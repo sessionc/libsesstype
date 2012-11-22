@@ -16,19 +16,20 @@ DEBUG   := -g -D__DEBUG__
 RELEASE := -O3
 PROFILE := -g -pg
 
-CC      := clang
-MPICC   := mpicc.openmpi
+MPICC   := mpicc
 CFLAGS  := -Wall -I$(INCLUDE_DIR) -m64 -fPIC $(RELEASE)
-LDFLAGS := -L$(LIB_DIR) -L/usr/include/mpi -lsc-mpi
+LDFLAGS := -L$(LIB_DIR)
 
 # Other options
 
 AR      := ar
 ARFLAGS := -cvq
+INSTALL := install -p
 
 # Other tools
 
-CP      := cp
+CP      := cp -i
+MV      := mv -i
 MAKE    := make
 MKDIR   := mkdir -p
 DOXYGEN := doxygen

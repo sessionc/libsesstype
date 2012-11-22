@@ -2,7 +2,7 @@
 # Global rules
 #
 
-.PHONY: clean clean-all
+.PHONY: all clean clean-all install
 
 $(BUILD_DIR)/%.o: %.c $(INCLUDE_DIR)/%.h
 	$(CC) $(CFLAGS) -c $*.c \
