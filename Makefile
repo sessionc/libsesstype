@@ -23,6 +23,6 @@ install: libsesstype libsesstype.a
 	$(INSTALL) $(LIB_DIR)/*.a $(DESTDIR)/usr/lib
 
 pkg-deb: all
-	dpkg-buildpackage -us -uc -rfakeroot
+	dpkg-buildpackage -tc -us -uc -rfakeroot
 
 include $(ROOT)/Rules.mk

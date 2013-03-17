@@ -14,24 +14,30 @@
 extern "C" {
 #endif
 
+#define ST_NODE_ROOT      0
+#define ST_NODE_SENDRECV  1
+#define ST_NODE_CHOICE    2
+#define ST_NODE_PARALLEL  3
+#define ST_NODE_RECUR     4
+#define ST_NODE_CONTINUE  5
+#define ST_NODE_FOR       6
+#define ST_NODE_ALLREDUCE 7
 
-#define ST_NODE_ROOT     0
-#define ST_NODE_SENDRECV 1
-#define ST_NODE_CHOICE   2
-#define ST_NODE_PARALLEL 3
-#define ST_NODE_RECUR    4
-#define ST_NODE_CONTINUE 5
-#define ST_NODE_FOR      6
+// Endpoint only.
+#define ST_NODE_SEND      8
+#define ST_NODE_RECV      9
 
-// Endpoint-specific
-#define ST_NODE_SEND     7
-#define ST_NODE_RECV     8
+#define ST_TYPE_LOCAL     0x80  // 128
+#define ST_TYPE_GLOBAL    0x100 // 256
 
-#define ST_TYPE_LOCAL        0
-#define ST_TYPE_GLOBAL       1
-#define ST_TYPE_PARAMETRISED 2
+#define ST_CONST_VALUE 1 // Constant defined as value
+#define ST_CONST_BOUND 2 // Constant defined as ower/upper bounds
 
+#define ST_ROLE_ALL "All"
 
+/**
+ * Import.
+ */
 typedef struct {
   char *name;
   char *as;
@@ -39,61 +45,100 @@ typedef struct {
 } st_tree_import_t;
 
 
+/**
+ * Message signature.
+ */
 typedef struct {
-  char *op;
-  char *payload;
+  char *op;      /**< Label or operator. */
+  char *payload; /**< Payload type name. */
 } st_node_msgsig_t;
 
 
+/**
+ * Parameterised roles.
+ */
 typedef struct {
-  char *name;
-  st_expr_t *param;
-} st_role_t;
+  char *name;         /**< Role prefix name (without parameters). */
+  unsigned int dimen; /**< Role parameter dimension. 0 if non-parameterised. */
+  st_expr **param;    /**< N-dimension expression. null if non-parametrised. */
+} st_role;
 
-typedef st_role_t msg_cond_t;
+typedef st_role msg_cond_t;
 
+/**
+ * Group roles.
+ */
+typedef struct {
+  char *name;         /**< Group name. */
+  unsigned int nmemb; /**< Number of Roles in group. */
+  st_role **membs;    /**< List of Role pointers. */
+} st_role_group;
+
+
+/**
+ * Interaction (message passing).
+ */
+typedef struct {
+  st_node_msgsig_t msgsig; /**< Message signature. */
+
+  int nto;                 /**< Number of Senders. */
+  st_role **to;            /**< List [role] of Receivers. */
+  st_role *from;           /**< Sender. */
+
+  msg_cond_t *msg_cond;    /**< Pattern matching condition. */
+} st_node_interaction_t;
+
+
+/**
+ * Recursion.
+ */
+typedef struct {
+  char *label; /**< Recursion label. */
+} st_node_recur_t;
+
+
+/**
+ * Continue.
+ */
+typedef struct {
+  char *label; /**< Target recursion label. */
+} st_node_continue_t;
+
+
+/**
+ * Choice.
+ */
+typedef struct {
+  st_role *at;
+} st_node_choice_t;
+
+
+/**
+ * Foreach loop.
+ */
+typedef struct {
+  st_rng_expr_t *range; /**< Binding range. */
+} st_node_for_t;
+
+
+/**
+ * Allreduce.
+ */
 typedef struct {
   st_node_msgsig_t msgsig;
-
-  int nto;
-  st_role_t **to;
-
-  st_role_t *from;
-
-  msg_cond_t *msg_cond; // Pattern matching condition
-} st_node_interaction;
-
-
-typedef struct {
-  char *label;
-} st_node_recur;
-
-
-typedef struct {
-  char *label;
-} st_node_continue;
-
-
-typedef struct {
-  char *at;
-} st_node_choice;
-
-
-typedef struct {
-  char *var;
-  st_expr_t *range;
-} st_node_for;
+} st_node_allreduce_t;
 
 
 struct __st_node {
   int type;
 
   union {
-    st_node_interaction *interaction;
-    st_node_choice *choice;
-    st_node_recur *recur;
-    st_node_continue *cont;
-    st_node_for *forloop;
+    st_node_interaction_t *interaction;
+    st_node_choice_t      *choice;
+    st_node_recur_t       *recur;
+    st_node_continue_t    *cont;
+    st_node_for_t         *forloop;
+    st_node_allreduce_t   *allreduce;
   };
 
   int nchild;
@@ -101,21 +146,38 @@ struct __st_node {
   int marked;
 };
 
+typedef struct {
+  const char *name;
+  int type;
+  union {
+    unsigned int value;
+    struct {
+      unsigned int lbound;
+      unsigned int ubound;
+    } bounds;
+  };
+} st_const_t;
+
 
 /**
  * Session type tree metadata.
  */
 typedef struct {
-  char *name;
-  st_expr_t *param;
-  int nrole;
-  st_role_t **roles;
-
   int nimport;
   st_tree_import_t **imports;
+  int nconst;
+  st_const_t **consts;
 
-  int type; // Session Tree type: global/local/parametrised-local
-  char *myrole;
+  int type;                /**< Session Tree type: global/local/parametrised-local */
+
+  const char *name;        /**< Protocol name. */
+  st_role *myrole;         /**< Projected Role. */
+
+  // Role declarations.
+  int nrole;               /**< Number of Roles. */ 
+  st_role **roles;         /**< List of Roles. */
+  int ngroup;              /**< Number of Groups. */
+  st_role_group **groups;  /**< List of Groups. */
 } st_info;
 
 
@@ -129,8 +191,8 @@ typedef struct __st_node st_node;
  * Session type tree represenation.
  */
 typedef struct {
-  st_info *info;
-  st_node *root;
+  st_info *info; /**< Protocol metadata. */
+  st_node *root; /**< Protocol body. */
 } st_tree;
 
 
@@ -173,33 +235,40 @@ st_tree *st_tree_set_name(st_tree *tree, const char *name);
  * \brief Set name of protocol (with role parameters).
  *
  * @param[in,out] tree Session type tree of protocol.
- * @param[in]     name Name of protocol.
- * @param[in]     param Role parameter of protocol.
+ * @param[in]     name Name of protocol
+ * @param[in]     role Role of protocol.
  */
-st_tree *st_tree_set_name_param(st_tree *tree, const char *name, st_expr_t *param);
+st_tree *st_tree_set_local_name(st_tree *tree, const char *name, const st_role *role);
 
 
 /**
- * \brief Add a role to protocol.
+ * \brief Add a constant declaration to protocol.
+ *
+ * @param[in,out] tree Sess type tree of protocol.
+ * @param[in]     cons Constant struct.
+ */
+st_tree *st_tree_add_const(st_tree *tree, st_const_t con);
+
+
+/**
+ * \brief Add a role declaration to protocol.
  *
  * @param[in,out] tree Session type tree of protocol.
- * @param[in]     role Role name to add.
+ * @param[in]     role Role to add.
  *
  * \returns Updated session types tree.
  */
-st_tree *st_tree_add_role(st_tree *tree, const char *role);
-
+st_tree *st_tree_add_role(st_tree *tree, const st_role *role);
 
 /**
- * \brief Add a role (with parameter) to protocol.
+ * \brief Add a role group declaration to protocol.
  *
- * @param[in,out] tree  Session type tree of protocol.
- * @param[in]     role  Role name to add.
- * @param[in]     param Expression of parametrised role
+ * @param[in,out] tree Session type tree of protocol.
+ * @param[in]     role Role group to add.
  *
  * \returns Updated session types tree.
  */
-st_tree *st_tree_add_role_param(st_tree *tree, const char *role, st_expr_t *param);
+st_tree *st_tree_add_role_group(st_tree *tree, const st_role_group *group);
 
 
 /**
@@ -211,6 +280,17 @@ st_tree *st_tree_add_role_param(st_tree *tree, const char *role, st_expr_t *para
  * \returns Updated session types tree.
  */
 st_tree *st_tree_add_import(st_tree *tree, st_tree_import_t import);
+
+
+/**
+ * \brief Test if a string is a constant in the protocol.
+ *
+ * @param[in] tree Session type tree of protocol.
+ * @param[in] name Constant name to test.
+ *
+ * \returns 1 if name is a defined constant, 0 otherwise.
+ */
+int st_tree_is_constant(st_tree *tree, const char *name);
 
 
 /**
@@ -266,7 +346,7 @@ void st_node_print(const st_node *node, int indent);
  *
  * @param[in] e   Expression to print.
  */
-void st_expr_print(st_expr_t *e);
+void st_expr_print(st_expr *e);
 
 
 /**
@@ -311,6 +391,17 @@ int st_node_compare_msgsig(const st_node_msgsig_t msgsig, const st_node_msgsig_t
 int st_node_compare(st_node *node, st_node *other);
 
 int st_node_compare_interaction(st_node *node, st_node *other);
+
+int st_node_is_overlapped(st_node *node, st_node *other);
+
+/**
+ * \brief Copy a role.
+ *
+ * @param[in] role Role to copy.
+ *
+ * \returns a pointer to dynamically allocated copy of expression.
+ */
+st_role *st_node_copy_role(const st_role *role);
 
 #ifdef __cplusplus
 }

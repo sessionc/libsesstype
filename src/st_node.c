@@ -20,9 +20,15 @@ st_tree *st_tree_init(st_tree *tree)
 {
   assert(tree != NULL);
   tree->info = (st_info *)malloc(sizeof(st_info));
-  tree->info->nrole   = 0;
   tree->info->nimport = 0;
+  tree->info->imports = NULL;
+  tree->info->nconst = 0;
+  tree->info->consts = NULL;
   tree->root = NULL;
+  tree->info->nrole   = 0;
+  tree->info->roles = NULL;
+  tree->info->ngroup  = 0;
+  tree->info->groups = NULL;
 
   return tree;
 }
@@ -31,10 +37,12 @@ st_tree *st_tree_init(st_tree *tree)
 void st_tree_free(st_tree *tree)
 {
   assert(tree != NULL);
-  if (tree->info != NULL)
+  if (tree->info != NULL) {
     free(tree->info);
-  if (tree->root == NULL)
+  }
+  if (tree->root == NULL) {
     st_node_free(tree->root);
+  }
 }
 
 
@@ -66,11 +74,13 @@ void st_node_free(st_node *node)
       free(node->recur);
       break;
     case ST_NODE_CONTINUE:
-      free(node->recur);
+      free(node->cont);
       break;
     case ST_NODE_FOR:
       free(node->forloop);
       break;
+    case ST_NODE_ALLREDUCE:
+      free(node->allreduce);
     default:
       fprintf(stderr, "%s:%d %s Unknown node type: %d\n", __FILE__, __LINE__, __FUNCTION__, node->type);
       break;
@@ -83,66 +93,96 @@ void st_node_free(st_node *node)
 st_tree *st_tree_set_name(st_tree *tree, const char *name)
 {
   assert(tree != NULL);
-  tree->info->name = (char *)calloc(sizeof(char), strlen(name)+1);
-  tree->info->param = NULL;
-  strcpy(tree->info->name, name);
+  tree->info->name = strdup(name);
+  tree->info->type = ST_TYPE_GLOBAL;
+  tree->info->myrole = NULL;
 
   return tree;
 }
 
 
-st_tree *st_tree_set_name_param(st_tree *tree, const char *name, st_expr_t *param)
+st_tree *st_tree_set_local_name(st_tree *tree, const char *name, const st_role *endpoint_role)
 {
   assert(tree != NULL);
-  tree->info->name = (char *)calloc(sizeof(char), strlen(name)+1);
-  tree->info->param = param;
-  strcpy(tree->info->name, name);
+#ifdef __DEBUG__
+  if (endpoint_role->dimen == 0) {
+    fprintf(stderr, "%s: Endpoint: %s @ %s\n", __FUNCTION__, name, endpoint_role->name);
+  } else {
+    fprintf(stderr, "%s: Parameterised Endpoint: %s @ %s[%u-dimen]", __FUNCTION__, name, endpoint_role->name, endpoint_role->dimen);
+  }
+#endif
+  tree->info->name = strdup(name);
+  tree->info->type = ST_TYPE_LOCAL;
+  tree->info->myrole = (st_role *)malloc(sizeof(st_role));
+  tree->info->myrole->name = strdup(endpoint_role->name);
+  tree->info->myrole->dimen = endpoint_role->dimen;
+  tree->info->myrole->param = (st_expr **)malloc(sizeof(st_expr *));
+  for (int i=0; i<endpoint_role->dimen; ++i) {
+    tree->info->myrole->param[i] = st_expr_copy(endpoint_role->param[i]);
+  }
 
   return tree;
 }
 
 
-st_tree *st_tree_add_role(st_tree *tree, const char *role)
+st_tree *st_tree_add_const(st_tree *tree, st_const_t con)
+{
+  assert(tree != NULL);
+  assert(tree->info != NULL);
+  if (tree->info->nconst == 0) {
+    tree->info->consts = (st_const_t **)malloc(sizeof(st_const_t *));
+  } else if (tree->info->nrole > 0) {
+    tree->info->consts = (st_const_t **)realloc(tree->info->consts, sizeof(st_const_t *) * (tree->info->nconst+1));
+  }
+
+  tree->info->consts[tree->info->nconst] = (st_const_t *)malloc(sizeof(st_const_t));
+  memcpy(tree->info->consts[tree->info->nconst], &con, sizeof(st_const_t));
+  tree->info->consts[tree->info->nconst]->name = strdup(con.name);
+  tree->info->nconst++;
+  return tree;
+}
+
+
+st_tree *st_tree_add_role(st_tree *tree, const st_role *role)
 {
   assert(tree != NULL);
   assert(tree->info != NULL);
   if (tree->info->nrole == 0) {
     // Allocate for 1 element.
-    tree->info->roles = (st_role_t **)malloc(sizeof(st_role_t *));
+    tree->info->roles = (st_role **)malloc(sizeof(st_role *));
   } else if (tree->info->nrole > 0) {
     // Allocate for n+1 element.
-    tree->info->roles = (st_role_t **)realloc(tree->info->roles, sizeof(st_role_t *) * (tree->info->nrole+1));
+    tree->info->roles = (st_role **)realloc(tree->info->roles, sizeof(st_role *) * (tree->info->nrole+1));
   }
 
-  tree->info->roles[tree->info->nrole] = (st_role_t *)malloc(sizeof(st_role_t));
-  tree->info->roles[tree->info->nrole]->name = strdup(role);
-  tree->info->roles[tree->info->nrole]->param = NULL; // Non-parametrised
-
+  tree->info->roles[tree->info->nrole] = st_node_copy_role(role);
   tree->info->nrole++;
 
   return tree;
 }
 
 
-st_tree *st_tree_add_role_param(st_tree *tree, const char *role, st_expr_t *param)
+st_tree *st_tree_add_role_group(st_tree *tree, const st_role_group *group)
 {
   assert(tree != NULL);
   assert(tree->info != NULL);
-  assert(param != NULL);
-  assert(param->type <= 100);
-  if (tree->info->nrole == 0) {
+  if (tree->info->ngroup == 0) {
     // Allocate for 1 element.
-    tree->info->roles = (st_role_t **)malloc(sizeof(st_role_t *));
-  } else if (tree->info->nrole > 0) {
+    tree->info->groups = (st_role_group **)malloc(sizeof(st_role_group *));
+  } else if (tree->info->ngroup > 0) {
     // Allocate for n+1 element.
-    tree->info->roles = (st_role_t **)realloc(tree->info->roles, sizeof(st_role_t *) * (tree->info->nrole+1));
+    tree->info->groups = (st_role_group **)realloc(tree->info->groups, sizeof(st_role *) * (tree->info->ngroup+1));
   }
 
-  tree->info->roles[tree->info->nrole] = (st_role_t *)malloc(sizeof(st_role_t));
-  tree->info->roles[tree->info->nrole]->name = strdup(role);
-  tree->info->roles[tree->info->nrole]->param = param;
+  tree->info->groups[tree->info->ngroup] = (st_role_group *)malloc(sizeof(st_role_group));
+  tree->info->groups[tree->info->ngroup]->name = strdup(group->name);
+  tree->info->groups[tree->info->ngroup]->nmemb = group->nmemb;
+  tree->info->groups[tree->info->ngroup]->membs = (st_role **)malloc(sizeof(st_role *));
+  for (int r=0; r<group->nmemb; ++r) {
+    tree->info->groups[tree->info->ngroup]->membs[r] = st_node_copy_role(group->membs[r]);
+  }
 
-  tree->info->nrole++;
+  tree->info->ngroup++;
 
   return tree;
 }
@@ -172,6 +212,16 @@ st_tree *st_tree_add_import(st_tree *tree, st_tree_import_t import)
   return tree;
 }
 
+int st_tree_is_constant(st_tree *tree, const char *name)
+{
+  for (int constant=0; constant<tree->info->nconst; constant++) {
+    if (strcmp(name, tree->info->consts[constant]->name) == 0) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
 
 st_node *st_node_init(st_node *node, int type)
 {
@@ -183,26 +233,26 @@ st_node *st_node_init(st_node *node, int type)
     case ST_NODE_SENDRECV:
     case ST_NODE_SEND:
     case ST_NODE_RECV:
-      node->interaction = (st_node_interaction *)malloc(sizeof(st_node_interaction));
+      node->interaction = (st_node_interaction_t *)malloc(sizeof(st_node_interaction_t));
       node->interaction->msg_cond = NULL;
       break;
     case ST_NODE_PARALLEL:
       break;
     case ST_NODE_CHOICE:
-      node->choice = (st_node_choice *)malloc(sizeof(st_node_choice));
-      memset(node->choice, 0, sizeof(st_node_choice));
+      node->choice = (st_node_choice_t *)malloc(sizeof(st_node_choice_t));
+      memset(node->choice, 0, sizeof(st_node_choice_t));
       break;
     case ST_NODE_RECUR:
-      node->recur = (st_node_recur *)malloc(sizeof(st_node_recur));
-      memset(node->recur, 0, sizeof(st_node_recur));
+      node->recur = (st_node_recur_t *)malloc(sizeof(st_node_recur_t));
+      memset(node->recur, 0, sizeof(st_node_recur_t));
       break;
     case ST_NODE_CONTINUE:
-      node->cont = (st_node_continue *)malloc(sizeof(st_node_continue));
-      memset(node->cont, 0, sizeof(st_node_continue));
+      node->cont = (st_node_continue_t *)malloc(sizeof(st_node_continue_t));
+      memset(node->cont, 0, sizeof(st_node_continue_t));
       break;
     case ST_NODE_FOR:
-      node->forloop = (st_node_for *)malloc(sizeof(st_node_for));
-      memset(node->forloop, 0, sizeof(st_node_for));
+      node->forloop = (st_node_for_t *)malloc(sizeof(st_node_for_t));
+      memset(node->forloop, 0, sizeof(st_node_for_t));
       break;
     default:
       fprintf(stderr, "%s:%d %s Unknown node type: %d\n", __FILE__, __LINE__, __FUNCTION__, type);
@@ -235,8 +285,6 @@ st_node *st_node_append(st_node *node, st_node *child)
 
 void st_tree_print(const st_tree *tree)
 {
-  int i;
-
   if (tree == NULL) {
     fprintf(stderr, "%s:%d %s tree is NULL\n", __FILE__, __LINE__, __FUNCTION__);
   }
@@ -245,36 +293,78 @@ void st_tree_print(const st_tree *tree)
 
   if (tree->info != NULL) {
     printf("Protocol: %s\n", tree->info->name);
-    if (ST_TYPE_GLOBAL == tree->info->type) {
-      printf("Global");
-    } else if (ST_TYPE_LOCAL == tree->info->type) {
-      printf("Local");
-    } else if (ST_TYPE_PARAMETRISED == tree->info->type) {
-      printf("Parametrised local");
-    } else assert(1/* unrecognised type */);
-    printf(" protocol\n");
+    switch (tree->info->type) {
+      case ST_TYPE_GLOBAL:
+        printf("Global protocol\n");
+        break;
+      case ST_TYPE_LOCAL:
+        printf("Local protocol\n");
+        break;
+      default:
+        assert(0/* Unrecognised Type*/);
+    }
 
     if (ST_TYPE_GLOBAL != tree->info->type) {
-      printf("Endpoint role: %s", tree->info->myrole);
-    }
-    if (tree->info->param != NULL) {
-      printf("[");
-      st_expr_print(tree->info->param);
-      printf("]");
+      if (tree->info->myrole != NULL) {
+        printf("Endpoint role: %s", tree->info->myrole->name);
+        for (int i=0; i<tree->info->myrole->dimen; ++i) {
+          printf("[");
+          st_expr_print(tree->info->myrole->param[i]);
+          printf("]");
+        }
+      } else {
+        printf("Endpoint role: NOT SET");
+      }
     }
     printf("\n");
-    printf("Imports: [\n");
-    for (i=0; i<tree->info->nimport; ++i)
-      printf("  { name: %s, as: %s, from: %s }\n", tree->info->imports[i]->name, tree->info->imports[i]->as, tree->info->imports[i]->from);
+
+    printf("Imports: [");
+    for (int i=0; i<tree->info->nimport; ++i) {
+      if (i==0) printf("\n");
+      printf("  { name: %s, as: %s, from: %s }\n",
+          tree->info->imports[i]->name,
+          tree->info->imports[i]->as,
+          tree->info->imports[i]->from);
+    }
     printf("]\n");
+
+    printf("Constants: [");
+    for (int c=0; c<tree->info->nconst; ++c) {
+      printf("\n%s ", tree->info->consts[c]->name);
+      if (tree->info->consts[c]->type == ST_CONST_VALUE) {
+        printf("= %u",
+            tree->info->consts[c]->value);
+      } else {
+        printf("is between %u and %u",
+            tree->info->consts[c]->bounds.lbound,
+            tree->info->consts[c]->bounds.ubound);
+      }
+    }
+    printf("]\n");
+
     printf("Roles: [");
-    for (i=0; i<tree->info->nrole; ++i) {
-      printf(" %s", tree->info->roles[i]->name);
-      if (NULL != tree->info->roles[i]->param) {
+    for (int r=0; r<tree->info->nrole; ++r) {
+      printf(" %s", tree->info->roles[r]->name);
+      for (int p=0; p<tree->info->roles[r]->dimen; ++p) {
         printf("[");
-        st_expr_print(tree->info->roles[i]->param);
+        st_expr_print(tree->info->roles[r]->param[p]);
         printf("]");
       }
+    }
+    printf(" ]\n");
+
+    printf("Groups: [");
+    for (int g=0; g<tree->info->ngroup; ++g) {
+      printf(" %s={", tree->info->groups[g]->name);
+      for (int r=0; r<tree->info->groups[g]->nmemb; ++r) {
+        printf(" %s", tree->info->groups[g]->membs[r]->name);
+        for (int p=0; p<tree->info->groups[g]->membs[r]->dimen; ++p) {
+          printf("[");
+          st_expr_print(tree->info->groups[g]->membs[r]->param[p]);
+          printf("]");
+        }
+      }
+      printf("}");
     }
     printf(" ]\n");
   } else {
@@ -324,17 +414,17 @@ void st_node_print(const st_node *node, int indent)
       case ST_NODE_SENDRECV: // ---------- SENDRECV ----------
 
         printf("Node { type: interaction, from: %s", node->interaction->from->name);
-        if (NULL != node->interaction->from->param) {
+        for (int j=0; j<node->interaction->from->dimen; ++j) {
           printf("[");
-          st_expr_print(node->interaction->from->param);
+          st_expr_print(node->interaction->from->param[j]);
           printf("]");
         }
 
         printf(", to(%d): ", node->interaction->nto);
         printf("[%s", node->interaction->to[0]->name);
-        if (NULL != node->interaction->to[0]->param) {
+        for (int j=0; j<node->interaction->to[0]->dimen; ++j) {
           printf("[");
-          st_expr_print(node->interaction->to[0]->param);
+          st_expr_print(node->interaction->to[0]->param[j]);
           printf("]");
         }
         printf(" ..]");
@@ -348,21 +438,22 @@ void st_node_print(const st_node *node, int indent)
         printf("Node { type: send");
         printf(", to(%d): ", node->interaction->nto);
         printf("[%s", node->interaction->to[0]->name);
-        if (NULL != node->interaction->to[0]->param) {
+        for (int j=0; j<node->interaction->to[0]->dimen; ++j) {
           printf("[");
-          st_expr_print(node->interaction->to[0]->param);
+          st_expr_print(node->interaction->to[0]->param[j]);
           printf("]");
         }
         printf(" ..]");
 
         printf(", msgsig: { op: %s, payload: %s }", node->interaction->msgsig.op, node->interaction->msgsig.payload);
 
-        if (NULL != node->interaction->msg_cond) { // ST_ROLE_PARAMETRISED, always
+        if (NULL != node->interaction->msg_cond) {
           printf(", cond: %s", node->interaction->msg_cond->name);
-          assert(NULL!=node->interaction->msg_cond->param);
-          printf("[");
-          st_expr_print(node->interaction->msg_cond->param);
-          printf("]");
+          for (int r=0; r<node->interaction->msg_cond->dimen; ++r) {
+            printf("[");
+            st_expr_print(node->interaction->msg_cond->param[r]);
+            printf("]");
+          }
         } // if msg_cond
 
         printf("}\n");
@@ -370,9 +461,9 @@ void st_node_print(const st_node *node, int indent)
 
       case ST_NODE_RECV: // ----------- RECV -----------
         printf("Node { type: recv, from: %s", node->interaction->from->name);
-        if (NULL != node->interaction->from->param) {
+        for (int j=0; j<node->interaction->from->dimen; ++j) {
           printf("[");
-          st_expr_print(node->interaction->from->param);
+          st_expr_print(node->interaction->from->param[j]);
           printf("]");
         }
 
@@ -380,17 +471,24 @@ void st_node_print(const st_node *node, int indent)
 
         if (NULL != node->interaction->msg_cond) {
           printf(", cond: %s", node->interaction->msg_cond->name);
-          assert(NULL != node->interaction->msg_cond->param);
-          printf("[");
-          st_expr_print(node->interaction->msg_cond->param);
-          printf("]");
+          for (int r=0; r<node->interaction->msg_cond->dimen; ++r) {
+            printf("[");
+            st_expr_print(node->interaction->msg_cond->param[r]);
+            printf("]");
+          }
         } // if msg_cond
 
         printf("}\n");
         break;
 
       case ST_NODE_CHOICE: // ---------- CHOICE ----------
-        printf("Node { type: choice, at: %s } %d children \n", node->choice->at, node->nchild);
+        printf("Node { type: choice, at: %s ", node->choice->at->name);
+        for (int p=0; p<node->choice->at->dimen; ++p) {
+          printf("[");
+          st_expr_print(node->choice->at->param[p]);
+          printf("]");
+        }
+        printf("} %d children \n", node->nchild);
         break;
 
       case ST_NODE_PARALLEL: // ---------- PARALLEL ----------
@@ -406,9 +504,10 @@ void st_node_print(const st_node *node, int indent)
         break;
 
       case ST_NODE_FOR: // ---------- FOR ----------
-        printf("Node { type: forloop, var: %s range: ", node->forloop->var);
-        if (node->forloop->range == NULL) { printf("NULL"); }
-        else { st_expr_print(node->forloop->range); }
+        printf("Node { type: forloop, var: %s range: ", node->forloop->range->bindvar);
+        st_expr_print(node->forloop->range->from);
+        printf("..");
+        st_expr_print(node->forloop->range->to);
         printf("\n");
         break;
 
@@ -430,41 +529,6 @@ void st_node_reset_markedflag(st_node *node)
     st_node_reset_markedflag(node->children[i]);
   }
 }
-
-
-int st_node_is_overlapped(const st_node *node, const st_node *other)
-{
-  int is_overlapped = 0;
-  if (ST_NODE_SEND == node->type) {
-    if (NULL == node->interaction->to[0]->param
-        && ((other->type == ST_NODE_SEND && NULL == other->interaction->to[0]->param)
-            ||(other->type == ST_NODE_RECV && NULL == other->interaction->from->param))) {
-      is_overlapped = 1; // Normal role with same name
-    } else {
-      // Try to match role parameters too
-      if (other->type == ST_NODE_RECV) {
-        is_overlapped |= st_expr_is_overlapped(node->interaction->to[0]->param, other->interaction->from->param);
-      } else if (other->type == ST_NODE_SEND) {
-        is_overlapped |= st_expr_is_overlapped(node->interaction->to[0]->param, other->interaction->to[0]->param);
-      }
-    }
-  }
-  if (ST_NODE_RECV == node->type) {
-    if (NULL == node->interaction->from->param
-        && ((other->type == ST_NODE_SEND && NULL == other->interaction->to[0]->param)
-            ||(other->type == ST_NODE_RECV && NULL == other->interaction->from->param))) {
-        is_overlapped = 1; // Normal role with same name
-    } else {
-      if (other->type == ST_NODE_RECV) {
-        is_overlapped |= st_expr_is_overlapped(node->interaction->from->param, other->interaction->from->param);
-      } else if (other->type == ST_NODE_SEND) {
-        is_overlapped |= st_expr_is_overlapped(node->interaction->from->param, other->interaction->to[0]->param);
-      }
-    }
-  }
-  return is_overlapped;
-}
-
 
 
 int st_node_compare_async(const st_node *node, const st_node *other)
@@ -688,7 +752,10 @@ int st_node_compare_interaction(st_node *node, st_node *other)
   int i = 0;
   assert(ST_NODE_SENDRECV == node->type || ST_NODE_SEND == node->type || ST_NODE_RECV == node->type);
   if (node->interaction->msg_cond != NULL && other->interaction->msg_cond != NULL) {
-    identical &= st_expr_is_identical(node->interaction->msg_cond->param, other->interaction->msg_cond->param);
+    identical &= (node->interaction->msg_cond->dimen == other->interaction->msg_cond->dimen);
+    for (int j=0; j<node->interaction->msg_cond->dimen || !identical; ++j) {
+      identical &= st_expr_is_identical(node->interaction->msg_cond->param[j], other->interaction->msg_cond->param[j]);
+    }
   }
 
   switch (node->type) {
@@ -696,27 +763,35 @@ int st_node_compare_interaction(st_node *node, st_node *other)
       // Send
       for (i=0; i<node->interaction->nto; ++i) {
         identical &= (0 == strcmp(node->interaction->to[i]->name, other->interaction->to[i]->name) || 0 == strcmp(other->interaction->to[i]->name, "__ROLE__"));
-        identical &= (node->interaction->to[i]->param == NULL && other->interaction->to[i]->param == NULL)
-                      || st_expr_is_identical(node->interaction->to[i]->param, other->interaction->to[i]->param);
+        identical &= (node->interaction->to[i]->dimen == other->interaction->to[i]->dimen);
+        for (int j=0; j<node->interaction->to[i]->dimen || !identical; ++j) {
+          identical &= st_expr_is_identical(node->interaction->to[i]->param[j], other->interaction->to[i]->param[j]);
+        }
       }
       // Receive
       identical &= (0 == strcmp(node->interaction->from->name, other->interaction->from->name) || 0 == strcmp(other->interaction->from->name, "__ROLE__"));
-      identical &= (node->interaction->from->param == NULL && other->interaction->from->param == NULL)
-                    || st_expr_is_identical(node->interaction->from->param, other->interaction->from->param);
+        identical &= (node->interaction->from->dimen == other->interaction->from->dimen);
+        for (int j=0; j<node->interaction->from->dimen || !identical; ++j) {
+          identical &= st_expr_is_identical(node->interaction->from->param[j], other->interaction->from->param[j]);
+        }
       break;
 
     case ST_NODE_SEND:
       for (i=0; i<node->interaction->nto; ++i) {
         identical &= (0 == strcmp(node->interaction->to[i]->name, other->interaction->to[i]->name) || 0 == strcmp(other->interaction->to[i]->name, "__ROLE__"));
-        identical &= (node->interaction->to[i]->param == NULL && other->interaction->to[i]->param == NULL)
-                      || st_expr_is_identical(node->interaction->to[i]->param, other->interaction->to[i]->param);
+        identical &= (node->interaction->to[i]->dimen == other->interaction->to[i]->dimen);
+        for (int j=0; j<node->interaction->to[i]->dimen || !identical; ++j) {
+          identical &= st_expr_is_identical(node->interaction->to[i]->param[j], other->interaction->to[i]->param[j]);
+        }
       }
       break;
 
     case ST_NODE_RECV:
       identical &= (0 == strcmp(node->interaction->from->name, other->interaction->from->name) || 0 == strcmp(other->interaction->from->name, "__ROLE__"));
-      identical &= (node->interaction->from->param == NULL && other->interaction->from->param == NULL)
-                    || st_expr_is_identical(node->interaction->from->param, other->interaction->from->param);
+      identical &= (node->interaction->from->dimen == other->interaction->from->dimen);
+      for (int j=0; j<node->interaction->from->dimen || !identical; ++j) {
+        identical &= st_expr_is_identical(node->interaction->from->param[j], other->interaction->from->param[j]);
+      }
       break;
 
     default:
@@ -755,7 +830,8 @@ int st_node_compare(st_node *node, st_node *other)
           break;
 
         case ST_NODE_CHOICE:
-          identical &= (0 == strcmp(node->choice->at, other->choice->at));
+          identical &= (0 == strcmp(node->choice->at->name, other->choice->at->name));
+          // TODO compare params
           break;
 
         case ST_NODE_PARALLEL:
@@ -772,8 +848,9 @@ int st_node_compare(st_node *node, st_node *other)
           break;
 
         case ST_NODE_FOR:
-          identical &= (0 == strcmp(node->forloop->var, other->forloop->var));
-          identical &= st_expr_is_identical(node->forloop->range, other->forloop->range);
+          identical &= (0 == strcmp(node->forloop->range->bindvar, other->forloop->range->bindvar));
+          identical &= st_expr_is_identical(node->forloop->range->from, other->forloop->range->from);
+          identical &= st_expr_is_identical(node->forloop->range->to, other->forloop->range->to);
           break;
 
         default:
@@ -791,4 +868,25 @@ int st_node_compare(st_node *node, st_node *other)
   }
   return identical;
 }
+
+int st_node_is_overlapped(st_node *node, st_node *other)
+{
+  return 0;
+}
+
+st_role *st_node_copy_role(const st_role *role)
+{
+  if (role == NULL) {
+    return NULL;
+  }
+  st_role *newrole = (st_role *)malloc(sizeof(st_role));
+  newrole->name = strdup(role->name);
+  newrole->dimen = role->dimen;
+  newrole->param = (st_expr **)calloc(newrole->dimen, sizeof(st_expr *));
+  for (int i=0; i<newrole->dimen; ++i) {
+    newrole->param[i] = st_expr_copy(role->param[i]);
+  }
+  return newrole;
+}
+
 

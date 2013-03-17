@@ -102,7 +102,7 @@ st_node *st_node_singleton_interaction_upmerge(st_node *node)
     node->nchild = 0;
     free(node->children);
     node = st_node_init(node, node->type);
-    memcpy(node->interaction, oldchild->interaction, sizeof(st_node_interaction));
+    memcpy(node->interaction, oldchild->interaction, sizeof(st_node_interaction_t));
   }
   return node;
 }
@@ -311,7 +311,8 @@ st_node *st_node_label_recv(st_node *node)
     if (node->children[i]->type == ST_NODE_RECV
         && strcmp(node->children[i]->interaction->msgsig.payload, "__LABEL__") == 0
         && node->children[i+1]->type == ST_NODE_CHOICE
-        && strcmp(node->children[i]->interaction->from->name, node->children[i+1]->choice->at) == 0) {
+        && strcmp(node->children[i]->interaction->from->name, node->children[i+1]->choice->at->name) == 0) {
+      // compare params
       // Apply label-recv merging on children[i+1]
       st_node_free(node->children[i]);
       node->children[i] = st_node_label_recv_merge(node->children[i+1]);
@@ -348,7 +349,8 @@ st_node *st_node_choice_realign(st_node *node)
       assert(node->children[i]->type == ST_NODE_ROOT);
       if (node->children[i]->nchild == 1  // has one node in branch block (if-then-else-if)
           && node->children[i]->children[0]->type == ST_NODE_CHOICE // is a choice
-          && strcmp(node->choice->at, node->children[i]->children[0]->choice->at) == 0) { // has same choice role
+          && strcmp(node->choice->at->name, node->children[i]->children[0]->choice->at->name) == 0) { // has same choice role
+        // TODO compare params
         for (j=0; j<node->children[i]->children[0]->nchild; ++j) {
           st_node_append(node, node->children[i]->children[0]->children[j]); // move branch blocks of this choice to parent choice
         }

@@ -13,512 +13,563 @@
 
 #include "st_expr.h"
 
-int st_expr_is_overlapped(const st_expr_t *e1, const st_expr_t *e2)
+
+inline st_expr *st_expr_constant(int num)
 {
-  int is_overlapped = 0;
-
-  // This start from toplevel so the leave nodes could be in different format
-  // but we will not get this far as long as the toplevel(s) are combinations of range and tuples
-  //
-  switch (e1->type) {
-    case ST_EXPR_TYPE_RANGE:
-      // Test whether the two ranges are not intersecting
-      //
-      // 1. If there is a variable, it can be overlapping (so always reject)
-      // 2. If there is a constant, make sure
-      // 2.1. e1 is before e2 (e1.max < e2.min)
-      // 2.2. e2 is before e1 (e2.max < e1.min)
-      //    Under the assumption that ranges are well-formed (min..max)
-      //
-      is_overlapped = (e1->binexpr->right->type == ST_EXPR_TYPE_CONST
-                      && e2->binexpr->left->type == ST_EXPR_TYPE_CONST
-                      && e1->binexpr->right->constant >= e2->binexpr->left->constant)
-                    ||(e1->binexpr->left->type == ST_EXPR_TYPE_CONST
-                      && e2->binexpr->right->type == ST_EXPR_TYPE_CONST
-                      && e2->binexpr->right->constant >= e1->binexpr->left->constant);
-      break;
-    case ST_EXPR_TYPE_TUPLE:
-      is_overlapped = st_expr_is_overlapped(e1->binexpr->left, e2->binexpr->left)
-                    ||st_expr_is_overlapped(e1->binexpr->right, e2->binexpr->right);
-      break;
-    default:
-      is_overlapped = 1; // Conservative heuristic
-      break;
-  }
-
-  return is_overlapped;
-}
-
-
-int st_expr_is_identical(st_expr_t *expr, st_expr_t *other)
-{
-  int identical = 1;
-
-  // If both of the expression are empty
-  if (expr == NULL && other == NULL)
-    return identical;
-
-  // Otherwise compare the expression
-  identical &= (expr->type == other->type);
-  if (identical) {
-    switch (expr->type) {
-      case ST_EXPR_TYPE_CONST:
-        identical &= (expr->constant == other->constant);
-        break;
-
-      case ST_EXPR_TYPE_VAR:
-        identical &= (0 == strcmp(expr->variable, other->variable));
-        break;
-
-      // Binary operations
-      case ST_EXPR_TYPE_RANGE:
-      case ST_EXPR_TYPE_PLUS:
-      case ST_EXPR_TYPE_MINUS:
-      case ST_EXPR_TYPE_MULTIPLY:
-      case ST_EXPR_TYPE_DIVIDE:
-      case ST_EXPR_TYPE_MODULO:
-      case ST_EXPR_TYPE_SHL:
-      case ST_EXPR_TYPE_SHR:
-      case ST_EXPR_TYPE_TUPLE:
-      case ST_EXPR_TYPE_EQUAL:
-      case ST_EXPR_TYPE_BIND:
-      case ST_EXPR_TYPE_LT:
-      case ST_EXPR_TYPE_LE:
-        identical &= st_expr_is_identical(expr->binexpr->left, other->binexpr->left);
-        identical &= st_expr_is_identical(expr->binexpr->right, other->binexpr->right);
-        break;
-
-      default:
-        fprintf(stderr, "%s:%d %s Unknown expr type: %d\n", __FILE__, __LINE__, __FUNCTION__, expr->type);
-        break;
-    }
-  }
-
-  if (!identical) {
-    fprintf(stderr, "Error: incompatible expression (%d and %d):\n", expr->type, other->type);
-    st_expr_print(expr); printf(" and "); st_expr_print(other); printf("\n");
-  }
-
-  return identical;
-}
-
-
-st_expr_t *st_expr_copy(const st_expr_t *e)
-{
-  st_expr_t *dup_e;
-  switch (e->type) {
-    case ST_EXPR_TYPE_CONST:
-      dup_e = st_expr_constant(e->constant);
-      break;
-    case ST_EXPR_TYPE_VAR:
-      dup_e = st_expr_variable(e->variable);
-      break;
-    default:
-      dup_e = st_expr_binexpr(st_expr_copy(e->binexpr->left), e->type, st_expr_copy(e->binexpr->right));
-      break;
-  }
-  return dup_e;
-}
-
-
-st_expr_t *st_expr_offset_range(st_expr_t *range, st_expr_t* offset)
-{
-  assert(range->type == ST_EXPR_TYPE_RANGE || range->type == ST_EXPR_TYPE_TUPLE || range->type == ST_EXPR_TYPE_VAR || range->type == ST_EXPR_TYPE_CONST);
-
-  // Offset = 0. No change.
-  if (offset->type == ST_EXPR_TYPE_CONST && offset->constant == 0) return range;
-
-  // Range is ST_EXPR_TYPE_RANGE. min + offset .. max + offset.
-  if (range->type == ST_EXPR_TYPE_RANGE) {
-
-    //
-    // Range, this is the normal case.
-    //
-    range->binexpr->left = st_expr_binexpr(range->binexpr->left, ST_EXPR_TYPE_PLUS, offset);
-    range->binexpr->right = st_expr_binexpr(range->binexpr->right, ST_EXPR_TYPE_PLUS, offset);
-
-  } else if (range->type == ST_EXPR_TYPE_TUPLE && offset->type == ST_EXPR_TYPE_TUPLE) {
-
-    //
-    // Tuples, we run this separately for each component.
-    //
-    range->binexpr->left = st_expr_offset_range(range->binexpr->left, offset->binexpr->left);
-    range->binexpr->right = st_expr_offset_range(range->binexpr->right, offset->binexpr->right);
-
-  } else if (range->type == ST_EXPR_TYPE_VAR || range->type == ST_EXPR_TYPE_CONST) {
-
-    range = st_expr_binexpr(range, ST_EXPR_TYPE_PLUS, offset);
-
-  } else {
-
-    fprintf(stderr, "%s: Invalid format of range and offset (Expecting RANGE + CONST/VAR offset or TUPLE + TUPLE offset)\n",
-        __FUNCTION__);
-
-  }
-
-  st_expr_eval(range);
-  return range;
-}
-
-
-inline st_expr_t *st_expr_constant(int val)
-{
-  st_expr_t *_ = (st_expr_t *)malloc(sizeof(st_expr_t));
+  st_expr *_ = (st_expr *)malloc(sizeof(st_expr));
   _->type = ST_EXPR_TYPE_CONST;
-  _->constant = val;
+  _->num = num;
   return _;
 }
 
 
-inline st_expr_t *st_expr_variable(const char *var)
+inline st_expr *st_expr_variable(const char *var)
 {
-  st_expr_t *_ = (st_expr_t *)malloc(sizeof(st_expr_t));
+  st_expr *_ = (st_expr *)malloc(sizeof(st_expr));
   _->type = ST_EXPR_TYPE_VAR;
-  _->variable = strdup(var);
+  _->var = strdup(var);
   return _;
 }
 
 
-inline st_expr_t *st_expr_binexpr(st_expr_t *left, int type, st_expr_t *right)
+inline st_expr *st_expr_binary(st_expr *left, int type, st_expr *right)
 {
-  st_expr_t *_ = (st_expr_t *)malloc(sizeof(st_expr_t));
+  st_expr *_ = (st_expr *)malloc(sizeof(st_expr));
   _->type = type;
-  _->binexpr = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
-  _->binexpr->left = left;
-  _->binexpr->right = right;
+  _->bin = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
+  _->bin->left = left;
+  _->bin->right = right;
   return _;
 }
-void st_expr_eval(st_expr_t *e)
+
+
+inline st_expr *st_expr_range(st_expr *from, st_expr *to)
+{
+  st_expr *_ = (st_expr *)malloc(sizeof(st_expr));
+  _->type = ST_EXPR_TYPE_RNG;
+  _->rng = (st_rng_expr_t *)malloc(sizeof(st_rng_expr_t));
+  _->rng->bindvar = "_";
+  _->rng->from = from;
+  _->rng->to = to;
+  return _;
+}
+
+
+void st_expr_eval(st_expr *e)
 {
   assert(e->type > 0);
   switch (e->type) {
-    case ST_EXPR_TYPE_PLUS:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
+    case ST_EXPR_TYPE_ADD:
+      st_expr_eval(e->bin->left);
+      st_expr_eval(e->bin->right);
 
-      if (ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type) {
+      if (ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type) {
         e->type = ST_EXPR_TYPE_CONST;
-        int val = e->binexpr->left->constant + e->binexpr->right->constant;
-        free(e->binexpr);
-        e->constant = val;
+        int val = e->bin->left->num + e->bin->right->num;
+        free(e->bin);
+        e->num = val;
       }
 
-      if (ST_EXPR_TYPE_PLUS == e->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type
-          && e->binexpr->right->constant < 0) {
-        e->type = ST_EXPR_TYPE_MINUS;
-        e->binexpr->right->constant = -e->binexpr->right->constant;
+      if (ST_EXPR_TYPE_ADD == e->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type
+          && e->bin->right->num < 0) {
+        e->type = ST_EXPR_TYPE_SUB;
+        e->bin->right->num = -e->bin->right->num;
       }
 
       // Simplifies the form: x + ? - y => ? + (x-y)
-      if (ST_EXPR_TYPE_PLUS == e->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_MINUS == e->binexpr->right->type
-          && ST_EXPR_TYPE_VAR == e->binexpr->right->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->binexpr->right->type) {
-        int val = e->binexpr->left->constant - e->binexpr->right->binexpr->right->constant;
+      if (ST_EXPR_TYPE_ADD == e->type
+          && ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_SUB == e->bin->right->type
+          && ST_EXPR_TYPE_VAR == e->bin->right->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->bin->right->type) {
+        int val = e->bin->left->num - e->bin->right->bin->right->num;
         if (val < 0) {
-          free(e->binexpr->left); // constant
-          st_expr_t *_tmp = e->binexpr->right;
-          e->type = ST_EXPR_TYPE_MINUS;
-          e->binexpr->left = e->binexpr->right->binexpr->left;
-          e->binexpr->right = st_expr_constant(-val);
-          //free(_tmp->binexpr->right); // constant
-          //free(_tmp->binexpr);
+          free(e->bin->left); // value
+          e->type = ST_EXPR_TYPE_SUB;
+          e->bin->left = e->bin->right->bin->left;
+          e->bin->right = st_expr_constant(-val);
         } else if (val == 0) {
-          char *variable = strdup(e->binexpr->right->binexpr->left->variable);
-          // TODO
-          //free(e->binexpr->right->binexpr->left);
-          //free(e->binexpr->right->binexpr->right);
-          //free(e->binexpr->right->binexpr);
-          //free(e->binexpr->right);
-          //free(e->binexpr->left);
-          //free(e->binexpr);
+          char *variable = strdup(e->bin->right->bin->left->var);
           e->type = ST_EXPR_TYPE_VAR;
-          e->variable = variable;
+          e->var = variable;
         } else { // val > 0
-          free(e->binexpr->left); // constant
-          st_expr_t *_tmp = e->binexpr->right;
-          e->type = ST_EXPR_TYPE_PLUS;
-          e->binexpr->left = e->binexpr->right->binexpr->left;
-          e->binexpr->right = st_expr_constant(val);
-          //free(_tmp->binexpr->right); // constant
-          //free(_tmp->binexpr);
+          free(e->bin->left); // value
+          e->type = ST_EXPR_TYPE_ADD;
+          e->bin->left = e->bin->right->bin->left;
+          e->bin->right = st_expr_constant(val);
         }
       }
 
       // Simplifies the form: ? - x + y=> ? + (x-y)
-      if (ST_EXPR_TYPE_PLUS == e->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type
-          && ST_EXPR_TYPE_MINUS == e->binexpr->left->type
-          && ST_EXPR_TYPE_VAR == e->binexpr->left->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->left->binexpr->right->type) {
-        int val = e->binexpr->right->constant - e->binexpr->left->binexpr->right->constant;
+      if (ST_EXPR_TYPE_ADD == e->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type
+          && ST_EXPR_TYPE_SUB == e->bin->left->type
+          && ST_EXPR_TYPE_VAR == e->bin->left->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->left->bin->right->type) {
+        int val = e->bin->right->num - e->bin->left->bin->right->num;
         if (val < 0) {
-          //free(e->binexpr->left); // constant
-          st_expr_t *_tmp = e->binexpr->right;
-          e->type = ST_EXPR_TYPE_MINUS;
-          e->binexpr->left = e->binexpr->left->binexpr->left;
-          e->binexpr->right = st_expr_constant(-val);
-          //free(_tmp->binexpr->right); // constant
-          //free(_tmp->binexpr);
+          e->type = ST_EXPR_TYPE_SUB;
+          e->bin->left = e->bin->left->bin->left;
+          e->bin->right = st_expr_constant(-val);
         } else if (val == 0) {
-          char *variable = strdup(e->binexpr->left->binexpr->left->variable);
-          //free(e->binexpr->right->binexpr->left);
-          //free(e->binexpr->right->binexpr->right);
-          //free(e->binexpr->right->binexpr);
-          //free(e->binexpr->right);
-          //free(e->binexpr->left);
-          //free(e->binexpr);
+          char *variable = strdup(e->bin->left->bin->left->var);
           e->type = ST_EXPR_TYPE_VAR;
-          e->variable = variable;
+          e->var = variable;
         } else { // val > 0
-          //free(e->binexpr->left); // constant
-          st_expr_t *_tmp = e->binexpr->right;
-          e->type = ST_EXPR_TYPE_PLUS;
-          e->binexpr->left = e->binexpr->left->binexpr->left;
-          e->binexpr->right = st_expr_constant(val);
-          //free(_tmp->binexpr->right); // constant
-          //free(_tmp->binexpr);
+          e->type = ST_EXPR_TYPE_ADD;
+          e->bin->left = e->bin->left->bin->left;
+          e->bin->right = st_expr_constant(val);
         }
         st_expr_eval(e);
       }
 
       // X + (y - X)
-      if (ST_EXPR_TYPE_PLUS == e->type
-          && ST_EXPR_TYPE_VAR == e->binexpr->left->type
-          && ST_EXPR_TYPE_MINUS == e->binexpr->right->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->binexpr->left->type
-          && ST_EXPR_TYPE_VAR == e->binexpr->right->binexpr->right->type
-          && 0 == strcmp(e->binexpr->left->variable, e->binexpr->right->binexpr->right->variable)) {
-        int val = e->binexpr->right->binexpr->left->constant;
-        //free(e->binexpr->right->binexpr->left);
-        //free(e->binexpr->right->binexpr->right);
-        //free(e->binexpr->right->binexpr);
-        //free(e->binexpr->right);
-        //free(e->binexpr->left);
-        //free(e->binexpr);
+      if (ST_EXPR_TYPE_ADD == e->type
+          && ST_EXPR_TYPE_VAR == e->bin->left->type
+          && ST_EXPR_TYPE_SUB == e->bin->right->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->bin->left->type
+          && ST_EXPR_TYPE_VAR == e->bin->right->bin->right->type
+          && 0 == strcmp(e->bin->left->var, e->bin->right->bin->right->var)) {
+        int val = e->bin->right->bin->left->num;
         e->type = ST_EXPR_TYPE_CONST;
-        e->constant = val;
+        e->num = val;
       }
 
       // (0 - x) + y ==> y - x
-      if (ST_EXPR_TYPE_PLUS == e->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type
-          && ST_EXPR_TYPE_MINUS == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->left->binexpr->left->type
-          && 0 == e->binexpr->left->binexpr->left->constant) {
-        e->type = ST_EXPR_TYPE_MINUS;
-        st_expr_t *_tmp = e->binexpr->left;
-        e->binexpr->left = e->binexpr->right;
-        e->binexpr->right = _tmp->binexpr->right;
-        free(_tmp->binexpr->left);
+      if (ST_EXPR_TYPE_ADD == e->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type
+          && ST_EXPR_TYPE_SUB == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->left->bin->left->type
+          && 0 == e->bin->left->bin->left->num) {
+        e->type = ST_EXPR_TYPE_SUB;
+        st_expr *_tmp = e->bin->left;
+        e->bin->left = e->bin->right;
+        e->bin->right = _tmp->bin->right;
+        free(_tmp->bin->left);
 
         st_expr_eval(e);
       }
       break;
 
-    case ST_EXPR_TYPE_MINUS:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
-      if (ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type) {
+    case ST_EXPR_TYPE_SUB:
+      st_expr_eval(e->bin->left);
+      st_expr_eval(e->bin->right);
+      if (ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type) {
         e->type = ST_EXPR_TYPE_CONST;
-        int val = e->binexpr->left->constant - e->binexpr->right->constant;
-        free(e->binexpr);
-        e->constant = val;
+        int val = e->bin->left->num - e->bin->right->num;
+        free(e->bin);
+        e->num = val;
       }
       break;
 
-    case ST_EXPR_TYPE_MULTIPLY:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
-      if (ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type) {
+    case ST_EXPR_TYPE_MUL:
+      st_expr_eval(e->bin->left);
+      st_expr_eval(e->bin->right);
+      if (ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type) {
         e->type = ST_EXPR_TYPE_CONST;
-        int val = e->binexpr->left->constant * e->binexpr->right->constant;
-        free(e->binexpr);
-        e->constant = val;
+        int val = e->bin->left->num * e->bin->right->num;
+        free(e->bin);
+        e->num = val;
       }
       break;
 
-    case ST_EXPR_TYPE_MODULO:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
-      if (ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type) {
+    case ST_EXPR_TYPE_MOD:
+      st_expr_eval(e->bin->left);
+      st_expr_eval(e->bin->right);
+      if (ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type) {
         e->type = ST_EXPR_TYPE_CONST;
-        int val = e->binexpr->left->constant % e->binexpr->right->constant;
-        free(e->binexpr);
-        e->constant = val;
+        int val = e->bin->left->num % e->bin->right->num;
+        free(e->bin);
+        e->num = val;
       }
       break;
 
-    case ST_EXPR_TYPE_DIVIDE:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
-      if (ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type) {
+    case ST_EXPR_TYPE_DIV:
+      st_expr_eval(e->bin->left);
+      st_expr_eval(e->bin->right);
+      if (ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type) {
         e->type = ST_EXPR_TYPE_CONST;
-        int val = e->binexpr->left->constant / e->binexpr->right->constant;
-        free(e->binexpr);
-        e->constant = val;
+        int val = e->bin->left->num / e->bin->right->num;
+        free(e->bin);
+        e->num = val;
       }
       break;
 
     case ST_EXPR_TYPE_SHL:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
-      if (ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type) {
+      st_expr_eval(e->bin->left);
+      st_expr_eval(e->bin->right);
+      if (ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type) {
         e->type = ST_EXPR_TYPE_CONST;
-        int val = e->binexpr->left->constant << e->binexpr->right->constant;
-        free(e->binexpr);
-        e->constant = val;
+        int val = e->bin->left->num << e->bin->right->num;
+        free(e->bin);
+        e->num = val;
       }
       break;
 
     case ST_EXPR_TYPE_SHR:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
-      if (ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type) {
+      st_expr_eval(e->bin->left);
+      st_expr_eval(e->bin->right);
+      if (ST_EXPR_TYPE_CONST == e->bin->left->type
+          && ST_EXPR_TYPE_CONST == e->bin->right->type) {
         e->type = ST_EXPR_TYPE_CONST;
-        int val = e->binexpr->left->constant >> e->binexpr->right->constant;
-        free(e->binexpr);
-        e->constant = val;
+        int val = e->bin->left->num >> e->bin->right->num;
+        free(e->bin);
+        e->num = val;
       }
       break;
 
-    case ST_EXPR_TYPE_RANGE:
-      st_expr_eval(e->binexpr->left);
-      st_expr_eval(e->binexpr->right);
+    case ST_EXPR_TYPE_RNG:
+      st_expr_eval(e->rng->from);
+      st_expr_eval(e->rng->to);
 
-      if (ST_EXPR_TYPE_VAR == e->binexpr->left->type
-          && ST_EXPR_TYPE_VAR == e->binexpr->right->type
-          && 0 == strcmp(e->binexpr->left->variable, e->binexpr->right->variable)) {
-        char *var = strdup(e->binexpr->left->variable);
-        //free(e->binexpr->left);
-        //free(e->binexpr->right);
-        //free(e->binexpr);
+      /*
+      if (ST_EXPR_TYPE_VAR == e->rng->from->type
+          && ST_EXPR_TYPE_VAR == e->rng->to->type
+          && 0 == strcmp(e->rng->from->var, e->rng->to->var)) {
+        char *var = strdup(e->rng->from->var);
         e->type = ST_EXPR_TYPE_VAR;
-        e->variable = var;
-      }
+        e->var = var;
+      }*/
 
-      if (ST_EXPR_TYPE_RANGE == e->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->left->type
-          && ST_EXPR_TYPE_CONST == e->binexpr->right->type
-          && e->binexpr->left->constant == e->binexpr->right->constant) {
-        int val = e->binexpr->right->constant+0;
-        //free(e->binexpr->left);
-        //free(e->binexpr->right);
-        //free(e->binexpr);
+      if (ST_EXPR_TYPE_RNG == e->type
+          && ST_EXPR_TYPE_CONST == e->rng->from->type
+          && ST_EXPR_TYPE_CONST == e->rng->to->type
+          && e->rng->from->num == e->rng->to->num) {
+        int val = e->rng->to->num+0;
         e->type = ST_EXPR_TYPE_CONST;
-        e->constant = val;
+        e->num = val;
       }
       break;
   }
 }
 
-void st_expr_subst_var(st_expr_t *e, const char *name, int value)
+void st_expr_free(st_expr *e)
 {
   assert(e->type > 0);
-  if (e->type == ST_EXPR_TYPE_CONST) return;
-
-  if (e->type == ST_EXPR_TYPE_VAR) {
-    if (0 == strcmp(name, e->variable)) {
-      e->type = ST_EXPR_TYPE_CONST;
-      e->constant = value;
-    }
-    return;
-  }
-
-  st_expr_subst_var(e->binexpr->left, name, value);
-  st_expr_subst_var(e->binexpr->right, name, value);
-}
-
-void st_expr_print(st_expr_t *e)
-{
-  assert(e->type > 0);
-  st_expr_eval(e);
   switch (e->type) {
-    case ST_EXPR_TYPE_RANGE:
-      st_expr_print(e->binexpr->left);
-      printf("..");
-      st_expr_print(e->binexpr->right);
-      break;
-    case ST_EXPR_TYPE_PLUS:
-      printf("(");
-      st_expr_print(e->binexpr->left);
-      printf("+");
-      st_expr_print(e->binexpr->right);
-      printf(")");
-      break;
-    case ST_EXPR_TYPE_MINUS:
-      printf("(");
-      st_expr_print(e->binexpr->left);
-      printf("-");
-      st_expr_print(e->binexpr->right);
-      printf(")");
-      break;
-    case ST_EXPR_TYPE_MULTIPLY:
-      printf("(");
-      st_expr_print(e->binexpr->left);
-      printf("*");
-      st_expr_print(e->binexpr->right);
-      printf(")");
-      break;
-    case ST_EXPR_TYPE_MODULO:
-      printf("(");
-      st_expr_print(e->binexpr->left);
-      printf("%%");
-      st_expr_print(e->binexpr->right);
-      printf(")");
-      break;
-    case ST_EXPR_TYPE_DIVIDE:
-      printf("(");
-      st_expr_print(e->binexpr->left);
-      printf("/");
-      st_expr_print(e->binexpr->right);
-      printf(")");
-      break;
-    case ST_EXPR_TYPE_SHL:
-      printf("(");
-      st_expr_print(e->binexpr->left);
-      printf("<<");
-      st_expr_print(e->binexpr->right);
-      printf(")");
-      break;
-    case ST_EXPR_TYPE_SHR:
-      printf("(");
-      st_expr_print(e->binexpr->left);
-      printf(">>");
-      st_expr_print(e->binexpr->right);
-      printf(")");
-      break;
-    case ST_EXPR_TYPE_TUPLE:
-      st_expr_print(e->binexpr->left);
-      printf("][");
-      st_expr_print(e->binexpr->right);
-      break;
-    case ST_EXPR_TYPE_EQUAL:
-      st_expr_print(e->binexpr->left);
-      printf("==");
-      st_expr_print(e->binexpr->right);
-      break;
-    case ST_EXPR_TYPE_BIND:
-      st_expr_print(e->binexpr->left);
-      printf(":");
-      st_expr_print(e->binexpr->right);
+    case ST_EXPR_TYPE_VAR:
+      free(e->var);
+      free(e);
       break;
     case ST_EXPR_TYPE_CONST:
-      printf("%d", e->constant);
+      free(e);
       break;
-    case ST_EXPR_TYPE_VAR:
-      printf("%s", e->variable);
+    case ST_EXPR_TYPE_ADD:
+    case ST_EXPR_TYPE_SUB:
+    case ST_EXPR_TYPE_MUL:
+    case ST_EXPR_TYPE_DIV:
+    case ST_EXPR_TYPE_MOD:
+    case ST_EXPR_TYPE_SHL:
+    case ST_EXPR_TYPE_SHR:
+      st_expr_free(e->bin->left);
+      st_expr_free(e->bin->right);
+      free(e->bin);
+      free(e);
+      break;
+    case ST_EXPR_TYPE_SEQ:
+      free(e->seq->values);
+      e->seq->count = 0;
+      free(e->seq);
+      free(e);
+      break;
+    case ST_EXPR_TYPE_RNG:
+      free(e->rng->bindvar);
+      st_expr_free(e->rng->from);
+      st_expr_free(e->rng->to);
+      free(e->rng);
+      free(e);
       break;
     default:
       fprintf(stderr, "%s:%d %s Unknown expr type: %d\n", __FILE__, __LINE__, __FUNCTION__, e->type);
+  }
+}
+
+void st_expr_print(st_expr *e)
+{
+  FILE *f = stdout;
+  assert(e->type > 0);
+  st_expr_eval(e);
+  switch (e->type) {
+    case ST_EXPR_TYPE_CONST:
+      fprintf(f, "%d", e->num);
+      break;
+    case ST_EXPR_TYPE_VAR:
+      fprintf(f, "%s", e->var);
+      break;
+    case ST_EXPR_TYPE_ADD:
+      fprintf(f, "(");
+      st_expr_print(e->bin->left);
+      fprintf(f, "+");
+      st_expr_print(e->bin->right);
+      fprintf(f, ")");
+      break;
+    case ST_EXPR_TYPE_SUB:
+      fprintf(f, "(");
+      st_expr_print(e->bin->left);
+      fprintf(f, "-");
+      st_expr_print(e->bin->right);
+      fprintf(f, ")");
+      break;
+    case ST_EXPR_TYPE_MUL:
+      fprintf(f, "(");
+      st_expr_print(e->bin->left);
+      fprintf(f, "*");
+      st_expr_print(e->bin->right);
+      fprintf(f, ")");
+      break;
+    case ST_EXPR_TYPE_DIV:
+      fprintf(f, "(");
+      st_expr_print(e->bin->left);
+      fprintf(f, "/");
+      st_expr_print(e->bin->right);
+      fprintf(f, ")");
+      break;
+    case ST_EXPR_TYPE_MOD:
+      fprintf(f, "(");
+      st_expr_print(e->bin->left);
+      fprintf(f, "%%");
+      st_expr_print(e->bin->right);
+      fprintf(f, ")");
+      break;
+    case ST_EXPR_TYPE_SHL:
+      fprintf(f, "(");
+      st_expr_print(e->bin->left);
+      fprintf(f, "<<");
+      st_expr_print(e->bin->right);
+      fprintf(f, ")");
+      break;
+    case ST_EXPR_TYPE_SHR:
+      fprintf(f, "(");
+      st_expr_print(e->bin->left);
+      fprintf(f, ">>");
+      st_expr_print(e->bin->right);
+      fprintf(f, ")");
+      break;
+    case ST_EXPR_TYPE_SEQ:
+      if (e->seq->count > 0) {
+        fprintf(f, "%d", e->seq->values[0]);
+      }
+      for (int i=1; i<e->seq->count; i++) {
+        fprintf(f, ",%d", e->seq->values[i]);
+      }
+      break;
+    case ST_EXPR_TYPE_RNG:
+      if (e->rng->bindvar != NULL && strlen(e->rng->bindvar) > 0 && 0 != strcmp(e->rng->bindvar, "_")) {
+        fprintf(f, "%s:", e->rng->bindvar);
+      }
+      st_expr_print(e->rng->from);
+      fprintf(f, "..");
+      st_expr_print(e->rng->to);
+      break;
+    default:
+      fprintf(stderr, "%s:%d %s Unknown expr type: %d\n", __FILE__, __LINE__, __FUNCTION__, e->type);
+  }
+}
+
+int st_expr_is_identical(st_expr *e0, st_expr *e1)
+{
+  return 0;
+}
+
+
+st_expr *st_expr_copy(const st_expr *e)
+{
+  st_expr *newe = (st_expr *)malloc(sizeof(st_expr));
+  memcpy(newe, e, sizeof(st_expr));
+  newe->type = e->type;
+  switch (e->type) {
+    case ST_EXPR_TYPE_ADD:
+    case ST_EXPR_TYPE_SUB:
+    case ST_EXPR_TYPE_MUL:
+    case ST_EXPR_TYPE_DIV:
+    case ST_EXPR_TYPE_MOD:
+    case ST_EXPR_TYPE_SHL:
+    case ST_EXPR_TYPE_SHR:
+      newe->bin = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
+      newe->bin->left = st_expr_copy(e->bin->left);
+      newe->bin->right = st_expr_copy(e->bin->right);
+      break;
+
+    case ST_EXPR_TYPE_SEQ:
+      newe->seq = (st_seq_expr_t *)malloc(sizeof(st_seq_expr_t));
+      newe->seq->count = e->seq->count;
+      newe->seq->values = (int *)calloc(newe->seq->count, sizeof(int));
+      memcpy(newe->seq->values, e->seq->values, newe->seq->count * sizeof(int));
+      break;
+
+    case ST_EXPR_TYPE_RNG:
+      newe->rng = (st_rng_expr_t *)malloc(sizeof(st_rng_expr_t));
+      newe->rng->bindvar = strdup(e->rng->bindvar);
+      newe->rng->from = st_expr_copy(e->rng->from);
+      newe->rng->to = st_expr_copy(e->rng->to);
+      break;
+
+    case ST_EXPR_TYPE_CONST:
+      newe->num = e->num;
+      break;
+
+    case ST_EXPR_TYPE_VAR:
+      newe->var = strdup(e->var);
+      break;
+
+    default:
+      fprintf(stderr, "%s:%d %s Unknown expr type: %d\n", __FILE__, __LINE__, __FUNCTION__, e->type);
+  }
+  return newe;
+}
+
+st_expr *st_expr_replace(const st_expr *in, const char *var, const st_expr *by)
+{
+  st_expr *newe = (st_expr *)malloc(sizeof(st_expr));
+  switch (in->type) {
+    case ST_EXPR_TYPE_ADD:
+    case ST_EXPR_TYPE_SUB:
+    case ST_EXPR_TYPE_MUL:
+    case ST_EXPR_TYPE_DIV:
+    case ST_EXPR_TYPE_MOD:
+    case ST_EXPR_TYPE_SHL:
+    case ST_EXPR_TYPE_SHR:
+      newe->type = in->type;
+      newe->bin = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
+      newe->bin->left = st_expr_replace(in->bin->left, var, by);
+      newe->bin->right = st_expr_replace(in->bin->right, var, by);
+      return newe;
+
+    case ST_EXPR_TYPE_SEQ:
+      newe->type = in->type;
+      newe->seq = (st_seq_expr_t *)malloc(sizeof(st_seq_expr_t));
+      newe->seq->count = in->seq->count;
+      newe->seq->values = (int *)calloc(newe->seq->count, sizeof(int));
+      memcpy(newe->seq->values, in->seq->values, sizeof(int)*newe->seq->count);
+      return newe;
+
+    case ST_EXPR_TYPE_RNG:
+      newe->type = in->type;
+      newe->rng = (st_rng_expr_t *)malloc(sizeof(st_rng_expr_t));
+      newe->rng->bindvar = strdup(in->rng->bindvar);
+      newe->rng->from = st_expr_replace(in->rng->from, var, by);
+      newe->rng->to = st_expr_replace(in->rng->to, var, by);
+      return newe;
+
+    case ST_EXPR_TYPE_CONST:
+      newe->type = in->type;
+      newe->num = in->num;
+      return newe;
+
+    case ST_EXPR_TYPE_VAR:
+      if (strcmp(in->var, var) == 0) {
+        free(newe);
+        return st_expr_copy(by);
+      }
+      newe->type = in->type;
+      newe->var = strdup(in->var);
+      return newe;
+
+    default:
+      fprintf(stderr, "%s:%d %s Unknown expr type: %d\n", __FILE__, __LINE__, __FUNCTION__, in->type);
+      return NULL;
+  }
+}
+
+
+st_expr *st_expr_apply(const st_expr *b, const st_expr *e)
+{
+  st_expr *newe;
+  switch (b->type) {
+    case ST_EXPR_TYPE_RNG:
+      newe = (st_expr *)malloc(sizeof(st_expr));
+      newe->type = ST_EXPR_TYPE_RNG;
+      newe->rng = (st_rng_expr_t *)malloc(sizeof(st_rng_expr_t));
+      newe->rng->bindvar = strdup(b->rng->bindvar);
+      newe->rng->from = st_expr_replace(e, b->rng->bindvar, b->rng->from);
+      newe->rng->to = st_expr_replace(e, b->rng->bindvar, b->rng->to);
+      return newe;
+
+    case ST_EXPR_TYPE_CONST:
+    case ST_EXPR_TYPE_VAR:
+      newe = (st_expr *)malloc(sizeof(st_expr));
+      if (e->type == ST_EXPR_TYPE_VAR) {
+        newe->type = ST_EXPR_TYPE_CONST;
+        newe->var = strdup(b->var);
+      } else if (e->type == ST_EXPR_TYPE_CONST) {
+        newe->type = ST_EXPR_TYPE_CONST;
+        newe->num = e->num;
+      }
+      return newe;
+
+    default:
+      fprintf(stderr, "%s:%d %s Not a bind expression (%d)\n", __FILE__, __LINE__, __FUNCTION__, e->type);
+  }
+  return NULL;
+}
+
+
+st_expr *st_expr_inv(const st_expr *e)
+{
+  st_expr *newe;
+  switch (e->type) {
+    case ST_EXPR_TYPE_ADD:
+      if (e->bin->right->type != ST_EXPR_TYPE_CONST) return NULL;
+      newe = (st_expr *)malloc(sizeof(st_expr));
+      newe->type = ST_EXPR_TYPE_SUB;
+      newe->bin = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
+      newe->bin->left = st_expr_copy(e->bin->left);
+      newe->bin->right = st_expr_copy(e->bin->right);
+      return newe;
+
+    case ST_EXPR_TYPE_SUB:
+      if (e->bin->right->type != ST_EXPR_TYPE_CONST) return NULL;
+      newe = (st_expr *)malloc(sizeof(st_expr));
+      newe->type = ST_EXPR_TYPE_ADD;
+      newe->bin = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
+      newe->bin->left = st_expr_copy(e->bin->left);
+      newe->bin->right = st_expr_copy(e->bin->right);
+      return newe;
+
+    case ST_EXPR_TYPE_MUL:
+      if (e->bin->right->type != ST_EXPR_TYPE_CONST) return NULL;
+      newe = (st_expr *)malloc(sizeof(st_expr));
+      newe->type = ST_EXPR_TYPE_MUL;
+      newe->bin = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
+      newe->bin->left = st_expr_copy(e->bin->left);
+      newe->bin->right = st_expr_copy(e->bin->right);
+      return newe;
+
+    case ST_EXPR_TYPE_DIV:
+      if (e->bin->right->type != ST_EXPR_TYPE_CONST) return NULL;
+      newe = (st_expr *)malloc(sizeof(st_expr));
+      newe->type = ST_EXPR_TYPE_MUL;
+      newe->bin = (st_bin_expr_t *)malloc(sizeof(st_bin_expr_t));
+      newe->bin->left = st_expr_copy(e->bin->left);
+      newe->bin->right = st_expr_copy(e->bin->right);
+      return newe;
+
+    case ST_EXPR_TYPE_MOD:
+    case ST_EXPR_TYPE_SHL:
+    case ST_EXPR_TYPE_SHR:
+    case ST_EXPR_TYPE_SEQ:
+    case ST_EXPR_TYPE_RNG:
+      return NULL; // No inverse
+
+    case ST_EXPR_TYPE_VAR:
+      newe = (st_expr *)malloc(sizeof(st_expr));
+      newe->type = ST_EXPR_TYPE_VAR;
+      newe->var = strdup(e->var);
+      return newe;
+
+    case ST_EXPR_TYPE_CONST:
+      fprintf(stderr, "%s:%s:%d Attempting find inverse for constant/variable!!\n", __FUNCTION__, __FILE__, __LINE__);
+      return NULL;
+
+    default:
+      fprintf(stderr, "%s:%d %s Unknown expr type: %d\n", __FILE__, __LINE__, __FUNCTION__, e->type);
+      return NULL;
   }
 }

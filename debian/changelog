@@ -1,3 +1,9 @@
+libsesstype (1.1.0) unstable; urgency=low
+
+  * Add support for all-collective nodes
+
+ -- Nicholas Ng <nickng@doc.ic.ac.uk>  Mon, 18 Mar 2013 17:05:47 +0000
+
 libsesstype (1.0.0) unstable; urgency=low
 
   * Initial Release.

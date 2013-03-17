@@ -12,42 +12,61 @@ extern "C" {
 #endif
 
 
-#define ST_EXPR_TYPE_CONST 1
-#define ST_EXPR_TYPE_VAR   2
-#define ST_EXPR_TYPE_RANGE 3
-#define ST_EXPR_TYPE_PLUS  4
-#define ST_EXPR_TYPE_MINUS 5
-#define ST_EXPR_TYPE_MULTIPLY 6
-#define ST_EXPR_TYPE_DIVIDE 7
-#define ST_EXPR_TYPE_MODULO 8
-#define ST_EXPR_TYPE_SHL 9
-#define ST_EXPR_TYPE_SHR 10
-#define ST_EXPR_TYPE_TUPLE 11
-#define ST_EXPR_TYPE_EQUAL 12
-#define ST_EXPR_TYPE_BIND 13
-#define ST_EXPR_TYPE_LT 14
-#define ST_EXPR_TYPE_LE 15
+#define ST_EXPR_TYPE_CONST 1 // Constant
+#define ST_EXPR_TYPE_VAR   2 // Variable
+
+#define ST_EXPR_TYPE_ADD 3 // +
+#define ST_EXPR_TYPE_SUB 4 // -
+#define ST_EXPR_TYPE_MUL 5 // *
+#define ST_EXPR_TYPE_DIV 6 // /
+#define ST_EXPR_TYPE_MOD 7 // &
+#define ST_EXPR_TYPE_SHL 8 // <<
+#define ST_EXPR_TYPE_SHR 9 // >>
+
+#define ST_EXPR_TYPE_SEQ 10 // , (Sequence)
+#define ST_EXPR_TYPE_RNG 11 // .. (Range)
 
 
-// Binary expressions
 struct __st_bin_expr_t {
   struct __st_expr_t *left;
   struct __st_expr_t *right;
 };
 
+struct __st_seq_expr_t {
+  unsigned int count;
+  int *values;
+};
+
+struct __st_rng_expr_t {
+  char *bindvar;
+  struct __st_expr_t *from;
+  struct __st_expr_t *to;
+};
 
 struct __st_expr_t {
   int type;
   union {
-    struct __st_bin_expr_t *binexpr;
-    int constant;
-    char *variable;
+    struct __st_bin_expr_t *bin;
+    struct __st_seq_expr_t *seq;
+    struct __st_rng_expr_t *rng;
+    char *var;
+    int num;
   };
 };
 
+typedef struct __st_expr_t     st_expr;       /**< Generic expression. */
 
-typedef struct __st_bin_expr_t st_bin_expr_t;
-typedef struct __st_expr_t st_expr_t;
+typedef struct __st_bin_expr_t st_bin_expr_t; /**< Binary expression. */
+typedef struct __st_seq_expr_t st_seq_expr_t; /**< Sequence [int] expression. */
+typedef struct __st_rng_expr_t st_rng_expr_t; /**< Range expression. */
+
+/**
+ * Expression list.
+ */
+typedef struct {
+  int count;
+  st_expr **exprs;
+} st_expr_list;
 
 
 /**
@@ -59,62 +78,55 @@ typedef struct __st_expr_t st_expr_t;
  *
  * \returns expression with binary expression (dynamically allocated).
  */
-st_expr_t *st_expr_binexpr(st_expr_t *left, int type, st_expr_t *right);
+st_expr *st_expr_binary(st_expr *left, int type, st_expr *right);
 
 
 /**
  * \brief Helper constructor for 'constant' expression.
  *
- * @param[in] val Integer value.
+ * @param[in] num Integer value.
  *
  * \returns expression with constant value (dynamically allocated).
  */
-st_expr_t *st_expr_constant(int val);
-
-
-/**
- * \brief Helper constructor for 'variable' expression.
- *
- * @param[in] var Variable name.
- *
- * \returns expression with variable (dynamically allocated).
- */
-st_expr_t *st_expr_variable(const char *var);
-
+st_expr *st_expr_constant(int num);
 
 /**
- * \brief Compare two expressions.
+ * \brief Test if two expressions are identical.
  *
+ * @param[in] e0 Expression to compare.
  * @param[in] e1 Expression to compare.
- * @param[in] e2 Expression to compare.
  *
  * \returns 1 if identical, 0 otherwise.
- *
  */
-int st_expr_is_identical(st_expr_t *e1, st_expr_t *e2);
+int st_expr_is_identical(st_expr *e0, st_expr *e1);
 
 
 /**
- * \brief Get a copy of an expression.
- * 
- * @param[in] expr Expression to copy.
+ * \brief Print an expression to stdout.
  *
- * \returns a copy of expr.
+ * @param[in] expr Expression to print.
  */
-st_expr_t *st_expr_copy(const st_expr_t *expr);
+void st_expr_print(st_expr *e);
+
 
 /**
- * \brief Helper function to simplofy a range expression
- *        in the form of X..X to X.
+ * \brief Helper constructor for range expression.
  *
- * If toplevel expression is not range or not in X..X format
- * original expression will be returned.
+ * @param[in] from LHS from expression.
+ * @param[in] to   RHS to expression.
  *
- * @param[in] e Expression to simplify.
- *
- * \returns simplified expression.
+ * \returns Range exprssion.
  */
-st_expr_t *st_expr_simplify(st_expr_t *e);
+st_expr *st_expr_range(st_expr *from, st_expr *to);
+
+
+/**
+ * \brief Print an expression to a string.
+ *
+ * @param[out] str  Output string.
+ * @param[in]  expr Expression to print.
+ */
+void st_expr_sprint(char *str, st_expr *e);
 
 
 /**
@@ -125,39 +137,59 @@ st_expr_t *st_expr_simplify(st_expr_t *e);
  *
  * @param[in,out] e Expression to evaluate.
  */
-void st_expr_eval(st_expr_t *e);
+void st_expr_eval(st_expr *e);
 
 
 /**
- * \brief Calculate the resulting expression given
- *        a range and an offset.
+ * \brief Helper constructor for 'variable' expression.
  *
- * @param[in] range  Expression range.
- * @param[in] offset Expression offset (for both start and end).
+ * @param[in] var Variable name.
  *
- * \returns resulting expression.
+ * \returns expression with variable (dynamically allocated).
  */
-st_expr_t *st_expr_offset_range(st_expr_t *range, st_expr_t* offset);
+st_expr *st_expr_variable(const char *var);
 
 
 /**
- * \brief Checks if two expressions are overlapped
- *        (identical or common range).
+ * \brief Deep copy an expression.
  *
- * @param[in] e1 Expression to compare.
- * @param[in] e2 Expression to compare.
+ * @param[in] e Expression to copy.
  *
- * \returns 1 if overlapped, 0 otherwise.
+ * \returns pointer to dynamically allocated copy of expression.
  */
-int st_expr_is_overlapped(const st_expr_t *e1, const st_expr_t *e2);
+st_expr *st_expr_copy(const st_expr *e);
 
 
 /**
- * \brief Print an expression to stdout.
+ * \brief Free an exprssion.
  *
- * @param[in] expr Expression to print
+ * @param[in] e Expression to free.
  */
-void st_expr_print(st_expr_t *e);
+void st_expr_free(st_expr *e);
+
+
+/**
+ * \brief Apply a relative expression on a binding range.
+ *
+ * @param[in] b Binding range.
+ * @param[in] e Relative expression.
+ *
+ * \returns pointer to dynamically allocated expression.
+ */
+st_expr *st_expr_apply(const st_expr *b, const st_expr *e);
+
+
+/**
+ * \brief Invert an expression.
+ *
+ * Currently only work with + - * / expressions
+ * and with numeric value on RHS.
+ *
+ * @param[in] e Expression to invert.
+ *
+ * \returns an inverted expression or NULL if not possible.
+ */
+st_expr *st_expr_inv(const st_expr *e);
 
 
 #ifdef __cplusplus
