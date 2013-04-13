@@ -13,7 +13,7 @@ Architecture: amd64
 Depends: libsesstype (= ${binary:Version})
 Description: Core library for session types programming (dev)
  Development files for programming with Session Types in C.
- This is a core library for internal tree representation of Sesion Types, part of Session C programming framework. See http://www.doc.ic.ac.uk/~cn06/sessionc for details.
+ This is a core library for internal tree representation of Session Types, part of Session C programming framework. See http://www.doc.ic.ac.uk/~cn06/sessionc for details.
 
 Package: libsesstype
 Section: libs
@@ -21,4 +21,4 @@ Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Core library for session types programming
  Shared libraries for programming with Session Types in C.
- This is a core library for internal tree representation of Sesion Types, part of Session C programming framework. See http://www.doc.ic.ac.uk/~cn06/sessionc for details.
+ This is a core library for internal tree representation of Session Types, part of Session C programming framework. See http://www.doc.ic.ac.uk/~cn06/sessionc for details.
