@@ -11,7 +11,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "st_expr.h"
+#include "sesstype/st_expr.h"
 
 
 inline st_expr *st_expr_constant(int num)
@@ -496,8 +496,8 @@ st_expr *st_expr_apply(const st_expr *b, const st_expr *e)
     case ST_EXPR_TYPE_VAR:
       newe = (st_expr *)malloc(sizeof(st_expr));
       if (e->type == ST_EXPR_TYPE_VAR) {
-        newe->type = ST_EXPR_TYPE_CONST;
-        newe->var = strdup(b->var);
+        newe->type = ST_EXPR_TYPE_VAR;
+        newe->var = strdup(e->var);
       } else if (e->type == ST_EXPR_TYPE_CONST) {
         newe->type = ST_EXPR_TYPE_CONST;
         newe->num = e->num;

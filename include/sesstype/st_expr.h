@@ -1,5 +1,5 @@
-#ifndef ST_EXPR__H__
-#define ST_EXPR__H__
+#ifndef SESSTYPE__ST_EXPR__H__
+#define SESSTYPE__ST_EXPR__H__
 /**
  * \file
  * This file contains the tree representation of expressions
@@ -196,4 +196,4 @@ st_expr *st_expr_inv(const st_expr *e);
 }
 #endif
 
-#endif // ST_EXPR__H__
+#endif // SESSTYPE__ST_EXPR__H__

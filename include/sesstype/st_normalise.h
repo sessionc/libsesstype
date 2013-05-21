@@ -1,5 +1,5 @@
-#ifndef ST_NORMALISE__H__
-#define ST_NORMALISE__H__
+#ifndef SESSTYPE__ST_NORMALISE__H__
+#define SESSTYPE__ST_NORMALISE__H__
 /**
  * \file
  * This file contains the canonicalisation functions of (multiparty) session
@@ -36,4 +36,4 @@ st_node *st_node_refactor(st_node *node);
 }
 #endif
 
-#endif // ST_NORMALISE__H__
+#endif // SESSTYPE__ST_NORMALISE__H__

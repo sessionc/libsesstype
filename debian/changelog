@@ -1,3 +1,15 @@
+libsesstype (1.1.0-2) unstable; urgency=low
+
+  * Update include namespace to sesstype
+
+ -- Nicholas Ng <nickng@doc.ic.ac.uk>  Tue, 21 May 2013 15:45:00 +0000
+
+libsesstype (1.1.0-1) unstable; urgency=low
+
+  * Bugfix release
+
+ -- Nicholas Ng <nickng@doc.ic.ac.uk>  Fri, 17 May 2013 14:37:00 +0000
+
 libsesstype (1.1.0) unstable; urgency=low
 
   * Add support for all-collective nodes

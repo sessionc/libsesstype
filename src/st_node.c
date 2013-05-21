@@ -12,8 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "st_node.h"
-#include "st_expr.h"
+#include "sesstype/st_node.h"
+#include "sesstype/st_expr.h"
 
 
 st_tree *st_tree_init(st_tree *tree)

@@ -16,9 +16,9 @@ libsesstype.a: libsesstype
 	$(CP) -v $(BUILD_DIR)/$@ $(LIB_DIR)/$@
 
 install: libsesstype libsesstype.a
-	$(MKDIR) $(DESTDIR)/usr/include
+	$(MKDIR) $(DESTDIR)/usr/include/sesstype
 	$(MKDIR) $(DESTDIR)/usr/lib
-	$(INSTALL) $(INCLUDE_DIR)/*.h $(DESTDIR)/usr/include
+	$(INSTALL) $(INCLUDE_DIR)/sesstype/*.h $(DESTDIR)/usr/include/sesstype
 	$(INSTALL) $(BUILD_DIR)/*.so $(DESTDIR)/usr/lib
 	$(INSTALL) $(LIB_DIR)/*.a $(DESTDIR)/usr/lib
 

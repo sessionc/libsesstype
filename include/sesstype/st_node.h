@@ -1,5 +1,5 @@
-#ifndef ST_NODE__H__
-#define ST_NODE__H__
+#ifndef SESSTYPE__ST_NODE__H__
+#define SESSTYPE__ST_NODE__H__
 /**
  * \file
  * Thie file contains the tree representation of (multiparty) session
@@ -8,7 +8,7 @@
  *
  */
 
-#include "st_expr.h"
+#include <sesstype/st_expr.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -407,4 +407,4 @@ st_role *st_node_copy_role(const st_role *role);
 }
 #endif
 
-#endif // ST_NODE__H__
+#endif // SESSTYPE__ST_NODE__H__

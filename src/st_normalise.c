@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "st_node.h"
-#include "st_normalise.h"
+#include "sesstype/st_node.h"
+#include "sesstype/st_normalise.h"
 
 
 /**
