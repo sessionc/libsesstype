@@ -178,6 +178,7 @@ typedef struct {
   st_role **roles;         /**< List of Roles. */
   int ngroup;              /**< Number of Groups. */
   st_role_group **groups;  /**< List of Groups. */
+  const char *package;     /**< Package of protocol. */
 } st_info;
 
 
@@ -220,6 +221,16 @@ void st_tree_free(st_tree *tree);
  * @param[in,out] node Node to clean up.
  */
 void st_node_free(st_node *node);
+
+
+/**
+ * \brief Set package of protocol.
+ * If package is not set, the default package name is 'default'.
+ *
+ * @param[in,out] tree Session type tree of protocol.
+ * @param[in]     package Package name of protocol.
+ */
+st_tree *st_tree_set_package(st_tree *tree, const char *package);
 
 
 /**

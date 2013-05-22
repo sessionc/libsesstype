@@ -29,6 +29,7 @@ st_tree *st_tree_init(st_tree *tree)
   tree->info->roles = NULL;
   tree->info->ngroup  = 0;
   tree->info->groups = NULL;
+  tree->info->package = "default";
 
   return tree;
 }
@@ -87,6 +88,15 @@ void st_node_free(st_node *node)
   }
 
   free(node);
+}
+
+
+st_tree *st_tree_set_package(st_tree *tree, const char *package)
+{
+  assert(tree != NULL);
+  tree->info->package = strdup(package);
+
+  return tree;
 }
 
 
