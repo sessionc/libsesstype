@@ -302,7 +302,7 @@ void st_tree_print(const st_tree *tree)
   printf("\n-------Summary------\n");
 
   if (tree->info != NULL) {
-    printf("Protocol: %s\n", tree->info->name);
+    printf("Protocol: %s#%s\n", tree->info->package, tree->info->name);
     switch (tree->info->type) {
       case ST_TYPE_GLOBAL:
         printf("Global protocol\n");
