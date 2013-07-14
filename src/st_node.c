@@ -25,9 +25,9 @@ st_tree *st_tree_init(st_tree *tree)
   tree->info->nconst = 0;
   tree->info->consts = NULL;
   tree->root = NULL;
-  tree->info->nrole   = 0;
+  tree->info->nrole = 0;
   tree->info->roles = NULL;
-  tree->info->ngroup  = 0;
+  tree->info->ngroup = 0;
   tree->info->groups = NULL;
   tree->info->package = "default";
 
@@ -889,6 +889,7 @@ st_role *st_node_copy_role(const st_role *role)
   if (role == NULL) {
     return NULL;
   }
+
   st_role *newrole = (st_role *)malloc(sizeof(st_role));
   newrole->name = strdup(role->name);
   newrole->dimen = role->dimen;
@@ -896,6 +897,7 @@ st_role *st_node_copy_role(const st_role *role)
   for (int i=0; i<newrole->dimen; ++i) {
     newrole->param[i] = st_expr_copy(role->param[i]);
   }
+
   return newrole;
 }
 
