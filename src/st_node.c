@@ -29,7 +29,7 @@ st_tree *st_tree_init(st_tree *tree)
   tree->info->roles = NULL;
   tree->info->ngroup = 0;
   tree->info->groups = NULL;
-  tree->info->package = "default";
+  tree->info->module = "default";
 
   return tree;
 }
@@ -91,10 +91,10 @@ void st_node_free(st_node *node)
 }
 
 
-st_tree *st_tree_set_package(st_tree *tree, const char *package)
+st_tree *st_tree_set_module(st_tree *tree, const char *module)
 {
   assert(tree != NULL);
-  tree->info->package = strdup(package);
+  tree->info->module = strdup(module);
 
   return tree;
 }
@@ -302,7 +302,7 @@ void st_tree_print(const st_tree *tree)
   printf("\n-------Summary------\n");
 
   if (tree->info != NULL) {
-    printf("Protocol: %s#%s\n", tree->info->package, tree->info->name);
+    printf("Protocol: %s#%s\n", tree->info->module, tree->info->name);
     switch (tree->info->type) {
       case ST_TYPE_GLOBAL:
         printf("Global protocol\n");
@@ -341,13 +341,20 @@ void st_tree_print(const st_tree *tree)
     printf("Constants: [");
     for (int c=0; c<tree->info->nconst; ++c) {
       printf("\n%s ", tree->info->consts[c]->name);
-      if (tree->info->consts[c]->type == ST_CONST_VALUE) {
-        printf("= %u",
-            tree->info->consts[c]->value);
-      } else {
-        printf("is between %u and %u",
-            tree->info->consts[c]->bounds.lbound,
-            tree->info->consts[c]->bounds.ubound);
+      switch (tree->info->consts[c]->type) {
+        case ST_CONST_VALUE:
+          printf("= %u",
+              tree->info->consts[c]->value);
+          break;
+        case ST_CONST_BOUND:
+          printf("is between %u and %u",
+              tree->info->consts[c]->bounds.lbound,
+              tree->info->consts[c]->bounds.ubound);
+          break;
+        case ST_CONST_INF:
+          printf("is unbounded from %u to +Inf",
+              tree->info->consts[c]->inf.lbound);
+          break;
       }
     }
     printf("]\n");

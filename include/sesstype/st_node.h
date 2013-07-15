@@ -32,8 +32,10 @@ extern "C" {
 
 #define ST_CONST_VALUE 1 // Constant defined as value
 #define ST_CONST_BOUND 2 // Constant defined as ower/upper bounds
+#define ST_CONST_INF   3 // Constant defined as lbound/infinity upper bound
 
 #define ST_ROLE_ALL "All"
+
 
 /**
  * Import.
@@ -155,6 +157,9 @@ typedef struct {
       unsigned int lbound;
       unsigned int ubound;
     } bounds;
+    struct {
+      unsigned int lbound;
+    } inf; // ST_CONST_INF (Infinity upper bound)
   };
 } st_const_t;
 
@@ -178,7 +183,7 @@ typedef struct {
   st_role **roles;         /**< List of Roles. */
   int ngroup;              /**< Number of Groups. */
   st_role_group **groups;  /**< List of Groups. */
-  const char *package;     /**< Package of protocol. */
+  const char *module;      /**< Full module/package name of protocol. */
 } st_info;
 
 
@@ -224,13 +229,13 @@ void st_node_free(st_node *node);
 
 
 /**
- * \brief Set package of protocol.
- * If package is not set, the default package name is 'default'.
+ * \brief Set module name of protocol.
+ * If module is not set, the default module name is 'default'.
  *
  * @param[in,out] tree Session type tree of protocol.
- * @param[in]     package Package name of protocol.
+ * @param[in]     module Module name of protocol.
  */
-st_tree *st_tree_set_package(st_tree *tree, const char *package);
+st_tree *st_tree_set_module(st_tree *tree, const char *module);
 
 
 /**
