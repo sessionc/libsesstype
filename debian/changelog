@@ -1,16 +1,16 @@
-libsesstype (1.1.1-1) unstable; urgency=low
+libsesstype (1.2.0) unstable; urgency=low
 
   * Adds support for infinite ranges
 
  -- Nicholas Ng <nickng@doc.ic.ac.uk>  Fri, 14 Jun 2013 14:24:20 +0000
 
-libsesstype (1.1.0-2) unstable; urgency=low
+libsesstype (1.1.1) unstable; urgency=low
 
   * Update include namespace to sesstype
 
  -- Nicholas Ng <nickng@doc.ic.ac.uk>  Tue, 21 May 2013 15:45:00 +0000
 
-libsesstype (1.1.0-1) unstable; urgency=low
+libsesstype (1.1.0) unstable; urgency=low
 
   * Bugfix release
 
