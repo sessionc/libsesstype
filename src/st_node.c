@@ -82,6 +82,13 @@ void st_node_free(st_node *node)
       break;
     case ST_NODE_ALLREDUCE:
       free(node->allreduce);
+      break;
+    case ST_NODE_IFBLK:
+      free(node->ifblk);
+      break;
+    case ST_NODE_ONEOF:
+      free(node->oneof);
+      break;
     default:
       fprintf(stderr, "%s:%d %s Unknown node type: %d\n", __FILE__, __LINE__, __FUNCTION__, node->type);
       break;
@@ -263,6 +270,18 @@ st_node *st_node_init(st_node *node, int type)
     case ST_NODE_FOR:
       node->forloop = (st_node_for_t *)malloc(sizeof(st_node_for_t));
       memset(node->forloop, 0, sizeof(st_node_for_t));
+      break;
+    case ST_NODE_ALLREDUCE:
+      node->allreduce = (st_node_allreduce_t *)malloc(sizeof(st_node_allreduce_t));
+      memset(node->allreduce, 0, sizeof(st_node_allreduce_t));
+      break;
+    case ST_NODE_IFBLK:
+      node->ifblk = (st_node_ifblk_t *)malloc(sizeof(st_node_ifblk_t));
+      memset(node->ifblk, 0, sizeof(st_node_ifblk_t));
+      break;
+    case ST_NODE_ONEOF:
+      node->oneof = (st_node_oneof_t *)malloc(sizeof(st_node_oneof_t));
+      memset(node->oneof, 0, sizeof(st_node_oneof_t));
       break;
     default:
       fprintf(stderr, "%s:%d %s Unknown node type: %d\n", __FILE__, __LINE__, __FUNCTION__, type);
@@ -868,6 +887,24 @@ int st_node_compare(st_node *node, st_node *other)
           identical &= (0 == strcmp(node->forloop->range->bindvar, other->forloop->range->bindvar));
           identical &= st_expr_is_identical(node->forloop->range->from, other->forloop->range->from);
           identical &= st_expr_is_identical(node->forloop->range->to, other->forloop->range->to);
+          break;
+
+        case ST_NODE_ALLREDUCE:
+          identical &= st_node_compare_msgsig(node->allreduce->msgsig, other->allreduce->msgsig);
+          break;
+
+        case ST_NODE_IFBLK:
+          identical &= (0 == strcmp(node->ifblk->cond->name, other->ifblk->cond->name));
+          identical &= (node->ifblk->cond->dimen == other->ifblk->cond->dimen);
+          for (int j=0; j<node->ifblk->cond->dimen || !identical; ++j) {
+            identical &= st_expr_is_identical(node->ifblk->cond->param[j], other->ifblk->cond->param[j]);
+          }
+          break;
+
+        case ST_NODE_ONEOF:
+          identical &= (0 == strcmp(node->oneof->range->bindvar, other->oneof->range->bindvar));
+          identical &= st_expr_is_identical(node->oneof->range->from, other->oneof->range->from);
+          identical &= st_expr_is_identical(node->oneof->range->to, other->oneof->range->to);
           break;
 
         default:

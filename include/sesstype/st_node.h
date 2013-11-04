@@ -22,10 +22,12 @@ extern "C" {
 #define ST_NODE_CONTINUE  5
 #define ST_NODE_FOR       6
 #define ST_NODE_ALLREDUCE 7
+#define ST_NODE_ONEOF     8
 
 // Endpoint only.
-#define ST_NODE_SEND      8
-#define ST_NODE_RECV      9
+#define ST_NODE_SEND      9
+#define ST_NODE_RECV      10
+#define ST_NODE_IFBLK     11
 
 #define ST_TYPE_LOCAL     0x80  // 128
 #define ST_TYPE_GLOBAL    0x100 // 256
@@ -131,6 +133,23 @@ typedef struct {
 } st_node_allreduce_t;
 
 
+/**
+ * If (block-level).
+ */
+typedef struct {
+  st_role *cond;
+} st_node_ifblk_t;
+
+
+/**
+ * Existential operator.
+ */
+typedef struct {
+  char *role;
+  st_rng_expr_t *range;
+} st_node_oneof_t;
+
+
 struct __st_node {
   int type;
 
@@ -141,6 +160,8 @@ struct __st_node {
     st_node_continue_t    *cont;
     st_node_for_t         *forloop;
     st_node_allreduce_t   *allreduce;
+    st_node_ifblk_t       *ifblk;
+    st_node_oneof_t       *oneof;
   };
 
   int nchild;
