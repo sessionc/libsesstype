@@ -122,6 +122,7 @@ typedef struct {
  */
 typedef struct {
   st_rng_expr_t *range; /**< Binding range. */
+  char *except;
 } st_node_for_t;
 
 
@@ -147,6 +148,7 @@ typedef struct {
 typedef struct {
   char *role;
   st_rng_expr_t *range;
+  unsigned int unordered;
 } st_node_oneof_t;
 
 

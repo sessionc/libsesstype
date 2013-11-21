@@ -540,11 +540,36 @@ void st_node_print(const st_node *node, int indent)
         break;
 
       case ST_NODE_FOR: // ---------- FOR ----------
-        printf("Node { type: forloop, var: %s range: ", node->forloop->range->bindvar);
+        printf("Node { type: forloop, var: %s, range: ", node->forloop->range->bindvar);
         st_expr_print(node->forloop->range->from);
         printf("..");
         st_expr_print(node->forloop->range->to);
-        printf("\n");
+        if (node->forloop->except != NULL) printf(", except: %s ", node->forloop->except);
+        printf("}\n");
+        break;
+
+      case ST_NODE_ALLREDUCE: // ---------- ALLREDUCE ----------
+        printf("Node { type: allreduce, ");
+        printf(", msgsig: { op: %s, payload: %s } }\n", node->allreduce->msgsig.op, node->allreduce->msgsig.payload);
+        break;
+
+      case ST_NODE_ONEOF: // ---------- ONEOF ----------
+        printf("Node { %stype: oneof, role: %s, range: ", (node->oneof->unordered ? "unordered " : ""), node->oneof->role);
+        st_expr_print(node->oneof->range->from);
+        printf("..");
+        st_expr_print(node->oneof->range->to);
+        printf("}\n");
+        break;
+
+      case ST_NODE_IFBLK: // ---------- IFBLK ----------
+        assert(node->ifblk->cond != NULL);
+        printf("Node { type: if block, cond: "/*, node->ifblk->cond->name*/);
+        for (int j=0; j<node->ifblk->cond->dimen; ++j) {
+          printf("[");
+          st_expr_print(node->ifblk->cond->param[j]);
+          printf("]");
+        }
+        printf(" }\n");
         break;
 
       default:
