@@ -132,6 +132,19 @@ int st_node_has_empty_leaf(st_node *node)
 
 
 /**
+ * Checks if there is still empty leaf (from root).
+ */
+int st_node_has_empty_leaf_root(st_node *root)
+{
+  int has_empty_leaf = 0;
+  for (int i=0; i<root->nchild; ++i) {
+    has_empty_leaf |= st_node_has_empty_leaf(root->children[i]);
+  }
+  return has_empty_leaf;
+}
+
+
+/**
  * Remove leaf nodes with no children
  * (choice, par, recur, root, foreach)
  */
@@ -249,7 +262,7 @@ st_node *st_node_normalise(st_node *node)
   node = st_node_recur_simplify(node);
   node = st_node_singleton_leaf_upmerge(node);
   node = st_node_singleton_interaction_upmerge(node);
-  while (st_node_has_empty_leaf(node)) {
+  while (st_node_has_empty_leaf_root(node)) {
     node = st_node_empty_leaf_remove(node);
     node = st_node_singleton_leaf_upmerge(node);
   }

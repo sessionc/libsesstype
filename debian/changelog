@@ -1,3 +1,10 @@
+libsesstype (1.4.2) unstable; urgency=low
+
+  * Minor typo
+  * Fix an infinity loop bug exists in leaf detection code
+
+ -- Nicholas Ng <nickng@doc.ic.ac.uk>  Tue, 26 Nov 2013 14:41:14 +0000
+
 libsesstype (1.4.1) unstable; urgency=low
 
   * Datastructure change for updated foreach and existential operator

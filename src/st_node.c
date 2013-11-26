@@ -125,7 +125,7 @@ st_tree *st_tree_set_local_name(st_tree *tree, const char *name, const st_role *
   if (endpoint_role->dimen == 0) {
     fprintf(stderr, "%s: Endpoint: %s @ %s\n", __FUNCTION__, name, endpoint_role->name);
   } else {
-    fprintf(stderr, "%s: Parameterised Endpoint: %s @ %s[%u-dimen]", __FUNCTION__, name, endpoint_role->name, endpoint_role->dimen);
+    fprintf(stderr, "%s: Parameterised Endpoint: %s @ %s[%u-dimen]\n", __FUNCTION__, name, endpoint_role->name, endpoint_role->dimen);
   }
 #endif
   tree->info->name = strdup(name);
