@@ -8,7 +8,8 @@
  *
  */
 
-#include <sesstype/st_expr.h>
+#include <stdio.h>
+#include "sesstype/st_expr.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -329,7 +330,7 @@ st_tree *st_tree_add_import(st_tree *tree, st_tree_import_t import);
  *
  * \returns 1 if name is a defined constant, 0 otherwise.
  */
-int st_tree_is_constant(st_tree *tree, const char *name);
+int st_tree_has_constant(st_tree *tree, const char *name);
 
 
 /**
@@ -352,40 +353,6 @@ st_node *st_node_init(st_node *node, int type);
  * \returns Updated parent node.
  */
 st_node *st_node_append(st_node *node, st_node *child);
-
-
-/**
- * \brief Print a st_tree with meta information.
- * 
- * @param[in] tree Tree to print.
- */
-void st_tree_print(const st_tree *tree);
-
-
-/**
- * \brief Print a single st_node and all its children recursively.
- *
- * @param[in] node   Node to print.
- * @param[in] indent Indentation (number of spaces).
- */
-void st_node_print_r(const st_node *node, int indent);
-
-
-/**
- * \brief Print a single st_node.
- *
- * @param[in] node   Node to print.
- * @param[in] indent Indentation (number of spaces).
- */
-void st_node_print(const st_node *node, int indent);
-
-
-/**
- * \brief Pretty print an expression.
- *
- * @param[in] e   Expression to print.
- */
-void st_expr_print(st_expr *e);
 
 
 /**

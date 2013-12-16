@@ -4,7 +4,7 @@
 
 .PHONY: all clean clean-all install
 
-$(BUILD_DIR)/%.o: %.c $(INCLUDE_DIR)/sesstype/%.h
+$(BUILD_DIR)/%.o: %.c $(INCLUDE_DIR)/sesstype/st_node.h $(INCLUDE_DIR)/sesstype/st_expr.h
 	$(CC) $(CFLAGS) -c $*.c \
 	  -o $(BUILD_DIR)/$*.o
 

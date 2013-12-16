@@ -121,12 +121,41 @@ st_expr *st_expr_range(st_expr *from, st_expr *to);
 
 
 /**
+ * \brief Helper constructor for range expression.
+ *
+ * @param[in] bindvar Bind variable.
+ * @param[in] from    LHS from expression.
+ * @param[in] to      RHS to expression.
+ *
+ * \returns Range exprssion.
+ */
+st_rng_expr_t *st_expr_init_rng(char *bindvar, st_expr *from, st_expr *to);
+
+
+/**
  * \brief Print an expression to a string.
  *
  * @param[out] str  Output string.
  * @param[in]  expr Expression to print.
  */
 void st_expr_sprint(char *str, st_expr *e);
+
+
+/**
+ * \brief Print an expression to a given output stream.
+ *
+ * @param[out] stream Output stream.
+ * @param[in]  expr   Expression to print.
+ */
+void st_expr_fprint(FILE *stream, st_expr *e);
+
+
+/**
+ * \brief Pretty print an expression.
+ *
+ * @param[in] e   Expression to print.
+ */
+void st_expr_print(st_expr *e);
 
 
 /**

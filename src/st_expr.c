@@ -47,10 +47,16 @@ inline st_expr *st_expr_range(st_expr *from, st_expr *to)
 {
   st_expr *_ = (st_expr *)malloc(sizeof(st_expr));
   _->type = ST_EXPR_TYPE_RNG;
-  _->rng = (st_rng_expr_t *)malloc(sizeof(st_rng_expr_t));
-  _->rng->bindvar = "_";
-  _->rng->from = from;
-  _->rng->to = to;
+  _->rng = st_expr_init_rng("_", from, to);
+  return _;
+}
+
+inline st_rng_expr_t *st_expr_init_rng(char *bindvar, st_expr *from, st_expr *to)
+{
+  st_rng_expr_t *_ = (st_rng_expr_t *)malloc(sizeof(st_rng_expr_t));
+  _->bindvar = bindvar;
+  _->from = from;
+  _->to = to;
   return _;
 }
 
@@ -291,90 +297,97 @@ void st_expr_free(st_expr *e)
   }
 }
 
-void st_expr_print(st_expr *e)
+
+void st_expr_fprint(FILE *stream, st_expr *e)
 {
-  FILE *f = stdout;
   assert(e->type > 0);
   st_expr_eval(e);
   switch (e->type) {
     case ST_EXPR_TYPE_CONST:
-      fprintf(f, "%d", e->num);
+      fprintf(stream, "%d", e->num);
       break;
     case ST_EXPR_TYPE_VAR:
-      fprintf(f, "%s", e->var);
+      fprintf(stream, "%s", e->var);
       break;
     case ST_EXPR_TYPE_ADD:
-      fprintf(f, "(");
-      st_expr_print(e->bin->left);
-      fprintf(f, "+");
-      st_expr_print(e->bin->right);
-      fprintf(f, ")");
+      fprintf(stream, "(");
+      st_expr_fprint(stream, e->bin->left);
+      fprintf(stream, "+");
+      st_expr_fprint(stream, e->bin->right);
+      fprintf(stream, ")");
       break;
     case ST_EXPR_TYPE_SUB:
-      fprintf(f, "(");
-      st_expr_print(e->bin->left);
-      fprintf(f, "-");
-      st_expr_print(e->bin->right);
-      fprintf(f, ")");
+      fprintf(stream, "(");
+      st_expr_fprint(stream, e->bin->left);
+      fprintf(stream, "-");
+      st_expr_fprint(stream, e->bin->right);
+      fprintf(stream, ")");
       break;
     case ST_EXPR_TYPE_MUL:
-      fprintf(f, "(");
-      st_expr_print(e->bin->left);
-      fprintf(f, "*");
-      st_expr_print(e->bin->right);
-      fprintf(f, ")");
+      fprintf(stream, "(");
+      st_expr_fprint(stream, e->bin->left);
+      fprintf(stream, "*");
+      st_expr_fprint(stream, e->bin->right);
+      fprintf(stream, ")");
       break;
     case ST_EXPR_TYPE_DIV:
-      fprintf(f, "(");
-      st_expr_print(e->bin->left);
-      fprintf(f, "/");
-      st_expr_print(e->bin->right);
-      fprintf(f, ")");
+      fprintf(stream, "(");
+      st_expr_fprint(stream, e->bin->left);
+      fprintf(stream, "/");
+      st_expr_fprint(stream, e->bin->right);
+      fprintf(stream, ")");
       break;
     case ST_EXPR_TYPE_MOD:
-      fprintf(f, "(");
-      st_expr_print(e->bin->left);
-      fprintf(f, "%%");
-      st_expr_print(e->bin->right);
-      fprintf(f, ")");
+      fprintf(stream, "(");
+      st_expr_fprint(stream, e->bin->left);
+      fprintf(stream, "%%");
+      st_expr_fprint(stream, e->bin->right);
+      fprintf(stream, ")");
       break;
     case ST_EXPR_TYPE_SHL:
-      fprintf(f, "(");
-      st_expr_print(e->bin->left);
-      fprintf(f, "<<");
-      st_expr_print(e->bin->right);
-      fprintf(f, ")");
+      fprintf(stream, "(");
+      st_expr_fprint(stream, e->bin->left);
+      fprintf(stream, "<<");
+      st_expr_fprint(stream, e->bin->right);
+      fprintf(stream, ")");
       break;
     case ST_EXPR_TYPE_SHR:
-      fprintf(f, "(");
-      st_expr_print(e->bin->left);
-      fprintf(f, ">>");
-      st_expr_print(e->bin->right);
-      fprintf(f, ")");
+      fprintf(stream, "(");
+      st_expr_fprint(stream, e->bin->left);
+      fprintf(stream, ">>");
+      st_expr_fprint(stream, e->bin->right);
+      fprintf(stream, ")");
       break;
     case ST_EXPR_TYPE_SEQ:
       if (e->seq->count > 0) {
-        fprintf(f, "%d", e->seq->values[0]);
+        fprintf(stream, "%d", e->seq->values[0]);
       }
       for (int i=1; i<e->seq->count; i++) {
-        fprintf(f, ",%d", e->seq->values[i]);
+        fprintf(stream, ",%d", e->seq->values[i]);
       }
       break;
     case ST_EXPR_TYPE_RNG:
       if (e->rng->bindvar != NULL && strlen(e->rng->bindvar) > 0 && 0 != strcmp(e->rng->bindvar, "_")) {
-        fprintf(f, "%s:", e->rng->bindvar);
+        fprintf(stream, "%s:", e->rng->bindvar);
       }
-      st_expr_print(e->rng->from);
-      fprintf(f, "..");
-      st_expr_print(e->rng->to);
+      st_expr_fprint(stream, e->rng->from);
+      fprintf(stream, "..");
+      st_expr_fprint(stream, e->rng->to);
       break;
     default:
       fprintf(stderr, "%s:%d %s Unknown expr type: %d\n", __FILE__, __LINE__, __FUNCTION__, e->type);
   }
+
+}
+
+inline void st_expr_print(st_expr *e)
+{
+  st_expr_fprint(stdout, e);
 }
 
 int st_expr_is_identical(st_expr *e0, st_expr *e1)
 {
+  assert(0/*TODO*/);
   return 0;
 }
 

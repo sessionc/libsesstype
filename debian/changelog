@@ -1,3 +1,10 @@
+libsesstype (1.4.3) unstable; urgency=low
+
+  * Internal refactoring
+  * Add helper functions for creating expressions
+
+ -- Nicholas Ng <nickng@doc.ic.ac.uk>  Thu, 5 Dec 2013 18:18:09 +0000
+
 libsesstype (1.4.2) unstable; urgency=low
 
   * Minor typo
