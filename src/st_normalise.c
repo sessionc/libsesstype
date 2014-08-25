@@ -290,7 +290,8 @@ st_node *st_node_label_recv_merge(st_node *node)
     for (i=0; i<_choice->nchild-1; ++i) {
       // If recv(__LOCAL__, (label)__LABEL__), ie. label comparison
       if (_choice->children[i]->type == ST_NODE_RECV
-          && strcmp(_choice->children[i]->interaction->msgsig.payload, "__LABEL__") == 0
+          && _choice->children[i]->interaction->msgsig.npayload == 1
+          && strcmp(_choice->children[i]->interaction->msgsig.payloads[0].name, "__LABEL__") == 0
           && strcmp(_choice->children[i]->interaction->from->name, "__LOCAL__") == 0) {
         if (_choice->children[i+1]->type == ST_NODE_RECV && _choice->children[i+1]->interaction->msgsig.op == NULL) {
           _choice->children[i+1]->interaction->msgsig.op = (char *)calloc(sizeof(char), strlen(_choice->children[i]->interaction->msgsig.op)+1);
@@ -322,7 +323,8 @@ st_node *st_node_label_recv(st_node *node)
   for (i=0; i<node->nchild-1; ++i) {
     // If children[i] = recv(R, __LABEL__) and children[i+1] = choice@R
     if (node->children[i]->type == ST_NODE_RECV
-        && strcmp(node->children[i]->interaction->msgsig.payload, "__LABEL__") == 0
+        && node->children[i]->interaction->msgsig.npayload == 1
+        && strcmp(node->children[i]->interaction->msgsig.payloads[0].name, "__LABEL__") == 0
         && node->children[i+1]->type == ST_NODE_CHOICE
         && strcmp(node->children[i]->interaction->from->name, node->children[i+1]->choice->at->name) == 0) {
       // compare params

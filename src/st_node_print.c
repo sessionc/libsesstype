@@ -28,13 +28,13 @@ void st_tree_print(const st_tree *tree)
   if (tree->info != NULL) {
     printf("Protocol: %s#%s\n", tree->info->module, tree->info->name);
     switch (tree->info->type) {
-      case ST_TYPE_GLOBAL: printf("Global protocol\n"); break;
-      case ST_TYPE_LOCAL:  printf("Local protocol\n");  break;
+      case ST_TREE_GLOBAL: printf("Global protocol\n"); break;
+      case ST_TREE_LOCAL:  printf("Local protocol\n");  break;
       default:
         assert(0/* Unrecognised Type*/);
     }
 
-    if (ST_TYPE_GLOBAL != tree->info->type) {
+    if (ST_TREE_GLOBAL != tree->info->type) {
       if (tree->info->myrole != NULL) {
         printf("Endpoint role: ");
         st_role_fprint(stdout, tree->info->myrole);
@@ -141,7 +141,9 @@ void st_node_fprint(FILE *stream, const st_node *node, int indent)
     case ST_NODE_CONTINUE:  st_node_fprint_continue(stream, node);  break;
     case ST_NODE_FOR:       st_node_fprint_for(stream, node);       break;
     case ST_NODE_ALLREDUCE: st_node_fprint_allreduce(stream, node); break;
+#ifdef PABBLE_DYNAMIC
     case ST_NODE_ONEOF:     st_node_fprint_oneof(stream, node);     break;
+#endif
     case ST_NODE_IFBLK:     st_node_fprint_ifblk(stream, node);     break;
     default:
       fprintf(stderr, "%s:%d %s Unknown node type: %d\n", __FILE__, __LINE__, __FUNCTION__, node->type);
@@ -174,8 +176,15 @@ void st_role_fprint(FILE *stream, const st_role *role)
 inline void st_node_msgsig_fprint(FILE *stream, const st_node_msgsig_t msgsig)
 {
   assert(msgsig.op != NULL);
-  assert(msgsig.payload != NULL);
-  fprintf(stream, "msgsig: { op: %s, payload: %s }", msgsig.op, msgsig.payload);
+  fprintf(stream, "msgsig: { op: %s, payload(%u): [", msgsig.op, msgsig.npayload);
+  for (int pl=0; pl<msgsig.npayload; pl++) {
+    fprintf(stream, "%s:%s[", msgsig.payloads[pl].name, msgsig.payloads[pl].type);
+    if (msgsig.payloads[pl].expr != NULL) {
+      st_expr_fprint(stream, msgsig.payloads[pl].expr);
+    }
+    fprintf(stream, "] ");
+  }
+  fprintf(stream, "] }");
 }
 
 
@@ -303,6 +312,7 @@ inline void st_node_fprint_allreduce(FILE *stream, const st_node *node)
 }
 
 
+#ifdef PABBLE_DYNAMIC
 inline void st_node_fprint_oneof(FILE *stream, const st_node *node)
 {
   assert(node != NULL && node->type == ST_NODE_ONEOF);
@@ -314,6 +324,7 @@ inline void st_node_fprint_oneof(FILE *stream, const st_node *node)
 
   fprintf(stream, "}\n");
 }
+#endif
 
 
 inline void st_node_fprint_ifblk(FILE *stream, const st_node *node)

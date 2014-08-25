@@ -77,7 +77,9 @@ void st_node_fprint_recur(FILE *stream, const st_node *node);
 void st_node_fprint_continue(FILE *stream, const st_node *node);
 void st_node_fprint_for(FILE *stream, const st_node *node);
 void st_node_fprint_allreduce(FILE *stream, const st_node *node);
+#ifdef PABBLE_DYNAMIC
 void st_node_fprint_oneof(FILE *stream, const st_node *node);
+#endif
 void st_node_fprint_ifblk(FILE *stream, const st_node *node);
 
 #ifdef __cplusplus
