@@ -7,7 +7,7 @@
 
 #ifdef __cplusplus
 #include <string>
-#include <uordered_map>
+#include <unordered_map>
 #endif
 
 #include "sesstype/constant.h"
