@@ -50,3 +50,18 @@ if(DOXYGEN_FOUND)
         COMMENT "Generating API documentation with Doxygen" VERBATIM
         )
 endif(DOXYGEN_FOUND)
+
+
+#
+# Tests.
+#
+if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/third_party/gtest)
+  enable_testing(true)
+  add_subdirectory(third_party/gtest)
+  message(STATUS "Looking for gtest (unit test) - found")
+  include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+  link_directories(${LIBRARY_OUTPUT_PATH})
+  add_subdirectory(${libsesstype_TESTS_DIR})
+else()
+  message(WARNING "Looking for gtest (unit test) - not found (no unit test will be run).")
+endif()
