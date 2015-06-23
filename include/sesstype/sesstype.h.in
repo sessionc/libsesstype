@@ -1,0 +1,32 @@
+/**
+ * \mainpage libsesstype: Library for Session Types programming in C/C++.
+ *
+ * This library is a collection of data structures for representing and APIs for
+ * manipulating Multiparty Session Types (MPST) for programming. A C API is
+ * provided for FFI interoperation with other programming languages.
+ *
+ * Developed for Imperial College London, see http://mrg.doc.ic.ac.uk/ for
+ * details about Session Types research.
+ *
+ * \file sesstype/sesstype.h
+ * \brief Top-level header file to access data structures and functions for representing a session type.
+ */
+#ifndef SESSTYPE__SESSTYPE__H__
+#define SESSTYPE__SESSTYPE__H__
+
+#define sesstype_VERSION_MAJOR @libsesstype_VERSION_MAJOR@
+#define sesstype_VERSION_MINOR @libsesstype_VERSION_MINOR@
+#define sesstype_VERSION_PATCH @libsesstype_VERSION_PATCH@
+
+#include "sesstype/module.h"
+#include "sesstype/protocol.h"
+#include "sesstype/import.h"
+#include "sesstype/constant.h"
+#include "sesstype/node.h"
+#include "sesstype/expr.h"
+#include "sesstype/role.h"
+#include "sesstype/role_grp.h"
+
+#include "sesstype/utils.h"
+
+#endif//SESSTYPE__SESSTYPE_H__
