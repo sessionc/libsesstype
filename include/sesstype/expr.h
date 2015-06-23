@@ -47,6 +47,9 @@ class Expr {
     /// \brief clone an Expr (abstract).
     virtual Expr *clone() const = 0;
 
+    /// \returns type of Expr.
+    enum __st_expr_type type() const;
+
     /// \brief <tt>accept</tt> method for utils::ExprVisitor.
     virtual void accept(utils::ExprVisitor &v) = 0;
 
@@ -342,12 +345,20 @@ class SeqExpr : public Expr {
     /// \brief clone a SeqExpr.
     SeqExpr *clone() const override;
 
+    /// \returns the idx'th number in the SqeExpr.
+    int value(unsigned int idx) const;
+
+    /// \returns number of values in the SeqExpr.
+    unsigned int num_value() const;
+
     /// \brief Append integer value to sequence.
     /// \param[in] value to append.
     void append_value(int value);
 
+    /// \brief Start iterator for sequence.
     std::vector<int>::const_iterator seq_begin() const;
 
+    /// \brief End iterator for sequence.
     std::vector<int>::const_iterator seq_end() const;
 
     void accept(utils::ExprVisitor &v) override;
@@ -369,14 +380,14 @@ class RngExpr : public Expr {
     /// \param[in] to Expr of RngExpr.
     RngExpr(Expr *from, Expr *to);
 
-    /// \brief RngExpr copy constructor.
-    RngExpr(const RngExpr &expr);
-
     /// \brief RngExpr constructor.
     /// \param[in] bindvar name.
     /// \param[in] from Expr of RngExpr.
     /// \param[in] to Expr of RngExpr.
     RngExpr(std::string bindvar, Expr *from, Expr *to);
+
+    /// \brief RngExpr copy constructor.
+    RngExpr(const RngExpr &expr);
 
     /// \brief RngExpr destructor.
     ~RngExpr() override;
