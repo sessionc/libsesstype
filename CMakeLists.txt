@@ -36,6 +36,14 @@ set(CMAKE_CXX_FLAGS "-std=c++11 -O3 -Wall -Werror")
 
 
 #
+# Sources: libsesstype
+#
+include_directories(${libsesstype_INCLUDE_DIR} ${PROJECT_BINARY_DIR}/include)
+add_subdirectory(${libsesstype_SOURCE_DIR})
+add_library(sesstype SHARED ${libsesstype_SOURCE})
+
+
+#
 # Documentation.
 #
 find_package(Doxygen)
