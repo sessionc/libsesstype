@@ -418,7 +418,7 @@ st_node *st_node_mk_choice(st_role *at_role);
 st_node *st_node_mk_for(st_expr *bind_expr);
 st_node *st_node_mk_allreduce();
 st_node *st_node_mk_oneof();
-st_node_ *st_node_mk_ifblk(msg_cond_t *cond);
+st_node *st_node_mk_ifblk(msg_cond_t *cond);
 
 #ifdef __cplusplus
 } // extern "C"

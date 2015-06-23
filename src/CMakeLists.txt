@@ -1,9 +1,14 @@
 set(libsesstype_SOURCE
     ${libsesstype_SOURCE}
     ${CMAKE_CURRENT_SOURCE_DIR}/constant.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/message.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/role_grp.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/expr.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/constant_api.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/node_api.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/expr_api.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/node_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/expr_visitor.cc
     PARENT_SCOPE)
