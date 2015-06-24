@@ -30,8 +30,10 @@ For both C and C++, include `sesstype/sesstype.h` to get started.
     int main(int argc, char *argv[])
     {
       // If C++
-      sesstype::Protocol protocol("Example");
+      sesstype::Protocol *protocol = sesstype::Protocol("Example");
+      delete protocol;
       // If C
       st_tree *prot = st_tree_mk_init("Example");
+      st_tree_free(prot);
       return EXIT_SUCCESS;
     }

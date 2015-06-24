@@ -98,6 +98,7 @@ class Projection : public NodeVisitor {
  private:
   Role *project_role_;
 };
+#endif // __cplusplus
 
 #ifdef __cplusplus
 } // namespace utils
