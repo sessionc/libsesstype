@@ -48,6 +48,9 @@ class Node {
   /// \brief Node destructor.
   virtual ~Node();
 
+  /// \brief clone a Node (abstract).
+  virtual Node *clone() const = 0;
+
   /// \returns type of Node.
   enum __st_node_type type() const;
 
@@ -69,8 +72,14 @@ class BlockNode : public Node {
     /// \brief BlockNode constructor.
     BlockNode();
 
+    /// \brief BlockNode copy constructor.
+    BlockNode(const BlockNode &node);
+
     /// \brief BlockNode destructor.
     ~BlockNode() override;
+
+    /// \brief clone a BlocNode.
+    BlockNode *clone() const override;
 
     /// \brief Get child Node at position <tt>idx</tt>.
     /// \param[in] idx of Node in BlockNode.
@@ -109,12 +118,18 @@ class InteractionNode : public Node {
     /// \brief InteractionNode constructor with empty MsgSig.
     InteractionNode();
 
+    /// \brief InteractionNode copy constructor.
+    InteractionNode(const InteractionNode &node);
+
     /// \brief InteractionNode constructor.
     /// \param[in] msgsig for the interaction.
     InteractionNode(MsgSig *msgsig);
 
     /// \brief InteractionNode destructor.
     ~InteractionNode() override;
+
+    /// \brief clone a InteractionNode.
+    InteractionNode *clone() const override;
 
     /// \returns message condition.
     MsgCond *cond() const;
@@ -173,8 +188,14 @@ class RecurNode : public BlockNode {
     /// \param[in] label of RecurNode.
     RecurNode(std::string label);
 
+    /// \brief RecurNode copy constructor.
+    RecurNode(const RecurNode &node);
+
     /// \brief RecurNode destructor.
     ~RecurNode() override;
+
+    /// \brief clone a RecurNode.
+    RecurNode *clone() const override;
 
     /// \returns label of RecursionNode.
     std::string label() const;
@@ -198,8 +219,14 @@ class ContinueNode : public Node {
     /// \param[in] label of Choice Node.
     ContinueNode(std::string label);
 
+    /// \brief ContinueNode copy constructor.
+    ContinueNode(const ContinueNode &node);
+
     /// \brief ContinueNode destructor.
     ~ContinueNode() override;
+
+    /// \brief clone a ContinueNode.
+    ContinueNode *clone() const override;
 
     /// \returns label of ContinueNode.
     std::string label() const;
@@ -226,8 +253,14 @@ class ChoiceNode : public BlockNode {
     /// \param[in] at Role (choice maker).
     ChoiceNode(Role *at);
 
+    /// \brief ChoiceNode copy constructor.
+    ChoiceNode(const ChoiceNode &node);
+
     /// \brief ChoiceNode destructor.
     ~ChoiceNode() override;
+
+    /// \brief clone a ChoiceNode.
+    ChoiceNode *clone() const override;
 
     /// \returns choice maker Role.
     Role *at() const;
@@ -253,8 +286,14 @@ class ForNode : public BlockNode {
     /// \param[in] bind_expr to add as index binding expression.
     ForNode(RngExpr *bind_expr);
 
+    /// \brief ForNode copy constructor.
+    ForNode(const ForNode &node);
+
     /// \brief ForNode destructor.
     ~ForNode() override;
+
+    /// \brief clone a ForNode.
+    ForNode *clone() const override;
 
     /// \returns binding expression of the for-loop.
     RngExpr *bind_expr() const;
@@ -282,8 +321,14 @@ class AllReduceNode : public Node {
     /// \param[in] msgsig for reduction.
     AllReduceNode(MsgSig *msgsig);
 
+    /// \brief AllReduceNode copy constructor.
+    AllReduceNode(const AllReduceNode &node);
+
     /// \brief AllReduceNode destructor.
     ~AllReduceNode() override;
+
+    /// \brief clone a AllReduceNode.
+    AllReduceNode *clone() const override;
 
     /// \returns message signature of AllReduceNode.
     MsgSig *msgsig() const;
@@ -308,8 +353,14 @@ class OneofNode : public BlockNode {
     /// \param[in] dimen of the Role parameters to use as selector index domain.
     OneofNode(Role *selector_role, unsigned int dimen);
 
+    /// \brief OneofNode copy constructor.
+    OneofNode(const OneofNode &node);
+
     /// \brief OneofNode destructor.
     ~OneofNode() override;
+
+    /// \brief clone a OneofNode.
+    OneofNode *clone() const override;
 
     /// \returns selector Role.
     Role *selector_role() const;
@@ -344,8 +395,14 @@ class IfNode : public BlockNode {
     /// \param[in] cond for the if-block.
     IfNode(MsgCond *cond);
 
+    /// \brief IfNode copy constructor.
+    IfNode(const IfNode &node);
+
     /// \brief IfNode destructor.
     ~IfNode() override;
+
+    /// \brief clone a IfNode.
+    IfNode *clone() const override;
 
     /// \brief Get body Node at position <tt>idx</tt>.
     /// \param[in] idx of Node in IfNode.

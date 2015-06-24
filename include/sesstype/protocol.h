@@ -105,20 +105,22 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-  typedef Protocol st_tree;
+typedef Protocol st_tree;
 #else
-  typedef struct Protocol st_tree;
+typedef struct Protocol st_tree;
 #endif
 
-  void st_tree_add_const(st_tree *const tree, st_const_t con);
-  void st_tree_add_import(st_tree *const tree, st_tree_import_t import);
-  void st_tree_add_role(st_tree *tree, const st_role *role);
-  void st_tree_add_role_group(st_tree *tree, const st_role_grp *grp);
-  bool st_tree_has_constant(st_tree *tree, const char *name);
+st_tree *st_tree_mk_init(char *name);
+void st_tree_free(st_tree *tree);
+void st_tree_add_const(st_tree *const tree, st_const_t con);
+void st_tree_add_import(st_tree *const tree, st_tree_import_t import);
+void st_tree_add_role(st_tree *tree, const st_role *role);
+void st_tree_add_role_group(st_tree *tree, const st_role_grp *grp);
+bool st_tree_has_constant(st_tree *tree, const char *name);
 
-  void st_tree_set_name(st_tree *tree, const char *name);
-  void st_tree_set_module(st_tree *tree, const char *module);
-  void st_tree_set_local_name(st_tree *tree, const char *name, const st_role *endpoint_role);
+void st_tree_set_name(st_tree *tree, const char *name);
+void st_tree_set_module(st_tree *tree, const char *module);
+void st_tree_set_local_name(st_tree *tree, const char *name, const st_role *endpoint_role);
 
 #ifdef __cplusplus
 } // extern "C"

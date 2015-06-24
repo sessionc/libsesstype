@@ -27,15 +27,18 @@ namespace sesstype {
  */
 class MsgPayload {
   public:
-    /// MsgPayload constructor with "" (empty string) as MsgPayload name.
+    /// \brief MsgPayload constructor with "" (empty string) as MsgPayload name.
     MsgPayload(std::string type);
 
-    /// MsgPayload constructor.
+    /// \brief MsgPayload constructor.
     /// \param[in] name of MsgPayload (identifier).
     /// \param[in] type of MsgPayload (datatype).
     MsgPayload(std::string name, std::string type);
 
-    /// MsgPayload destructor.
+    /// \brief MsgPayload copy constructor.
+    MsgPayload(const MsgPayload &payload);
+
+    /// \brief MsgPayload destructor.
     ~MsgPayload();
 
     /// \returns name of MsgPayload.
@@ -47,11 +50,11 @@ class MsgPayload {
     /// \returns number of dimensions in MsgPayload.
     unsigned int num_dimen() const;
 
-    /// Add an expression as a new parameter (dimension) of current MsgPayload.
+    /// \brief Add an expression as a new parameter of current MsgPayload.
     /// \param[in] expr to use as new parameter.
     void add_param(Expr *expr);
 
-    /// Get parameter at dimension <tt>idx</tt> using [] notation.
+    /// \brief Get parameter at dimension <tt>idx</tt> using [] notation.
     /// \param[in] idx of the parameter.
     /// \returns expression at idx'th parameter.
     Expr *operator[](unsigned int idx);
@@ -71,11 +74,14 @@ class MsgPayload {
  */
 class MsgSig {
   public:
-    /// MsgSig constructor.
+    /// \brief MsgSig constructor.
     /// \param[in] label of the MsgSig.
     MsgSig(std::string label);
 
-    /// MsgSig destructor.
+    /// \brief Msgsig copy constructor.
+    MsgSig(const MsgSig &msgsig);
+
+    /// \brief MsgSig destructor.
     ~MsgSig();
 
     /// \returns label of the MsgSig.
@@ -90,7 +96,7 @@ class MsgSig {
     /// \returns payload by positional index.
     MsgPayload *payload(unsigned int idx) const;
 
-    /// Add a payload parameter to current MsgSig.
+    /// \brief Add a payload parameter to current MsgSig.
     /// \param[in] payload to add.
     void add_payload(MsgPayload *payload);
 
