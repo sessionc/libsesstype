@@ -10,6 +10,10 @@ add_executable(test_const constant.cc)
 target_link_libraries(test_const sesstype gtest gtest_main)
 add_test(NAME Constant COMMAND test_const)
 
+add_executable(test_protocol protocol.cc)
+target_link_libraries(test_protocol sesstype gtest gtest_main)
+add_test(NAME Protocol COMMAND test_protocol)
+
 add_executable(test_module module.cc)
 target_link_libraries(test_module sesstype gtest gtest_main)
 add_test(NAME Module COMMAND test_module)
