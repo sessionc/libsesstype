@@ -14,6 +14,8 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/module_api.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/node_api.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/expr_api.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/role_api.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/role_grp_api.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/node_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/expr_visitor.cc
     PARENT_SCOPE)

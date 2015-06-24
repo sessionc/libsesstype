@@ -24,13 +24,21 @@ class Role {
   public:
     /// \brief Role constructor with "default" as name.
     Role();
+
+    /// \brief Role constructor.
     Role(std::string name);
+
+    /// \brief Role copy constructor.
     Role(const Role &role);
+
+    /// \brief Role destructor.
     ~Role();
+
+    /// \returns name of Role.
+    std::string name();
 
     /// \param[in] name Sets role name to name.
     void set_name(std::string name);
-    std::string name();
 
     /// \returns Number of dimensions in the parameterised Role.
     unsigned int num_dimen();
@@ -41,7 +49,7 @@ class Role {
     /// \param[in] idx Dimension index of parameterised Role.
     /// \returns expression at dimension idx.
     /// \exception std::out_of_range if dimension idx does not exist.
-    Expr *operator[](std::size_t idx);
+    Expr *operator[](std::size_t idx) const;
 
   private:
     std::string name_;

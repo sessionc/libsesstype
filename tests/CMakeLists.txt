@@ -21,3 +21,7 @@ add_test(NAME Node COMMAND test_node)
 add_executable(test_expr expr.cc)
 target_link_libraries(test_expr sesstype gtest gtest_main)
 add_test(NAME Expr COMMAND test_expr)
+
+add_executable(test_role role.cc)
+target_link_libraries(test_role sesstype gtest gtest_main)
+add_test(NAME Role COMMAND test_role)
