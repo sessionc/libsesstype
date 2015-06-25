@@ -28,5 +28,10 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/constant.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/utils/expr_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/utils/node_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils/print.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils/projection.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/utils/role_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils/parameterised/print.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils/parameterised/projection.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils/parameterised/simplify.cc
     PARENT_SCOPE)
