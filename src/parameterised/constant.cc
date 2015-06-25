@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
 
-#include <sesstype/constant.h>
+#include <sesstype/parameterised/constant.h>
 
 namespace sesstype {
+namespace parameterised {
 
 // Constant ------------------------------------------------------------------
 
-Constant::Constant(std::string name, enum __st_prot_const_type type)
-    : name_(name), type_(type)
+Constant::Constant(std::string name, int type) : name_(name), type_(type)
 {
 }
 
@@ -21,7 +21,7 @@ std::string Constant::name() const
     return name_;
 }
 
-enum __st_prot_const_type Constant::type() const
+int Constant::type() const
 {
     return type_;
 }
@@ -29,7 +29,7 @@ enum __st_prot_const_type Constant::type() const
 // ValueConstant -------------------------------------------------------------
 
 ValueConstant::ValueConstant(std::string name, int value)
-    : Constant(name, sesstype::ST_CONST_VALUE), value_(value)
+    : Constant(name, ST_CONST_VALUE), value_(value)
 {
 }
 
@@ -44,7 +44,7 @@ int ValueConstant::value() const
 // BoundedConstant -----------------------------------------------------------
 
 BoundedConstant::BoundedConstant(std::string name, int lbound, int ubound)
-    : Constant(name, sesstype::ST_CONST_RANGE), lbound_(lbound), ubound_(ubound)
+    : Constant(name, ST_CONST_RANGE), lbound_(lbound), ubound_(ubound)
 {
     if (ubound < lbound) {
         std::cerr << "Warning: " << name << " has lower bound > upper bound\n";
@@ -68,7 +68,7 @@ int BoundedConstant::ubound() const
 // ScalableConstant ----------------------------------------------------------
 
 ScalableConstant::ScalableConstant(std::string name, int lbound)
-    : Constant(name, sesstype::ST_CONST_SCALABLE), lbound_(lbound)
+    : Constant(name, ST_CONST_SCALABLE), lbound_(lbound)
 {
 }
 
@@ -81,4 +81,5 @@ int ScalableConstant::lbound() const
     return lbound_;
 }
 
+} // namespace parameterised
 } // namespace sesstype

@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include "sesstype/constant.h"
+#include "sesstype/parameterised/constant.h"
 
 namespace sesstype {
 namespace tests {
@@ -22,14 +22,14 @@ class ConstantTest : public ::testing::Test {
  */
 TEST_F(ConstantTest, BasicConsts)
 {
-    auto *val = new sesstype::ValueConstant("N", 3);
+    auto *val = new sesstype::parameterised::ValueConstant("N", 3);
 
     EXPECT_EQ(val->name(), "N");
     EXPECT_EQ(val->value(), 3);
 
     delete val;
 
-    auto *rng = new sesstype::BoundedConstant("M", 3, 5);
+    auto *rng = new sesstype::parameterised::BoundedConstant("M", 3, 5);
 
     EXPECT_EQ(rng->name(), "M");
     EXPECT_EQ(rng->lbound(), 3);
@@ -37,7 +37,7 @@ TEST_F(ConstantTest, BasicConsts)
 
     delete rng;
 
-    auto *inf = new sesstype::ScalableConstant("K", 2);
+    auto *inf = new sesstype::parameterised::ScalableConstant("K", 2);
 
     EXPECT_EQ(inf->name(), "K");
     EXPECT_EQ(inf->lbound(), 2);
