@@ -3,35 +3,28 @@
 #include <string>
 #include <vector>
 
-#include <sesstype/expr.h>
 #include <sesstype/message.h>
 
 namespace sesstype {
 
 // MsgPayload ----------------------------------------------------------------
 
-MsgPayload::MsgPayload(std::string type) : name_(""), type_(type), param_()
+MsgPayload::MsgPayload(std::string type) : name_(""), type_(type)
 {
 }
 
 MsgPayload::MsgPayload(std::string name, std::string type)
-    : name_(name), type_(type), param_()
+    : name_(name), type_(type)
 {
 }
 
 MsgPayload::MsgPayload(const MsgPayload &payload)
-    : name_(payload.name_), type_(payload.type_), param_()
+    : name_(payload.name_), type_(payload.type_)
 {
-    for (const auto &param : param_) {
-        param_.push_back(param->clone());
-    }
 }
 
 MsgPayload::~MsgPayload()
 {
-    for (Expr *e : param_) {
-        delete e;
-    }
 }
 
 std::string MsgPayload::name() const
@@ -42,21 +35,6 @@ std::string MsgPayload::name() const
 std::string MsgPayload::type() const
 {
     return type_;
-}
-
-unsigned int MsgPayload::num_dimen() const
-{
-    return param_.size();
-}
-
-void MsgPayload::add_param(Expr *param)
-{
-    param_.push_back(param);
-}
-
-Expr *MsgPayload::operator[](unsigned int idx)
-{
-    return param_.at(idx);
 }
 
 // MsgSig --------------------------------------------------------------------

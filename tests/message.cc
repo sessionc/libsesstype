@@ -6,6 +6,8 @@
 #include <string>
 
 #include "sesstype/message.h"
+#include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/message.h"
 
 namespace sesstype {
 namespace tests {
@@ -34,6 +36,16 @@ TEST_F(MsgTest, EmptyPayload)
   auto *payload = new sesstype::MsgPayload("T");
   EXPECT_EQ(payload->name(), "");
   EXPECT_EQ(payload->type(), "T");
+}
+
+/**
+ * \test Check that empty parameterised message payload can be constructed.
+ */
+TEST_F(MsgTest, EmptyParameterisedPayload)
+{
+  auto *payload = new sesstype::parameterised::MsgPayload("T");
+  EXPECT_EQ(payload->name(), "");
+  EXPECT_EQ(payload->type(), "T");
   EXPECT_EQ(payload->num_dimen(), 0);
 }
 
@@ -51,12 +63,11 @@ TEST_F(MsgTest, BasicMessages)
 
   EXPECT_EQ(pl_typeonly->name(), "");
   EXPECT_EQ(pl_typeonly->type(), "float");
-  EXPECT_EQ(pl_typeonly->num_dimen(), 0);
 
   sig->add_payload(pl_typeonly);
   EXPECT_EQ(sig->num_payload(), 1);
 
-  auto *pl_nametype = new sesstype::MsgPayload("count", "int");
+  auto *pl_nametype = new sesstype::parameterised::MsgPayload("count", "int");
 
   EXPECT_EQ(pl_nametype->name(), "count");
   EXPECT_EQ(pl_nametype->type(), "int");
@@ -65,18 +76,18 @@ TEST_F(MsgTest, BasicMessages)
   sig->add_payload(pl_nametype);
   EXPECT_EQ(sig->num_payload(), 2);
 
-  auto *pl_nametypeparam = new sesstype::MsgPayload("size", "long");
+  auto *pl_nametypeparam = new sesstype::parameterised::MsgPayload("size", "long");
 
   EXPECT_EQ(pl_nametypeparam->name(), "size");
   EXPECT_EQ(pl_nametypeparam->type(), "long");
   EXPECT_EQ(pl_nametypeparam->num_dimen(), 0);
 
-  pl_nametypeparam->add_param(new sesstype::ValExpr(2));
+  pl_nametypeparam->add_param(new sesstype::parameterised::ValExpr(2));
   EXPECT_EQ(pl_nametypeparam->num_dimen(), 1);
 
-  pl_nametypeparam->add_param(new sesstype::AddExpr(
-        new sesstype::ValExpr(1),
-        new sesstype::VarExpr("N")));
+  pl_nametypeparam->add_param(new sesstype::parameterised::AddExpr(
+        new sesstype::parameterised::ValExpr(1),
+        new sesstype::parameterised::VarExpr("N")));
   EXPECT_EQ(pl_nametypeparam->num_dimen(), 2);
 
   EXPECT_EQ(sig->num_payload(), 2);

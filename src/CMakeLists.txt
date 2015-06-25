@@ -21,6 +21,7 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/role_grp.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role_grp.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/message.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/constant.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/utils/role_visitor.cc
     PARENT_SCOPE)
