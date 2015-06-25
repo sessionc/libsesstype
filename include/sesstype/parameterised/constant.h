@@ -1,9 +1,9 @@
 /**
- * \file sesstype/constant.h
+ * \file sesstype/parameterised/constant.h
  * \brief Constants.
  */
-#ifndef SESSTYPE__CONSTANT_H__
-#define SESSTYPE__CONSTANT_H__
+#ifndef SESSTYPE__PARAMETERISED__CONSTANT_H__
+#define SESSTYPE__PARAMETERISED__CONSTANT_H__
 
 #ifdef __cplusplus
 #include <string>
@@ -11,13 +11,12 @@
 
 #ifdef __cplusplus
 namespace sesstype {
+namespace parameterised {
 #endif
 
-enum __st_prot_const_type {
-  ST_CONST_VALUE,
-  ST_CONST_RANGE,
-  ST_CONST_SCALABLE
-};
+#define ST_CONST_VALUE    1
+#define ST_CONST_RANGE    2
+#define ST_CONST_SCALABLE 3
 
 #ifdef __cplusplus
 /**
@@ -29,17 +28,17 @@ class Constant {
     std::string name() const;
 
     /// \returns type of Constant.
-    enum __st_prot_const_type type() const;
+    int type() const;
 
     /// \brief Constant destructor.
     virtual ~Constant();
 
   protected:
-    Constant(std::string name, enum __st_prot_const_type type);
+    Constant(std::string name, int type);
 
   private:
     std::string name_;
-    enum __st_prot_const_type type_;
+    int type_;
 };
 
 /**
@@ -139,7 +138,7 @@ st_const_t *st_mk_inf_const(const char *name, int lbound);
 
 /// \brief Get constant type from Constant.
 /// \param[in] con Constant to read from.
-enum __st_prot_const_type st_const_get_type(st_const_t *const con);
+int st_const_get_type(st_const_t *const con);
 
 /// \brief Free allocated Constant.
 void st_free_const(st_const_t *con);
@@ -149,7 +148,8 @@ void st_free_const(st_const_t *con);
 #endif
 
 #ifdef __cplusplus
+} // namespace parameterised
 } // namespace sesstype
 #endif
 
-#endif // SESSTYPE__CONSTANT_H__
+#endif // SESSTYPE__PARAMETERISED__CONSTANT_H__

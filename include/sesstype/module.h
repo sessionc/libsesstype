@@ -10,7 +10,6 @@
 #include <unordered_map>
 #endif
 
-#include "sesstype/constant.h"
 #include "sesstype/import.h"
 #include "sesstype/protocol.h"
 
@@ -57,20 +56,6 @@ class Module {
     /// \returns true if <tt>name</tt> is a Protocol in Module.
     bool has_protocol(std::string name) const;
 
-    /// \returns Constant named <tt>name</tt>.
-    /// \exception std::out_of_range if not found.
-    Constant *constant(std::string name) const;
-
-    /// \returns number of Constant in Module.
-    unsigned int num_constant() const;
-
-    /// \brief Test if Constant is in Module.
-    /// \returns true if <tt>name</tt> is a Constant in Module.
-    bool has_constant(std::string name) const;
-
-    /// \param[in] constant to add to Module.
-    void add_constant(Constant *constant);
-
     /// \detail This returns the original Import if alias is matched.
     /// \returns Import named (or with alias)<tt>name</tt>.
     /// \exception std::out_of_range if not found.
@@ -87,7 +72,6 @@ class Module {
 
   private:
     std::string name_;
-    std::unordered_map<std::string, Constant *> consts_;
     std::unordered_map<std::string, std::pair<Import *, bool>> imports_;
     std::unordered_map<std::string, Protocol *> protocols_;
 };

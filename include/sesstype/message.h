@@ -10,8 +10,6 @@
 #include <vector>
 #endif
 
-#include "sesstype/expr.h"
-
 #ifdef __cplusplus
 namespace sesstype {
 #endif
@@ -47,22 +45,9 @@ class MsgPayload {
     /// \returns datatype of MsgPayload.
     std::string type() const;
 
-    /// \returns number of dimensions in MsgPayload.
-    unsigned int num_dimen() const;
-
-    /// \brief Add an expression as a new parameter of current MsgPayload.
-    /// \param[in] expr to use as new parameter.
-    void add_param(Expr *expr);
-
-    /// \brief Get parameter at dimension <tt>idx</tt> using [] notation.
-    /// \param[in] idx of the parameter.
-    /// \returns expression at idx'th parameter.
-    Expr *operator[](unsigned int idx);
-
   private:
     std::string name_;
     std::string type_;
-    std::vector<Expr *> param_;
 };
 
 /**

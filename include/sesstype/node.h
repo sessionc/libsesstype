@@ -10,7 +10,6 @@
 #include <vector>
 #endif
 
-#include "sesstype/expr.h"
 #include "sesstype/message.h"
 #include "sesstype/role.h"
 
@@ -18,24 +17,18 @@
 namespace sesstype {
 #endif
 
-enum __st_node_type {
-  ST_NODE_ROOT,
-  ST_NODE_SENDRECV,
-  ST_NODE_CHOICE,
-  ST_NODE_PARALLEL,
-  ST_NODE_RECUR,
-  ST_NODE_CONTINUE,
-  ST_NODE_FOR,
-  ST_NODE_ALLREDUCE,
-  ST_NODE_ONEOF,
-  ST_NODE_IF
-};
+#define ST_NODE_ROOT     0
+#define ST_NODE_SENDRECV 1
+#define ST_NODE_CHOICE   2
+#define ST_NODE_PARALLEL 3
+#define ST_NODE_RECUR    4
+#define ST_NODE_CONTINUE 5
 
 #ifdef __cplusplus
 typedef Role MsgCond;
 
 namespace utils {
-class NodeVisitor; // Forward declaration.
+class NodeVisitor;
 } // namespace utils
 
 /**
@@ -44,24 +37,24 @@ class NodeVisitor; // Forward declaration.
  * Contains Node::accept method for visitors.
  */
 class Node {
- public:
-  /// \brief Node destructor.
-  virtual ~Node();
+  public:
+    /// \brief Node destructor.
+    virtual ~Node();
 
-  /// \brief clone a Node (abstract).
-  virtual Node *clone() const = 0;
+    /// \brief clone a Node (abstract).
+    virtual Node *clone() const = 0;
 
-  /// \returns type of Node.
-  enum __st_node_type type() const;
+    /// \returns type of Node.
+    int type() const;
 
-  /// \brief <tt>accept</tt> method for utils::NodeVisitor.
-  virtual void accept(utils::NodeVisitor &v) = 0;
+    /// \brief <tt>accept</tt> method for utils::NodeVisitor.
+    virtual void accept(utils::NodeVisitor &v) = 0;
 
- protected:
-  Node(enum __st_node_type type);
+  protected:
+    Node(int type);
 
- private:
-  enum __st_node_type type_;
+  private:
+    int type_;
 };
 
 /**
@@ -104,7 +97,7 @@ class BlockNode : public Node {
     void accept(utils::NodeVisitor &v) override;
 
   protected:
-    BlockNode(enum __st_node_type type);
+    BlockNode(int type);
     std::vector<Node *> children_;
 };
 
@@ -130,13 +123,6 @@ class InteractionNode : public Node {
 
     /// \brief clone a InteractionNode.
     InteractionNode *clone() const override;
-
-    /// \returns message condition.
-    MsgCond *cond() const;
-
-    /// \brief Set message condition (only for send/receive).
-    /// \param[in] cond for InteractionNode.
-    void set_cond(MsgCond *cond);
 
     /// \returns message signature of InteractionNode.
     MsgSig *msgsig() const;
@@ -176,7 +162,6 @@ class InteractionNode : public Node {
     MsgSig *msgsig_;
     Role *from_;
     std::vector<Role *> to_;
-    MsgCond *msgcond_;
 };
 
 /**
@@ -277,179 +262,6 @@ class ChoiceNode : public BlockNode {
     Role *at_;
 };
 
-/**
- * \brief Counting for-loop statement.
- */
-class ForNode : public BlockNode {
-  public:
-    /// \brief ForNode constructor.
-    /// \param[in] bind_expr to add as index binding expression.
-    ForNode(RngExpr *bind_expr);
-
-    /// \brief ForNode copy constructor.
-    ForNode(const ForNode &node);
-
-    /// \brief ForNode destructor.
-    ~ForNode() override;
-
-    /// \brief clone a ForNode.
-    ForNode *clone() const override;
-
-    /// \returns binding expression of the for-loop.
-    RngExpr *bind_expr() const;
-
-    /// \brief Replace binding expression of for loop.
-    /// \param[in] bind_expr to replace with.
-    void set_bind_expr(RngExpr *bind_expr);
-
-    void accept(utils::NodeVisitor &v) override;
-
-  private:
-    RngExpr *bind_expr_;
-    std::string except_idx_;
-};
-
-/**
- * \brief All-to-all reduction statement.
- */
-class AllReduceNode : public Node {
-  public:
-    /// \brief AllReduceNode constructor with no Msgsig as default (pure all2all).
-    AllReduceNode();
-
-    /// \brief AllReduceNode constructor.
-    /// \param[in] msgsig for reduction.
-    AllReduceNode(MsgSig *msgsig);
-
-    /// \brief AllReduceNode copy constructor.
-    AllReduceNode(const AllReduceNode &node);
-
-    /// \brief AllReduceNode destructor.
-    ~AllReduceNode() override;
-
-    /// \brief clone a AllReduceNode.
-    AllReduceNode *clone() const override;
-
-    /// \returns message signature of AllReduceNode.
-    MsgSig *msgsig() const;
-
-    /// \brief Replace msgsig of AllReduceNode.
-    /// \param[in] msgsig to replace with.
-    void set_msgsig(MsgSig *msgsig);
-
-    void accept(utils::NodeVisitor &v) override;
-
-  private:
-    MsgSig *msgsig_;
-};
-
-/**
- * \brief Existential construct.
- */
-class OneofNode : public BlockNode {
-  public:
-    /// \brief OneofNode constructor.
-    /// \param[in] selector_role Role to use as selector.
-    /// \param[in] dimen of the Role parameters to use as selector index domain.
-    OneofNode(Role *selector_role, unsigned int dimen);
-
-    /// \brief OneofNode copy constructor.
-    OneofNode(const OneofNode &node);
-
-    /// \brief OneofNode destructor.
-    ~OneofNode() override;
-
-    /// \brief clone a OneofNode.
-    OneofNode *clone() const override;
-
-    /// \returns selector Role.
-    Role *selector_role() const;
-
-    /// \returns selector Role dimension.
-    unsigned int selector_role_dimen() const;
-
-    /// \param[in] selector_role Role to use as selector.
-    /// \param[in] dimen of the Role parameters to use as selector index domain.
-    void set_selector_role(Role *selector_role, unsigned int dimen);
-
-    /// \returns true if allow unordered access.
-    bool unordered() const;
-
-    /// \param[in] unordered flag.
-    void set_unordered(bool unordered);
-
-    void accept(utils::NodeVisitor &v) override;
-
-  private:
-    Role *selector_role_;
-    unsigned int selector_role_dimen_;
-    bool unordered_;
-};
-
-/**
- * \brief If-block.
- */
-class IfNode : public BlockNode {
-  public:
-    /// \brief IfNode constructor.
-    /// \param[in] cond for the if-block.
-    IfNode(MsgCond *cond);
-
-    /// \brief IfNode copy constructor.
-    IfNode(const IfNode &node);
-
-    /// \brief IfNode destructor.
-    ~IfNode() override;
-
-    /// \brief clone a IfNode.
-    IfNode *clone() const override;
-
-    /// \brief Get body Node at position <tt>idx</tt>.
-    /// \param[in] idx of Node in IfNode.
-    /// \returns body Node at position <tt>idx</tt>
-    /// \exception std::out_of_range if <tt>idx</tt> is out of bounds.
-    Node *body(unsigned int idx) const;
-
-    /// \brief Add body Node to current if-block
-    /// \param[in] body Node.
-    void append_body(Node *body);
-
-    /// \returns if-block condition.
-    MsgCond *cond() const;
-
-    /// \brief Set if-block condition.
-    /// \param[in] cond for the if-block.
-    void set_cond(MsgCond *cond);
-
-    void accept(utils::NodeVisitor &v) override;
-
-  private:
-    MsgCond *cond_;
-};
-
-/**
- * \brief Namespace for utilities and non-datastructure classes.
- */
-namespace utils {
-
-/**
- * \brief Abstract class for building Node AST-based visitors.
- */
-class NodeVisitor {
- public:
-  //virtual void visit(Node *node) = 0;
-  virtual void visit(InteractionNode *node) = 0;
-  virtual void visit(BlockNode *node) = 0;
-  virtual void visit(RecurNode *node) = 0;
-  virtual void visit(ContinueNode *node) = 0;
-  virtual void visit(ChoiceNode *node) = 0;
-  virtual void visit(AllReduceNode *node) = 0;
-  virtual void visit(ForNode *node) = 0;
-  virtual void visit(OneofNode *node) = 0;
-  virtual void visit(IfNode *node) = 0;
-};
-
-} // namespace utils
 #endif // __cplusplus
 
 #ifdef __cplusplus
@@ -472,10 +284,6 @@ st_node *st_node_mk_interaction();
 st_node *st_node_mk_recur(char *label);
 st_node *st_node_mk_continue(char *label);
 st_node *st_node_mk_choice(st_role *at_role);
-st_node *st_node_mk_for(st_expr *bind_expr);
-st_node *st_node_mk_allreduce();
-st_node *st_node_mk_oneof();
-st_node *st_node_mk_ifblk(msg_cond_t *cond);
 
 #ifdef __cplusplus
 } // extern "C"

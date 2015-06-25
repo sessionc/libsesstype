@@ -11,20 +11,16 @@
 #include <unordered_map>
 #endif
 
-#include <sesstype/constant.h>
 #include <sesstype/import.h>
 #include <sesstype/node.h>
 #include <sesstype/role.h>
-#include <sesstype/role_grp.h>
 
 #ifdef __cplusplus
 namespace sesstype {
 #endif
 
-enum __st_prot_type {
-  ST_PROTOCOL_LOCAL,
-  ST_PROTOCOL_GLOBAL
-};
+#define ST_PROTOCOL_GLOBAL 1
+#define ST_PROTOCOL_LOCAL  2
 
 #ifdef __cplusplus
 /**
@@ -60,7 +56,7 @@ class Protocol {
     void project(Role *role);
 
     /// \returns Protocol type (global or local).
-    enum __st_prot_type type() const;
+    int type() const;
 
     /// Add a Role as a participant of the Protocol.
     /// \param[in] role to add to this Protocol.
@@ -77,26 +73,12 @@ class Protocol {
     /// \exception std::out_of_range if not found.
     Role *role(std::string name) const;
 
-    /// Add a RoleGrp as a participant of the Protocol.
-    /// \param[in] group to add to this Protocol.
-    void add_group(RoleGrp *group);
-
-    /// \param[in] group to look for.
-    /// \returns true if group is a RoleGrp in the Protocol.
-    bool has_role_grp(RoleGrp *group) const;
-
-    /// \param[in] name of the RoleGrp.
-    /// \returns RoleGrp named name.
-    /// \exception std::out_of_range_ if not found.
-    RoleGrp *group(std::string name) const;
-
   private:
     std::string name_;
+    int type_;
     Role *me_; // Localised role (only used in endpoint protocol)
     Node *root_;
-    enum __st_prot_type type_;
     std::unordered_map<std::string, Role *> roles_;
-    std::unordered_map<std::string, RoleGrp *> groups_;
 };
 #endif
 
@@ -111,16 +93,15 @@ typedef struct Protocol st_tree;
 #endif
 
 st_tree *st_tree_mk_init(char *name);
-void st_tree_free(st_tree *tree);
-void st_tree_add_const(st_tree *const tree, st_const_t con);
+
 void st_tree_add_import(st_tree *const tree, st_tree_import_t import);
 void st_tree_add_role(st_tree *tree, const st_role *role);
-void st_tree_add_role_group(st_tree *tree, const st_role_grp *grp);
-bool st_tree_has_constant(st_tree *tree, const char *name);
 
 void st_tree_set_name(st_tree *tree, const char *name);
 void st_tree_set_module(st_tree *tree, const char *module);
 void st_tree_set_local_name(st_tree *tree, const char *name, const st_role *endpoint_role);
+
+void st_tree_free(st_tree *tree);
 
 #ifdef __cplusplus
 } // extern "C"

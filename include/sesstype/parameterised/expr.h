@@ -1,9 +1,9 @@
 /**
- * \file sesstype/expr.h
+ * \file sesstype/parameterised/expr.h
  * \brief Expressions in a Role parameter or statement.
  */
-#ifndef SESSTYPE__EXPR__H__
-#define SESSTYPE__EXPR__H__
+#ifndef SESSTYPE__PARAMETERISED__EXPR__H__
+#define SESSTYPE__PARAMETERISED__EXPR__H__
 
 #ifdef __cplusplus
 #include <string>
@@ -15,26 +15,27 @@
 
 #ifdef __cplusplus
 namespace sesstype {
-#endif
 
-enum __st_expr_type {
-  ST_EXPR_TYPE_CONST,
-  ST_EXPR_TYPE_VAR,
-  ST_EXPR_TYPE_ADD,
-  ST_EXPR_TYPE_SUB,
-  ST_EXPR_TYPE_MUL,
-  ST_EXPR_TYPE_DIV,
-  ST_EXPR_TYPE_MOD,
-  ST_EXPR_TYPE_SHL, // <<
-  ST_EXPR_TYPE_SHR, // >>
-  ST_EXPR_TYPE_SEQ, // , (Sequence)
-  ST_EXPR_TYPE_RNG, // .. (Range)
-};
-
-#ifdef __cplusplus
 namespace utils {
 class ExprVisitor;
 } // namespace utils
+
+namespace parameterised {
+#endif
+
+#define ST_EXPR_CONST 1
+#define ST_EXPR_VAR   2
+#define ST_EXPR_ADD   3
+#define ST_EXPR_SUB   4
+#define ST_EXPR_MUL   5
+#define ST_EXPR_DIV   6
+#define ST_EXPR_MOD   7
+#define ST_EXPR_SHL   8 // <<
+#define ST_EXPR_SHR   9 // >>
+#define ST_EXPR_SEQ   10 // , (Sequence)
+#define ST_EXPR_RNG   11 // .. (Range)
+
+#ifdef __cplusplus
 
 /**
  * \brief Expression.
@@ -48,16 +49,16 @@ class Expr {
     virtual Expr *clone() const = 0;
 
     /// \returns type of Expr.
-    enum __st_expr_type type() const;
+    int type() const;
 
     /// \brief <tt>accept</tt> method for utils::ExprVisitor.
     virtual void accept(utils::ExprVisitor &v) = 0;
 
   protected:
-    Expr(enum __st_expr_type type);
+    Expr(int type);
 
   private:
-    enum __st_expr_type type_;
+    int type_;
 };
 
 /**
@@ -123,7 +124,7 @@ class BinExpr : public Expr {
     ~BinExpr() override;
 
     /// \returns binary operator.
-    enum __st_expr_type op() const;
+    int op() const;
 
     /// \returns left Expr.
     Expr *lhs() const;
@@ -139,9 +140,8 @@ class BinExpr : public Expr {
 
   protected:
     /// \brief BinExpr constructor.
-    BinExpr(enum __st_expr_type op, Expr *lhs, Expr *rhs);
+    BinExpr(int op, Expr *lhs, Expr *rhs);
 
-    enum __st_expr_type op_;
     Expr *lhs_;
     Expr *rhs_;
 };
@@ -421,29 +421,6 @@ class RngExpr : public Expr {
     Expr *from_;
     Expr *to_;
 };
-
-
-namespace utils {
-
-/**
- * \brief Abstract class for building Expr visitors.
- */
-class ExprVisitor {
-  public:
-    virtual void visit(VarExpr *expr) = 0;
-    virtual void visit(ValExpr *expr) = 0;
-    virtual void visit(AddExpr *expr) = 0;
-    virtual void visit(SubExpr *expr) = 0;
-    virtual void visit(MulExpr *expr) = 0;
-    virtual void visit(DivExpr *expr) = 0;
-    virtual void visit(ModExpr *expr) = 0;
-    virtual void visit(ShlExpr *expr) = 0;
-    virtual void visit(ShrExpr *expr) = 0;
-    virtual void visit(SeqExpr *expr) = 0;
-    virtual void visit(RngExpr *expr) = 0;
-};
-
-} // namespace utils
 #endif // __cplusplus
 
 #ifdef __cplusplus
@@ -477,7 +454,7 @@ st_expr *st_expr_mk_var(const char *var);
 /// \param[in] type  Expression type as defined in st_node.h (ST_EXPR_TYPE_*)
 /// \param[in] right RHS expression tree.
 /// \returns expression with binary expression (dynamically allocated).
-st_expr *st_expr_mk_binary(st_expr *lhs, enum __st_expr_type type, st_expr *rhs);
+st_expr *st_expr_mk_binary(st_expr *lhs, int type, st_expr *rhs);
 
 /// \brief Constructor for range expression.
 /// \param[in] bindvar Binding variable name, NULL means plain range.
@@ -525,7 +502,8 @@ st_expr *st_expr_inv(const st_expr *e);
 #endif
 
 #ifdef __cplusplus
+} // namespace parameterised
 } // namespace sesstype
 #endif
 
-#endif//SESSTYPE__ST_EXPR__H__
+#endif//SESSTYPE__PARAMETERISED__EXPR__H__

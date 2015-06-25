@@ -9,11 +9,22 @@
 #include <ostream>
 #endif
 
-#include "sesstype/expr.h"
 #include "sesstype/node.h"
+#include "sesstype/role.h"
+
+#include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/node.h"
+#include "sesstype/parameterised/role.h"
+
+#include "sesstype/utils/expr.h"
+#include "sesstype/utils/node.h"
+#include "sesstype/utils/role.h"
 
 #ifdef __cplusplus
 namespace sesstype {
+/**
+ * \brief Namespace for utilities and non-datastructure classes.
+ */
 namespace utils {
 #endif
 
@@ -21,7 +32,7 @@ namespace utils {
 /**
  * \brief Protocol and Expression printer.
  */
-class Printer : public NodeVisitor, public ExprVisitor {
+class Printer : public NodeVisitor, public RoleVisitor, public ExprVisitor {
  public:
   /// \brief Printer constructor with output to std::out as default.
   Printer();
@@ -38,22 +49,28 @@ class Printer : public NodeVisitor, public ExprVisitor {
   void visit(RecurNode *node) override;
   void visit(ContinueNode *node) override;
   void visit(ChoiceNode *node) override;
-  void visit(AllReduceNode *node) override;
-  void visit(ForNode *node) override;
-  void visit(OneofNode *node) override;
-  void visit(IfNode *node) override;
+  void visit(parameterised::InteractionNode *node) override;
+  void visit(parameterised::AllReduceNode *node) override;
+  void visit(parameterised::ForNode *node) override;
+  void visit(parameterised::OneofNode *node) override;
+  void visit(parameterised::IfNode *node) override;
 
-  void visit(VarExpr *expr) override;
-  void visit(ValExpr *expr) override;
-  void visit(AddExpr *expr) override;
-  void visit(SubExpr *expr) override;
-  void visit(MulExpr *expr) override;
-  void visit(DivExpr *expr) override;
-  void visit(ModExpr *expr) override;
-  void visit(ShlExpr *expr) override;
-  void visit(ShrExpr *expr) override;
-  void visit(SeqExpr *expr) override;
-  void visit(RngExpr *expr) override;
+  void visit(Role *role) override;
+  void visit(parameterised::Role *role) override;
+  void visit(parameterised::RoleGrp *role) override;
+
+  void visit(parameterised::VarExpr *expr) override;
+  void visit(parameterised::ValExpr *expr) override;
+  void visit(parameterised::AddExpr *expr) override;
+  void visit(parameterised::SubExpr *expr) override;
+  void visit(parameterised::MulExpr *expr) override;
+  void visit(parameterised::DivExpr *expr) override;
+  void visit(parameterised::ModExpr *expr) override;
+  void visit(parameterised::ShlExpr *expr) override;
+  void visit(parameterised::ShrExpr *expr) override;
+  void visit(parameterised::SeqExpr *expr) override;
+  void visit(parameterised::RngExpr *expr) override;
+
  private:
   std::ostream &os_;
   unsigned int indent_lvl_;
@@ -65,17 +82,17 @@ class Printer : public NodeVisitor, public ExprVisitor {
  * \brief Expression simplifier.
  */
 class Simplifier : public ExprVisitor {
-  void visit(VarExpr *expr) override;
-  void visit(ValExpr *expr) override;
-  void visit(AddExpr *expr) override;
-  void visit(SubExpr *expr) override;
-  void visit(MulExpr *expr) override;
-  void visit(DivExpr *expr) override;
-  void visit(ModExpr *expr) override;
-  void visit(ShlExpr *expr) override;
-  void visit(ShrExpr *expr) override;
-  void visit(SeqExpr *expr) override;
-  void visit(RngExpr *expr) override;
+  void visit(parameterised::VarExpr *expr) override;
+  void visit(parameterised::ValExpr *expr) override;
+  void visit(parameterised::AddExpr *expr) override;
+  void visit(parameterised::SubExpr *expr) override;
+  void visit(parameterised::MulExpr *expr) override;
+  void visit(parameterised::DivExpr *expr) override;
+  void visit(parameterised::ModExpr *expr) override;
+  void visit(parameterised::ShlExpr *expr) override;
+  void visit(parameterised::ShrExpr *expr) override;
+  void visit(parameterised::SeqExpr *expr) override;
+  void visit(parameterised::RngExpr *expr) override;
 };
 
 /**
@@ -90,10 +107,11 @@ class Projection : public NodeVisitor {
   void visit(RecurNode *node) override;
   void visit(ContinueNode *node) override;
   void visit(ChoiceNode *node) override;
-  void visit(AllReduceNode *node) override;
-  void visit(ForNode *node) override;
-  void visit(OneofNode *node) override;
-  void visit(IfNode *node) override;
+  void visit(parameterised::InteractionNode *node) override;
+  void visit(parameterised::AllReduceNode *node) override;
+  void visit(parameterised::ForNode *node) override;
+  void visit(parameterised::OneofNode *node) override;
+  void visit(parameterised::IfNode *node) override;
 
  private:
   Role *project_role_;
@@ -102,6 +120,10 @@ class Projection : public NodeVisitor {
 
 #ifdef __cplusplus
 } // namespace utils
+#endif
+
+#ifdef __cplusplus
+namespace parameterised {
 #endif
 
 #ifdef __cplusplus
@@ -128,6 +150,10 @@ void st_expr_print(st_expr *expr);
 
 #ifdef __cplusplus
 } // extern "C"
+#endif
+
+#ifdef __cplusplus
+} // namespace parameterised
 #endif
 
 #ifdef __cplusplus

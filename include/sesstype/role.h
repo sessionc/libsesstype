@@ -10,15 +10,17 @@
 #include <vector>
 #endif
 
-#include "sesstype/expr.h"
-
 #ifdef __cplusplus
 namespace sesstype {
 #endif
 
 #ifdef __cplusplus
+namespace utils {
+class RoleVisitor;
+} // namespace utils
+
 /**
- * \brief Role (participants) of a protocol or session.
+ * \brief Role (participant) of a protocol or session.
  */
 class Role {
   public:
@@ -32,30 +34,26 @@ class Role {
     Role(const Role &role);
 
     /// \brief Role destructor.
-    ~Role();
+    virtual ~Role();
 
     /// \returns name of Role.
-    std::string name();
+    std::string name() const;
 
     /// \param[in] name Sets role name to name.
     void set_name(std::string name);
 
-    /// \returns Number of dimensions in the parameterised Role.
-    unsigned int num_dimen();
+    /// \brief Check if this Role matches another Role.
+    /// \returns true if this Role is another Role.
+    virtual bool matches(Role *other) const;
 
-    /// \param[in] param Adds parameter as a new dimension to the Role.
-    void add_param(Expr *param);
+    /// \brief <tt>accept</tt> method for utils::RoleVisitor.
+    virtual void accept(utils::RoleVisitor &v);
 
-    /// \param[in] idx Dimension index of parameterised Role.
-    /// \returns expression at dimension idx.
-    /// \exception std::out_of_range if dimension idx does not exist.
-    Expr *operator[](std::size_t idx) const;
 
   private:
     std::string name_;
-    std::vector<Expr *> param_;
 };
-#endif
+#endif // __cplusplus
 
 #ifdef __cplusplus
 extern "C" {
@@ -87,22 +85,6 @@ const char *st_role_name(st_role *const role);
 /// \param[in] name to use.
 /// \returns the modified Role.
 st_role *st_role_set_name(st_role *const role, const char *name);
-
-/// \brief Get the total dimension of a Role.
-/// \param[in] role pointer.
-/// \returns the dimension of the Role.
-unsigned int st_role_num_dimen(st_role *const role);
-
-/// \brief Get the idx'th dimension parameter of a Role.
-/// \param[in] role pointer.
-/// \returns the idx'th dimension parameter of the Role.
-st_expr *st_role_get_param(st_role *const role, unsigned int idx);
-
-/// \brief Add a new parameter to the Role as a new dimension.
-/// \param[in] role pointer.
-/// \param[in] param Expr.
-/// \returns the modified Role.
-st_role *st_role_add_param(st_role *const role, st_expr *param);
 
 /// \brief Free a previously allocated Role.
 /// \param[in] role pointer.
