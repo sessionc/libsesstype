@@ -10,7 +10,7 @@
 #include <vector>
 #endif
 
-#include "sesstype/message.h"
+#include "sesstype/msg.h"
 #include "sesstype/role.h"
 
 #ifdef __cplusplus

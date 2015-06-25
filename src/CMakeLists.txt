@@ -4,7 +4,7 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/protocol.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/import.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/message.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/msg.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/import.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/module.cc

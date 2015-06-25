@@ -1,5 +1,5 @@
 /**
- * \file sesstype/utils/role.h
+ * \file sesstype/utils/node.h
  * \brief Utilities for Node.
  */
 #ifndef SESSTYPE__UTILS__NODE_H__

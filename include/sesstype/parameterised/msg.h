@@ -1,5 +1,5 @@
 /**
- * \file sesstype/parameterised/message.h
+ * \file sesstype/parameterised/msg.h
  * \brief A message for passing between participants (with parameters).
  */
 #ifndef SESSTYPE__PARAMETERISED__MESSAGE_H__
@@ -9,7 +9,7 @@
 #include <vector>
 #endif
 
-#include "sesstype/message.h"
+#include "sesstype/msg.h"
 #include "sesstype/parameterised/expr.h"
 
 #ifdef __cplusplus

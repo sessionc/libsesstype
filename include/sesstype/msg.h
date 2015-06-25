@@ -1,5 +1,5 @@
 /**
- * \file sesstype/message.h
+ * \file sesstype/msg.h
  * \brief A message for passing between participants.
  */
 #ifndef SESSTYPE__MESSAGE_H__

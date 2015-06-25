@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include <sesstype/message.h>
+#include <sesstype/msg.h>
 
 namespace sesstype {
 

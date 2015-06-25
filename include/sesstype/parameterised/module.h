@@ -18,6 +18,10 @@ namespace parameterised {
 #endif
 
 #ifdef __cplusplus
+/**
+ * \brief Module is a container class for multiple logically related Protocols
+ * (contains parameterised elements).
+ */
 class Module : public sesstype::Module {
   public:
     /// \brief Module constructor with "default" as Module name.

@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
-#include <sesstype/message.h>
+#include <sesstype/msg.h>
 #include <sesstype/parameterised/expr.h>
-#include <sesstype/parameterised/message.h>
+#include <sesstype/parameterised/msg.h>
 
 namespace sesstype {
 namespace parameterised {
