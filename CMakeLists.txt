@@ -73,3 +73,14 @@ if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/third_party/gtest)
 else()
   message(WARNING "Looking for gtest (unit test) - not found (no unit test will be run).")
 endif()
+
+
+#
+# Install.
+#
+install(DIRECTORY include/sesstype DESTINATION include)
+install(TARGETS sesstype
+        EXPORT sesstype
+        RUNTIME DESTINATION bin
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib)
