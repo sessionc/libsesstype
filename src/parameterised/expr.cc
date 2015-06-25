@@ -3,18 +3,19 @@
 #include <string>
 #include <vector>
 
-#include "sesstype/expr.h"
+#include "sesstype/parameterised/expr.h"
 
 namespace sesstype {
+namespace parameterised {
 
 // Expr ----------------------------------------------------------------------
 
-Expr::Expr(enum __st_expr_type type)
+Expr::Expr(int type)
 {
     type_ = type;
 }
 
-enum __st_expr_type Expr::type() const
+int Expr::type() const
 {
     return type_;
 }
@@ -25,11 +26,11 @@ Expr::~Expr()
 
 // VarExpr -------------------------------------------------------------------
 
-VarExpr::VarExpr(std::string name) : Expr(ST_EXPR_TYPE_VAR), name_(name)
+VarExpr::VarExpr(std::string name) : Expr(ST_EXPR_VAR), name_(name)
 {
 }
 
-VarExpr::VarExpr(const VarExpr &expr) : Expr(ST_EXPR_TYPE_VAR), name_(expr.name_)
+VarExpr::VarExpr(const VarExpr &expr) : Expr(ST_EXPR_VAR), name_(expr.name_)
 {
 }
 
@@ -49,11 +50,11 @@ std::string VarExpr::name() const
 
 // ValExpr -------------------------------------------------------------------
 
-ValExpr::ValExpr(int num) : Expr(ST_EXPR_TYPE_CONST), num_(num)
+ValExpr::ValExpr(int num) : Expr(ST_EXPR_CONST), num_(num)
 {
 }
 
-ValExpr::ValExpr(const ValExpr &expr) : Expr(ST_EXPR_TYPE_CONST), num_(expr.num_)
+ValExpr::ValExpr(const ValExpr &expr) : Expr(ST_EXPR_CONST), num_(expr.num_)
 {
 }
 
@@ -73,8 +74,7 @@ int ValExpr::num() const
 
 // BinExpr -------------------------------------------------------------------
 
-BinExpr::BinExpr(enum __st_expr_type op, Expr *lhs, Expr *rhs)
-    : Expr(op), op_(op), lhs_(lhs), rhs_(rhs)
+BinExpr::BinExpr(int op, Expr *lhs, Expr *rhs) : Expr(op), lhs_(lhs), rhs_(rhs)
 {
 }
 
@@ -84,9 +84,9 @@ BinExpr::~BinExpr()
     delete rhs_;
 }
 
-enum __st_expr_type BinExpr::op() const
+int BinExpr::op() const
 {
-    return op_;
+    return type();
 }
 
 Expr *BinExpr::lhs() const
@@ -100,12 +100,12 @@ Expr *BinExpr::rhs() const {
 
 // AddExpr -------------------------------------------------------------------
 
-AddExpr::AddExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_TYPE_ADD, lhs, rhs)
+AddExpr::AddExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_ADD, lhs, rhs)
 {
 }
 
 AddExpr::AddExpr(const AddExpr &expr)
-    : BinExpr(ST_EXPR_TYPE_ADD, expr.lhs_, expr.rhs_)
+    : BinExpr(ST_EXPR_ADD, expr.lhs_, expr.rhs_)
 {
 }
 
@@ -130,12 +130,12 @@ bool AddExpr::is_commutative() const
 
 // SubExpr -------------------------------------------------------------------
 
-SubExpr::SubExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_TYPE_SUB, lhs, rhs)
+SubExpr::SubExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_SUB, lhs, rhs)
 {
 }
 
 SubExpr::SubExpr(const SubExpr &expr)
-    : BinExpr(ST_EXPR_TYPE_SUB, expr.lhs_, expr.rhs_)
+    : BinExpr(ST_EXPR_SUB, expr.lhs_, expr.rhs_)
 {
 }
 
@@ -161,12 +161,12 @@ bool SubExpr::is_commutative() const
 
 // MulExpr -------------------------------------------------------------------
 
-MulExpr::MulExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_TYPE_MUL, lhs, rhs)
+MulExpr::MulExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_MUL, lhs, rhs)
 {
 }
 
 MulExpr::MulExpr(const MulExpr &expr)
-    : BinExpr(ST_EXPR_TYPE_MUL, expr.lhs_, expr.rhs_)
+    : BinExpr(ST_EXPR_MUL, expr.lhs_, expr.rhs_)
 {
 }
 
@@ -191,12 +191,12 @@ bool MulExpr::is_commutative() const
 
 // DivExpr -------------------------------------------------------------------
 
-DivExpr::DivExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_TYPE_DIV, lhs, rhs)
+DivExpr::DivExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_DIV, lhs, rhs)
 {
 }
 
 DivExpr::DivExpr(const DivExpr &expr)
-    : BinExpr(ST_EXPR_TYPE_DIV, expr.lhs_, expr.rhs_)
+    : BinExpr(ST_EXPR_DIV, expr.lhs_, expr.rhs_)
 {
 }
 
@@ -221,12 +221,12 @@ bool DivExpr::is_commutative() const
 
 // ModExpr -------------------------------------------------------------------
 
-ModExpr::ModExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_TYPE_MOD, lhs, rhs)
+ModExpr::ModExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_MOD, lhs, rhs)
 {
 }
 
 ModExpr::ModExpr(const ModExpr &expr)
-    : BinExpr(ST_EXPR_TYPE_MOD, expr.lhs_, expr.rhs_)
+    : BinExpr(ST_EXPR_MOD, expr.lhs_, expr.rhs_)
 {
 }
 
@@ -251,12 +251,12 @@ bool ModExpr::is_commutative() const
 
 // ShlExpr -------------------------------------------------------------------
 
-ShlExpr::ShlExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_TYPE_SHL, lhs, rhs)
+ShlExpr::ShlExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_SHL, lhs, rhs)
 {
 }
 
 ShlExpr::ShlExpr(const ShlExpr &expr)
-    : BinExpr(ST_EXPR_TYPE_SHL, expr.lhs_, expr.rhs_)
+    : BinExpr(ST_EXPR_SHL, expr.lhs_, expr.rhs_)
 {
 }
 
@@ -281,12 +281,12 @@ bool ShlExpr::is_commutative() const
 
 // ShrExpr -------------------------------------------------------------------
 
-ShrExpr::ShrExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_TYPE_SHR, lhs, rhs)
+ShrExpr::ShrExpr(Expr *lhs, Expr *rhs) : BinExpr(ST_EXPR_SHR, lhs, rhs)
 {
 }
 
 ShrExpr::ShrExpr(const ShrExpr &expr)
-    : BinExpr(ST_EXPR_TYPE_SHR, expr.lhs_, expr.rhs_)
+    : BinExpr(ST_EXPR_SHR, expr.lhs_, expr.rhs_)
 {
 }
 
@@ -311,12 +311,12 @@ bool ShrExpr::is_commutative() const
 
 // SeqExpr -------------------------------------------------------------------
 
-SeqExpr::SeqExpr() : Expr(ST_EXPR_TYPE_SEQ), vals_()
+SeqExpr::SeqExpr() : Expr(ST_EXPR_SEQ), vals_()
 {
 }
 
 SeqExpr::SeqExpr(const SeqExpr &expr)
-    : Expr(ST_EXPR_TYPE_SEQ), vals_(expr.vals_)
+    : Expr(ST_EXPR_SEQ), vals_(expr.vals_)
 {
 }
 
@@ -357,17 +357,17 @@ std::vector<int>::const_iterator SeqExpr::seq_end() const
 // RngExpr -------------------------------------------------------------------
 
 RngExpr::RngExpr(std::string bindvar, Expr *from, Expr *to)
-    : Expr(ST_EXPR_TYPE_RNG), bindvar_(bindvar), from_(from), to_(to)
+    : Expr(ST_EXPR_RNG), bindvar_(bindvar), from_(from), to_(to)
 {
 }
 
 RngExpr::RngExpr(Expr *from, Expr *to)
-    : Expr(ST_EXPR_TYPE_RNG), from_(from), to_(to)
+    : Expr(ST_EXPR_RNG), from_(from), to_(to)
 {
 }
 
 RngExpr::RngExpr(const RngExpr &expr)
-    : Expr(ST_EXPR_TYPE_RNG),
+    : Expr(ST_EXPR_RNG),
       bindvar_(expr.bindvar_), from_(expr.from_), to_(expr.to_)
 {
 }
@@ -415,4 +415,6 @@ void RngExpr::set_to(Expr *to)
     to_ = to;
 }
 
+
+} // namespace parameterised
 } // namespace sesstype

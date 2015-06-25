@@ -1,6 +1,6 @@
 /**
  * \file test/expr.cc
- * \brief Tests for sesstype::Expr.
+ * \brief Tests for sesstype::parameterised::Expr.
  */
 
 #include "gtest/gtest.h"
@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 
-#include "sesstype/expr.h"
+#include "sesstype/parameterised/expr.h"
 
 namespace sesstype {
 namespace tests {
@@ -23,8 +23,8 @@ class ExprTest : public ::testing::Test {
  */
 TEST_F(ExprTest, TestVarExpr)
 {
-    auto *expr = new sesstype::VarExpr("N");
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_VAR);
+    auto *expr = new sesstype::parameterised::VarExpr("N");
+    EXPECT_EQ(expr->type(), ST_EXPR_VAR);
     EXPECT_EQ(expr->name(), "N");
     delete expr;
 }
@@ -34,8 +34,8 @@ TEST_F(ExprTest, TestVarExpr)
  */
 TEST_F(ExprTest, TestValExpr)
 {
-    auto *expr = new sesstype::ValExpr(42);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_CONST);
+    auto *expr = new sesstype::parameterised::ValExpr(42);
+    EXPECT_EQ(expr->type(), ST_EXPR_CONST);
     EXPECT_EQ(expr->num(), 42);
     delete expr;
 }
@@ -45,10 +45,10 @@ TEST_F(ExprTest, TestValExpr)
  */
 TEST_F(ExprTest, TestAddExpr)
 {
-    auto *l = new sesstype::ValExpr(42);
-    auto *r = new sesstype::VarExpr("N");
-    auto *expr = new sesstype::AddExpr(l, r);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_ADD);
+    auto *l = new sesstype::parameterised::ValExpr(42);
+    auto *r = new sesstype::parameterised::VarExpr("N");
+    auto *expr = new sesstype::parameterised::AddExpr(l, r);
+    EXPECT_EQ(expr->type(), ST_EXPR_ADD);
     EXPECT_EQ(expr->lhs(), l);
     EXPECT_EQ(expr->rhs(), r);
     delete expr;
@@ -59,10 +59,10 @@ TEST_F(ExprTest, TestAddExpr)
  */
 TEST_F(ExprTest, TestSubExpr)
 {
-    auto *l = new sesstype::VarExpr("N");
-    auto *r = new sesstype::ValExpr(42);
-    auto *expr = new sesstype::SubExpr(l, r);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_SUB);
+    auto *l = new sesstype::parameterised::VarExpr("N");
+    auto *r = new sesstype::parameterised::ValExpr(42);
+    auto *expr = new sesstype::parameterised::SubExpr(l, r);
+    EXPECT_EQ(expr->type(), ST_EXPR_SUB);
     EXPECT_EQ(expr->lhs(), l);
     EXPECT_EQ(expr->rhs(), r);
     delete expr;
@@ -73,10 +73,10 @@ TEST_F(ExprTest, TestSubExpr)
  */
 TEST_F(ExprTest, TestMulExpr)
 {
-    auto *l = new sesstype::VarExpr("N");
-    auto *r = new sesstype::ValExpr(42);
-    auto *expr = new sesstype::MulExpr(l, r);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_MUL);
+    auto *l = new sesstype::parameterised::VarExpr("N");
+    auto *r = new sesstype::parameterised::ValExpr(42);
+    auto *expr = new sesstype::parameterised::MulExpr(l, r);
+    EXPECT_EQ(expr->type(), ST_EXPR_MUL);
     EXPECT_EQ(expr->lhs(), l);
     EXPECT_EQ(expr->rhs(), r);
     delete expr;
@@ -87,10 +87,10 @@ TEST_F(ExprTest, TestMulExpr)
  */
 TEST_F(ExprTest, TestDivExpr)
 {
-    auto *l = new sesstype::VarExpr("N");
-    auto *r = new sesstype::ValExpr(42);
-    auto *expr = new sesstype::DivExpr(l, r);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_DIV);
+    auto *l = new sesstype::parameterised::VarExpr("N");
+    auto *r = new sesstype::parameterised::ValExpr(42);
+    auto *expr = new sesstype::parameterised::DivExpr(l, r);
+    EXPECT_EQ(expr->type(), ST_EXPR_DIV);
     EXPECT_EQ(expr->lhs(), l);
     EXPECT_EQ(expr->rhs(), r);
     delete expr;
@@ -101,10 +101,10 @@ TEST_F(ExprTest, TestDivExpr)
  */
 TEST_F(ExprTest, TestModExpr)
 {
-    auto *l = new sesstype::VarExpr("N");
-    auto *r = new sesstype::ValExpr(42);
-    auto *expr = new sesstype::ModExpr(l, r);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_MOD);
+    auto *l = new sesstype::parameterised::VarExpr("N");
+    auto *r = new sesstype::parameterised::ValExpr(42);
+    auto *expr = new sesstype::parameterised::ModExpr(l, r);
+    EXPECT_EQ(expr->type(), ST_EXPR_MOD);
     EXPECT_EQ(expr->lhs(), l);
     EXPECT_EQ(expr->rhs(), r);
     delete expr;
@@ -115,10 +115,10 @@ TEST_F(ExprTest, TestModExpr)
  */
 TEST_F(ExprTest, TestShlExpr)
 {
-    auto *l = new sesstype::ValExpr(3);
-    auto *r = new sesstype::ValExpr(2);
-    auto *expr = new sesstype::ShlExpr(l, r);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_SHL);
+    auto *l = new sesstype::parameterised::ValExpr(3);
+    auto *r = new sesstype::parameterised::ValExpr(2);
+    auto *expr = new sesstype::parameterised::ShlExpr(l, r);
+    EXPECT_EQ(expr->type(), ST_EXPR_SHL);
     EXPECT_EQ(expr->lhs(), l);
     EXPECT_EQ(expr->rhs(), r);
     delete expr;
@@ -129,10 +129,10 @@ TEST_F(ExprTest, TestShlExpr)
  */
 TEST_F(ExprTest, TestShrExpr)
 {
-    auto *l = new sesstype::ValExpr(3);
-    auto *r = new sesstype::ValExpr(2);
-    auto *expr = new sesstype::ShrExpr(l, r);
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_SHR);
+    auto *l = new sesstype::parameterised::ValExpr(3);
+    auto *r = new sesstype::parameterised::ValExpr(2);
+    auto *expr = new sesstype::parameterised::ShrExpr(l, r);
+    EXPECT_EQ(expr->type(), ST_EXPR_SHR);
     EXPECT_EQ(expr->lhs(), l);
     EXPECT_EQ(expr->rhs(), r);
     delete expr;
@@ -143,8 +143,8 @@ TEST_F(ExprTest, TestShrExpr)
  */
 TEST_F(ExprTest, TestSeqExpr)
 {
-    auto *expr = new sesstype::SeqExpr();
-    EXPECT_EQ(expr->type(), ST_EXPR_TYPE_SEQ);
+    auto *expr = new sesstype::parameterised::SeqExpr();
+    EXPECT_EQ(expr->type(), ST_EXPR_SEQ);
     EXPECT_EQ(expr->num_value(), 0);
     expr->append_value(1);
     EXPECT_EQ(expr->num_value(), 1);
@@ -170,9 +170,9 @@ TEST_F(ExprTest, TestSeqExpr)
  */
 TEST_F(ExprTest, TestRngExpr)
 {
-    auto *from = new sesstype::ValExpr(1);
-    auto *to = new sesstype::ValExpr(10);
-    auto *expr = new sesstype::RngExpr(from, to);
+    auto *from = new sesstype::parameterised::ValExpr(1);
+    auto *to = new sesstype::parameterised::ValExpr(10);
+    auto *expr = new sesstype::parameterised::RngExpr(from, to);
     EXPECT_EQ(expr->from(), from);
     EXPECT_EQ(expr->to(), to);
     EXPECT_EQ(expr->bindvar(), "");
@@ -182,10 +182,10 @@ TEST_F(ExprTest, TestRngExpr)
     EXPECT_EQ(expr->to(), to);
     EXPECT_EQ(expr->bindvar(), "BBB");
 
-    auto *from2 = new sesstype::ValExpr(2);
-    auto *to2 = new sesstype::SubExpr(
-        new sesstype::VarExpr("N"),
-        new sesstype::ValExpr(1));
+    auto *from2 = new sesstype::parameterised::ValExpr(2);
+    auto *to2 = new sesstype::parameterised::SubExpr(
+        new sesstype::parameterised::VarExpr("N"),
+        new sesstype::parameterised::ValExpr(1));
 
     expr->set_from(from2);
     EXPECT_EQ(expr->from(), from2);
@@ -198,9 +198,9 @@ TEST_F(ExprTest, TestRngExpr)
     EXPECT_EQ(expr->bindvar(), "BBB");
     delete expr;
 
-    auto *expr_setbind = new sesstype::RngExpr("A",
-        new sesstype::ValExpr(1),
-        new sesstype::ValExpr(100));
+    auto *expr_setbind = new sesstype::parameterised::RngExpr("A",
+        new sesstype::parameterised::ValExpr(1),
+        new sesstype::parameterised::ValExpr(100));
     delete expr_setbind;
 }
 
@@ -211,17 +211,17 @@ TEST_F(ExprTest, ComplexExpr)
 {
   // 1 * 2 + (3 / N - 10) % 100
 
-  auto *expr = new sesstype::AddExpr(
-      new sesstype::MulExpr(
-          new sesstype::ValExpr(1),
-          new sesstype::ValExpr(2)),
-      new sesstype::ModExpr(
-        new sesstype::SubExpr(
-          new sesstype::DivExpr(
-            new sesstype::ValExpr(3),
-            new sesstype::VarExpr("N")),
-          new sesstype::ValExpr(10)),
-        new sesstype::ValExpr(100)));
+  auto *expr = new sesstype::parameterised::AddExpr(
+      new sesstype::parameterised::MulExpr(
+          new sesstype::parameterised::ValExpr(1),
+          new sesstype::parameterised::ValExpr(2)),
+      new sesstype::parameterised::ModExpr(
+        new sesstype::parameterised::SubExpr(
+          new sesstype::parameterised::DivExpr(
+            new sesstype::parameterised::ValExpr(3),
+            new sesstype::parameterised::VarExpr("N")),
+          new sesstype::parameterised::ValExpr(10)),
+        new sesstype::parameterised::ValExpr(100)));
   delete expr;
 }
 

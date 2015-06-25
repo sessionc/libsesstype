@@ -3,10 +3,11 @@
 #include <iostream>
 #include <sstream>
 
-#include <sesstype/expr.h>
+#include <sesstype/parameterised/expr.h>
 #include <sesstype/utils.h>
 
 namespace sesstype {
+namespace parameterised {
 
 st_expr *st_expr_mk_const(int num)
 {
@@ -18,28 +19,28 @@ st_expr *st_expr_mk_var(const char *var)
   return new VarExpr(std::string(var));
 }
 
-st_expr *st_expr_mk_binary(st_expr *lhs, enum __st_expr_type type, st_expr *rhs)
+st_expr *st_expr_mk_binary(st_expr *lhs, int type, st_expr *rhs)
 {
   switch (type) {
-    case ST_EXPR_TYPE_ADD:
+    case ST_EXPR_ADD:
       return new AddExpr(lhs, rhs);
-    case ST_EXPR_TYPE_SUB:
+    case ST_EXPR_SUB:
       return new SubExpr(lhs, rhs);
-    case ST_EXPR_TYPE_MUL:
+    case ST_EXPR_MUL:
       return new MulExpr(lhs, rhs);
-    case ST_EXPR_TYPE_DIV:
+    case ST_EXPR_DIV:
       return new DivExpr(lhs, rhs);
-    case ST_EXPR_TYPE_MOD:
+    case ST_EXPR_MOD:
       return new ModExpr(lhs, rhs);
-    case ST_EXPR_TYPE_SHL:
+    case ST_EXPR_SHL:
       return new ShlExpr(lhs, rhs);
-    case ST_EXPR_TYPE_SHR:
+    case ST_EXPR_SHR:
       return new ShrExpr(lhs, rhs);
 
-    case ST_EXPR_TYPE_CONST:
-    case ST_EXPR_TYPE_VAR:
-    case ST_EXPR_TYPE_SEQ:
-    case ST_EXPR_TYPE_RNG:
+    case ST_EXPR_CONST:
+    case ST_EXPR_VAR:
+    case ST_EXPR_SEQ:
+    case ST_EXPR_RNG:
       std::cerr << "Error: Cannot create binary expression from type "
                 << type << std::endl;
     default:
@@ -92,4 +93,5 @@ st_expr *st_expr_inv(const st_expr *e)
   assert(0 /* TODO */);
 }
 
+} // namespace parameterised
 } // namespace sesstype

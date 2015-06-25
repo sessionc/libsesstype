@@ -1,7 +1,8 @@
-#include <sesstype/expr.h>
-#include <sesstype/utils.h>
+#include <sesstype/parameterised/expr.h>
+#include <sesstype/utils/expr.h>
 
 namespace sesstype {
+namespace parameterised {
 
 void VarExpr::accept(utils::ExprVisitor &v)
 {
@@ -58,4 +59,5 @@ void RngExpr::accept(utils::ExprVisitor &v)
   v.visit(this);
 }
 
+} // namespace parameterised
 } // namespace sesstype
