@@ -734,7 +734,7 @@ WARN_LOGFILE           =
 INPUT                  = @libsesstype_SOURCE_DIR@ \
                          @libsesstype_INCLUDE_DIR@ \
                          @PROJECT_BINARY_DIR@/include \
-                         @libsesstype_TEST_DIR@
+                         @libsesstype_TESTS_DIR@
 INPUT_ENCODING         = UTF-8
 
 FILE_PATTERNS          = *.h *.cc
