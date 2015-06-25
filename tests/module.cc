@@ -9,6 +9,7 @@
 #include "gtest/gtest.h"
 
 #include "sesstype/module.h"
+#include "sesstype/parameterised/module.h"
 #include "sesstype/protocol.h"
 
 namespace sesstype {
@@ -76,14 +77,15 @@ TEST_F(ModuleTest, Module_AddImport)
 
   ASSERT_THROW(empty.import("int2"), std::out_of_range);
 }
+
 /**
  * \test Test adding constant to Module.
  */
 TEST_F(ModuleTest, Module_AddConstant)
 {
-  sesstype::Module empty;
-  auto *constant = new sesstype::ValueConstant("N", 1);
-  auto *constant2 = new sesstype::BoundedConstant("M", 1, 10);
+  sesstype::parameterised::Module empty;
+  auto *constant = new sesstype::parameterised::ValueConstant("N", 1);
+  auto *constant2 = new sesstype::parameterised::BoundedConstant("M", 1, 10);
   EXPECT_EQ(empty.num_constant(), 0);
   empty.add_constant(constant);
   EXPECT_EQ(empty.num_constant(), 1);
