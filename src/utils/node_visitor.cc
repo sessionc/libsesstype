@@ -1,5 +1,6 @@
 #include <sesstype/node.h>
-#include <sesstype/utils.h>
+#include <sesstype/parameterised/node.h>
+#include <sesstype/utils/node.h>
 
 namespace sesstype {
 
@@ -23,6 +24,18 @@ void ContinueNode::accept(utils::NodeVisitor &v)
   v.visit(this);
 }
 
+void ChoiceNode::accept(utils::NodeVisitor &v)
+{
+  v.visit(this);
+}
+
+namespace parameterised {
+
+void InteractionNode::accept(utils::NodeVisitor &v)
+{
+  v.visit(this);
+}
+
 void ForNode::accept(utils::NodeVisitor &v)
 {
   v.visit(this);
@@ -33,10 +46,6 @@ void OneofNode::accept(utils::NodeVisitor &v)
   v.visit(this);
 }
 
-void ChoiceNode::accept(utils::NodeVisitor &v)
-{
-  v.visit(this);
-}
 
 void AllReduceNode::accept(utils::NodeVisitor &v)
 {
@@ -47,5 +56,7 @@ void IfNode::accept(utils::NodeVisitor &v)
 {
   v.visit(this);
 }
+
+} // namespace parameterised
 
 } // namespace sesstype

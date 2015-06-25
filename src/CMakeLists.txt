@@ -9,18 +9,22 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/protocol_api.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/import.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/module.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/constant.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/expr.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/module.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/role_grp.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/expr.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role_grp.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/msg.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/module.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/constant.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/utils/expr_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/utils/node_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/utils/role_visitor.cc
     PARENT_SCOPE)
