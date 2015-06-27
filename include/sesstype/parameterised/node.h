@@ -1,6 +1,6 @@
 /**
  * \file sesstype/parameterised/node.h
- * \brief Statements in a protocol or session (parameterised flavour).
+ * \brief Statements in a protocol or session (parameterised).
  */
 #ifndef SESSTYPE__PARAMETERISED__NODE_H__
 #define SESSTYPE__PARAMETERISED__NODE_H__

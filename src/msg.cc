@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -9,7 +10,7 @@ namespace sesstype {
 
 // MsgPayload ----------------------------------------------------------------
 
-MsgPayload::MsgPayload(std::string type) : name_(""), type_(type)
+MsgPayload::MsgPayload(std::string type) : name_(), type_(type)
 {
 }
 

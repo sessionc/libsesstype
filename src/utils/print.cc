@@ -35,18 +35,32 @@ void Printer::prefix()
     }
 }
 
+void Printer::reset_line_num()
+{
+    indent_lvl_ = 0;
+    line_count_ = 1;
+}
+
 // Nodes ---------------------------------------------------------------------
 
 void Printer::visit(InteractionNode *node)
 {
     prefix();
-    os_ << "interaction "
-        << "{ from: " << (node->from() ? node->from()->name() : "(unset)")
-        << ", to(" << node->num_to() << "): ["
-        << (node->num_to()>0 ? node->to()->name() : "(unset)")
-        << (node->num_to()>1 ? ".. ]" : "]")
+    os_ << "interaction { from: ";
+    if (node->from()) {
+        node->from()->accept(*this);
+    } else {
+        os_ << "(empty)";
+    }
+    os_ << ", to(" << node->num_to() << "): [";
+    if (node->num_to() > 0) {
+        node->to()->accept(*this);
+    } else {
+        os_ << "(empty)";
+    }
+    os_ << (node->num_to()>1 ? ".. ]" : "]")
         << ", msgsig: " << node->msgsig()->label()
-        << "(" << node->msgsig()->num_payload() << ") }\n";
+        << "(" << node->msgsig()->num_payload() << ") } @" << node << "\n";
 }
 
 void Printer::visit(BlockNode *node)
@@ -61,7 +75,8 @@ void Printer::visit(BlockNode *node)
 void Printer::visit(RecurNode *node)
 {
     prefix();
-    os_ << "recur " << "{ label: " << node->label() << " }\n";
+    os_ << "recur " << "{ label: " << node->label() << " }";
+    os_ << " children: " << node->num_child() << " @" << node << "\n";
 
     node->BlockNode::accept(*this);
 }
@@ -69,13 +84,14 @@ void Printer::visit(RecurNode *node)
 void Printer::visit(ContinueNode *node)
 {
     prefix();
-    os_ << "cont " << "{ label: " << node->label() << " }\n";
+    os_ << "cont { label: " << node->label() << " } @" << node << "\n";
 }
 
 void Printer::visit(ChoiceNode *node)
 {
     prefix();
-    os_ << "choice { at: " << node->at()->name() << " }\n";
+    os_  << " choice { at: " << node->at()->name() << " }";
+    os_ << " children: " << node->num_child() << " @" << node << "\n";
 
     node->BlockNode::accept(*this);
 }

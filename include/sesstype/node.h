@@ -137,6 +137,9 @@ class InteractionNode : public Node {
     /// \param[in] from Role of InteractionNode.
     void set_from(Role *from);
 
+    /// \brief Remove from Role.
+    void remove_from();
+
     /// \brief Convenient function to return the first <tt>to</tt> Role.
     /// \returns the first <tt>to</tt> Role of InteractionNode.
     Role *to() const;
@@ -149,6 +152,9 @@ class InteractionNode : public Node {
 
     /// \param[in] to Role to add to this InteractionNode.
     void add_to(Role *to);
+
+    /// \brief Remove to Role (all of them);
+    void remove_tos();
 
     /// \brief Start iterator for to Role.
     std::vector<Role *>::const_iterator to_begin() const;

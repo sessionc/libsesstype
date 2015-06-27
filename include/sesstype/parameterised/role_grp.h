@@ -2,8 +2,8 @@
  * \file sesstype/parameterised/role_grp.h
  * \brief A group of participants of a protocol or session.
  */
-#ifndef SESSTYPE__ROLE_GRP_H__
-#define SESSTYPE__ROLE_GRP_H__
+#ifndef SESSTYPE__PARAMETERISED__ROLE_GRP_H__
+#define SESSTYPE__PARAMETERISED__ROLE_GRP_H__
 
 #ifdef __cplusplus
 #include <string>
@@ -93,4 +93,4 @@ void st_role_grp_free(st_role_grp *role_grp);
 } // namespace sesstype
 #endif
 
-#endif
+#endif//SESSTYPE__PARAMETERISED__ROLE_GRP_H__

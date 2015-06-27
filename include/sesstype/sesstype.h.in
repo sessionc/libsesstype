@@ -18,14 +18,12 @@
 #define sesstype_VERSION_MINOR @libsesstype_VERSION_MINOR@
 #define sesstype_VERSION_PATCH @libsesstype_VERSION_PATCH@
 
-#include "sesstype/module.h"
-#include "sesstype/protocol.h"
 #include "sesstype/import.h"
-#include "sesstype/constant.h"
+#include "sesstype/module.h"
+#include "sesstype/msg.h"
 #include "sesstype/node.h"
-#include "sesstype/expr.h"
+#include "sesstype/protocol.h"
 #include "sesstype/role.h"
-#include "sesstype/role_grp.h"
 
 #include "sesstype/utils.h"
 

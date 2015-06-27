@@ -1,6 +1,6 @@
 /**
  * \file sesstype/parameterised/msg.h
- * \brief A message for passing between participants (with parameters).
+ * \brief A message for passing between participants (parameterised).
  */
 #ifndef SESSTYPE__PARAMETERISED__MESSAGE_H__
 #define SESSTYPE__PARAMETERISED__MESSAGE_H__

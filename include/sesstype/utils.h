@@ -6,6 +6,7 @@
 #define SESSTYPE__UTILS_H__
 
 #ifdef __cplusplus
+#include <stack>
 #include <ostream>
 #endif
 
@@ -43,6 +44,8 @@ class Printer : public NodeVisitor, public RoleVisitor, public ExprVisitor {
 
   /// \brief Output prefix based on current line#, indent level and character.
   void prefix();
+
+  void reset_line_num();
 
   void visit(BlockNode *node) override;
   void visit(InteractionNode *node) override;
@@ -102,6 +105,8 @@ class Projection : public NodeVisitor {
  public:
   Projection(Role *role);
 
+  Node *get_root();
+
   void visit(BlockNode *node) override;
   void visit(InteractionNode *node) override;
   void visit(RecurNode *node) override;
@@ -115,6 +120,7 @@ class Projection : public NodeVisitor {
 
  private:
   Role *project_role_;
+  std::stack<Node *> stack_;
 };
 #endif // __cplusplus
 

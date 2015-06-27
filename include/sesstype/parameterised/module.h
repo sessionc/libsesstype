@@ -1,7 +1,6 @@
 /**
  * \file sesstype/parameterised/module.h
- * \brief Module containing protocols or sessions (contains parameterised
- * elements).
+ * \brief Module containing protocols or sessions (parameterised).
  */
 #ifndef SESSTYPE__PARAMETERISED__MODULE_H__
 #define SESSTYPE__PARAMETERISED__MODULE_H__

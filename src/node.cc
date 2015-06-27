@@ -83,14 +83,12 @@ std::vector<Node *>::const_iterator BlockNode::child_end() const
 // InteractionNode -----------------------------------------------------------
 
 InteractionNode::InteractionNode()
-    : Node(ST_NODE_SENDRECV), msgsig_(new MsgSig("")),
-      from_(NULL), to_()
+    : Node(ST_NODE_SENDRECV), msgsig_(new MsgSig("")), from_(nullptr), to_()
 {
 }
 
 InteractionNode::InteractionNode(MsgSig *msgsig)
-    : Node(ST_NODE_SENDRECV), msgsig_(msgsig),
-      from_(NULL), to_()
+    : Node(ST_NODE_SENDRECV), msgsig_(msgsig), from_(nullptr), to_()
 {
 }
 
@@ -103,7 +101,7 @@ InteractionNode::InteractionNode(const InteractionNode &node)
 InteractionNode::~InteractionNode()
 {
     delete msgsig_;
-    if (from_ != NULL) {
+    if (from_ != nullptr) {
         delete from_;
     }
     for (auto it=to_begin(); it!=to_end(); it++) {
@@ -136,6 +134,12 @@ void InteractionNode::set_from(Role *from)
     from_ = from;
 }
 
+void InteractionNode::remove_from()
+{
+    delete from_;
+    from_ = nullptr;
+}
+
 Role *InteractionNode::to(unsigned int idx) const
 {
     return to_.at(idx);
@@ -154,6 +158,11 @@ unsigned int InteractionNode::num_to() const
 void InteractionNode::add_to(Role *to)
 {
     to_.push_back(to);
+}
+
+void InteractionNode::remove_tos()
+{
+    to_.clear();
 }
 
 std::vector<Role *>::const_iterator InteractionNode::to_begin() const
