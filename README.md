@@ -7,6 +7,10 @@ See [http://mrg.doc.ic.ac.uk/](http://mrg.doc.ic.ac.uk/) for details.
 
 [![Build Status](https://travis-ci.org/sessionc/libsesstype.svg)](https://travis-ci.org/sessionc/libsesstype?branch=v2.0)
 
+[Documentation](http://sessionc.github.io/libsesstype) are automatically
+generated from the latest source on
+[github](https://github.com/sessionc/libsesstype/tree/v2.0).
+
 ## Build
 
 1. At the project root, fetch the external dependencies with git
