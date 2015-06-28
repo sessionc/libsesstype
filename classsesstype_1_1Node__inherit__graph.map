@@ -1,0 +1,12 @@
+<map id="sesstype::Node" name="sesstype::Node">
+<area shape="rect" id="node2" href="$classsesstype_1_1BlockNode.html" title="Block of statements (Node instances). " alt="" coords="182,163,329,189"/>
+<area shape="rect" id="node8" href="$classsesstype_1_1ContinueNode.html" title="Continue statements. " alt="" coords="172,221,339,248"/>
+<area shape="rect" id="node9" href="$classsesstype_1_1InteractionNode.html" title="Interaction (message&#45;passing) statements. " alt="" coords="168,272,343,299"/>
+<area shape="rect" id="node11" href="$classsesstype_1_1parameterised_1_1AllReduceNode.html" title="All&#45;to&#45;all reduction statement. " alt="" coords="173,323,338,365"/>
+<area shape="rect" id="node3" href="$classsesstype_1_1ChoiceNode.html" title="Choice blocks. " alt="" coords="396,5,551,32"/>
+<area shape="rect" id="node4" href="$classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for&#45;loop statement. " alt="" coords="391,57,556,98"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1IfNode.html" title="If&#45;block. " alt="" coords="391,122,556,163"/>
+<area shape="rect" id="node6" href="$classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct. " alt="" coords="391,187,556,229"/>
+<area shape="rect" id="node7" href="$classsesstype_1_1RecurNode.html" title="Recursion statements. " alt="" coords="399,253,548,280"/>
+<area shape="rect" id="node10" href="$classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message&#45;passing) statements (parameterised). " alt="" coords="391,305,556,346"/>
+</map>

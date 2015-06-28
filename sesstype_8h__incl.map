@@ -1,0 +1,16 @@
+<map id="sesstype.h" name="sesstype.h">
+<area shape="rect" id="node2" href="$import_8h.html" title="Protocol or Module imports. " alt="" coords="5,326,132,353"/>
+<area shape="rect" id="node4" href="$module_8h.html" title="Module containing protocols or sessions. " alt="" coords="205,155,337,181"/>
+<area shape="rect" id="node6" href="$protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="309,237,445,263"/>
+<area shape="rect" id="node7" href="$node_8h.html" title="Statements in a protocol or session. " alt="" coords="648,326,767,353"/>
+<area shape="rect" id="node9" href="$msg_8h.html" title="A message for passing between participants. " alt="" coords="553,415,667,442"/>
+<area shape="rect" id="node10" href="$role_8h.html" title="A participant of a protocol or session. " alt="" coords="744,415,855,442"/>
+<area shape="rect" id="node11" href="$utils_8h.html" title="Utility functions for working with Session Types. " alt="" coords="913,80,1027,107"/>
+<area shape="rect" id="node14" href="$parameterised_2expr_8h.html" title="Expressions in a Role parameter or statement. " alt="" coords="1012,408,1173,449"/>
+<area shape="rect" id="node15" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised). " alt="" coords="1160,229,1321,271"/>
+<area shape="rect" id="node16" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session. " alt="" coords="1159,319,1320,360"/>
+<area shape="rect" id="node17" href="$utils_2expr_8h.html" title="Utilities for Expr. " alt="" coords="993,237,1136,263"/>
+<area shape="rect" id="node18" href="$utils_2node_8h.html" title="Utilities for Node. " alt="" coords="1079,155,1226,181"/>
+<area shape="rect" id="node19" href="$utils_2role_8h.html" title="Utities for Roles. " alt="" coords="830,237,969,263"/>
+<area shape="rect" id="node20" href="$role__grp_8h.html" title="A group of participants of a protocol or session. " alt="" coords="360,319,521,360"/>
+</map>

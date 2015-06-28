@@ -1,0 +1,11 @@
+<map id="role_grp.h" name="role_grp.h">
+<area shape="rect" id="node2" href="$parameterised_2print_8cc.html" title="Printer. " alt="" coords="5,229,71,256"/>
+<area shape="rect" id="node3" href="$parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="76,80,155,107"/>
+<area shape="rect" id="node4" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised. " alt="" coords="82,155,197,181"/>
+<area shape="rect" id="node5" href="$utils_2role_8h.html" title="Utities for Roles. " alt="" coords="231,80,285,107"/>
+<area shape="rect" id="node6" href="$utils_8h.html" title="Utility functions for working with Session Types. " alt="" coords="229,155,287,181"/>
+<area shape="rect" id="node7" href="$src_2utils_2parameterised_2projection_8cc.html" title="Endpoint projection. " alt="" coords="95,229,191,256"/>
+<area shape="rect" id="node8" href="$simplify_8cc.html" title="Expression simplifier. " alt="" coords="215,229,301,256"/>
+<area shape="rect" id="node9" href="$src_2utils_2projection_8cc.html" title="Endpoint projection. " alt="" coords="325,229,421,256"/>
+<area shape="rect" id="node10" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="445,229,532,256"/>
+</map>

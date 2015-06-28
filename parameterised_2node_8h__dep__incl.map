@@ -1,0 +1,10 @@
+<map id="node.h" name="node.h">
+<area shape="rect" id="node2" href="$parameterised_2print_8cc.html" title="Printer. " alt="" coords="5,229,71,256"/>
+<area shape="rect" id="node3" href="$src_2utils_2parameterised_2projection_8cc.html" title="Endpoint projection. " alt="" coords="437,229,533,256"/>
+<area shape="rect" id="node4" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised. " alt="" coords="391,80,506,107"/>
+<area shape="rect" id="node5" href="$utils_2node_8h.html" title="Utilities for Node. " alt="" coords="255,80,317,107"/>
+<area shape="rect" id="node6" href="$utils_8h.html" title="Utility functions for working with Session Types. " alt="" coords="224,155,281,181"/>
+<area shape="rect" id="node7" href="$simplify_8cc.html" title="Expression simplifier. " alt="" coords="95,229,181,256"/>
+<area shape="rect" id="node8" href="$src_2utils_2projection_8cc.html" title="Endpoint projection. " alt="" coords="205,229,301,256"/>
+<area shape="rect" id="node9" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="325,229,412,256"/>
+</map>

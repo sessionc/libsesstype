@@ -1,0 +1,8 @@
+<map id="sesstype::BlockNode" name="sesstype::BlockNode">
+<area shape="rect" id="node3" href="$classsesstype_1_1ChoiceNode.html" title="Choice blocks. " alt="" coords="368,5,523,32"/>
+<area shape="rect" id="node4" href="$classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for&#45;loop statement. " alt="" coords="363,57,528,98"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1IfNode.html" title="If&#45;block. " alt="" coords="363,122,528,163"/>
+<area shape="rect" id="node6" href="$classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct. " alt="" coords="363,187,528,229"/>
+<area shape="rect" id="node7" href="$classsesstype_1_1RecurNode.html" title="Recursion statements. " alt="" coords="371,253,520,280"/>
+<area shape="rect" id="node2" href="$classsesstype_1_1Node.html" title="Session Type statements (st_node). " alt="" coords="5,129,120,156"/>
+</map>

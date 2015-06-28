@@ -1,0 +1,7 @@
+<map id="module.h" name="module.h">
+<area shape="rect" id="node4" href="$import_8h.html" title="Protocol or Module imports. " alt="" coords="25,155,151,181"/>
+<area shape="rect" id="node5" href="$protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="195,80,331,107"/>
+<area shape="rect" id="node6" href="$node_8h.html" title="Statements in a protocol or session. " alt="" coords="227,155,346,181"/>
+<area shape="rect" id="node9" href="$role_8h.html" title="A participant of a protocol or session. " alt="" coords="419,229,530,256"/>
+<area shape="rect" id="node8" href="$msg_8h.html" title="A message for passing between participants. " alt="" coords="229,229,344,256"/>
+</map>
