@@ -5,7 +5,7 @@ Libraries for programming with Session Types in C/C++.
 This is a core library for internal tree representation of Session Types.
 See [http://mrg.doc.ic.ac.uk/](http://mrg.doc.ic.ac.uk/) for details.
 
-[![Build Status](https://travis-ci.org/sessionc/libsesstype.svg)](https://travis-ci.org/sessionc/libsesstype?branch=dev)
+[![Build Status](https://travis-ci.org/sessionc/libsesstype.svg)](https://travis-ci.org/sessionc/libsesstype?branch=v2.0)
 
 ## Build
 
