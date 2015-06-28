@@ -94,46 +94,49 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00013"></a>00013 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
 <a name="l00014"></a>00014 <span class="preprocessor">#endif</span>
 <a name="l00015"></a>00015 <span class="preprocessor"></span>
-<a name="l00019"></a><a class="code" href="classsesstype_1_1Import.html">00019</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1Import.html" title="Import statement.">Import</a> {
-<a name="l00020"></a>00020   <span class="keyword">public</span>:
-<a name="l00022"></a>00022     <a class="code" href="classsesstype_1_1Import.html#a4913819760088b8ae322fe0db9795a13" title="Import constructor without &quot;from&quot; or alias.">Import</a>(std::string <a class="code" href="classsesstype_1_1Import.html#a9da3e20a040151bedb5b1f725f448bb0">name</a>);
-<a name="l00026"></a>00026     <a class="code" href="classsesstype_1_1Import.html#a4913819760088b8ae322fe0db9795a13" title="Import constructor without &quot;from&quot; or alias.">Import</a>(std::string name, std::string <a class="code" href="classsesstype_1_1Import.html#a59750bf09bcf2d8a66f6622d1862fcd7">from</a>, std::string <a class="code" href="classsesstype_1_1Import.html#ad8ab83a603e37bcaa832bcaee2f60345">as</a>);
-<a name="l00027"></a>00027 
-<a name="l00029"></a>00029     std::string <a class="code" href="classsesstype_1_1Import.html#a9da3e20a040151bedb5b1f725f448bb0">name</a>() <span class="keyword">const</span>;
-<a name="l00030"></a>00030 
-<a name="l00032"></a>00032     std::string <a class="code" href="classsesstype_1_1Import.html#a59750bf09bcf2d8a66f6622d1862fcd7">from</a>() <span class="keyword">const</span>;
-<a name="l00033"></a>00033 
-<a name="l00035"></a>00035     std::string <a class="code" href="classsesstype_1_1Import.html#ad8ab83a603e37bcaa832bcaee2f60345">as</a>() <span class="keyword">const</span>;
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037   <span class="keyword">private</span>:
-<a name="l00038"></a>00038     std::string name_;
-<a name="l00039"></a>00039     std::string from_;
-<a name="l00040"></a>00040     std::string as_;
-<a name="l00041"></a>00041 };
-<a name="l00042"></a>00042 
-<a name="l00043"></a>00043 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>{
-<a name="l00045"></a>00045 <span class="preprocessor">#endif</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span>
-<a name="l00047"></a>00047 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00048"></a>00048 <span class="preprocessor"></span><span class="keyword">typedef</span> <a class="code" href="classsesstype_1_1Import.html" title="Import statement.">Import</a> <a class="code" href="classsesstype_1_1Import.html" title="Import statement.">st_tree_import_t</a>;
-<a name="l00049"></a>00049 <span class="preprocessor">#else</span>
-<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="classsesstype_1_1Import.html" title="Import statement.">Import</a> st_tree_import_t;
-<a name="l00051"></a>00051 <span class="preprocessor">#endif</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span>
-<a name="l00053"></a>00053 st_tree_import_t *st_mk_import(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
-<a name="l00054"></a>00054 
-<a name="l00055"></a>00055 st_tree_import_t *st_mk_import_from_as(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <span class="keywordtype">char</span> *from, <span class="keyword">const</span> <span class="keywordtype">char</span> *as);
+<a name="l00016"></a>00016 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00017"></a>00017 <span class="preprocessor"></span>
+<a name="l00020"></a><a class="code" href="classsesstype_1_1Import.html">00020</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1Import.html" title="Import statement.">Import</a> {
+<a name="l00021"></a>00021   <span class="keyword">public</span>:
+<a name="l00023"></a>00023     <a class="code" href="classsesstype_1_1Import.html#a4913819760088b8ae322fe0db9795a13" title="Import constructor without &quot;from&quot; or alias.">Import</a>(std::string <a class="code" href="classsesstype_1_1Import.html#a9da3e20a040151bedb5b1f725f448bb0">name</a>);
+<a name="l00027"></a>00027     <a class="code" href="classsesstype_1_1Import.html#a4913819760088b8ae322fe0db9795a13" title="Import constructor without &quot;from&quot; or alias.">Import</a>(std::string name, std::string <a class="code" href="classsesstype_1_1Import.html#a59750bf09bcf2d8a66f6622d1862fcd7">from</a>, std::string <a class="code" href="classsesstype_1_1Import.html#ad8ab83a603e37bcaa832bcaee2f60345">as</a>);
+<a name="l00028"></a>00028 
+<a name="l00030"></a>00030     std::string <a class="code" href="classsesstype_1_1Import.html#a9da3e20a040151bedb5b1f725f448bb0">name</a>() <span class="keyword">const</span>;
+<a name="l00031"></a>00031 
+<a name="l00033"></a>00033     std::string <a class="code" href="classsesstype_1_1Import.html#a59750bf09bcf2d8a66f6622d1862fcd7">from</a>() <span class="keyword">const</span>;
+<a name="l00034"></a>00034 
+<a name="l00036"></a>00036     std::string <a class="code" href="classsesstype_1_1Import.html#ad8ab83a603e37bcaa832bcaee2f60345">as</a>() <span class="keyword">const</span>;
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038   <span class="keyword">private</span>:
+<a name="l00039"></a>00039     std::string name_;
+<a name="l00040"></a>00040     std::string from_;
+<a name="l00041"></a>00041     std::string as_;
+<a name="l00042"></a>00042 };
+<a name="l00043"></a>00043 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00044"></a>00044 <span class="preprocessor"></span>
+<a name="l00045"></a>00045 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00046"></a>00046 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span>{
+<a name="l00047"></a>00047 <span class="preprocessor">#endif</span>
+<a name="l00048"></a>00048 <span class="preprocessor"></span>
+<a name="l00049"></a>00049 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00050"></a>00050 <span class="preprocessor"></span><span class="keyword">typedef</span> <a class="code" href="classsesstype_1_1Import.html" title="Import statement.">Import</a> <a class="code" href="classsesstype_1_1Import.html" title="Import statement.">st_tree_import_t</a>;
+<a name="l00051"></a>00051 <span class="preprocessor">#else</span>
+<a name="l00052"></a>00052 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="classsesstype_1_1Import.html" title="Import statement.">Import</a> st_tree_import_t;
+<a name="l00053"></a>00053 <span class="preprocessor">#endif</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span>
+<a name="l00055"></a>00055 st_tree_import_t *st_mk_import(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
 <a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00059"></a>00059 <span class="preprocessor">#endif</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span>
-<a name="l00061"></a>00061 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00062"></a>00062 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
-<a name="l00063"></a>00063 <span class="preprocessor">#endif</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span>
+<a name="l00057"></a>00057 st_tree_import_t *st_mk_import_from_as(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <span class="keywordtype">char</span> *from, <span class="keyword">const</span> <span class="keywordtype">char</span> *as);
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00061"></a>00061 <span class="preprocessor">#endif</span>
+<a name="l00062"></a>00062 <span class="preprocessor"></span>
+<a name="l00063"></a>00063 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00064"></a>00064 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
 <a name="l00065"></a>00065 <span class="preprocessor">#endif</span>
+<a name="l00066"></a>00066 <span class="preprocessor"></span>
+<a name="l00067"></a>00067 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
