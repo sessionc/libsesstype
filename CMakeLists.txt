@@ -78,8 +78,8 @@ endif()
 #
 # Install and Packaging.
 #
-install(DIRECTORY ${libsesstype_INCLUDE_DIR}
-        DIRECTORY ${PROJECT_BINARY_DIR}/include
+install(DIRECTORY ${libsesstype_INCLUDE_DIR}/
+        DIRECTORY ${PROJECT_BINARY_DIR}/include/
         DESTINATION include
         FILES_MATCHING PATTERN *.h)
 install(TARGETS sesstype
