@@ -36,6 +36,9 @@ class Role {
     /// \brief Role destructor.
     virtual ~Role();
 
+    /// \brief clone a Role.
+    virtual Role *clone() const;
+
     /// \returns name of Role.
     std::string name() const;
 

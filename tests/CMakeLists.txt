@@ -29,3 +29,7 @@ add_test(NAME Expr COMMAND test_expr)
 add_executable(test_role role.cc)
 target_link_libraries(test_role sesstype gtest gtest_main)
 add_test(NAME Role COMMAND test_role)
+
+add_executable(test_projection projection.cc)
+target_link_libraries(test_projection sesstype gtest gtest_main)
+add_test(NAME Projection COMMAND test_projection)

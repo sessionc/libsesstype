@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -46,7 +45,7 @@ MsgSig::MsgSig(std::string label) : label_(label), payloads_()
 
 MsgSig::MsgSig(const MsgSig &msgsig) : label_(msgsig.label_), payloads_()
 {
-    for (const MsgPayload *payload : payloads_) {
+    for (auto payload : msgsig.payloads_) {
         payloads_.push_back(new MsgPayload(*payload));
     }
 }
@@ -56,6 +55,11 @@ MsgSig::~MsgSig()
     for (auto payload : payloads_) {
         delete payload;
     }
+}
+
+MsgSig *MsgSig::clone() const
+{
+    return new MsgSig(*this);
 }
 
 std::string MsgSig::label() const

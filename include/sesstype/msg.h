@@ -63,11 +63,14 @@ class MsgSig {
     /// \param[in] label of the MsgSig.
     MsgSig(std::string label);
 
-    /// \brief Msgsig copy constructor.
+    /// \brief MsgSig copy constructor.
     MsgSig(const MsgSig &msgsig);
 
     /// \brief MsgSig destructor.
-    ~MsgSig();
+    virtual ~MsgSig();
+
+    /// \brief Make a MsgSig* clone.
+    virtual MsgSig *clone() const;
 
     /// \returns label of the MsgSig.
     std::string label() const;

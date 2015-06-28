@@ -34,6 +34,11 @@ Role::~Role()
     }
 }
 
+Role *Role::clone() const
+{
+    return new Role(*this);
+}
+
 unsigned int Role::num_dimen()
 {
     return param_.size();

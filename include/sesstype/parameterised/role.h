@@ -24,14 +24,17 @@ class Role : public sesstype::Role {
     /// \brief Role constructor.
     Role(std::string name);
 
-    /// \brief ParamRole constructor for upgrading from sesstype::Role..
+    /// \brief Role constructor for upgrading from sesstype::Role..
     Role(const sesstype::Role &role);
 
-    /// \brief ParamRole copy constructor.
+    /// \brief Role copy constructor.
     Role(const Role &role);
 
-    /// \brief ParamRole destructor.
+    /// \brief Role destructor.
     ~Role() override;
+
+    /// \brief clone a Role
+    Role *clone() const override;
 
     /// \returns Number of dimensions in the parameterised Role.
     unsigned int num_dimen();

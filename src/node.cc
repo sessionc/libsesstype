@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <iostream>
 #include <iterator>
 #include <string>
 #include <vector>
@@ -83,30 +82,40 @@ std::vector<Node *>::const_iterator BlockNode::child_end() const
 // InteractionNode -----------------------------------------------------------
 
 InteractionNode::InteractionNode()
-    : Node(ST_NODE_SENDRECV), msgsig_(new MsgSig("")), from_(nullptr), to_()
+    : Node(ST_NODE_SENDRECV),
+      msgsig_(new MsgSig("")),
+      from_(),
+      to_()
 {
 }
 
 InteractionNode::InteractionNode(MsgSig *msgsig)
-    : Node(ST_NODE_SENDRECV), msgsig_(msgsig), from_(nullptr), to_()
+    : Node(ST_NODE_SENDRECV),
+      msgsig_(msgsig->clone()),
+      from_(),
+      to_()
 {
 }
 
 InteractionNode::InteractionNode(const InteractionNode &node)
-    : Node(ST_NODE_SENDRECV), msgsig_(node.msgsig_),
-      from_(node.from_), to_(node.to_)
+    : Node(ST_NODE_SENDRECV),
+      msgsig_(node.msgsig_->clone()),
+      from_(node.from_->clone()),
+      to_()
 {
+    for (auto to : node.to_) {
+        to_.push_back(to->clone());
+    }
 }
 
 InteractionNode::~InteractionNode()
 {
     delete msgsig_;
-    if (from_ != nullptr) {
-        delete from_;
+    delete from_;
+    for (Role *to : to_) {
+        delete to;
     }
-    for (auto it=to_begin(); it!=to_end(); it++) {
-        delete *it;
-    }
+    to_.clear();
 }
 
 InteractionNode *InteractionNode::clone() const
@@ -131,7 +140,8 @@ Role *InteractionNode::from() const
 
 void InteractionNode::set_from(Role *from)
 {
-    from_ = from;
+    delete from_;
+    from_ = from->clone();
 }
 
 void InteractionNode::remove_from()
@@ -157,11 +167,14 @@ unsigned int InteractionNode::num_to() const
 
 void InteractionNode::add_to(Role *to)
 {
-    to_.push_back(to);
+    to_.push_back(to->clone());
 }
 
 void InteractionNode::remove_tos()
 {
+    for (Role *to : to_) {
+        delete to;
+    }
     to_.clear();
 }
 
@@ -267,7 +280,8 @@ ChoiceNode *ChoiceNode::clone() const
 
 void ChoiceNode::set_atrole(Role *at)
 {
-    at_ = at;
+    if (at_) delete at_;
+    at_ = at->clone();
 }
 
 Role *ChoiceNode::at() const

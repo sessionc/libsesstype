@@ -37,6 +37,9 @@ class RoleGrp : public Role {
     /// Roles in the RoleGrp are not freed (they are owned by the Protocol).
     ~RoleGrp() override;
 
+    /// \brief clone a RoleGrp.
+    RoleGrp *clone() const override;
+
     /// \param[in] name of the member Role.
     /// \returns member Role.
     /// \exception std::out_of_range if Role is not in the RoleGrp.

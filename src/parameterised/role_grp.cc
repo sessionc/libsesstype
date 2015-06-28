@@ -29,6 +29,11 @@ RoleGrp::~RoleGrp()
   // Note: member Role pointers are deallocated by protocol.
 }
 
+RoleGrp *RoleGrp::clone() const
+{
+    return new RoleGrp(*this);
+}
+
 Role *RoleGrp::member(std::string name) const
 {
   return members_.at(name);

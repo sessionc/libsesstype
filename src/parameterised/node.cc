@@ -13,30 +13,29 @@ namespace parameterised {
 
 // InteractionNode -----------------------------------------------------------
 
-InteractionNode::InteractionNode() : sesstype::InteractionNode(), msgcond_(NULL)
+InteractionNode::InteractionNode() : sesstype::InteractionNode(), msgcond_(nullptr)
 {
 }
 
 InteractionNode::InteractionNode(MsgSig *msgsig)
-    : sesstype::InteractionNode(msgsig), msgcond_(NULL)
+    : sesstype::InteractionNode(msgsig), msgcond_(nullptr)
 {
 }
 
 InteractionNode::InteractionNode(const sesstype::InteractionNode &node)
-    : sesstype::InteractionNode(node), msgcond_(NULL)
+    : sesstype::InteractionNode(node), msgcond_(nullptr)
 {
 }
 
 InteractionNode::InteractionNode(const InteractionNode &node)
-    : sesstype::InteractionNode(node), msgcond_(node.msgcond_)
+    : sesstype::InteractionNode(node),
+      msgcond_(node.msgcond_ ? node.msgcond_->clone() : nullptr)
 {
 }
 
 InteractionNode::~InteractionNode()
 {
-    if (msgcond_ != NULL) {
-        delete msgcond_;
-    }
+    delete msgcond_;
 }
 
 InteractionNode *InteractionNode::clone() const
@@ -52,7 +51,7 @@ MsgCond *InteractionNode::cond() const
 void InteractionNode::set_cond(MsgCond *cond)
 {
     // Note: only possible for send/receive.
-    msgcond_ = cond;
+    msgcond_ = cond->clone();
 }
 
 // ForNode -------------------------------------------------------------------
@@ -136,14 +135,18 @@ void AllReduceNode::set_msgsig(MsgSig *msgsig)
 
 OneofNode::OneofNode(Role *selector_role, unsigned int dimen)
     : BlockNode(ST_NODE_ONEOF),
-      selector_role_(selector_role), selector_role_dimen_(dimen)
+      selector_role_(selector_role),
+      selector_role_dimen_(dimen),
+      unordered_(false)
+
 {
 }
 
 OneofNode::OneofNode(const OneofNode &node)
     : BlockNode(node),
       selector_role_(node.selector_role_),
-      selector_role_dimen_(node.selector_role_dimen_)
+      selector_role_dimen_(node.selector_role_dimen_),
+      unordered_(false)
 {
 }
 

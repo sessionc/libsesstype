@@ -75,30 +75,36 @@ TEST_F(NodeTest, TestInteractionNode)
 
     interaction_node->add_to(to0);
     EXPECT_EQ(interaction_node->num_to(), 1);
-    EXPECT_EQ(interaction_node->to(0), to0);
+    EXPECT_EQ(interaction_node->to(0)->name(), to0->name());
 
     interaction_node->add_to(to1);
     EXPECT_EQ(interaction_node->num_to(), 2);
-    EXPECT_EQ(interaction_node->to(1), to1);
+    EXPECT_EQ(interaction_node->to(1)->name(), to1->name());
 
     interaction_node->add_to(to2);
     EXPECT_EQ(interaction_node->num_to(), 3);
-    EXPECT_EQ(interaction_node->to(2), to2);
+    EXPECT_EQ(interaction_node->to(2)->name(), to2->name());
 
     interaction_node->set_from(from);
-    EXPECT_EQ(interaction_node->from(), from);
+    EXPECT_EQ(interaction_node->from()->name(), from->name());
+    delete from;
+    delete to0;
+    delete to1;
+    delete to2;
 
     auto *node2 = new sesstype::parameterised::InteractionNode();
     EXPECT_EQ(NULL, node2->cond()); // Defaults to NULL
 
     auto *cond = new sesstype::MsgCond("Alice");
     node2->set_cond(cond);
-    EXPECT_EQ(node2->cond(), cond);
+    EXPECT_EQ(node2->cond()->name(), cond->name());
+    delete cond;
     delete interaction_node;
     delete node2;
 
     auto *msgsig = new sesstype::MsgSig("T");
     auto *interaction_node_with_msg = new sesstype::InteractionNode(msgsig);
+    delete msgsig;
     delete interaction_node_with_msg;
 }
 
@@ -138,7 +144,7 @@ TEST_F(NodeTest, TestChoiceNode)
     auto *node = new sesstype::ChoiceNode();
     EXPECT_EQ(node->type(), ST_NODE_CHOICE);
     node->set_atrole(role);
-    EXPECT_EQ(node->at(), role);
+    EXPECT_EQ(node->at()->name(), role->name());
     EXPECT_EQ(node->num_child(), 0);
     delete node;
 
@@ -228,7 +234,7 @@ TEST_F(NodeTest, BasicUsage)
 {
     auto *msgsig = new sesstype::MsgSig("L");
     auto *interaction_node = new sesstype::InteractionNode(msgsig);
-    EXPECT_EQ(interaction_node->msgsig(), msgsig);
+    EXPECT_EQ(interaction_node->msgsig()->label(), msgsig->label());
     EXPECT_EQ(interaction_node->type(), ST_NODE_SENDRECV);
     interaction_node->set_from(new Role("Alice"));
     interaction_node->add_to(new Role("Bob"));

@@ -20,6 +20,11 @@ Role::~Role()
 {
 }
 
+Role *Role::clone() const
+{
+    return new Role(*this);
+}
+
 std::string Role::name() const
 {
     return name_;

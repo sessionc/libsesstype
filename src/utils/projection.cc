@@ -70,12 +70,12 @@ void Projection::visit(ContinueNode *node)
 void Projection::visit(ChoiceNode *node)
 {
     ChoiceNode *new_node = new ChoiceNode(node->at());
-    stack_.push(new_node); // Enter Choice scope
+    stack_.push(new_node);
     if (project_role_->matches(node->at())) {
         // Choice sender
     }
     node->BlockNode::accept(*this);
-    stack_.pop(); // Exit Recur scope
+    stack_.pop();
     dynamic_cast<BlockNode *>(stack_.top())->append_child(new_node);
 }
 
