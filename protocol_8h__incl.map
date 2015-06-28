@@ -1,6 +1,6 @@
-<map id="protocol.h" name="protocol.h">
-<area shape="rect" id="node4" href="$import_8h.html" title="Protocol or Module imports. " alt="" coords="30,155,157,181"/>
-<area shape="rect" id="node5" href="$node_8h.html" title="Statements in a protocol or session. " alt="" coords="270,80,389,107"/>
-<area shape="rect" id="node8" href="$role_8h.html" title="A participant of a protocol or session. " alt="" coords="181,155,292,181"/>
-<area shape="rect" id="node7" href="$msg_8h.html" title="A message for passing between participants. " alt="" coords="367,155,482,181"/>
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="30,160,155,189"/>
+<area shape="rect" id="node10" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="267,83,385,112"/>
+<area shape="rect" id="node19" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="179,160,289,189"/>
+<area shape="rect" id="node15" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="363,160,478,189"/>
 </map>

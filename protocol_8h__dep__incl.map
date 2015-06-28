@@ -1,7 +1,7 @@
-<map id="protocol.h" name="protocol.h">
-<area shape="rect" id="node2" href="$module_8h.html" title="Module containing protocols or sessions. " alt="" coords="37,80,112,107"/>
-<area shape="rect" id="node5" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="105,155,191,181"/>
-<area shape="rect" id="node6" href="$parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="189,80,267,107"/>
-<area shape="rect" id="node3" href="$parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised). " alt="" coords="5,155,80,181"/>
-<area shape="rect" id="node4" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised. " alt="" coords="79,229,193,256"/>
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$module_8h.html" title="Module containing protocols or sessions." alt="" coords="36,83,111,112"/>
+<area shape="rect" id="node9" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="104,160,189,189"/>
+<area shape="rect" id="node11" href="$parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="187,83,264,112"/>
+<area shape="rect" id="node5" href="$parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="5,160,80,189"/>
+<area shape="rect" id="node7" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="77,237,192,267"/>
 </map>

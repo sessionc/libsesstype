@@ -1,4 +1,4 @@
-<map id="sesstype::parameterised::ForNode" name="sesstype::parameterised::ForNode">
-<area shape="rect" id="node2" href="$classsesstype_1_1BlockNode.html" title="Block of statements (Node instances). " alt="" coords="15,80,161,107"/>
-<area shape="rect" id="node3" href="$classsesstype_1_1Node.html" title="Session Type statements (st_node). " alt="" coords="31,5,145,32"/>
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classsesstype_1_1BlockNode.html" title="Block of statements (Node instances)." alt="" coords="43,83,189,112"/>
+<area shape="rect" id="node4" href="$classsesstype_1_1Node.html" title="Session Type statements (st_node)." alt="" coords="59,5,173,35"/>
 </map>

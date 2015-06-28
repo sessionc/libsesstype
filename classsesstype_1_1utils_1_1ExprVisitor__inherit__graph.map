@@ -1,4 +1,4 @@
-<map id="sesstype::utils::ExprVisitor" name="sesstype::utils::ExprVisitor">
-<area shape="rect" id="node2" href="$classsesstype_1_1utils_1_1Printer.html" title="Protocol and Expression printer. " alt="" coords="5,80,159,107"/>
-<area shape="rect" id="node3" href="$classsesstype_1_1utils_1_1Simplifier.html" title="Expression simplifier. " alt="" coords="183,80,352,107"/>
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsesstype_1_1utils_1_1Printer.html" title="Protocol and Expression printer." alt="" coords="5,83,157,112"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1utils_1_1Simplifier.html" title="Expression simplifier." alt="" coords="181,83,349,112"/>
 </map>

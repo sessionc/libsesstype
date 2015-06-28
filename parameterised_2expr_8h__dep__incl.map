@@ -1,16 +1,16 @@
-<map id="expr.h" name="expr.h">
-<area shape="rect" id="node2" href="$parameterised_2print_8cc.html" title="Printer. " alt="" coords="358,379,423,405"/>
-<area shape="rect" id="node3" href="$simplify_8cc.html" title="Expression simplifier. " alt="" coords="109,379,195,405"/>
-<area shape="rect" id="node4" href="$parameterised_2msg_8h.html" title="A message for passing between participants (parameterised). " alt="" coords="144,80,203,107"/>
-<area shape="rect" id="node5" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised. " alt="" coords="201,229,316,256"/>
-<area shape="rect" id="node6" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised). " alt="" coords="635,155,696,181"/>
-<area shape="rect" id="node9" href="$utils_8h.html" title="Utility functions for working with Session Types. " alt="" coords="486,304,543,331"/>
-<area shape="rect" id="node12" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session. " alt="" coords="403,80,458,107"/>
-<area shape="rect" id="node15" href="$utils_2expr_8h.html" title="Utilities for Expr. " alt="" coords="552,155,611,181"/>
-<area shape="rect" id="node7" href="$src_2utils_2parameterised_2projection_8cc.html" title="Endpoint projection. " alt="" coords="755,379,851,405"/>
-<area shape="rect" id="node8" href="$utils_2node_8h.html" title="Utilities for Node. " alt="" coords="603,229,664,256"/>
-<area shape="rect" id="node10" href="$src_2utils_2projection_8cc.html" title="Endpoint projection. " alt="" coords="455,379,551,405"/>
-<area shape="rect" id="node11" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="575,379,662,405"/>
-<area shape="rect" id="node13" href="$parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="297,155,375,181"/>
-<area shape="rect" id="node14" href="$utils_2role_8h.html" title="Utities for Roles. " alt="" coords="422,229,477,256"/>
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$parameterised_2print_8cc.html" title="Printer." alt="" coords="357,392,421,421"/>
+<area shape="rect" id="node5" href="$simplify_8cc.html" title="Expression simplifier." alt="" coords="108,392,193,421"/>
+<area shape="rect" id="node7" href="$parameterised_2msg_8h.html" title="A message for passing between participants (parameterised)." alt="" coords="144,83,203,112"/>
+<area shape="rect" id="node9" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="201,237,316,267"/>
+<area shape="rect" id="node11" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="632,160,693,189"/>
+<area shape="rect" id="node19" href="$utils_8h.html" title="Utility functions for working with Session Types." alt="" coords="484,315,540,344"/>
+<area shape="rect" id="node29" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="401,83,455,112"/>
+<area shape="rect" id="node43" href="$utils_2expr_8h.html" title="Utilities for Expr." alt="" coords="549,160,608,189"/>
+<area shape="rect" id="node14" href="$src_2utils_2parameterised_2projection_8cc.html" title="Endpoint projection." alt="" coords="752,392,848,421"/>
+<area shape="rect" id="node17" href="$utils_2node_8h.html" title="Utilities for Node." alt="" coords="600,237,661,267"/>
+<area shape="rect" id="node24" href="$src_2utils_2projection_8cc.html" title="Endpoint projection." alt="" coords="452,392,548,421"/>
+<area shape="rect" id="node26" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="572,392,657,421"/>
+<area shape="rect" id="node34" href="$parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="296,160,373,189"/>
+<area shape="rect" id="node38" href="$utils_2role_8h.html" title="Utities for Roles." alt="" coords="421,237,475,267"/>
 </map>

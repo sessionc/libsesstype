@@ -1,13 +1,13 @@
-<map id="projection.cc" name="projection.cc">
-<area shape="rect" id="node4" href="$node_8h.html" title="Statements in a protocol or session. " alt="" coords="393,326,511,353"/>
-<area shape="rect" id="node8" href="$role_8h.html" title="A participant of a protocol or session. " alt="" coords="979,415,1090,442"/>
-<area shape="rect" id="node9" href="$utils_8h.html" title="Utility functions for working with Session Types. " alt="" coords="601,80,716,107"/>
-<area shape="rect" id="node7" href="$msg_8h.html" title="A message for passing between participants. " alt="" coords="489,415,604,442"/>
-<area shape="rect" id="node12" href="$parameterised_2expr_8h.html" title="Expressions in a Role parameter or statement. " alt="" coords="679,408,841,449"/>
-<area shape="rect" id="node13" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised). " alt="" coords="561,229,722,271"/>
-<area shape="rect" id="node14" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session. " alt="" coords="679,319,841,360"/>
-<area shape="rect" id="node15" href="$utils_2expr_8h.html" title="Utilities for Expr. " alt="" coords="798,237,941,263"/>
-<area shape="rect" id="node16" href="$utils_2node_8h.html" title="Utilities for Node. " alt="" coords="475,155,621,181"/>
-<area shape="rect" id="node17" href="$utils_2role_8h.html" title="Utities for Roles. " alt="" coords="965,237,1104,263"/>
-<area shape="rect" id="node18" href="$role__grp_8h.html" title="A group of participants of a protocol or session. " alt="" coords="1230,319,1391,360"/>
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="369,315,487,344"/>
+<area shape="rect" id="node17" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="975,392,1084,421"/>
+<area shape="rect" id="node22" href="$utils_8h.html" title="Utility functions for working with Session Types." alt="" coords="599,83,713,112"/>
+<area shape="rect" id="node13" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="465,392,580,421"/>
+<area shape="rect" id="node30" href="$parameterised_2expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="655,392,855,421"/>
+<area shape="rect" id="node34" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="517,237,720,267"/>
+<area shape="rect" id="node38" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="656,315,853,344"/>
+<area shape="rect" id="node42" href="$utils_2expr_8h.html" title="Utilities for Expr." alt="" coords="795,237,936,267"/>
+<area shape="rect" id="node45" href="$utils_2node_8h.html" title="Utilities for Node." alt="" coords="472,160,619,189"/>
+<area shape="rect" id="node49" href="$utils_2role_8h.html" title="Utities for Roles." alt="" coords="960,237,1099,267"/>
+<area shape="rect" id="node53" href="$role__grp_8h.html" title="A group of participants of a protocol or session." alt="" coords="1224,315,1445,344"/>
 </map>

@@ -1,4 +1,4 @@
-<map id="node.h" name="node.h">
-<area shape="rect" id="node4" href="$msg_8h.html" title="A message for passing between participants. " alt="" coords="23,80,137,107"/>
-<area shape="rect" id="node5" href="$role_8h.html" title="A participant of a protocol or session. " alt="" coords="162,80,273,107"/>
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="23,83,137,112"/>
+<area shape="rect" id="node11" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="161,83,271,112"/>
 </map>
