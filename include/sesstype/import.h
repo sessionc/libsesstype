@@ -13,6 +13,7 @@
 namespace sesstype {
 #endif
 
+#ifdef __cplusplus
 /**
  * \brief Import statement.
  */
@@ -39,6 +40,7 @@ class Import {
     std::string from_;
     std::string as_;
 };
+#endif // __cplusplus
 
 #ifdef __cplusplus
 extern "C"{
