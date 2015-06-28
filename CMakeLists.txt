@@ -76,11 +76,15 @@ endif()
 
 
 #
-# Install.
+# Install and Packaging.
 #
-install(DIRECTORY include/sesstype DESTINATION include)
+install(DIRECTORY ${libsesstype_INCLUDE_DIR}
+        DIRECTORY ${PROJECT_BINARY_DIR}/include
+        DESTINATION include
+        FILES_MATCHING PATTERN *.h)
 install(TARGETS sesstype
         EXPORT sesstype
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib)
+include(package.cmake)
