@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+REPO=git@github.com:sessionc/libsesstype.git
+HTML=docs/html
+COMMIT_USER="Documentation buildbot"
+COMMIT_EMAIL="nickng@imperial.ac.uk"
+CHANGESET=$(git rev-parse --verify HEAD)
+
+rm -rf ${HTML}
+mkdir -p ${HTML}
+git clone -b gh-pages "${REPO}" --single-branch ${HTML}
+
+make docs
+cd ${HTML}
+
+git add .
+git config user.name "${COMMIT_USER}"
+git config user.email "${COMMIT_EMAIL}"
+git commit -m "Automated documentation build for changeset ${CHANGESET}."
+git push origin gh-pages
