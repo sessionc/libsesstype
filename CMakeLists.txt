@@ -1,5 +1,6 @@
 project(libsesstype CXX C)
 cmake_minimum_required(VERSION 2.8)
+set(PROJECT_DESCRIPTION "Session Types programming library for C/C++")
 
 #
 # Version.
@@ -33,6 +34,7 @@ configure_file(
 #
 set(CMAKE_C_FLAGS   "-std=c99   -O3 -Wall -Werror")
 set(CMAKE_CXX_FLAGS "-std=c++11 -O3 -Wall -Werror")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 #
@@ -76,8 +78,9 @@ endif()
 
 
 #
-# Install and Packaging.
+# Install.
 #
+set(CMAKE_INSTALL_PREFIX "/usr")
 install(DIRECTORY ${libsesstype_INCLUDE_DIR}/
         DIRECTORY ${PROJECT_BINARY_DIR}/include/
         DESTINATION include
@@ -87,4 +90,25 @@ install(TARGETS sesstype
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib)
+install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc"
+        DESTINATION lib/pkgconfig)
+
+#
+# pkg-config.
+# Generate a .pc file for other to find
+#
+set(PKG_CONFIG_REQUIRES "")
+set(PKG_CONFIG_LIBDIR "\${prefix}/lib")
+set(PKG_CONFIG_INCLUDEDIR "\${prefix}/include")
+set(PKG_CONFIG_LIBS "-L\${libdir} -lsesstype")
+set(PKG_CONFIG_CFLAGS "-I\${includedir}")
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/pkg-config.pc.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc")
+
+#
+# Packaging.
+#
 include(package.cmake)
+
+
