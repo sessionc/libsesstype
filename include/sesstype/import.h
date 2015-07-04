@@ -21,6 +21,7 @@ class Import {
   public:
     /// \brief Import constructor without "from" or alias.
     Import(std::string name);
+
     /// \brief Import constructor
     /// \param[in] from Module name.
     /// \param[in] as Import alias name.
@@ -47,14 +48,23 @@ extern "C"{
 #endif
 
 #ifdef __cplusplus
-typedef Import st_tree_import_t;
+typedef Import st_import;
 #else
-typedef struct Import st_tree_import_t;
+typedef struct Import st_import;
 #endif
 
-st_tree_import_t *st_mk_import(const char *name);
+/// \param[in] name of the Import.
+/// \returns pointer to Import object allocated dynamically.
+st_import *st_import_mk_init(const char *name);
 
-st_tree_import_t *st_mk_import_from_as(const char *name, const char *from, const char *as);
+/// \param[in] name of the Import.
+/// \param[in] from module of the Import.
+/// \param[in] as alias name of the Import.
+/// \returns pointer to Import object allocated dynamically.
+st_import *st_import_mk_alias(const char *name, const char *from, const char *as);
+
+/// \param[in,out] import object to destroy.
+void st_import_free(st_import *import);
 
 #ifdef __cplusplus
 } // extern "C"

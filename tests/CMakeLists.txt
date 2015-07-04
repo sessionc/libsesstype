@@ -33,3 +33,7 @@ add_test(NAME Role COMMAND test_role)
 add_executable(test_projection projection.cc)
 target_link_libraries(test_projection sesstype gtest gtest_main)
 add_test(NAME Projection COMMAND test_projection)
+
+add_executable(test_api api.cc)
+target_link_libraries(test_api sesstype gtest gtest_main)
+add_test(NAME API COMMAND test_api)

@@ -52,7 +52,6 @@ class Role {
     /// \brief <tt>accept</tt> method for utils::RoleVisitor.
     virtual void accept(utils::RoleVisitor &v);
 
-
   private:
     std::string name_;
 };

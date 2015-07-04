@@ -4,14 +4,19 @@
 namespace sesstype {
 #endif
 
-st_tree_import_t *st_mk_import(const char *name)
+st_import *st_import_mk_init(const char *name)
 {
-  return new Import(std::string(name));
+    return new Import(name);
 }
 
-st_tree_import_t *st_mk_import_from_as(const char *name, const char *from, const char *as)
+st_import *st_import_mk_alias(const char *name, const char *from, const char *as)
 {
-  return new Import(std::string(name), std::string(from), std::string(as));
+    return new Import(name, from, as);
+}
+
+void st_import_free(st_import *import)
+{
+    delete import;
 }
 
 #ifdef __cplusplus

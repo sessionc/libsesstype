@@ -98,6 +98,45 @@ class MsgSig {
 #endif // __cplusplus
 
 #ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+typedef MsgSig st_msg;
+typedef MsgPayload st_msg_payload;
+#else
+typedef struct MsgSig st_msg;
+typedef struct MsgPayload st_msg_payload;
+#endif
+
+/// \param[in] op operator/label of the message.
+/// \returns pointer to MsgSig object allocated dynamically.
+st_msg *st_msg_mk_init(const char *op);
+
+/// \param[in,out] msg message to modify.
+/// \param[in] payload of message to add to message.
+st_msg *st_msg_add_payload(st_msg *msg, st_msg_payload *payload);
+
+/// \param[in,out] msg object to destroy.
+void st_msg_free(st_msg *msg);
+
+/// \param[in] type of the message payload.
+/// \returns pointer to MsgPayload object allocated dynamically.
+st_msg_payload *st_msg_payload_mk_init(const char *type);
+
+/// \param[in] name of the message payload.
+/// \param[in] type of the message payload.
+/// \returns pointer to MsgPayload objected allocated dynamically.
+st_msg_payload *st_msg_payload_mk_annotated(const char *name, const char *type);
+
+/// \param[in,out] payload object to destroy.
+void st_msg_payload_free(st_msg_payload *payload);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+#ifdef __cplusplus
 } // namespace sesstype
 #endif
 
