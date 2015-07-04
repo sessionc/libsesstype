@@ -106,9 +106,8 @@ configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/pkg-config.pc.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc")
 
+
 #
 # Packaging.
 #
 include(package.cmake)
-
-

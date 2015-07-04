@@ -11,7 +11,7 @@ set(CPACK_DEBIAN_PACKAGE_VERSION ${libsesstype_VERSION})
 set(CPACK_DEBIAN_PACKAGE_SECTION "libdevel")
 set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Nicholas Ng <nickng@imperial.ac.uk>")
-set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Session Types programming library for C/C++.
+set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "Session Types programming library for C/C++
  This library is a collection of data structures for representing and APIs for manipulating Multiparty Session Types (MPST) for programming.
  A C API is provided for FFI interoperation with other programming languages.
  Developed for Imperial College London, see http://mrg.doc.ic.ac.uk/ for details about Session Types research.")
