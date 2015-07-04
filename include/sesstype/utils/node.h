@@ -25,6 +25,9 @@ class NodeVisitor {
     virtual void visit(RecurNode *node) = 0;
     virtual void visit(ContinueNode *node) = 0;
     virtual void visit(ChoiceNode *node) = 0;
+    virtual void visit(ParNode *node) = 0;
+    virtual void visit(NestedNode *node) = 0;
+    virtual void visit(InterruptibleNode *node) = 0;
     virtual void visit(parameterised::InteractionNode *node) = 0;
     virtual void visit(parameterised::AllReduceNode *node) = 0;
     virtual void visit(parameterised::ForNode *node) = 0;

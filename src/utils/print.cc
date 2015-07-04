@@ -90,10 +90,48 @@ void Printer::visit(ContinueNode *node)
 void Printer::visit(ChoiceNode *node)
 {
     prefix();
-    os_  << " choice { at: " << node->at()->name() << " }";
+    os_  << "choice { at: " << node->at()->name() << " }";
     os_ << " children: " << node->num_child() << " @" << node << "\n";
 
     node->BlockNode::accept(*this);
+}
+
+void Printer::visit(ParNode *node)
+{
+    prefix();
+    os_ << "par {}";
+    os_ << " parblocks:children: " << node->num_child() << " @" << node << "\n";
+
+    node->BlockNode::accept(*this);
+}
+
+void Printer::visit(NestedNode *node)
+{
+    prefix();
+    os_ << "nested { name: " << node->name();
+    os_ << ", scope_name: " << node->scope_name();
+    os_ << ", arg("<< node->num_rolearg() <<"): <";
+    for (auto it=node->arg_begin(); it!=node->arg_end(); it++) {
+        os_ << (*it)->label() << "(" << (*it)->num_payload() << ")" << ", ";
+    }
+    os_ << ">";
+    os_ << ", rolearg("<< node->num_arg() <<"): [";
+    for (auto it=node->rolearg_begin(); it!=node->rolearg_end(); it++) {
+        (*it)->accept(*this);
+        os_ << ", ";
+    }
+    os_ << "]} @ " << node << "\n";
+}
+
+void Printer::visit(InterruptibleNode *node)
+{
+    prefix();
+    os_ << "interruptible { scope_name: " << node->scope_name();
+    os_ << " interrupts(" << node->num_interrupt() << "): ";
+    for (auto it=node->interrupt_begin(); it!=node->interrupt_end(); it++) {
+        os_ << (*it).first->name() << "/" << (*it).second.size() << ", ";
+    }
+    os_ <<"} @ " << node << "\n";
 }
 
 // Roles ---------------------------------------------------------------------

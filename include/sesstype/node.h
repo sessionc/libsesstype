@@ -8,6 +8,7 @@
 #ifdef __cplusplus
 #include <string>
 #include <vector>
+#include <unordered_map>
 #endif
 
 #include "sesstype/msg.h"
@@ -20,9 +21,11 @@ namespace sesstype {
 #define ST_NODE_ROOT     0
 #define ST_NODE_SENDRECV 1
 #define ST_NODE_CHOICE   2
-#define ST_NODE_PARALLEL 3
-#define ST_NODE_RECUR    4
-#define ST_NODE_CONTINUE 5
+#define ST_NODE_RECUR    3
+#define ST_NODE_CONTINUE 4
+#define ST_NODE_PARALLEL 5
+#define ST_NODE_NESTED   6
+#define ST_NODE_INTERRUPTIBLE 7
 
 #ifdef __cplusplus
 typedef Role MsgCond;
@@ -71,7 +74,7 @@ class BlockNode : public Node {
     /// \brief BlockNode destructor.
     ~BlockNode() override;
 
-    /// \brief clone a BlocNode.
+    /// \brief clone a BlockNode.
     BlockNode *clone() const override;
 
     /// \brief Get child Node at position <tt>idx</tt>.
@@ -103,7 +106,7 @@ class BlockNode : public Node {
 
 /**
  * \brief Interaction (message-passing) statements.
- * 
+ *
  * InteractionNode also encapsulates send-only and receive-only statements.
  */
 class InteractionNode : public Node {
@@ -268,6 +271,124 @@ class ChoiceNode : public BlockNode {
     Role *at_;
 };
 
+/**
+ * \brief Parallel blocks.
+ */
+class ParNode : public BlockNode {
+  public:
+    /// \brief ParNode constructor.
+    ParNode();
+
+    /// \brief ParNode copy constructor.
+    ParNode(const ParNode &node);
+
+    /// \brief ParNode destructor.
+    ~ParNode() override;
+
+    /// \brief clone a ParNode.
+    ParNode *clone() const override;
+
+    /// \param[in] parallel Node to add as new 'thread'.
+    void add_parallel(Node *parallel);
+
+    void accept(utils::NodeVisitor &v) override;
+};
+
+/**
+ * \brief Nested session type.
+ */
+class NestedNode : public Node {
+  public:
+    /// \brief NestedNode constructor with no scope name by default.
+    NestedNode(std::string protocolname);
+
+    /// \brief NestedNode constructor.
+    NestedNode(std::string protocolname, std::string scopename);
+
+    /// \brief NestedNode copy constructor.
+    NestedNode(const NestedNode &node);
+
+    /// \brief NestedNode destructor.
+    ~NestedNode() override;
+
+    /// \brief clone a NestedNode.
+    NestedNode *clone() const override;
+
+    /// \returns name of nested session to execute.
+    std::string name() const;
+
+    /// \returns scope name.
+    std::string scope_name() const;
+
+    /// \returns number of Message arguments.
+    unsigned int num_arg() const;
+
+    std::vector<MsgSig *>::const_iterator arg_begin() const;
+    std::vector<MsgSig *>::const_iterator arg_end() const;
+
+    /// \brief add message instantiation arguments.
+    /// \param[in] arg for instantiation of message parameter.
+    void add_arg(MsgSig *msg);
+
+    /// \returns number of Role arguments.
+    unsigned int num_rolearg() const;
+
+    std::vector<Role *>::const_iterator rolearg_begin() const;
+    std::vector<Role *>::const_iterator rolearg_end() const;
+
+    /// \brief add role instantiation arguments.
+    /// \param[in] role for instantiation of protocol.
+    void add_arg(Role *role);
+
+    void accept(utils::NodeVisitor &v) override;
+
+  private:
+    std::string name_;
+    std::string scope_name_;
+    std::vector<MsgSig *> args_;
+    std::vector<Role *> role_args_;
+};
+
+/**
+ * \brief Interruptible blocks.
+ */
+class InterruptibleNode : public BlockNode {
+  public:
+    /// \brief InterruptibleNode constructor with no scope name as default.
+    InterruptibleNode();
+
+    /// \brief InterruptibleNode constructor.
+    InterruptibleNode(std::string scopename);
+
+    /// \brief InterruptibleNode copy constructor.
+    InterruptibleNode(const InterruptibleNode &node);
+
+    /// \brief InterruptibleNode destructor.
+    ~InterruptibleNode() override;
+
+    /// \brief clone a InterruptibleNode.
+    InterruptibleNode *clone() const override;
+
+    /// \returns scope name of interrupt.
+    std::string scope_name() const;
+
+    /// \returns number of Roles with interrupt messages.
+    unsigned int num_interrupt() const;
+
+    std::unordered_map<Role *, std::vector<MsgSig *>>::const_iterator interrupt_begin() const;
+    std::unordered_map<Role *, std::vector<MsgSig *>>::const_iterator interrupt_end() const;
+
+    /// \brief add an interrupt specification for a Role.
+    /// \param[in] role that can send interrupt.
+    /// \param[in] msg as an interrupt message.
+    void add_interrupt(Role *role, MsgSig *msg);
+
+    void accept(utils::NodeVisitor &v) override;
+
+  private:
+    std::unordered_map<Role *, std::vector<MsgSig *>> interrupts_;
+    std::string scope_name_;
+};
 #endif // __cplusplus
 
 #ifdef __cplusplus

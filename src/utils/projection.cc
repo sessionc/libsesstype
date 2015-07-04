@@ -79,5 +79,35 @@ void Projection::visit(ChoiceNode *node)
     dynamic_cast<BlockNode *>(stack_.top())->append_child(new_node);
 }
 
+void Projection::visit(ParNode *node)
+{
+    ParNode *new_node = new ParNode();
+    stack_.push(new_node);
+    node->BlockNode::accept(*this);
+    stack_.pop();
+    dynamic_cast<BlockNode *>(stack_.top())->append_child(new_node);
+}
+
+void Projection::visit(NestedNode *node)
+{
+    for (auto it=node->rolearg_begin(); it!=node->rolearg_end(); it++) {
+        if ((*it)->matches(project_role_)) {
+            dynamic_cast<BlockNode *>(stack_.top())->append_child(node->clone());
+            break;
+        }
+    }
+}
+
+void Projection::visit(InterruptibleNode *node)
+{
+    InterruptibleNode *new_node = node->clone();
+
+    stack_.push(new_node);
+    node->BlockNode::accept(*this);
+    stack_.pop();
+
+    dynamic_cast<BlockNode *>(stack_.top())->append_child(new_node);
+}
+
 } // namespace utils
 } // namespace sesstype

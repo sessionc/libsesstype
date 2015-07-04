@@ -52,6 +52,9 @@ class Printer : public NodeVisitor, public RoleVisitor, public ExprVisitor {
   void visit(RecurNode *node) override;
   void visit(ContinueNode *node) override;
   void visit(ChoiceNode *node) override;
+  void visit(ParNode *node) override;
+  void visit(NestedNode *node) override;
+  void visit(InterruptibleNode *node) override;
   void visit(parameterised::InteractionNode *node) override;
   void visit(parameterised::AllReduceNode *node) override;
   void visit(parameterised::ForNode *node) override;
@@ -112,6 +115,9 @@ class Projection : public NodeVisitor {
   void visit(RecurNode *node) override;
   void visit(ContinueNode *node) override;
   void visit(ChoiceNode *node) override;
+  void visit(ParNode *node) override;
+  void visit(NestedNode *node) override;
+  void visit(InterruptibleNode *node) override;
   void visit(parameterised::InteractionNode *node) override;
   void visit(parameterised::AllReduceNode *node) override;
   void visit(parameterised::ForNode *node) override;

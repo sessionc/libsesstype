@@ -157,6 +157,64 @@ TEST_F(NodeTest, TestChoiceNode)
 }
 
 /**
+ * \test ParNode operations.
+ */
+TEST_F(NodeTest, TestParNode)
+{
+    auto *node = new sesstype::ParNode();
+    EXPECT_EQ(node->type(), ST_NODE_PARALLEL);
+    auto *node2 = new sesstype::InteractionNode();
+    EXPECT_EQ(node->num_child(), 0);
+    node->add_parallel(node2);
+    EXPECT_EQ(node->num_child(), 1);
+    EXPECT_EQ(node->child(0), node2);
+    delete node;
+}
+
+/**
+ * \test NestNode operations.
+ */
+TEST_F(NodeTest, TestNestedNode)
+{
+    auto *node = new sesstype::NestedNode("ProtocolName");
+    EXPECT_EQ(node->type(), ST_NODE_NESTED);
+    auto *role = new sesstype::Role("R");
+    EXPECT_EQ(node->num_rolearg(), 0);
+    node->add_arg(role);
+    EXPECT_EQ(node->num_rolearg(), 1);
+    auto *msg = new sesstype::MsgSig("Label");
+    EXPECT_EQ(node->num_arg(), 0);
+    node->add_arg(msg);
+    EXPECT_EQ(node->num_arg(), 1);
+    delete node;
+}
+
+/**
+ * \test InterruptibleNode operations.
+ */
+TEST_F(NodeTest, TestInterruptibleNode)
+{
+    auto *node = new sesstype::InterruptibleNode("scope");
+    EXPECT_EQ(node->type(), ST_NODE_INTERRUPTIBLE);
+    EXPECT_EQ(node->scope_name(), "scope");
+    auto *node2 = new sesstype::InteractionNode();
+    EXPECT_EQ(node->num_child(), 0);
+    node->append_child(node2);
+    EXPECT_EQ(node->child(0), node2);
+    EXPECT_EQ(node->num_child(), 1);
+    auto *role = new sesstype::Role();
+    auto *role2 = new sesstype::Role();
+    auto *msg1 = new sesstype::MsgSig("Label1");
+    auto *msg2 = new sesstype::MsgSig("Label2");
+    EXPECT_EQ(node->num_interrupt(), 0);
+    node->add_interrupt(role, msg1);
+    EXPECT_EQ(node->num_interrupt(), 1);
+    node->add_interrupt(role2, msg2);
+    EXPECT_EQ(node->num_interrupt(), 1);
+    delete node;
+}
+
+/**
  * \test ForNode operations.
  */
 TEST_F(NodeTest, TestForNode)

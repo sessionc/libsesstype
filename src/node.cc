@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iterator>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include <sesstype/msg.h>
@@ -292,6 +293,206 @@ Role *ChoiceNode::at() const
 void ChoiceNode::add_choice(Node *choice_blk)
 {
     append_child(choice_blk);
+}
+
+// ParNode -------------------------------------------------------------------
+
+ParNode::ParNode() : BlockNode(ST_NODE_PARALLEL)
+{
+}
+
+ParNode::ParNode(const ParNode &node) : BlockNode(node)
+{
+}
+
+ParNode::~ParNode()
+{
+}
+
+ParNode *ParNode::clone() const
+{
+    return new ParNode(*this);
+}
+
+void ParNode::add_parallel(Node *parallel)
+{
+    append_child(parallel);
+}
+
+// NestedNode ----------------------------------------------------------------
+
+NestedNode::NestedNode(std::string protocolname)
+    : Node(ST_NODE_NESTED),
+      name_(protocolname),
+      scope_name_(),
+      args_(),
+      role_args_()
+{
+}
+
+NestedNode::NestedNode(std::string protocolname, std::string scopename)
+    : Node(ST_NODE_NESTED),
+      name_(protocolname),
+      scope_name_(scopename),
+      args_(),
+      role_args_()
+{
+}
+
+NestedNode::NestedNode(const NestedNode &node)
+    : Node(node),
+      name_(node.name_),
+      scope_name_(node.scope_name_),
+      args_(),
+      role_args_()
+{
+    for (auto arg : node.args_) {
+        add_arg(arg->clone());
+    }
+    for (auto role_arg : node.role_args_) {
+        add_arg(role_arg->clone());
+    }
+}
+
+NestedNode::~NestedNode()
+{
+    for (auto arg : args_) {
+        delete arg;
+    }
+    for (auto role_arg : role_args_) {
+        delete role_arg;
+    }
+}
+
+NestedNode *NestedNode::clone() const
+{
+    return new NestedNode(*this);
+}
+
+std::string NestedNode::name() const
+{
+    return name_;
+}
+
+std::string NestedNode::scope_name() const
+{
+    return scope_name_;
+}
+
+unsigned int NestedNode::num_arg() const
+{
+    return args_.size();
+}
+
+std::vector<MsgSig *>::const_iterator NestedNode::arg_begin() const
+{
+    return args_.begin();
+}
+
+std::vector<MsgSig *>::const_iterator NestedNode::arg_end() const
+{
+    return args_.end();
+}
+
+void NestedNode::add_arg(MsgSig *msg)
+{
+    args_.push_back(msg);
+}
+
+unsigned int NestedNode::num_rolearg() const
+{
+    return role_args_.size();
+}
+
+std::vector<Role *>::const_iterator NestedNode::rolearg_begin() const
+{
+    return role_args_.begin();
+}
+
+std::vector<Role *>::const_iterator NestedNode::rolearg_end() const
+{
+    return role_args_.end();
+}
+
+void NestedNode::add_arg(Role *role)
+{
+    role_args_.push_back(role);
+}
+
+// InterruptibleNode ---------------------------------------------------------
+
+InterruptibleNode::InterruptibleNode()
+    : BlockNode(ST_NODE_INTERRUPTIBLE),
+      interrupts_(),
+      scope_name_()
+{
+}
+
+InterruptibleNode::InterruptibleNode(std::string scopename)
+    : BlockNode(ST_NODE_INTERRUPTIBLE),
+      interrupts_(),
+      scope_name_(scopename)
+{
+}
+
+InterruptibleNode::InterruptibleNode(const InterruptibleNode &node)
+    : BlockNode(node),
+      interrupts_(),
+      scope_name_(node.scope_name_)
+{
+    for (auto interrupt : node.interrupts_) {
+        Role *role = interrupt.first->clone();
+        for (auto msg : interrupt.second) {
+            add_interrupt(role, msg->clone());
+        }
+    }
+}
+
+InterruptibleNode::~InterruptibleNode()
+{
+    for (auto interrupt : interrupts_) {
+        for (auto msg : interrupt.second) {
+            delete msg;
+        }
+        delete interrupt.first; // Role
+    }
+}
+
+InterruptibleNode *InterruptibleNode::clone() const
+{
+    return new InterruptibleNode(*this);
+}
+
+std::string InterruptibleNode::scope_name() const
+{
+    return scope_name_;
+}
+
+unsigned int InterruptibleNode::num_interrupt() const
+{
+    return interrupts_.size();
+}
+
+std::unordered_map<Role *, std::vector<MsgSig *>>::const_iterator InterruptibleNode::interrupt_begin() const
+{
+    return interrupts_.begin();
+}
+
+std::unordered_map<Role *, std::vector<MsgSig *>>::const_iterator InterruptibleNode::interrupt_end() const
+{
+    return interrupts_.end();
+}
+
+void InterruptibleNode::add_interrupt(Role *role, MsgSig *msg)
+{
+    auto it = std::find_if(interrupts_.begin(), interrupts_.end(),
+        [role](std::pair<Role *, std::vector<MsgSig *>> role_msgs)
+            -> bool { return role_msgs.first->name() == role->name(); });
+    if (it == interrupts_.end()) {
+        interrupts_.insert({ role, std::vector<MsgSig *>() });
+    } else {
+        (*it).second.push_back(msg);
+    }
 }
 
 } // namespace sesstype
