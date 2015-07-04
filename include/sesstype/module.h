@@ -72,10 +72,45 @@ class Module {
 
   private:
     std::string name_;
+    // Pair<Import * theimport, bool is_alias>
     std::unordered_map<std::string, std::pair<Import *, bool>> imports_;
     std::unordered_map<std::string, Protocol *> protocols_;
 };
 #endif // __cplusplus
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+typedef Module st_module;
+#else
+typedef struct Module st_module;
+#endif
+
+/// \param[in] name of the Module (name can include dots).
+/// \returns pointer to Module object allocated dynamically.
+st_module *st_module_mk_init(const char *name);
+
+/// \param[in] module to query.
+const char *st_module_get_name(st_module *const module);
+
+/// \param[in,out] module to contain tree.
+/// \param[in] tree to add.
+/// \returns modified module.
+st_module *st_module_add_tree(st_module *const module, st_tree *tree);
+
+/// \param[in,out] module to contain import.
+/// \param[in] import to add.
+/// \returns modified module.
+st_module *st_module_import(st_module *const module, st_import *import);
+
+/// \param[in,out] module object to destroy.
+void st_module_free(st_module *module);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #ifdef __cplusplus
 } // namespace sesstype

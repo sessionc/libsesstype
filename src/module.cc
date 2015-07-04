@@ -9,8 +9,7 @@ Module::Module() : name_("default"), imports_(), protocols_()
 {
 }
 
-Module::Module(std::string name)
-    : name_(name), imports_(), protocols_()
+Module::Module(std::string name) : name_(name), imports_(), protocols_()
 {
 }
 
