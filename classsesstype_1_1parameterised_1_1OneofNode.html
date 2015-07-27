@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Existential construct.  
  <a href="classsesstype_1_1parameterised_1_1OneofNode.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="parameterised_2node_8h_source.html">node.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="oneof_8h_source.html">oneof.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for sesstype::parameterised::OneofNode:</div>
 <div class="dyncontent">
@@ -132,8 +132,8 @@ Collaboration diagram for sesstype::parameterised::OneofNode:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#aaefc42acd05847e673627f9db0ed12cb">OneofNode</a> (<a class="el" href="classsesstype_1_1parameterised_1_1Role.html">parameterised::Role</a> *<a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a52d2543b85b4dd79438d45190cad1589">selector_role</a>, unsigned int dimen)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct.">OneofNode</a> constructor.  <a href="#aaefc42acd05847e673627f9db0ed12cb"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a32e45c2ee3691438c3bc61d22fae02b0">OneofNode</a> (<a class="el" href="classsesstype_1_1parameterised_1_1Role.html">parameterised::Role</a> *selector, unsigned int dimen)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct.">OneofNode</a> constructor.  <a href="#a32e45c2ee3691438c3bc61d22fae02b0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a706234b64a62170c748439ba02154ce8"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::OneofNode" ref="a706234b64a62170c748439ba02154ce8" args="(const OneofNode &amp;node)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a706234b64a62170c748439ba02154ce8">OneofNode</a> (const <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html">OneofNode</a> &amp;node)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct.">OneofNode</a> copy constructor. <br/></td></tr>
@@ -143,27 +143,33 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac7f6b6284afc19ceb93ebfe1d43c5748"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::clone" ref="ac7f6b6284afc19ceb93ebfe1d43c5748" args="() const override" -->
 <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html">OneofNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#ac7f6b6284afc19ceb93ebfe1d43c5748">clone</a> () const override</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">clone a <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct.">OneofNode</a>. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#afebc7992ce210bcc7e3b24058837bb0f">set_var</a> (std::string <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a156c6bbf1e301adcacf86a84d373c2e4">var</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a156c6bbf1e301adcacf86a84d373c2e4">var</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a296ed7fd9ae88a204876d1b55e9fe747">set_repeat</a> (bool repeat)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#af279fe7d48d67e48a48a20b916c10e61">is_repeat</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#af283c995dd4527fd923b20376a0657da">set_range</a> (<a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *<a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a1ced65cd60b32817a0921cd451a19a45">range</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a1ced65cd60b32817a0921cd451a19a45">range</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a9d51a0837641094fc251143e6d0b1b27">set_selector</a> (<a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a> *selector, unsigned int dimen)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a52d2543b85b4dd79438d45190cad1589">selector_role</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a6e865ded98a79e2ff1fc8e76b72e8214">selector_role_dimen</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a7e66c85a34eb2423af9ed643c6bf76e6">set_selector_role</a> (<a class="el" href="classsesstype_1_1parameterised_1_1Role.html">parameterised::Role</a> *<a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a52d2543b85b4dd79438d45190cad1589">selector_role</a>, unsigned int dimen)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a77205d3a7ace2492932bc4fedd98c5b9">unordered</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#abf11fbfc21a4fe4c82e4992b47a5804d">set_unordered</a> (bool <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a77205d3a7ace2492932bc4fedd98c5b9">unordered</a>)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ade81f368c1ca5c1d38bc463731fe8df6"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::accept" ref="ade81f368c1ca5c1d38bc463731fe8df6" args="(utils::NodeVisitor &amp;v) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#ade81f368c1ca5c1d38bc463731fe8df6">accept</a> (<a class="el" href="classsesstype_1_1utils_1_1NodeVisitor.html">utils::NodeVisitor</a> &amp;v) override</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>accept</code> method for <a class="el" href="classsesstype_1_1utils_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">utils::NodeVisitor</a>. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a81fb76be4c402be01460afc4db8d0ef7">selector_dimen</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#abf11fbfc21a4fe4c82e4992b47a5804d">set_unordered</a> (bool unordered)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a9e6024a07669cf2a4f724d99998be663">is_unordered</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03761e5ed0cf1cbc30e96307a67813b7"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::accept" ref="a03761e5ed0cf1cbc30e96307a67813b7" args="(sesstype::util::NodeVisitor &amp;v) override" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a03761e5ed0cf1cbc30e96307a67813b7">accept</a> (<a class="el" href="classsesstype_1_1util_1_1NodeVisitor.html">sesstype::util::NodeVisitor</a> &amp;v) override</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>accept</code> method for <a class="el" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">util::NodeVisitor</a>. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Existential construct. </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aaefc42acd05847e673627f9db0ed12cb"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::OneofNode" ref="aaefc42acd05847e673627f9db0ed12cb" args="(parameterised::Role *selector_role, unsigned int dimen)" -->
+<a class="anchor" id="a32e45c2ee3691438c3bc61d22fae02b0"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::OneofNode" ref="a32e45c2ee3691438c3bc61d22fae02b0" args="(parameterised::Role *selector, unsigned int dimen)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#aaefc42acd05847e673627f9db0ed12cb">sesstype::parameterised::OneofNode::OneofNode</a> </td>
+          <td class="memname"><a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a32e45c2ee3691438c3bc61d22fae02b0">sesstype::parameterised::OneofNode::OneofNode</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html">parameterised::Role</a> *&#160;</td>
-          <td class="paramname"><em>selector_role</em>, </td>
+          <td class="paramname"><em>selector</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -192,6 +198,74 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="af279fe7d48d67e48a48a20b916c10e61"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::is_repeat" ref="af279fe7d48d67e48a48a20b916c10e61" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#af279fe7d48d67e48a48a20b916c10e61">sesstype::parameterised::OneofNode::is_repeat</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if this is a repeat-oneof. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9e6024a07669cf2a4f724d99998be663"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::is_unordered" ref="a9e6024a07669cf2a4f724d99998be663" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a9e6024a07669cf2a4f724d99998be663">sesstype::parameterised::OneofNode::is_unordered</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if allow unordered access. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a1ced65cd60b32817a0921cd451a19a45"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::range" ref="a1ced65cd60b32817a0921cd451a19a45" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> * <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a1ced65cd60b32817a0921cd451a19a45">sesstype::parameterised::OneofNode::range</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>range of selection. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a81fb76be4c402be01460afc4db8d0ef7"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::selector_dimen" ref="a81fb76be4c402be01460afc4db8d0ef7" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a81fb76be4c402be01460afc4db8d0ef7">sesstype::parameterised::OneofNode::selector_dimen</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>selector <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> dimension. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a52d2543b85b4dd79438d45190cad1589"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::selector_role" ref="a52d2543b85b4dd79438d45190cad1589" args="() const " -->
 <div class="memitem">
 <div class="memproto">
@@ -209,32 +283,61 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a class="anchor" id="a6e865ded98a79e2ff1fc8e76b72e8214"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::selector_role_dimen" ref="a6e865ded98a79e2ff1fc8e76b72e8214" args="() const " -->
+<a class="anchor" id="af283c995dd4527fd923b20376a0657da"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::set_range" ref="af283c995dd4527fd923b20376a0657da" args="(RngExpr *range)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a6e865ded98a79e2ff1fc8e76b72e8214">sesstype::parameterised::OneofNode::selector_role_dimen</a> </td>
+          <td class="memname">void <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#af283c995dd4527fd923b20376a0657da">sesstype::parameterised::OneofNode::set_range</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *&#160;</td>
+          <td class="paramname"><em>range</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
-<dl class="return"><dt><b>Returns:</b></dt><dd>selector <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> dimension. </dd></dl>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">range</td><td>without variable. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a class="anchor" id="a7e66c85a34eb2423af9ed643c6bf76e6"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::set_selector_role" ref="a7e66c85a34eb2423af9ed643c6bf76e6" args="(parameterised::Role *selector_role, unsigned int dimen)" -->
+<a class="anchor" id="a296ed7fd9ae88a204876d1b55e9fe747"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::set_repeat" ref="a296ed7fd9ae88a204876d1b55e9fe747" args="(bool repeat)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a7e66c85a34eb2423af9ed643c6bf76e6">sesstype::parameterised::OneofNode::set_selector_role</a> </td>
+          <td class="memname">void <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a296ed7fd9ae88a204876d1b55e9fe747">sesstype::parameterised::OneofNode::set_repeat</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html">parameterised::Role</a> *&#160;</td>
-          <td class="paramname"><em>selector_role</em>, </td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>repeat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">repeat</td><td>boolean to indicate whether or not this is "repeat". </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9d51a0837641094fc251143e6d0b1b27"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::set_selector" ref="a9d51a0837641094fc251143e6d0b1b27" args="(Role *selector, unsigned int dimen)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a9d51a0837641094fc251143e6d0b1b27">sesstype::parameterised::OneofNode::set_selector</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a> *&#160;</td>
+          <td class="paramname"><em>selector</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -283,12 +386,35 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a class="anchor" id="a77205d3a7ace2492932bc4fedd98c5b9"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::unordered" ref="a77205d3a7ace2492932bc4fedd98c5b9" args="() const " -->
+<a class="anchor" id="afebc7992ce210bcc7e3b24058837bb0f"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::set_var" ref="afebc7992ce210bcc7e3b24058837bb0f" args="(std::string var)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a77205d3a7ace2492932bc4fedd98c5b9">sesstype::parameterised::OneofNode::unordered</a> </td>
+          <td class="memname">void <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#afebc7992ce210bcc7e3b24058837bb0f">sesstype::parameterised::OneofNode::set_var</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>var</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">var</td><td>to be used as existential variable name. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a156c6bbf1e301adcacf86a84d373c2e4"></a><!-- doxytag: member="sesstype::parameterised::OneofNode::var" ref="a156c6bbf1e301adcacf86a84d373c2e4" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string <a class="el" href="classsesstype_1_1parameterised_1_1OneofNode.html#a156c6bbf1e301adcacf86a84d373c2e4">sesstype::parameterised::OneofNode::var</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -296,14 +422,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
       </table>
 </div>
 <div class="memdoc">
-<dl class="return"><dt><b>Returns:</b></dt><dd>true if allow unordered access. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>existential variable. </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="parameterised_2node_8h_source.html">parameterised/node.h</a></li>
-<li>src/parameterised/node.cc</li>
-<li>node_visitor.cc</li>
+<li><a class="el" href="oneof_8h_source.html">oneof.h</a></li>
+<li>oneof_node.cc</li>
+<li>parameterised/util/node_visitor.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->

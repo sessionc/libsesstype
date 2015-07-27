@@ -89,8 +89,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00008"></a>00008 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#endif</span>
 <a name="l00010"></a>00010 <span class="preprocessor"></span>
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="module_8h.html" title="Module containing protocols or sessions.">sesstype/module.h</a>&quot;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="constant_8h.html" title="Constants.">sesstype/parameterised/constant.h</a>&quot;</span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="module_8h.html" title="Module containing sessions or sessions.">sesstype/module.h</a>&quot;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="const_8h.html" title="Constants.">sesstype/parameterised/const.h</a>&quot;</span>
 <a name="l00013"></a>00013 
 <a name="l00014"></a>00014 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00015"></a>00015 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
@@ -111,22 +111,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00038"></a>00038 
 <a name="l00040"></a>00040     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classsesstype_1_1parameterised_1_1Module.html#ae104dde11c233c314c4f6b11e1b62300">num_constant</a>() <span class="keyword">const</span>;
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042 
-<a name="l00045"></a>00045     <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1parameterised_1_1Module.html#ad55a6f3a47ea2ed6a742440e91cb0aa3" title="Test if Constant is in Module.">has_constant</a>(std::string name) <span class="keyword">const</span>;
-<a name="l00046"></a>00046 
-<a name="l00048"></a>00048     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1Module.html#a6abcd0b23a2b40a00712f058cd0e91e2">add_constant</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Constant.html" title="Named constants.">Constant</a> *constant);
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050   <span class="keyword">private</span>:
-<a name="l00051"></a>00051     std::unordered_map&lt;std::string, Constant *&gt; consts_;
-<a name="l00052"></a>00052 };
-<a name="l00053"></a>00053 <span class="preprocessor">#endif // __cplusplus</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span>
-<a name="l00055"></a>00055 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
-<a name="l00057"></a>00057 } <span class="comment">// namespace sesstype</span>
-<a name="l00058"></a>00058 <span class="preprocessor">#endif</span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span>
-<a name="l00060"></a>00060 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__MODULE_H__</span>
+<a name="l00044"></a>00044     <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1parameterised_1_1Module.html#ad55a6f3a47ea2ed6a742440e91cb0aa3" title="Test if Constant is in Module.">has_constant</a>(std::string name) <span class="keyword">const</span>;
+<a name="l00045"></a>00045 
+<a name="l00047"></a>00047     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1Module.html#a6abcd0b23a2b40a00712f058cd0e91e2">add_constant</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Constant.html" title="Named constants.">Constant</a> *constant);
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049   <span class="keyword">private</span>:
+<a name="l00050"></a>00050     std::unordered_map&lt;std::string, Constant *&gt; consts_;
+<a name="l00051"></a>00051 };
+<a name="l00052"></a>00052 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00053"></a>00053 <span class="preprocessor"></span>
+<a name="l00054"></a>00054 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00055"></a>00055 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
+<a name="l00056"></a>00056 } <span class="comment">// namespace sesstype</span>
+<a name="l00057"></a>00057 <span class="preprocessor">#endif</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span>
+<a name="l00059"></a>00059 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__MODULE_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node7" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="30,160,155,189"/>
+<area shape="rect" id="node10" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="269,83,386,112"/>
+<area shape="rect" id="node19" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="179,160,289,189"/>
+<area shape="rect" id="node15" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="363,160,478,189"/>
+</map>

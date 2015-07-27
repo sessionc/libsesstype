@@ -1,8 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$module_8h.html" title="Module containing protocols or sessions." alt="" coords="519,83,649,112"/>
-<area shape="rect" id="node31" href="$constant_8h.html" title="Constants." alt="" coords="713,160,940,189"/>
+<area shape="rect" id="node3" href="$module_8h.html" title="Module containing sessions or sessions." alt="" coords="519,83,649,112"/>
+<area shape="rect" id="node30" href="$const_8h.html" title="Constants." alt="" coords="713,160,921,189"/>
 <area shape="rect" id="node9" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="380,237,505,267"/>
-<area shape="rect" id="node12" href="$protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="296,160,432,189"/>
+<area shape="rect" id="node12" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="299,160,432,189"/>
 <area shape="rect" id="node17" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="188,237,305,267"/>
 <area shape="rect" id="node26" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="5,315,115,344"/>
 <area shape="rect" id="node22" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="189,315,304,344"/>

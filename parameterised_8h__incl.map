@@ -1,16 +1,17 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$constant_8h.html" title="Constants." alt="" coords="1157,160,1384,189"/>
-<area shape="rect" id="node7" href="$parameterised_2expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="229,315,429,344"/>
-<area shape="rect" id="node12" href="$parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="959,83,1177,112"/>
-<area shape="rect" id="node41" href="$parameterised_2msg_8h.html" title="A message for passing between participants (parameterised)." alt="" coords="5,237,205,267"/>
-<area shape="rect" id="node46" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="225,160,428,189"/>
-<area shape="rect" id="node50" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="331,237,528,267"/>
-<area shape="rect" id="node53" href="$parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="603,160,824,189"/>
-<area shape="rect" id="node59" href="$role__grp_8h.html" title="A group of participants of a protocol or session." alt="" coords="653,237,875,267"/>
-<area shape="rect" id="node14" href="$module_8h.html" title="Module containing protocols or sessions." alt="" coords="1003,160,1133,189"/>
-<area shape="rect" id="node19" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="1067,315,1192,344"/>
-<area shape="rect" id="node22" href="$protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="1000,237,1136,267"/>
-<area shape="rect" id="node27" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="459,315,576,344"/>
-<area shape="rect" id="node35" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="653,392,763,421"/>
-<area shape="rect" id="node31" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="312,392,427,421"/>
+<area shape="rect" id="node3" href="$const_8h.html" title="Constants." alt="" coords="5,160,213,189"/>
+<area shape="rect" id="node7" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="999,392,1199,421"/>
+<area shape="rect" id="node12" href="$parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="193,83,412,112"/>
+<area shape="rect" id="node40" href="$parameterised_2msg_8h.html" title="A message for passing between participants (parameterised)." alt="" coords="863,315,1063,344"/>
+<area shape="rect" id="node45" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="861,160,1064,189"/>
+<area shape="rect" id="node50" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="725,83,923,112"/>
+<area shape="rect" id="node60" href="$role__grp_8h.html" title="A group of participants of a protocol or session." alt="" coords="456,237,677,267"/>
+<area shape="rect" id="node14" href="$module_8h.html" title="Module containing sessions or sessions." alt="" coords="237,160,368,189"/>
+<area shape="rect" id="node19" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="199,315,324,344"/>
+<area shape="rect" id="node22" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="299,237,432,267"/>
+<area shape="rect" id="node27" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="721,315,839,344"/>
+<area shape="rect" id="node35" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="588,315,697,344"/>
+<area shape="rect" id="node31" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="809,392,924,421"/>
+<area shape="rect" id="node54" href="$parameterised_2util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="528,160,787,189"/>
+<area shape="rect" id="node56" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="701,237,875,267"/>
 </map>

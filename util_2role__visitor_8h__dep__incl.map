@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$parameterised_2util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="271,83,367,112"/>
+<area shape="rect" id="node36" href="$util_8h.html" title="Utility functions for working with Session Types." alt="" coords="515,83,565,112"/>
+<area shape="rect" id="node5" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="231,160,284,189"/>
+<area shape="rect" id="node18" href="$parameterised_2util_8h_source.html" title="util.h" alt="" coords="347,469,397,499"/>
+<area shape="rect" id="node7" href="$parameterised_2util_2print_8cc.html" title="Printer." alt="" coords="93,547,157,576"/>
+<area shape="rect" id="node9" href="$src_2parameterised_2util_2projection_8cc.html" title="Endpoint projection." alt="" coords="359,547,455,576"/>
+<area shape="rect" id="node11" href="$cond_8h_source.html" title="cond.h" alt="" coords="103,237,164,267"/>
+<area shape="rect" id="node26" href="$oneof_8h_source.html" title="oneof.h" alt="" coords="43,315,107,344"/>
+<area shape="rect" id="node30" href="$parameterised_2session_8h.html" title="A session or a session of an interaction, also known in the literature as global type (contains param..." alt="" coords="188,237,265,267"/>
+<area shape="rect" id="node33" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="289,237,404,267"/>
+<area shape="rect" id="node13" href="$if_8h_source.html" title="if.h" alt="" coords="248,315,288,344"/>
+<area shape="rect" id="node22" href="$parameterised_2node_2interaction_8h_source.html" title="interaction.h" alt="" coords="131,315,224,344"/>
+<area shape="rect" id="node16" href="$parameterised_2util_2node__visitor_8h.html" title="Utilities for Node." alt="" coords="163,392,264,421"/>
+<area shape="rect" id="node38" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="529,160,615,189"/>
+</map>

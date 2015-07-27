@@ -1,7 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="156,83,273,112"/>
-<area shape="rect" id="node17" href="$parameterised_2expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="347,160,547,189"/>
-<area shape="rect" id="node21" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="348,83,545,112"/>
-<area shape="rect" id="node9" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="157,160,272,189"/>
-<area shape="rect" id="node13" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="24,160,133,189"/>
+<area shape="rect" id="node3" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="61,83,179,112"/>
+<area shape="rect" id="node9" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="63,160,177,189"/>
 </map>

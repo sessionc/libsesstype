@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="619,160,736,189"/>
+<area shape="rect" id="node13" href="$node_2interaction_8h_source.html" title="sesstype/node/interaction.h" alt="" coords="1168,83,1349,112"/>
+<area shape="rect" id="node22" href="$node_2choice_8h_source.html" title="sesstype/node/choice.h" alt="" coords="771,83,931,112"/>
+<area shape="rect" id="node26" href="$node_2recur_8h_source.html" title="sesstype/node/recur.h" alt="" coords="5,83,155,112"/>
+<area shape="rect" id="node30" href="$node_2continue_8h_source.html" title="sesstype/node/continue.h" alt="" coords="179,83,349,112"/>
+<area shape="rect" id="node34" href="$node_2par_8h_source.html" title="sesstype/node/par.h" alt="" coords="608,83,747,112"/>
+<area shape="rect" id="node37" href="$node_2nested_8h_source.html" title="sesstype/node/nested.h" alt="" coords="373,83,533,112"/>
+<area shape="rect" id="node46" href="$node_2interruptible_8h_source.html" title="sesstype/node/interruptible.h" alt="" coords="955,83,1144,112"/>
+<area shape="rect" id="node9" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="841,237,956,267"/>
+<area shape="rect" id="node17" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="760,160,869,189"/>
+</map>

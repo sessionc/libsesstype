@@ -80,24 +80,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#namespaces">Namespaces</a>  </div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">module.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Module containing protocols or sessions.  
+<p>Module containing sessions or sessions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br/>
 <code>#include &lt;unordered_map&gt;</code><br/>
 <code>#include &quot;<a class="el" href="import_8h_source.html">sesstype/import.h</a>&quot;</code><br/>
-<code>#include &quot;<a class="el" href="protocol_8h_source.html">sesstype/protocol.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="session_8h_source.html">sesstype/session.h</a>&quot;</code><br/>
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for module.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="module_8h__incl.png" border="0" usemap="#module_8h" alt=""/></div>
 <map name="module_8h" id="module_8h">
-<area shape="rect" id="node7" href="import_8h.html" title="Protocol or Module imports." alt="" coords="24,160,149,189"/><area shape="rect" id="node10" href="protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="192,83,328,112"/><area shape="rect" id="node15" href="node_8h.html" title="Statements in a protocol or session." alt="" coords="224,160,341,189"/><area shape="rect" id="node24" href="role_8h.html" title="A participant of a protocol or session." alt="" coords="415,237,524,267"/><area shape="rect" id="node20" href="msg_8h.html" title="A message for passing between participants." alt="" coords="225,237,340,267"/></map>
+<area shape="rect" id="node7" href="import_8h.html" title="Protocol or Module imports." alt="" coords="24,160,150,189"/><area shape="rect" id="node10" href="session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="192,83,326,112"/><area shape="rect" id="node15" href="node_8h.html" title="Statements in a protocol or session." alt="" coords="224,160,342,189"/><area shape="rect" id="node24" href="role_8h.html" title="A participant of a protocol or session." alt="" coords="451,237,560,267"/><area shape="rect" id="node20" href="msg_8h.html" title="A message for passing between participants." alt="" coords="262,237,376,267"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -112,15 +114,26 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Module.html">sesstype::Module</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Protocols.">Module</a> is a container class for multiple logically related Protocols.  <a href="classsesstype_1_1Module.html#details">More...</a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Sessions.">Module</a> is a container class for multiple logically related Sessions.  <a href="classsesstype_1_1Module.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html">sesstype</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>namespace for Session Types. </p>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>namespace for <a class="el" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">Session</a> Types. </p>
 <br/></td></tr>
+<tr><td colspan="2"><h2><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a22fff4d7821c83e11a652115232b6c78"></a><!-- doxytag: member="module.h::st_module" ref="a22fff4d7821c83e11a652115232b6c78" args="" -->
+typedef Module&#160;</td><td class="memItemRight" valign="bottom"><b>sesstype::st_module</b></td></tr>
+<tr><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">st_module *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a7a8d085a9e562102c125a716e7ae21d9">sesstype::st_module_mk_init</a> (const char *name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a953e5e3827966979c3576a950b05e0c4">sesstype::st_module_get_name</a> (st_module *const module)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">st_module *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a6483a2d843de49dfb62bba023e16870f">sesstype::st_module_add_tree</a> (st_module *const module, st_tree *tree)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">st_module *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a85bab2c40cc0546265476c48c2cecbb6">sesstype::st_module_import</a> (st_module *const module, st_import *import)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a2e74bfa771fb7d0ef9c7d62a0befda47">sesstype::st_module_free</a> (st_module *module)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Module containing protocols or sessions. </p>
+<div class="textblock"><p>Module containing sessions or sessions. </p>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

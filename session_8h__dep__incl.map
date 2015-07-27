@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$module_8h.html" title="Module containing sessions or sessions." alt="" coords="55,83,129,112"/>
+<area shape="rect" id="node9" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="124,160,209,189"/>
+<area shape="rect" id="node11" href="$parameterised_2session_8h.html" title="A session or a session of an interaction, also known in the literature as global type (contains param..." alt="" coords="204,83,281,112"/>
+<area shape="rect" id="node5" href="$parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="25,160,100,189"/>
+<area shape="rect" id="node7" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="5,237,120,267"/>
+</map>

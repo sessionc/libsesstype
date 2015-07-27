@@ -1,7 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node7" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="24,160,149,189"/>
-<area shape="rect" id="node10" href="$protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="192,83,328,112"/>
-<area shape="rect" id="node15" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="224,160,341,189"/>
-<area shape="rect" id="node24" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="415,237,524,267"/>
-<area shape="rect" id="node20" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="225,237,340,267"/>
+<area shape="rect" id="node7" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="24,160,150,189"/>
+<area shape="rect" id="node10" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="192,83,326,112"/>
+<area shape="rect" id="node15" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="224,160,342,189"/>
+<area shape="rect" id="node24" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="451,237,560,267"/>
+<area shape="rect" id="node20" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="262,237,376,267"/>
 </map>

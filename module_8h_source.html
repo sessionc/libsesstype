@@ -92,7 +92,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00011"></a>00011 <span class="preprocessor">#endif</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span>
 <a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="import_8h.html" title="Protocol or Module imports.">sesstype/import.h</a>&quot;</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type...">sesstype/protocol.h</a>&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="session_8h.html" title="A session or a session of an interaction, also known in the literature as global type.">sesstype/session.h</a>&quot;</span>
 <a name="l00015"></a>00015 
 <a name="l00016"></a>00016 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00017"></a>00017 <span class="preprocessor"></span>
@@ -101,7 +101,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00022"></a>00022 <span class="preprocessor"></span>
 <a name="l00023"></a>00023 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00024"></a>00024 <span class="preprocessor"></span>
-<a name="l00027"></a><a class="code" href="classsesstype_1_1Module.html">00027</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Protocols.">Module</a> {
+<a name="l00027"></a><a class="code" href="classsesstype_1_1Module.html">00027</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Sessions.">Module</a> {
 <a name="l00028"></a>00028   <span class="keyword">public</span>:
 <a name="l00030"></a>00030     <a class="code" href="classsesstype_1_1Module.html#a5912199cd14ddbe12d5fe64705683b2a" title="Module constructor with &quot;default&quot; as Module name.">Module</a>();
 <a name="l00031"></a>00031 
@@ -113,13 +113,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00040"></a>00040 
 <a name="l00043"></a>00043     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1Module.html#aa865a4349bc0c2ad7065f94405e53551" title="Replace Module name.">set_name</a>(std::string name);
 <a name="l00044"></a>00044 
-<a name="l00047"></a>00047     <a class="code" href="classsesstype_1_1Protocol.html" title="Protocol (st_tree) class encapsulates a single protocol.">Protocol</a> *<a class="code" href="classsesstype_1_1Module.html#aa49a76ad2997ad2667d92d540c887ae6">protocol</a>(std::string name) <span class="keyword">const</span>;
+<a name="l00047"></a>00047     <a class="code" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">Session</a> *<a class="code" href="classsesstype_1_1Module.html#a1b577a2a170a834d747229e111ddacf5">session</a>(std::string name) <span class="keyword">const</span>;
 <a name="l00048"></a>00048 
-<a name="l00050"></a>00050     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classsesstype_1_1Module.html#a1ee854478a3b254a005758d5f812186c">num_protocol</a>() <span class="keyword">const</span>;
+<a name="l00050"></a>00050     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classsesstype_1_1Module.html#abf58e535dd58a391d3eb6a754fe5674a">num_session</a>() <span class="keyword">const</span>;
 <a name="l00051"></a>00051 
-<a name="l00053"></a>00053     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1Module.html#a5c8627a5174353e9b089a71cf548fe5b">add_protocol</a>(<a class="code" href="classsesstype_1_1Protocol.html" title="Protocol (st_tree) class encapsulates a single protocol.">Protocol</a> *protocol);
+<a name="l00053"></a>00053     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1Module.html#ae8bf99d874dc17efb752f62f0dc686bc">add_session</a>(<a class="code" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">Session</a> *session);
 <a name="l00054"></a>00054 
-<a name="l00057"></a>00057     <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1Module.html#a89d9984a92a1ce3b33930d60be6019c9" title="Test if Protocol is in Module.">has_protocol</a>(std::string name) <span class="keyword">const</span>;
+<a name="l00057"></a>00057     <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1Module.html#a8e111d3214044df57f96437ddbaf10ec" title="Test if Session is in Module.">has_session</a>(std::string name) <span class="keyword">const</span>;
 <a name="l00058"></a>00058 
 <a name="l00062"></a>00062     <a class="code" href="classsesstype_1_1Import.html" title="Import statement.">Import</a> *<span class="keyword">import</span>(std::string <a class="code" href="classsesstype_1_1Module.html#a7475d94ec87425da735482bd5d0cca6b">name</a>) <span class="keyword">const</span>;
 <a name="l00063"></a>00063 
@@ -131,16 +131,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00072"></a>00072 
 <a name="l00073"></a>00073   <span class="keyword">private</span>:
 <a name="l00074"></a>00074     std::string name_;
-<a name="l00075"></a>00075     std::unordered_map&lt;std::string, std::pair&lt;Import *, bool&gt;&gt; imports_;
-<a name="l00076"></a>00076     std::unordered_map&lt;std::string, Protocol *&gt; protocols_;
-<a name="l00077"></a>00077 };
-<a name="l00078"></a>00078 <span class="preprocessor">#endif // __cplusplus</span>
-<a name="l00079"></a>00079 <span class="preprocessor"></span>
-<a name="l00080"></a>00080 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00081"></a>00081 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
-<a name="l00082"></a>00082 <span class="preprocessor">#endif</span>
-<a name="l00083"></a>00083 <span class="preprocessor"></span>
-<a name="l00084"></a>00084 <span class="preprocessor">#endif//SESSTYPE__MODULE_H__</span>
+<a name="l00075"></a>00075     <span class="comment">// Pair&lt;Import * theimport, bool is_alias&gt;</span>
+<a name="l00076"></a>00076     std::unordered_map&lt;std::string, std::pair&lt;Import *, bool&gt;&gt; imports_;
+<a name="l00077"></a>00077     std::unordered_map&lt;std::string, Session *&gt; sessions_;
+<a name="l00078"></a>00078 };
+<a name="l00079"></a>00079 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span>
+<a name="l00081"></a>00081 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00082"></a>00082 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00083"></a>00083 <span class="preprocessor">#endif</span>
+<a name="l00084"></a>00084 <span class="preprocessor"></span>
+<a name="l00085"></a>00085 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00086"></a>00086 <span class="preprocessor"></span><span class="keyword">typedef</span> <a class="code" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Sessions.">Module</a> <a class="code" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Sessions.">st_module</a>;
+<a name="l00087"></a>00087 <span class="preprocessor">#else</span>
+<a name="l00088"></a>00088 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Sessions.">Module</a> st_module;
+<a name="l00089"></a>00089 <span class="preprocessor">#endif</span>
+<a name="l00090"></a>00090 <span class="preprocessor"></span>
+<a name="l00093"></a>00093 st_module *<a class="code" href="namespacesesstype.html#a7a8d085a9e562102c125a716e7ae21d9">st_module_mk_init</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
+<a name="l00094"></a>00094 
+<a name="l00096"></a>00096 <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="namespacesesstype.html#a953e5e3827966979c3576a950b05e0c4">st_module_get_name</a>(st_module *<span class="keyword">const</span> module);
+<a name="l00097"></a>00097 
+<a name="l00101"></a>00101 st_module *<a class="code" href="namespacesesstype.html#a6483a2d843de49dfb62bba023e16870f">st_module_add_tree</a>(st_module *<span class="keyword">const</span> module, <a class="code" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">st_tree</a> *tree);
+<a name="l00102"></a>00102 
+<a name="l00106"></a>00106 st_module *<a class="code" href="namespacesesstype.html#a85bab2c40cc0546265476c48c2cecbb6">st_module_import</a>(st_module *<span class="keyword">const</span> module, <a class="code" href="classsesstype_1_1Import.html" title="Import statement.">st_import</a> *<span class="keyword">import</span>);
+<a name="l00107"></a>00107 
+<a name="l00109"></a>00109 <span class="keywordtype">void</span> <a class="code" href="namespacesesstype.html#a2e74bfa771fb7d0ef9c7d62a0befda47">st_module_free</a>(st_module *module);
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00112"></a>00112 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00113"></a>00113 <span class="preprocessor">#endif</span>
+<a name="l00114"></a>00114 <span class="preprocessor"></span>
+<a name="l00115"></a>00115 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00116"></a>00116 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
+<a name="l00117"></a>00117 <span class="preprocessor">#endif</span>
+<a name="l00118"></a>00118 <span class="preprocessor"></span>
+<a name="l00119"></a>00119 <span class="preprocessor">#endif//SESSTYPE__MODULE_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

@@ -1,15 +1,33 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$src_2utils_2projection_8cc.html" title="Endpoint projection." alt="" coords="5,315,101,344"/>
-<area shape="rect" id="node5" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="268,83,329,112"/>
-<area shape="rect" id="node13" href="$utils_2node_8h.html" title="Utilities for Node." alt="" coords="163,160,224,189"/>
-<area shape="rect" id="node15" href="$utils_8h.html" title="Utility functions for working with Session Types." alt="" coords="192,237,248,267"/>
-<area shape="rect" id="node22" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="647,315,732,344"/>
-<area shape="rect" id="node25" href="$protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="512,83,589,112"/>
-<area shape="rect" id="node7" href="$parameterised_2print_8cc.html" title="Printer." alt="" coords="235,315,299,344"/>
-<area shape="rect" id="node9" href="$src_2utils_2parameterised_2projection_8cc.html" title="Endpoint projection." alt="" coords="323,315,419,344"/>
-<area shape="rect" id="node11" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="443,315,557,344"/>
-<area shape="rect" id="node19" href="$simplify_8cc.html" title="Expression simplifier." alt="" coords="125,315,211,344"/>
-<area shape="rect" id="node27" href="$module_8h.html" title="Module containing protocols or sessions." alt="" coords="552,160,627,189"/>
-<area shape="rect" id="node33" href="$parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="451,237,528,267"/>
-<area shape="rect" id="node29" href="$parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="552,237,627,267"/>
+<area shape="rect" id="node3" href="$node_2choice_8h_source.html" title="choice.h" alt="" coords="1040,83,1109,112"/>
+<area shape="rect" id="node16" href="$util_2node__visitor_8h.html" title="Utilities for Node." alt="" coords="499,160,600,189"/>
+<area shape="rect" id="node39" href="$util_8h.html" title="Utility functions for working with Session Types." alt="" coords="1227,237,1277,267"/>
+<area shape="rect" id="node41" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="1379,315,1464,344"/>
+<area shape="rect" id="node44" href="$node_2continue_8h_source.html" title="continue.h" alt="" coords="715,83,797,112"/>
+<area shape="rect" id="node52" href="$node_2interaction_8h_source.html" title="interaction.h" alt="" coords="597,83,691,112"/>
+<area shape="rect" id="node57" href="$node_2interruptible_8h_source.html" title="interruptible.h" alt="" coords="821,83,920,112"/>
+<area shape="rect" id="node65" href="$node_2nested_8h_source.html" title="nested.h" alt="" coords="944,83,1016,112"/>
+<area shape="rect" id="node73" href="$node_2par_8h_source.html" title="par.h" alt="" coords="1133,83,1184,112"/>
+<area shape="rect" id="node81" href="$node_2recur_8h_source.html" title="recur.h" alt="" coords="512,83,573,112"/>
+<area shape="rect" id="node89" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="313,160,375,189"/>
+<area shape="rect" id="node100" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="1433,83,1511,112"/>
+<area shape="rect" id="node5" href="$parameterised_2node_2choice_8h_source.html" title="choice.h" alt="" coords="1008,237,1077,267"/>
+<area shape="rect" id="node7" href="$parameterised_2util_2print_8cc.html" title="Printer." alt="" coords="405,469,469,499"/>
+<area shape="rect" id="node9" href="$parameterised_2util_2node__visitor_8h.html" title="Utilities for Node." alt="" coords="475,315,576,344"/>
+<area shape="rect" id="node11" href="$parameterised_2util_8h_source.html" title="util.h" alt="" coords="299,392,349,421"/>
+<area shape="rect" id="node14" href="$src_2parameterised_2util_2projection_8cc.html" title="Endpoint projection." alt="" coords="93,469,189,499"/>
+<area shape="rect" id="node18" href="$allreduce_8h_source.html" title="allreduce.h" alt="" coords="203,237,288,267"/>
+<area shape="rect" id="node22" href="$for_8h_source.html" title="for.h" alt="" coords="131,237,179,267"/>
+<area shape="rect" id="node26" href="$if_8h_source.html" title="if.h" alt="" coords="451,237,491,267"/>
+<area shape="rect" id="node30" href="$parameterised_2node_2interaction_8h_source.html" title="interaction.h" alt="" coords="565,237,659,267"/>
+<area shape="rect" id="node34" href="$oneof_8h_source.html" title="oneof.h" alt="" coords="312,237,376,267"/>
+<area shape="rect" id="node46" href="$parameterised_2node_2continue_8h_source.html" title="continue.h" alt="" coords="683,237,765,267"/>
+<area shape="rect" id="node59" href="$parameterised_2node_2interruptible_8h_source.html" title="interruptible.h" alt="" coords="789,237,888,267"/>
+<area shape="rect" id="node67" href="$parameterised_2node_2nested_8h_source.html" title="nested.h" alt="" coords="912,237,984,267"/>
+<area shape="rect" id="node75" href="$parameterised_2node_2par_8h_source.html" title="par.h" alt="" coords="1101,237,1152,267"/>
+<area shape="rect" id="node83" href="$parameterised_2node_2recur_8h_source.html" title="recur.h" alt="" coords="45,237,107,267"/>
+<area shape="rect" id="node98" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="1185,315,1300,344"/>
+<area shape="rect" id="node102" href="$module_8h.html" title="Module containing sessions or sessions." alt="" coords="1384,160,1459,189"/>
+<area shape="rect" id="node108" href="$parameterised_2session_8h.html" title="A session or a session of an interaction, also known in the literature as global type (contains param..." alt="" coords="1483,160,1560,189"/>
+<area shape="rect" id="node104" href="$parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="1384,237,1459,267"/>
 </map>

@@ -1,0 +1,35 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="852,392,1055,421"/>
+<area shape="rect" id="node17" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="2448,392,2645,421"/>
+<area shape="rect" id="node39" href="$parameterised_2util_8h_source.html" title="sesstype/parameterised/util.h" alt="" coords="2171,83,2363,112"/>
+<area shape="rect" id="node7" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="1281,547,1399,576"/>
+<area shape="rect" id="node13" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="1020,624,1135,653"/>
+<area shape="rect" id="node19" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="1776,624,1885,653"/>
+<area shape="rect" id="node23" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="2143,469,2343,499"/>
+<area shape="rect" id="node27" href="$parameterised_2util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="2417,469,2676,499"/>
+<area shape="rect" id="node29" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="2112,547,2285,576"/>
+<area shape="rect" id="node33" href="$role__grp_8h.html" title="A group of participants of a protocol or session." alt="" coords="2309,547,2531,576"/>
+<area shape="rect" id="node46" href="$expr__visitor_8h.html" title="Utilities for Expr." alt="" coords="2304,160,2568,189"/>
+<area shape="rect" id="node49" href="$parameterised_2util_2node__visitor_8h.html" title="Utilities for Node." alt="" coords="1136,160,1403,189"/>
+<area shape="rect" id="node51" href="$util_2node__visitor_8h.html" title="Utilities for Node." alt="" coords="1133,392,1315,421"/>
+<area shape="rect" id="node92" href="$parameterised_2node_2interaction_8h_source.html" title="sesstype/parameterised/node/interaction.h" alt="" coords="627,237,893,267"/>
+<area shape="rect" id="node104" href="$parameterised_2node_2choice_8h_source.html" title="sesstype/parameterised/node/choice.h" alt="" coords="1628,315,1873,344"/>
+<area shape="rect" id="node107" href="$parameterised_2node_2recur_8h_source.html" title="sesstype/parameterised/node/recur.h" alt="" coords="1403,392,1640,421"/>
+<area shape="rect" id="node110" href="$parameterised_2node_2continue_8h_source.html" title="sesstype/parameterised/node/continue.h" alt="" coords="1897,315,2153,344"/>
+<area shape="rect" id="node113" href="$parameterised_2node_2par_8h_source.html" title="sesstype/parameterised/node/par.h" alt="" coords="5,237,232,267"/>
+<area shape="rect" id="node116" href="$parameterised_2node_2nested_8h_source.html" title="sesstype/parameterised/node/nested.h" alt="" coords="256,237,501,267"/>
+<area shape="rect" id="node119" href="$parameterised_2node_2interruptible_8h_source.html" title="sesstype/parameterised/node/interruptible.h" alt="" coords="1924,237,2199,267"/>
+<area shape="rect" id="node122" href="$for_8h_source.html" title="sesstype/parameterised/node/for.h" alt="" coords="1105,315,1327,344"/>
+<area shape="rect" id="node127" href="$allreduce_8h_source.html" title="sesstype/parameterised/node/allreduce.h" alt="" coords="519,315,777,344"/>
+<area shape="rect" id="node132" href="$oneof_8h_source.html" title="sesstype/parameterised/node/oneof.h" alt="" coords="2228,315,2468,344"/>
+<area shape="rect" id="node139" href="$if_8h_source.html" title="sesstype/parameterised/node/if.h" alt="" coords="968,237,1181,267"/>
+<area shape="rect" id="node54" href="$node_2interaction_8h_source.html" title="sesstype/node/interaction.h" alt="" coords="724,469,905,499"/>
+<area shape="rect" id="node60" href="$node_2choice_8h_source.html" title="sesstype/node/choice.h" alt="" coords="1551,469,1711,499"/>
+<area shape="rect" id="node64" href="$node_2recur_8h_source.html" title="sesstype/node/recur.h" alt="" coords="1377,469,1527,499"/>
+<area shape="rect" id="node68" href="$node_2continue_8h_source.html" title="sesstype/node/continue.h" alt="" coords="1735,469,1905,499"/>
+<area shape="rect" id="node72" href="$node_2par_8h_source.html" title="sesstype/node/par.h" alt="" coords="1164,469,1303,499"/>
+<area shape="rect" id="node75" href="$node_2nested_8h_source.html" title="sesstype/node/nested.h" alt="" coords="929,469,1089,499"/>
+<area shape="rect" id="node84" href="$node_2interruptible_8h_source.html" title="sesstype/node/interruptible.h" alt="" coords="1929,469,2119,499"/>
+<area shape="rect" id="node96" href="$cond_8h_source.html" title="sesstype/parameterised/cond.h" alt="" coords="1351,315,1553,344"/>
+<area shape="rect" id="node99" href="$parameterised_2msg_8h.html" title="A message for passing between participants (parameterised)." alt="" coords="408,392,608,421"/>
+</map>

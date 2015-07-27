@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="261,83,315,112"/>
+<area shape="rect" id="node16" href="$parameterised_2util_8h_source.html" title="util.h" alt="" coords="344,392,395,421"/>
+<area shape="rect" id="node5" href="$parameterised_2util_2print_8cc.html" title="Printer." alt="" coords="96,469,160,499"/>
+<area shape="rect" id="node7" href="$src_2parameterised_2util_2projection_8cc.html" title="Endpoint projection." alt="" coords="353,469,449,499"/>
+<area shape="rect" id="node9" href="$cond_8h_source.html" title="cond.h" alt="" coords="44,160,105,189"/>
+<area shape="rect" id="node24" href="$oneof_8h_source.html" title="oneof.h" alt="" coords="272,237,336,267"/>
+<area shape="rect" id="node28" href="$parameterised_2session_8h.html" title="A session or a session of an interaction, also known in the literature as global type (contains param..." alt="" coords="129,160,207,189"/>
+<area shape="rect" id="node31" href="$parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="231,160,345,189"/>
+<area shape="rect" id="node11" href="$if_8h_source.html" title="if.h" alt="" coords="55,237,95,267"/>
+<area shape="rect" id="node20" href="$parameterised_2node_2interaction_8h_source.html" title="interaction.h" alt="" coords="119,237,212,267"/>
+<area shape="rect" id="node14" href="$parameterised_2util_2node__visitor_8h.html" title="Utilities for Node." alt="" coords="165,315,267,344"/>
+</map>

@@ -1,4 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsesstype_1_1Protocol.html" title="Protocol (st_tree) class encapsulates a single protocol." alt="" coords="5,5,136,35"/>
-<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1Protocol.html" title="Protocol class encapsulates a single protocol (parameterised flavour)." alt="" coords="184,5,405,35"/>
+<area shape="rect" id="node1" href="$classsesstype_1_1Role.html" title="Role (participant) of a protocol or session." alt="" coords="7,32,116,61"/>
+<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session." alt="" coords="176,5,376,35"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session." alt="" coords="165,59,387,88"/>
 </map>

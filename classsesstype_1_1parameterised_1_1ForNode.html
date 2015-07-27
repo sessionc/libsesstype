@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Counting for-loop statement.  
  <a href="classsesstype_1_1parameterised_1_1ForNode.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="parameterised_2node_8h_source.html">node.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="for_8h_source.html">for.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for sesstype::parameterised::ForNode:</div>
 <div class="dyncontent">
@@ -132,8 +132,8 @@ Collaboration diagram for sesstype::parameterised::ForNode:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a74f7b36cdda8289ffa2ca4518f587081">ForNode</a> (<a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *<a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#ad8f9b3227e62e6716184e8cea18d2b6a">bind_expr</a>)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">ForNode</a> constructor.  <a href="#a74f7b36cdda8289ffa2ca4518f587081"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a8a24b261d7506d783b7ce327a264bf49">ForNode</a> (<a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *<a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a65c1bc279734eae45a0a51b8bd6052b8">bindexpr</a>)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">ForNode</a> constructor.  <a href="#a8a24b261d7506d783b7ce327a264bf49"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac9bd8b6f482fea1048e0c59fa465c9a0"></a><!-- doxytag: member="sesstype::parameterised::ForNode::ForNode" ref="ac9bd8b6f482fea1048e0c59fa465c9a0" args="(const ForNode &amp;node)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#ac9bd8b6f482fea1048e0c59fa465c9a0">ForNode</a> (const <a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html">ForNode</a> &amp;node)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">ForNode</a> copy constructor. <br/></td></tr>
@@ -143,25 +143,25 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56bb467f1ce78c85f79ac0cb61190f6e"></a><!-- doxytag: member="sesstype::parameterised::ForNode::clone" ref="a56bb467f1ce78c85f79ac0cb61190f6e" args="() const override" -->
 <a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html">ForNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a56bb467f1ce78c85f79ac0cb61190f6e">clone</a> () const override</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">clone a <a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">ForNode</a>. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#ad8f9b3227e62e6716184e8cea18d2b6a">bind_expr</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#ab70ecaeb7985447f3109a6a8bbb0bc00">set_bind_expr</a> (<a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *<a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#ad8f9b3227e62e6716184e8cea18d2b6a">bind_expr</a>)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace binding expression of for loop.  <a href="#ab70ecaeb7985447f3109a6a8bbb0bc00"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38239fa4935df4fc7bca4ee5f4378d61"></a><!-- doxytag: member="sesstype::parameterised::ForNode::accept" ref="a38239fa4935df4fc7bca4ee5f4378d61" args="(sesstype::utils::NodeVisitor &amp;v) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a38239fa4935df4fc7bca4ee5f4378d61">accept</a> (<a class="el" href="classsesstype_1_1utils_1_1NodeVisitor.html">sesstype::utils::NodeVisitor</a> &amp;v) override</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>accept</code> method for <a class="el" href="classsesstype_1_1utils_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">utils::NodeVisitor</a>. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a65c1bc279734eae45a0a51b8bd6052b8">bindexpr</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a8e8c977897c37d61b989fd67fa368b89">set_bindexpr</a> (<a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *<a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a65c1bc279734eae45a0a51b8bd6052b8">bindexpr</a>)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace binding expression of for loop.  <a href="#a8e8c977897c37d61b989fd67fa368b89"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c1d0a792fcb6a8104302931c9fb7840"></a><!-- doxytag: member="sesstype::parameterised::ForNode::accept" ref="a9c1d0a792fcb6a8104302931c9fb7840" args="(sesstype::util::NodeVisitor &amp;v) override" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a9c1d0a792fcb6a8104302931c9fb7840">accept</a> (<a class="el" href="classsesstype_1_1util_1_1NodeVisitor.html">sesstype::util::NodeVisitor</a> &amp;v) override</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>accept</code> method for <a class="el" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">util::NodeVisitor</a>. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Counting for-loop statement. </p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a74f7b36cdda8289ffa2ca4518f587081"></a><!-- doxytag: member="sesstype::parameterised::ForNode::ForNode" ref="a74f7b36cdda8289ffa2ca4518f587081" args="(RngExpr *bind_expr)" -->
+<a class="anchor" id="a8a24b261d7506d783b7ce327a264bf49"></a><!-- doxytag: member="sesstype::parameterised::ForNode::ForNode" ref="a8a24b261d7506d783b7ce327a264bf49" args="(RngExpr *bindexpr)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a74f7b36cdda8289ffa2ca4518f587081">sesstype::parameterised::ForNode::ForNode</a> </td>
+          <td class="memname"><a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a8a24b261d7506d783b7ce327a264bf49">sesstype::parameterised::ForNode::ForNode</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *&#160;</td>
-          <td class="paramname"><em>bind_expr</em></td><td>)</td>
+          <td class="paramname"><em>bindexpr</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -179,12 +179,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="ad8f9b3227e62e6716184e8cea18d2b6a"></a><!-- doxytag: member="sesstype::parameterised::ForNode::bind_expr" ref="ad8f9b3227e62e6716184e8cea18d2b6a" args="() const " -->
+<a class="anchor" id="a65c1bc279734eae45a0a51b8bd6052b8"></a><!-- doxytag: member="sesstype::parameterised::ForNode::bindexpr" ref="a65c1bc279734eae45a0a51b8bd6052b8" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> * <a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#ad8f9b3227e62e6716184e8cea18d2b6a">sesstype::parameterised::ForNode::bind_expr</a> </td>
+          <td class="memname"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> * <a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a65c1bc279734eae45a0a51b8bd6052b8">sesstype::parameterised::ForNode::bindexpr</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -196,15 +196,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 
 </div>
 </div>
-<a class="anchor" id="ab70ecaeb7985447f3109a6a8bbb0bc00"></a><!-- doxytag: member="sesstype::parameterised::ForNode::set_bind_expr" ref="ab70ecaeb7985447f3109a6a8bbb0bc00" args="(RngExpr *bind_expr)" -->
+<a class="anchor" id="a8e8c977897c37d61b989fd67fa368b89"></a><!-- doxytag: member="sesstype::parameterised::ForNode::set_bindexpr" ref="a8e8c977897c37d61b989fd67fa368b89" args="(RngExpr *bindexpr)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void <a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#ab70ecaeb7985447f3109a6a8bbb0bc00">sesstype::parameterised::ForNode::set_bind_expr</a> </td>
+          <td class="memname">void <a class="el" href="classsesstype_1_1parameterised_1_1ForNode.html#a8e8c977897c37d61b989fd67fa368b89">sesstype::parameterised::ForNode::set_bindexpr</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classsesstype_1_1parameterised_1_1RngExpr.html">RngExpr</a> *&#160;</td>
-          <td class="paramname"><em>bind_expr</em></td><td>)</td>
+          <td class="paramname"><em>bindexpr</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -222,9 +222,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="parameterised_2node_8h_source.html">parameterised/node.h</a></li>
-<li>src/parameterised/node.cc</li>
-<li>node_visitor.cc</li>
+<li><a class="el" href="for_8h_source.html">for.h</a></li>
+<li>for_node.cc</li>
+<li>parameterised/util/node_visitor.cc</li>
 </ul>
 </div><!-- contents -->
 <!-- window showing the filter options -->

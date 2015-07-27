@@ -101,7 +101,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="import_8h__dep__incl.png" border="0" usemap="#import_8hdep" alt=""/></div>
 <map name="import_8hdep" id="import_8hdep">
-<area shape="rect" id="node3" href="module_8h.html" title="Module containing protocols or sessions." alt="" coords="107,160,181,189"/><area shape="rect" id="node9" href="sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="180,237,265,267"/><area shape="rect" id="node11" href="protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type..." alt="" coords="155,83,232,112"/><area shape="rect" id="node5" href="parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="81,237,156,267"/><area shape="rect" id="node7" href="parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="24,315,139,344"/><area shape="rect" id="node14" href="parameterised_2protocol_8h.html" title="A protocol or a session of an interaction, also known in the literature as global type (contains para..." alt="" coords="5,160,83,189"/></map>
+<area shape="rect" id="node3" href="module_8h.html" title="Module containing sessions or sessions." alt="" coords="40,160,115,189"/><area shape="rect" id="node9" href="sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="124,237,209,267"/><area shape="rect" id="node11" href="session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="189,83,267,112"/><area shape="rect" id="node5" href="parameterised_2module_8h.html" title="Module containing protocols or sessions (parameterised)." alt="" coords="25,237,100,267"/><area shape="rect" id="node7" href="parameterised_8h.html" title="Toplevel header files to pull in all dependency of parameterised." alt="" coords="5,315,120,344"/><area shape="rect" id="node14" href="parameterised_2session_8h.html" title="A session or a session of an interaction, also known in the literature as global type (contains param..." alt="" coords="240,160,317,189"/></map>
 </div>
 </div>
 <p><a href="import_8h_source.html">Go to the source code of this file.</a></p>
@@ -113,18 +113,17 @@ Classes</h2></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html">sesstype</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>namespace for Session Types. </p>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>namespace for <a class="el" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">Session</a> Types. </p>
 <br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad7cdf964044df32cb9dabc6074cb3b5a"></a><!-- doxytag: member="import.h::st_tree_import_t" ref="ad7cdf964044df32cb9dabc6074cb3b5a" args="" -->
-typedef Import&#160;</td><td class="memItemRight" valign="bottom"><b>sesstype::st_tree_import_t</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9c058bdffaa77d13c2cb863cb40feb04"></a><!-- doxytag: member="import.h::st_import" ref="a9c058bdffaa77d13c2cb863cb40feb04" args="" -->
+typedef Import&#160;</td><td class="memItemRight" valign="bottom"><b>sesstype::st_import</b></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0fa678406cf592a223222a0d8851885c"></a><!-- doxytag: member="import.h::st_mk_import" ref="a0fa678406cf592a223222a0d8851885c" args="(const char *name)" -->
-st_tree_import_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sesstype::st_mk_import</b> (const char *name)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5c0b78b45ca57ef6a8b9e86f731f237e"></a><!-- doxytag: member="import.h::st_mk_import_from_as" ref="a5c0b78b45ca57ef6a8b9e86f731f237e" args="(const char *name, const char *from, const char *as)" -->
-st_tree_import_t *&#160;</td><td class="memItemRight" valign="bottom"><b>sesstype::st_mk_import_from_as</b> (const char *name, const char *from, const char *as)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">st_import *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#ab6dcc375b4375b0c6cbc45c0fb8fd1ca">sesstype::st_import_mk_init</a> (const char *name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">st_import *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#aa73ea81440e71ed201e41c064d96f91c">sesstype::st_import_mk_alias</a> (const char *name, const char *from, const char *as)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a29f623cc3b6b72c95f598d11e341ca34">sesstype::st_import_free</a> (st_import *import)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Protocol or Module imports. </p>

@@ -1,8 +1,10 @@
 <map id="G" name="G">
 <area shape="rect" id="node5" href="$classsesstype_1_1ChoiceNode.html" title="Choice blocks." alt="" coords="405,5,560,35"/>
-<area shape="rect" id="node7" href="$classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for&#45;loop statement." alt="" coords="372,59,593,88"/>
-<area shape="rect" id="node9" href="$classsesstype_1_1parameterised_1_1IfNode.html" title="If&#45;block." alt="" coords="377,112,588,141"/>
-<area shape="rect" id="node11" href="$classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct." alt="" coords="364,165,601,195"/>
-<area shape="rect" id="node13" href="$classsesstype_1_1RecurNode.html" title="Recursion statements." alt="" coords="408,219,557,248"/>
-<area shape="rect" id="node2" href="$classsesstype_1_1Node.html" title="Session Type statements (st_node)." alt="" coords="5,112,120,141"/>
+<area shape="rect" id="node7" href="$classsesstype_1_1InterruptibleNode.html" title="Interruptible blocks." alt="" coords="392,59,573,88"/>
+<area shape="rect" id="node9" href="$classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for&#45;loop statement." alt="" coords="372,112,593,141"/>
+<area shape="rect" id="node11" href="$classsesstype_1_1parameterised_1_1IfNode.html" title="If&#45;block." alt="" coords="377,165,588,195"/>
+<area shape="rect" id="node13" href="$classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct." alt="" coords="364,219,601,248"/>
+<area shape="rect" id="node15" href="$classsesstype_1_1ParNode.html" title="Parallel blocks." alt="" coords="416,272,549,301"/>
+<area shape="rect" id="node17" href="$classsesstype_1_1RecurNode.html" title="Recursion statements." alt="" coords="408,325,557,355"/>
+<area shape="rect" id="node2" href="$classsesstype_1_1Node.html" title="Session Type statements (st_node)." alt="" coords="5,165,120,195"/>
 </map>
