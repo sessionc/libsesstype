@@ -12,8 +12,6 @@ addons:
         packages:
         - doxygen
         - graphviz
-install:
-    - sudo apt-get install --yes doxygen graphviz
 before_script:
     - cd build
     - cmake ..
