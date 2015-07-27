@@ -5,6 +5,13 @@ before_install:
     - openssl aes-256-cbc -K $encrypted_f770e278aa8f_key -iv $encrypted_f770e278aa8f_iv -in config/travisci_rsa.enc -out config/travisci_rsa -d
     - chmod 0600 config/travisci_rsa
     - cp config/travisci_rsa ~/.ssh/id_rsa
+addons:
+    apt:
+        source:
+        - debian-sid
+        packages:
+        - doxygen
+        - graphviz
 install:
     - sudo apt-get install --yes doxygen graphviz
 before_script:
