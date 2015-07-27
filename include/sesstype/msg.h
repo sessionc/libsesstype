@@ -2,8 +2,8 @@
  * \file sesstype/msg.h
  * \brief A message for passing between participants.
  */
-#ifndef SESSTYPE__MESSAGE_H__
-#define SESSTYPE__MESSAGE_H__
+#ifndef SESSTYPE__MSG_H__
+#define SESSTYPE__MSG_H__
 
 #ifdef __cplusplus
 #include <string>
@@ -76,7 +76,7 @@ class MsgSig {
     std::string label() const;
 
     /// \returns number of payload paramaters.
-    unsigned int num_payload() const;
+    unsigned int num_payloads() const;
 
     /// \returns payload by name.
     MsgPayload *payload(std::string name) const;
@@ -111,7 +111,7 @@ typedef struct MsgPayload st_msg_payload;
 
 /// \param[in] op operator/label of the message.
 /// \returns pointer to MsgSig object allocated dynamically.
-st_msg *st_msg_mk_init(const char *op);
+st_msg *st_mk_msg(const char *op);
 
 /// \param[in,out] msg message to modify.
 /// \param[in] payload of message to add to message.
@@ -122,12 +122,12 @@ void st_msg_free(st_msg *msg);
 
 /// \param[in] type of the message payload.
 /// \returns pointer to MsgPayload object allocated dynamically.
-st_msg_payload *st_msg_payload_mk_init(const char *type);
+st_msg_payload *st_mk_msg_payload(const char *type);
 
-/// \param[in] name of the message payload.
 /// \param[in] type of the message payload.
+/// \param[in] name of the message payload.
 /// \returns pointer to MsgPayload objected allocated dynamically.
-st_msg_payload *st_msg_payload_mk_annotated(const char *name, const char *type);
+st_msg_payload *st_mk_msg_payload_annotated(const char *type, const char *name);
 
 /// \param[in,out] payload object to destroy.
 void st_msg_payload_free(st_msg_payload *payload);
@@ -140,4 +140,4 @@ void st_msg_payload_free(st_msg_payload *payload);
 } // namespace sesstype
 #endif
 
-#endif//SESSTYPE__MESSAGE_H__
+#endif//SESSTYPE__MSG_H__

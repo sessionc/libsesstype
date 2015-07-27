@@ -22,9 +22,9 @@
 #include "sesstype/module.h"
 #include "sesstype/msg.h"
 #include "sesstype/node.h"
-#include "sesstype/protocol.h"
+#include "sesstype/session.h"
 #include "sesstype/role.h"
 
-#include "sesstype/utils.h"
+#include "sesstype/util.h"
 
 #endif//SESSTYPE__SESSTYPE_H__

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include <sesstype/parameterised/constant.h>
+#include <sesstype/parameterised/const.h>
 
 namespace sesstype {
 namespace parameterised {
@@ -28,7 +28,7 @@ int Constant::type() const
 
 // ValueConstant -------------------------------------------------------------
 
-ValueConstant::ValueConstant(std::string name, int value)
+ValueConstant::ValueConstant(std::string name, unsigned int value)
     : Constant(name, ST_CONST_VALUE), value_(value)
 {
 }
@@ -36,14 +36,14 @@ ValueConstant::ValueConstant(std::string name, int value)
 ValueConstant::~ValueConstant() {
 }
 
-int ValueConstant::value() const
+unsigned int ValueConstant::value() const
 {
     return value_;
 }
 
 // BoundedConstant -----------------------------------------------------------
 
-BoundedConstant::BoundedConstant(std::string name, int lbound, int ubound)
+BoundedConstant::BoundedConstant(std::string name, unsigned int lbound, unsigned int ubound)
     : Constant(name, ST_CONST_RANGE), lbound_(lbound), ubound_(ubound)
 {
     if (ubound < lbound) {
@@ -55,19 +55,19 @@ BoundedConstant::~BoundedConstant()
 {
 }
 
-int BoundedConstant::lbound() const
+unsigned int BoundedConstant::lbound() const
 {
     return lbound_;
 }
 
-int BoundedConstant::ubound() const
+unsigned int BoundedConstant::ubound() const
 {
     return ubound_;
 }
 
 // ScalableConstant ----------------------------------------------------------
 
-ScalableConstant::ScalableConstant(std::string name, int lbound)
+ScalableConstant::ScalableConstant(std::string name, unsigned int lbound)
     : Constant(name, ST_CONST_SCALABLE), lbound_(lbound)
 {
 }
@@ -76,7 +76,7 @@ ScalableConstant::~ScalableConstant()
 {
 }
 
-int ScalableConstant::lbound() const
+unsigned int ScalableConstant::lbound() const
 {
     return lbound_;
 }

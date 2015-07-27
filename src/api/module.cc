@@ -16,7 +16,7 @@ const char *st_module_get_name(st_module *const module)
 
 st_module *st_module_add_tree(st_module *const module, st_tree *tree)
 {
-    module->add_protocol(tree);
+    module->add_session(tree);
     return module;
 }
 

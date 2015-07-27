@@ -1,37 +1,62 @@
 set(libsesstype_SOURCE
     ${libsesstype_SOURCE}
-    ${CMAKE_CURRENT_SOURCE_DIR}/module.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/protocol.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/import.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/msg.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/role.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/module.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/session.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/import.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/block_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/interaction_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/choice_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/recur_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/continue_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/par_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/interruptible_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/nested_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/msg.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/import.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/module.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/protocol.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/choice_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/continue_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/interaction_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/interruptible_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/nested_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/recur_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/par_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/api/session.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/role.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/constant.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/expr.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/module.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/protocol.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/role.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/parameterised/role_grp.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/role_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/node_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/print.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/projection.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/role_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/expr.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/interaction_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/allreduce_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/for_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/oneof_node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/if_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role_grp.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/msg.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/module.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/protocol.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/session.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/constant.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/expr_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/node_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/print.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/projection.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/role_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/parameterised/print.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/parameterised/projection.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/utils/parameterised/simplify.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/constant.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/expr.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/module.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/node.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/session.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/role.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/role_grp.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/util.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/expr_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/node_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/print.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/projection.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/role_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/simplify.cc
     PARENT_SCOPE)

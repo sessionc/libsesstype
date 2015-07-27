@@ -1,6 +1,6 @@
 /**
- * \file test/protocol.cc
- * \brief Tests for sesstype::Protocol.
+ * \file test/session.cc
+ * \brief Tests for sesstype::Session.
  */
 #include <stdexcept>
 #include <string>
@@ -8,9 +8,9 @@
 
 #include "gtest/gtest.h"
 
-#include "sesstype/protocol.h"
+#include "sesstype/session.h"
 #include "sesstype/import.h"
-#include "sesstype/utils.h"
+#include "sesstype/util.h"
 
 namespace sesstype {
 /**
@@ -18,20 +18,20 @@ namespace sesstype {
  */
 namespace tests {
 
-class ProtocolTest : public ::testing::Test {
+class SessionTest : public ::testing::Test {
  protected:
-  ProtocolTest() {}
+  SessionTest() {}
 };
 
 /**
- * \test Test construction of empty protocol.
+ * \test Test construction of empty session.
  */
-TEST_F(ProtocolTest, EmptyProtocol)
+TEST_F(SessionTest, EmptySession)
 {
-  sesstype::Protocol empty;
+  sesstype::Session empty;
   EXPECT_EQ(empty.name(), std::string("default"));
   EXPECT_EQ(NULL, empty.root());
-  EXPECT_EQ(empty.type(), ST_PROTOCOL_GLOBAL);
+  EXPECT_EQ(empty.type(), ST_TYPE_GLOBAL);
 }
 
 } // namespace tests

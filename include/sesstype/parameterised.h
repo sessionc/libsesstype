@@ -5,7 +5,7 @@
 #ifndef SESSTYPE__PARAMETERISED_H__
 #define SESSTYPE__PARAMETERISED_H__
 
-#include "sesstype/parameterised/constant.h"
+#include "sesstype/parameterised/const.h"
 #include "sesstype/parameterised/expr.h"
 #include "sesstype/parameterised/module.h"
 #include "sesstype/parameterised/msg.h"

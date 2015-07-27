@@ -9,8 +9,12 @@
 #include <string>
 
 #include "sesstype/role.h"
+#include "sesstype/util.h"
+
 #include "sesstype/node.h"
-#include "sesstype/utils.h"
+#include "sesstype/node/interaction.h"
+#include "sesstype/node/recur.h"
+#include "sesstype/node/continue.h"
 
 namespace sesstype {
 namespace tests {
@@ -74,13 +78,13 @@ TEST_F(ProjectionTest, BasicProjection)
     root->append_child(interact4_node);
 
     // Project endpoint.
-    sesstype::utils::Projection projection_bob(BOB);
+    sesstype::util::Projection projection_bob(BOB);
     root->accept(projection_bob);
     sesstype::Node *endpoint_root = projection_bob.get_root();
 
     EXPECT_EQ(endpoint_root->type(), ST_NODE_ROOT);
     BlockNode *ep_bob_root = dynamic_cast<BlockNode *>(endpoint_root);
-    EXPECT_EQ(ep_bob_root->num_child(), 3);
+    EXPECT_EQ(ep_bob_root->num_children(), 3);
 
     EXPECT_EQ(ep_bob_root->child(0)->type(), ST_NODE_SENDRECV);
     InteractionNode *ep_bob_interact0 = dynamic_cast<InteractionNode *>(ep_bob_root->child(0));
@@ -90,12 +94,12 @@ TEST_F(ProjectionTest, BasicProjection)
     EXPECT_EQ(ep_bob_root->child(1)->type(), ST_NODE_RECUR);
     RecurNode *ep_bob_recur0 = dynamic_cast<RecurNode *>(ep_bob_root->child(1));
     EXPECT_EQ(ep_bob_recur0->label(), "Rec0");
-    EXPECT_EQ(ep_bob_recur0->num_child(), 2);
+    EXPECT_EQ(ep_bob_recur0->num_children(), 2);
 
     EXPECT_EQ(ep_bob_recur0->child(0)->type(), ST_NODE_RECUR);
     RecurNode *ep_bob_recur1 = dynamic_cast<RecurNode *>(ep_bob_recur0->child(0));
     EXPECT_EQ(ep_bob_recur1->label(), "Rec1");
-    EXPECT_EQ(ep_bob_recur1->num_child(), 0);
+    EXPECT_EQ(ep_bob_recur1->num_children(), 0);
 
     EXPECT_EQ(ep_bob_recur0->child(1)->type(), ST_NODE_CONTINUE);
     ContinueNode *ep_bob_interact1 = dynamic_cast<ContinueNode *>(ep_bob_recur0->child(1));

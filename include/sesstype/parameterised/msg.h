@@ -2,8 +2,8 @@
  * \file sesstype/parameterised/msg.h
  * \brief A message for passing between participants (parameterised).
  */
-#ifndef SESSTYPE__PARAMETERISED__MESSAGE_H__
-#define SESSTYPE__PARAMETERISED__MESSAGE_H__
+#ifndef SESSTYPE__PARAMETERISED__MSG_H__
+#define SESSTYPE__PARAMETERISED__MSG_H__
 
 #ifdef __cplusplus
 #include <vector>
@@ -58,4 +58,4 @@ class MsgPayload : public sesstype::MsgPayload {
 } // namespace sesstype
 #endif
 
-#endif//SESSTYPE__PARAMETERISED__MESSAGE_H__
+#endif//SESSTYPE__PARAMETERISED__MSG_H__

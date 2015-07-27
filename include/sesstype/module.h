@@ -1,6 +1,6 @@
 /**
  * \file sesstype/module.h
- * \brief Module containing protocols or sessions.
+ * \brief Module containing sessions or sessions.
  */
 #ifndef SESSTYPE__MODULE_H__
 #define SESSTYPE__MODULE_H__
@@ -11,7 +11,7 @@
 #endif
 
 #include "sesstype/import.h"
-#include "sesstype/protocol.h"
+#include "sesstype/session.h"
 
 #ifdef __cplusplus
 /**
@@ -22,7 +22,7 @@ namespace sesstype {
 
 #ifdef __cplusplus
 /**
- * \brief Module is a container class for multiple logically related Protocols.
+ * \brief Module is a container class for multiple logically related Sessions.
  */
 class Module {
   public:
@@ -42,19 +42,19 @@ class Module {
     /// \param[in] name of Module to replace with.
     void set_name(std::string name);
 
-    /// \returns Protocol named <tt>name</tt>.
+    /// \returns Session named <tt>name</tt>.
     /// \exception std::out_of_range if not found.
-    Protocol *protocol(std::string name) const;
+    Session *session(std::string name) const;
 
-    /// \returns number of Protocol in Module.
-    unsigned int num_protocol() const;
+    /// \returns number of Session in Module.
+    unsigned int num_session() const;
 
-    /// \param[in] protocol to add as component of Module.
-    void add_protocol(Protocol *protocol);
+    /// \param[in] Session to add as component of Module.
+    void add_session(Session *session);
 
-    /// \brief Test if Protocol is in Module.
-    /// \returns true if <tt>name</tt> is a Protocol in Module.
-    bool has_protocol(std::string name) const;
+    /// \brief Test if Session is in Module.
+    /// \returns true if <tt>name</tt> is a Session in Module.
+    bool has_session(std::string name) const;
 
     /// \detail This returns the original Import if alias is matched.
     /// \returns Import named (or with alias)<tt>name</tt>.
@@ -74,7 +74,7 @@ class Module {
     std::string name_;
     // Pair<Import * theimport, bool is_alias>
     std::unordered_map<std::string, std::pair<Import *, bool>> imports_;
-    std::unordered_map<std::string, Protocol *> protocols_;
+    std::unordered_map<std::string, Session *> sessions_;
 };
 #endif // __cplusplus
 

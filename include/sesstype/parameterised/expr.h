@@ -15,11 +15,18 @@
 
 #ifdef __cplusplus
 namespace sesstype {
+namespace parameterised {
+namespace util {
 
-namespace utils {
 class ExprVisitor;
-} // namespace utils
 
+} // namespace util
+} // namespace parameterised
+} // namespace sesstype
+#endif
+
+#ifdef __cplusplus
+namespace sesstype {
 namespace parameterised {
 #endif
 
@@ -51,8 +58,8 @@ class Expr {
     /// \returns type of Expr.
     int type() const;
 
-    /// \brief <tt>accept</tt> method for utils::ExprVisitor.
-    virtual void accept(utils::ExprVisitor &v) = 0;
+    /// \brief <tt>accept</tt> method for util::ExprVisitor.
+    virtual void accept(util::ExprVisitor &v) = 0;
 
   protected:
     Expr(int type);
@@ -82,7 +89,7 @@ class VarExpr : public Expr {
     /// \returns variable name.
     std::string name() const;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 
   private:
     std::string name_;
@@ -109,7 +116,7 @@ class ValExpr : public Expr {
     /// \returns value of expression.
     int num() const;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 
   private:
     int num_;
@@ -169,7 +176,7 @@ class AddExpr : public BinExpr {
 
     bool is_associative() const override;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 };
 
 /**
@@ -195,7 +202,7 @@ class SubExpr : public BinExpr {
 
     bool is_associative() const override;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 };
 
 /**
@@ -221,7 +228,7 @@ class MulExpr : public BinExpr {
 
     bool is_associative() const override;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 };
 
 /**
@@ -247,7 +254,7 @@ class DivExpr : public BinExpr {
 
     bool is_associative() const override;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 };
 
 /**
@@ -273,7 +280,7 @@ class ModExpr : public BinExpr {
 
     bool is_associative() const override;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 };
 
 /**
@@ -299,7 +306,7 @@ class ShlExpr : public BinExpr {
 
     bool is_associative() const override;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 };
 
 /**
@@ -325,7 +332,7 @@ class ShrExpr : public BinExpr {
 
     bool is_associative() const override;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 };
 
 /**
@@ -361,7 +368,7 @@ class SeqExpr : public Expr {
     /// \brief End iterator for sequence.
     std::vector<int>::const_iterator seq_end() const;
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 
   private:
     std::vector<int> vals_;
@@ -414,7 +421,7 @@ class RngExpr : public Expr {
     /// \param[in] to Expr of the range.
     void set_to(Expr *to);
 
-    void accept(utils::ExprVisitor &v) override;
+    void accept(util::ExprVisitor &v) override;
 
   private:
     std::string bindvar_;

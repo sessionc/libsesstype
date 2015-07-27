@@ -7,7 +7,7 @@
 
 #include <string>
 
-#include "sesstype/parameterised/constant.h"
+#include "sesstype/parameterised/const.h"
 
 namespace sesstype {
 namespace tests {

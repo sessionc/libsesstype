@@ -9,7 +9,7 @@
 #endif
 
 #include "sesstype/module.h"
-#include "sesstype/parameterised/constant.h"
+#include "sesstype/parameterised/const.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -38,7 +38,6 @@ class Module : public sesstype::Module {
 
     /// \returns number of Constant in Module.
     unsigned int num_constant() const;
-
 
     /// \brief Test if Constant is in Module.
     /// \returns true if <tt>name</tt> is a Constant in Module.

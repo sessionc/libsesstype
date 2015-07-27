@@ -12,13 +12,19 @@
 
 #ifdef __cplusplus
 namespace sesstype {
+namespace util {
+
+class RoleVisitor;
+
+} // namespace util
+} // namespace sesstype
 #endif
 
 #ifdef __cplusplus
-namespace utils {
-class RoleVisitor;
-} // namespace utils
+namespace sesstype {
+#endif
 
+#ifdef __cplusplus
 /**
  * \brief Role (participant) of a protocol or session.
  */
@@ -49,8 +55,8 @@ class Role {
     /// \returns true if this Role is another Role.
     virtual bool matches(Role *other) const;
 
-    /// \brief <tt>accept</tt> method for utils::RoleVisitor.
-    virtual void accept(utils::RoleVisitor &v);
+    /// \brief <tt>accept</tt> method for util::RoleVisitor.
+    virtual void accept(sesstype::util::RoleVisitor &v);
 
   private:
     std::string name_;

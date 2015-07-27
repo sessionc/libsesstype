@@ -15,13 +15,17 @@
 #ifdef __cplusplus
 namespace sesstype {
 namespace parameterised {
+
+namespace util {
+class RoleVisitor;
+} // namespace util
 #endif
 
 #ifdef __cplusplus
 /**
  * \brief Role Group (group of participants) of a protocol or session.
  */
-class RoleGrp : public Role {
+class RoleGrp : public sesstype::Role {
   public:
     /// \brief RoleGrp constructor with "default_grp" as name.
     RoleGrp();
@@ -61,7 +65,9 @@ class RoleGrp : public Role {
     /// \brief End iterator for member.
     std::unordered_map<std::string, sesstype::Role *>::const_iterator member_end() const;
 
-    void accept(utils::RoleVisitor &v) override;
+    using sesstype::Role::accept;
+
+    void accept(sesstype::parameterised::util::RoleVisitor &v);
 
   private:
     std::unordered_map<std::string, sesstype::Role *> members_;

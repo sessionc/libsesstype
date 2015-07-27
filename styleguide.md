@@ -59,7 +59,7 @@ curly brace.
     }
 
 This applies to all non-function statement blocks (`if`, `switch`, `for`,
-`while`, `do`).  E.g.:
+`while`, `do`).  e.g.:
 
     switch (action) {
     case GLOBAL:
@@ -83,7 +83,7 @@ nest functions in C.
 
 Note that the closing brace is empty on a line of its own, _except_
 in the cases where it is followed by a continuation of the same
-statement, ie a `while` in a `do`-statement or an `while` in an
+statement, i.e. a `while` in a `do`-statement or an `while` in an
 `if`-statement, like this:
 
     do {

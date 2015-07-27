@@ -5,11 +5,18 @@
 #ifndef SESSTYPE__PARAMETERISED__ROLE_H__
 #define SESSTYPE__PARAMETERISED__ROLE_H__
 
+#include "sesstype/role.h"
+
 #include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/util/role_visitor.h"
 
 #ifdef __cplusplus
 namespace sesstype {
 namespace parameterised {
+
+namespace util {
+class RoleVisitor;
+} // namespace util
 #endif
 
 #ifdef __cplusplus
@@ -51,7 +58,9 @@ class Role : public sesstype::Role {
     /// \returns true if this Role contains another Role.
     bool matches(sesstype::Role *other) const override;
 
-    void accept(utils::RoleVisitor &v) override;
+    using sesstype::Role::accept;
+
+    void accept(sesstype::parameterised::util::RoleVisitor &v);
 
   private:
     std::vector<Expr *> param_;
@@ -60,6 +69,10 @@ class Role : public sesstype::Role {
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#ifdef __cplusplus
+typedef Role st_role;
 #endif
 
 /// \brief Get the total dimension of a Role.

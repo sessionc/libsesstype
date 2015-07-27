@@ -9,8 +9,8 @@
 #include "gtest/gtest.h"
 
 #include "sesstype/module.h"
+#include "sesstype/session.h"
 #include "sesstype/parameterised/module.h"
-#include "sesstype/protocol.h"
 
 namespace sesstype {
 namespace tests {
@@ -27,28 +27,28 @@ TEST_F(ModuleTest, EmptyModule)
 {
   sesstype::Module anon_module;
   EXPECT_EQ(anon_module.name(), "default");
-  ASSERT_THROW(anon_module.protocol(""), std::out_of_range);
+  ASSERT_THROW(anon_module.session(""), std::out_of_range);
   anon_module.set_name("ANON");
   EXPECT_EQ(anon_module.name(), "ANON");
 }
 
 /**
- * \test Test adding Protocols to Module.
+ * \test Test adding Sessions to Module.
  */
-TEST_F(ModuleTest, Module_AddProtocol)
+TEST_F(ModuleTest, Module_AddSession)
 {
   sesstype::Module module("M");
-  auto *p = new sesstype::Protocol("P");
-  EXPECT_EQ(module.num_protocol(), 0);
-  module.add_protocol(p); // Do this, then hand over pointer to module.
-  EXPECT_EQ(module.num_protocol(), 1);
+  auto *p = new sesstype::Session("P");
+  EXPECT_EQ(module.num_session(), 0);
+  module.add_session(p); // Do this, then hand over pointer to module.
+  EXPECT_EQ(module.num_session(), 1);
 
-  sesstype::Protocol pp("PP");
-  module.add_protocol(&pp); // pp will be gone at the end of this function.
-  EXPECT_EQ(module.num_protocol(), 2);
+  sesstype::Session pp("PP");
+  module.add_session(&pp); // pp will be gone at the end of this function.
+  EXPECT_EQ(module.num_session(), 2);
 
-  EXPECT_EQ(module.protocol("P"), p);
-  EXPECT_EQ(module.protocol("PP"), &pp);
+  EXPECT_EQ(module.session("P"), p);
+  EXPECT_EQ(module.session("PP"), &pp);
 
   delete p;
 }

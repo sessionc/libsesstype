@@ -24,7 +24,7 @@ TEST_F(MsgTest, EmptyMsg)
 {
   auto *sig = new sesstype::MsgSig("");
   EXPECT_EQ(sig->label(), "");
-  EXPECT_EQ(sig->num_payload(), 0);
+  EXPECT_EQ(sig->num_payloads(), 0);
   delete sig;
 }
 
@@ -57,7 +57,7 @@ TEST_F(MsgTest, BasicMessages)
   auto *sig = new sesstype::MsgSig("Label");
 
   EXPECT_EQ(sig->label(), "Label");
-  EXPECT_EQ(sig->num_payload(), 0);
+  EXPECT_EQ(sig->num_payloads(), 0);
 
   auto *pl_typeonly = new sesstype::MsgPayload("float"); // Type only
 
@@ -65,7 +65,7 @@ TEST_F(MsgTest, BasicMessages)
   EXPECT_EQ(pl_typeonly->type(), "float");
 
   sig->add_payload(pl_typeonly);
-  EXPECT_EQ(sig->num_payload(), 1);
+  EXPECT_EQ(sig->num_payloads(), 1);
 
   auto *pl_nametype = new sesstype::parameterised::MsgPayload("count", "int");
 
@@ -74,7 +74,7 @@ TEST_F(MsgTest, BasicMessages)
   EXPECT_EQ(pl_nametype->num_dimen(), 0);
 
   sig->add_payload(pl_nametype);
-  EXPECT_EQ(sig->num_payload(), 2);
+  EXPECT_EQ(sig->num_payloads(), 2);
 
   auto *pl_nametypeparam = new sesstype::parameterised::MsgPayload("size", "long");
 
@@ -90,9 +90,9 @@ TEST_F(MsgTest, BasicMessages)
         new sesstype::parameterised::VarExpr("N")));
   EXPECT_EQ(pl_nametypeparam->num_dimen(), 2);
 
-  EXPECT_EQ(sig->num_payload(), 2);
+  EXPECT_EQ(sig->num_payloads(), 2);
   sig->add_payload(pl_nametypeparam);
-  EXPECT_EQ(sig->num_payload(), 3);
+  EXPECT_EQ(sig->num_payloads(), 3);
 
   EXPECT_EQ(sig->has_payload("name"), false);
   EXPECT_EQ(sig->has_payload(""), true);

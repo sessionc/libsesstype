@@ -67,7 +67,7 @@ std::string MsgSig::label() const
     return label_;
 }
 
-unsigned int MsgSig::num_payload() const
+unsigned int MsgSig::num_payloads() const
 {
     return payloads_.size();
 }

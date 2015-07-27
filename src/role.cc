@@ -1,6 +1,7 @@
 #include <string>
 
 #include <sesstype/role.h>
+#include <sesstype/util/role_visitor.h>
 
 namespace sesstype {
 

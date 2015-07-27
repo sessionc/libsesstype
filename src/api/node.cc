@@ -1,25 +1,43 @@
+#include <iostream>
+
 #include <sesstype/node.h>
 #include <sesstype/role.h>
 
-#ifdef __cplusplus
 namespace sesstype {
-#endif
 
-st_node *st_node_mk_recur(char *label)
+void st_node_append_child(st_node *parent, st_node *child)
 {
-  return new RecurNode(label);
+    if (BlockNode *node = dynamic_cast<BlockNode *>(parent)) {
+        node->append_child(child);
+    } else {
+        std::cerr << __FILE__ << ":" << __LINE__ << ": "
+                  << __FUNCTION__ << ": parent is not a Block.\n";
+    }
 }
 
-st_node *st_node_mk_continue(char *label)
+unsigned int st_node_num_children(st_node *parent)
 {
-  return new ContinueNode(label);
+    if (BlockNode *node = dynamic_cast<BlockNode *>(parent)) {
+        return node->num_children();
+    } else {
+        return 0;
+    }
 }
 
-st_node *st_node_mk_choice(st_role *at_role)
+st_node *st_node_get_child(st_node *parent, unsigned int index)
 {
-  return new ChoiceNode(at_role);
+    if (BlockNode *node = dynamic_cast<BlockNode *>(parent)) {
+        return node->child(index);
+    } else {
+        std::cerr << __FILE__ << ":" << __LINE__ << ": "
+                  << __FUNCTION__ << ": parent is not a Block and has no children.\n";
+        return nullptr;
+    }
 }
 
-#ifdef __cplusplus
+void st_node_free(st_node *node)
+{
+    delete node;
+}
+
 } // namespace sesstype
-#endif

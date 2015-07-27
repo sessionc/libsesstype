@@ -415,6 +415,5 @@ void RngExpr::set_to(Expr *to)
     to_ = to;
 }
 
-
 } // namespace parameterised
 } // namespace sesstype
