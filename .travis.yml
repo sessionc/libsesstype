@@ -16,3 +16,4 @@ after_success:
 notifications:
     slack:
         secure: QE5iXu2KnQZGsyac86j6xdaEvLTAjk0ONcSTH4hpGgiMnQ4kKRvWecfLod7h4OQkgwYVta+mnbuFxVmHPw6VozGsnb/WAV41cIiO3qVHjxl11FZUXpwE2cgyeNcGUlx/BMUC9i7n5ksIlD8uNa1UtpKDwVU/4VYy7ul1VVf0D/U=
+sudo: false
