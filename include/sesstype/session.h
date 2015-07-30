@@ -51,6 +51,13 @@ class Session {
     /// \returns root Node of Session body.
     Node *root() const;
 
+    /// \returns endpoint of current Session.
+    Role *endpoint() const;
+
+    /// \param[in] role Sets endpoint role to endpoint.
+    void set_endpoint(Role *endpoint);
+
+
     /// Perform endpoint projection of Session with respect to endpoint Role.
     /// \param[in] role to project for.
     void project(Role *role);

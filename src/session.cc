@@ -48,6 +48,16 @@ Node *Session::root() const
     return root_;
 }
 
+Role *Session::endpoint() const
+{
+    return me_;
+}
+
+void Session::set_endpoint(Role *endpoint)
+{
+    me_ = endpoint;
+}
+
 void Session::project(Role *role)
 {
     util::Projection projector(role);
