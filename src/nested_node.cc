@@ -18,10 +18,10 @@ NestedNode::NestedNode(std::string protocol_name)
 {
 }
 
-NestedNode::NestedNode(std::string protocol_name, std::string scope_name)
+NestedNode::NestedNode(std::string protocol_name, std::string scope)
     : Node(ST_NODE_NESTED),
       name_(protocol_name),
-      scope_name_(scope_name),
+      scope_name_(scope),
       args_(),
       role_args_()
 {
