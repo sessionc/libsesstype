@@ -29,9 +29,9 @@ class MsgPayload {
     MsgPayload(std::string type);
 
     /// \brief MsgPayload constructor.
-    /// \param[in] name of MsgPayload (identifier).
     /// \param[in] type of MsgPayload (datatype).
-    MsgPayload(std::string name, std::string type);
+    /// \param[in] name of MsgPayload (identifier).
+    MsgPayload(std::string type, std::string name);
 
     /// \brief MsgPayload copy constructor.
     MsgPayload(const MsgPayload &payload);

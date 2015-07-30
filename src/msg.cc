@@ -13,7 +13,7 @@ MsgPayload::MsgPayload(std::string type) : name_(), type_(type)
 {
 }
 
-MsgPayload::MsgPayload(std::string name, std::string type)
+MsgPayload::MsgPayload(std::string type, std::string name)
     : name_(name), type_(type)
 {
 }
