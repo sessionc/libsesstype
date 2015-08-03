@@ -30,10 +30,14 @@ namespace parameterised {
 #ifdef __cplusplus
 class Node : public sesstype::Node {
   public:
-    virtual void accept(util::NodeVisitor &v) { }
+    /// This subsumes accept in base class (but RoleVisitor is not a subclass)
+    virtual void accept(util::NodeVisitor &v) = 0;
 
   protected:
     explicit Node(unsigned int type) : sesstype::Node(type) { }
+
+  private:
+    virtual void accept(sesstype::util::NodeVisitor &v) override { /* hidden */ }
 };
 #endif // __cplusplus
 

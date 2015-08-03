@@ -88,7 +88,11 @@ class Role : public sesstype::Role {
         return false;
     }
 
-    virtual void accept(util::RoleVisitor &v); // Warn: we intend to hide accept of parent
+    /// This subsumes accept in base class (but RoleVisitor is not a subclass)
+    virtual void accept(util::RoleVisitor &v);
+
+  private:
+    virtual void accept(sesstype::util::RoleVisitor &v) override { /* hidden */ }
 };
 #endif // __cplusplus
 
