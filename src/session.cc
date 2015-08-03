@@ -60,8 +60,8 @@ void Session::set_endpoint(Role *endpoint)
 
 void Session::project(Role *role)
 {
-    util::Projection projector(role);
-    root_->accept(projector);
+    //util::Projection projection_visitor(role);
+    //root_->accept(projection_visitor);
 }
 
 int Session::type() const

@@ -5,13 +5,11 @@
 #ifndef SESSTYPE__UTIL__ROLE_VISITOR_H__
 #define SESSTYPE__UTIL__ROLE_VISITOR_H__
 
-#include "sesstype/role.h"
+#include "sesstype/util/visitor_tmpl.h"
 
 #ifdef __cplusplus
 namespace sesstype {
-
 class Role;
-
 } // namespace sesstype
 #endif
 
@@ -26,9 +24,8 @@ namespace util {
  */
 class RoleVisitor {
   public:
-    virtual void visit(Role *role) = 0;
+    virtual void visit(Role *node) = 0;
 };
-
 #endif // __cplusplus
 
 #ifdef __cplusplus

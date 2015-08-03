@@ -5,20 +5,15 @@
 #ifndef SESSTYPE__NODE_H__
 #define SESSTYPE__NODE_H__
 
-#ifdef __cplusplus
-#include <string>
-#include <vector>
-#endif
-
 #include "sesstype/msg.h"
+#include "sesstype/role.h"
+#include "sesstype/util/clonable.h"
 
 #ifdef __cplusplus
 namespace sesstype {
 namespace util {
-
 class NodeVisitor;
-
-} // namespace util
+} // namesapce util
 } // namespace sesstype
 #endif
 
@@ -41,69 +36,20 @@ namespace sesstype {
  *
  * Contains Node::accept method for visitors.
  */
-class Node {
+class Node : public util::Clonable {
+    unsigned int type_;
+
   public:
     /// \brief Node destructor.
-    virtual ~Node();
-
-    /// \brief clone a Node (abstract).
-    virtual Node *clone() const = 0;
+    virtual ~Node() { }
 
     /// \returns type of Node.
-    unsigned int type() const;
+    unsigned int type() const { return type_; }
 
-    /// \brief <tt>accept</tt> method for util::NodeVisitor.
-    virtual void accept(util::NodeVisitor &v) = 0;
-
-  protected:
-    explicit Node(unsigned int type);
-
-  private:
-    unsigned int type_;
-};
-
-/**
- * \brief Block of statements (Node instances).
- */
-class BlockNode : public Node {
-  public:
-    /// \brief BlockNode constructor.
-    BlockNode();
-
-    /// \brief BlockNode copy constructor.
-    BlockNode(const BlockNode &node);
-
-    /// \brief BlockNode destructor.
-    ~BlockNode() override;
-
-    /// \brief clone a BlockNode.
-    BlockNode *clone() const override;
-
-    /// \brief Get child Node at position <tt>idx</tt>.
-    /// \param[in] idx of Node in BlockNode.
-    /// \returns child Node at position <tt>idx</tt>.
-    /// \exception std::out_of_range if <tt>idx</tt> is out of bounds.
-    Node *child(unsigned int idx) const;
-
-    /// \brief Get number of child statements (Node) in BlockNode.
-    /// \returns number of child Node in current BlockNode.
-    unsigned int num_children() const;
-
-    /// \brief Add child Node to current Block.
-    /// \param[in] child Node.
-    void append_child(Node *child);
-
-    /// \brief Start iterator for children.
-    std::vector<Node *>::const_iterator child_begin() const;
-
-    /// \brief End iterator for children.
-    std::vector<Node *>::const_iterator child_end() const;
-
-    void accept(util::NodeVisitor &v) override;
+    virtual void accept(util::NodeVisitor &v) { };
 
   protected:
-    BlockNode(int type);
-    std::vector<Node *> children_;
+    explicit Node(unsigned int type) : type_(type) { }
 };
 #endif // __cplusplus
 
@@ -117,9 +63,6 @@ typedef Node st_node;
 typedef struct Node st_node;
 #endif // __cplusplus
 
-void st_node_append_child(st_node *parent, st_node *child);
-unsigned int st_node_num_children(st_node *parent);
-st_node *st_node_get_child(st_node *parent, unsigned int index);
 void st_node_free(st_node *node);
 
 #ifdef __cplusplus

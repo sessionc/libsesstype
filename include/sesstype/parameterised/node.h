@@ -10,19 +10,31 @@
 #ifdef __cplusplus
 namespace sesstype {
 namespace parameterised {
+namespace util {
+class NodeVisitor;
+} // namespace util
+} // namespace parameterised
+} // namespace sesstype
 #endif
 
-#define  ST_NODE_FOR       101
-#define  ST_NODE_ALLREDUCE 102
-#define  ST_NODE_ONEOF     103
-#define  ST_NODE_IF        104
+#ifdef __cplusplus
+namespace sesstype {
+namespace parameterised {
+#endif
+
+#define ST_NODE_FOR       101
+#define ST_NODE_ALLREDUCE 102
+#define ST_NODE_ONEOF     103
+#define ST_NODE_IF        104
 
 #ifdef __cplusplus
-// Load base classes from non-parameterised sesstypes to current namespace.
+class Node : public sesstype::Node {
+  public:
+    virtual void accept(util::NodeVisitor &v) { }
 
-using sesstype::Node;
-using sesstype::BlockNode;
-
+  protected:
+    explicit Node(unsigned int type) : sesstype::Node(type) { }
+};
 #endif // __cplusplus
 
 #ifdef __cplusplus

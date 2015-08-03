@@ -32,8 +32,8 @@ configure_file(
 #
 # Build configurations.
 #
-set(CMAKE_C_FLAGS   "-std=c99   -O3 -Wall -Werror")
-set(CMAKE_CXX_FLAGS "-std=c++11 -O3 -Wall -Werror")
+set(CMAKE_C_FLAGS   "-std=c99   -g -O0 -Wall")
+set(CMAKE_CXX_FLAGS "-std=c++11 -g -O0 -Wall")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 

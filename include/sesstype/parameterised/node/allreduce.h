@@ -1,9 +1,10 @@
 #ifndef SESSTYPE__PARAMETERIED__NODE__ALLREDUCE__H__
 #define SESSTYPE__PARAMETERIED__NODE__ALLREDUCE__H__
 
-#include "sesstype/util/node_visitor.h"
+#include "sesstype/util/visitor_tmpl.h"
 
 #include "sesstype/parameterised/msg.h"
+#include "sesstype/parameterised/role.h"
 #include "sesstype/parameterised/node.h"
 
 #ifdef __cplusplus
@@ -15,36 +16,47 @@ namespace parameterised {
 /**
  * \brief All-to-all reduction statement.
  */
-class AllReduceNode : public Node {
+template <class BaseNode, class RoleType, class MessageType, class VisitorType>
+class AllReduceNodeTmpl : public BaseNode {
+    MsgSig *msg_;
+
   public:
     /// \brief AllReduceNode constructor with no Msgsig as default (pure all2all).
-    AllReduceNode();
+    AllReduceNodeTmpl()
+        : BaseNode(ST_NODE_ALLREDUCE), msg_(new MessageType("")) { }
 
     /// \brief AllReduceNode constructor.
     /// \param[in] msgsig for reduction.
-    AllReduceNode(MsgSig *msgsig);
+    AllReduceNodeTmpl(MessageType *msg)
+        : BaseNode(ST_NODE_ALLREDUCE), msg_(msg) { }
 
     /// \brief AllReduceNode copy constructor.
-    AllReduceNode(const AllReduceNode &node);
-
-    /// \brief AllReduceNode destructor.
-    ~AllReduceNode() override;
+    AllReduceNodeTmpl(const AllReduceNodeTmpl &node)
+        : Node(ST_NODE_ALLREDUCE), msg_(node.msg_) { }
 
     /// \brief clone a AllReduceNode.
-    AllReduceNode *clone() const override;
-
-    /// \returns message signature of AllReduceNode.
-    MsgSig *msgsig() const;
+    AllReduceNodeTmpl *clone() const override
+    {
+        return new AllReduceNodeTmpl(*this);
+    }
 
     /// \brief Replace msgsig of AllReduceNode.
     /// \param[in] msgsig to replace with.
-    void set_msgsig(MsgSig *msgsig);
+    void set_msg(MessageType *msg)
+    {
+        msg_ = msg;
+    }
 
-    void accept(sesstype::util::NodeVisitor &v);
+    /// \returns message signature of AllReduceNode.
+    MessageType *msg() const
+    {
+        return msg_;
+    }
 
-  private:
-    MsgSig *msgsig_;
+    virtual void accept(VisitorType &v) override;
 };
+
+using AllReduceNode = AllReduceNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 #endif // __cplusplus
 
 #ifdef __cplusplus
@@ -52,9 +64,11 @@ extern "C" {
 #endif
 
 st_node *st_mk_allreduce_node_init();
-st_node *st_mk_allreduce_node(st_msg *msgsig);
 
-st_node *st_allreduce_node_set_msgsig(st_node *node, st_msg *msgsig);
+st_node *st_mk_allreduce_node(st_msg *msg);
+
+st_node *st_allreduce_node_set_msgsig(st_node *node, st_msg *msg);
+
 st_msg *st_allreduce_node_get_msgsig(st_node *node);
 
 #ifdef __cplusplus

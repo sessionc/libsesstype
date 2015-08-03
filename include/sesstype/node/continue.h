@@ -5,17 +5,10 @@
 #include <string>
 #endif
 
+#include "sesstype/msg.h"
+#include "sesstype/role.h"
 #include "sesstype/node.h"
-
-#ifdef __cplusplus
-namespace sesstype {
-namespace util {
-
-class NodeVisitor;
-
-} // namespace util
-} // namespace sesstype
-#endif
+#include "sesstype/node/block.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -25,33 +18,45 @@ namespace sesstype {
 /**
  * \brief Continue statements.
  */
-class ContinueNode : public Node {
+template <class BaseNode, class RoleType, class MessageType, class VisitorType>
+class ContinueNodeTmpl : public BaseNode {
+    std::string label_;
+
   public:
     /// \brief ContinueNode constructor.
     /// \param[in] label of Choice Node.
-    ContinueNode(std::string label);
+    ContinueNodeTmpl(std::string label)
+        : BaseNode(ST_NODE_CONTINUE),
+          label_(label) { }
 
     /// \brief ContinueNode copy constructor.
-    ContinueNode(const ContinueNode &node);
-
-    /// \brief ContinueNode destructor.
-    ~ContinueNode() override;
+    ContinueNodeTmpl(const ContinueNodeTmpl &node)
+        : BaseNode(ST_NODE_CONTINUE),
+          label_(node.label_) { }
 
     /// \brief clone a ContinueNode.
-    ContinueNode *clone() const override;
+    ContinueNodeTmpl *clone() const override
+    {
+        return new ContinueNodeTmpl(*this);
+    }
 
     /// \brief Repalce label of ContinueNode.
     /// \param[in] label of ContinueNode to replace with.
-    void set_label(std::string label);
+    void set_label(std::string label)
+    {
+        label_ = label;
+    }
 
     /// \returns label of ContinueNode.
-    std::string label() const;
+    std::string label() const
+    {
+        return label_;
+    }
 
-    void accept(util::NodeVisitor &v) override;
-
-  private:
-    std::string label_;
+    void accept(VisitorType &v) override;
 };
+
+using ContinueNode = ContinueNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 #endif // __cplusplus
 
 #ifdef __cplusplus
@@ -59,7 +64,9 @@ extern "C" {
 #endif
 
 st_node *st_mk_continue_node(char *label);
+
 st_node *st_continue_node_set_label(st_node *node, char *label);
+
 const char *st_continue_node_get_label(st_node *node);
 
 #ifdef __cplusplus

@@ -10,13 +10,13 @@
 #include <vector>
 #endif
 
+#include "sesstype/util/clonable.h"
+#include "sesstype/util/visitor_tmpl.h"
+#include "sesstype/util/role_visitor.h"
+
 #ifdef __cplusplus
 namespace sesstype {
-namespace util {
-
-class RoleVisitor;
-
-} // namespace util
+class Role;
 } // namespace sesstype
 #endif
 
@@ -28,38 +28,48 @@ namespace sesstype {
 /**
  * \brief Role (participant) of a protocol or session.
  */
-class Role {
+class Role : public util::Clonable {
+    std::string name_;
+
   public:
     /// \brief Role constructor with "default" as name.
-    Role();
+    Role() : name_("default") { }
 
     /// \brief Role constructor.
-    Role(std::string name);
+    Role(std::string name) : name_(name) { }
 
     /// \brief Role copy constructor.
-    Role(const Role &role);
+    Role(const Role &role) : name_(role.name_) { }
 
     /// \brief Role destructor.
-    virtual ~Role();
+    virtual ~Role() { }
 
     /// \brief clone a Role.
-    virtual Role *clone() const;
+    virtual Role *clone() const override
+    {
+        return new Role(*this);
+    }
 
     /// \returns name of Role.
-    std::string name() const;
+    std::string name() const
+    {
+        return name_;
+    }
 
     /// \param[in] name Sets role name to name.
-    void set_name(std::string name);
+    void set_name(std::string name)
+    {
+        name_ = name;
+    }
 
     /// \brief Check if this Role matches another Role.
     /// \returns true if this Role is another Role.
-    virtual bool matches(Role *other) const;
+    virtual bool matches(Role *other) const
+    {
+        return (other->name() == name_);
+    }
 
-    /// \brief <tt>accept</tt> method for util::RoleVisitor.
-    virtual void accept(sesstype::util::RoleVisitor &v);
-
-  private:
-    std::string name_;
+    virtual void accept(util::RoleVisitor &v);
 };
 #endif // __cplusplus
 

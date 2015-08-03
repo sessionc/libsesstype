@@ -10,67 +10,87 @@
 #include <unordered_map>
 #endif
 
-#include "sesstype/role.h"
+#include "sesstype/parameterised/role.h"
 
 #ifdef __cplusplus
 namespace sesstype {
 namespace parameterised {
-
-namespace util {
-class RoleVisitor;
-} // namespace util
 #endif
 
 #ifdef __cplusplus
 /**
  * \brief Role Group (group of participants) of a protocol or session.
  */
-class RoleGrp : public sesstype::Role {
+class RoleGrp : public Role {
+    std::unordered_map<std::string, sesstype::Role *> members_;
+
   public:
+    typedef std::unordered_map<std::string, sesstype::Role *> RoleContainer;
+
     /// \brief RoleGrp constructor with "default_grp" as name.
-    RoleGrp();
+    RoleGrp() : Role("default_grp"), members_() { }
 
     /// \brief RoleGrp constructor.
-    RoleGrp(std::string name);
+    RoleGrp(std::string name) : Role(name), members_() { }
 
     /// \brief RoleGrp copy constructor.
-    RoleGrp(const RoleGrp &role);
+    RoleGrp(const RoleGrp &role) : Role(role), members_(role.members_)
+    {
+        // We don't explicitly copy members
+        // --> because this is a shallow copy (of ptr)
+    }
 
     /// \brief RoleGrp destructor.
     ///
     /// Roles in the RoleGrp are not freed (they are owned by the Protocol).
-    ~RoleGrp() override;
+    ~RoleGrp() override { }
 
     /// \brief clone a RoleGrp.
-    RoleGrp *clone() const override;
+    RoleGrp *clone() const override
+    {
+        return new RoleGrp(*this);
+    }
 
     /// \param[in] name of the member Role.
     /// \returns member Role.
     /// \exception std::out_of_range if Role is not in the RoleGrp.
-    sesstype::Role *member(std::string name) const;
+    sesstype::Role *member(std::string name) const
+    {
+        return members_.at(name);
+    }
 
     /// \returns number of members.
-    unsigned int num_member() const;
+    unsigned int num_members() const
+    {
+        return members_.size();
+    }
 
     /// \param[in] role to add as member.
-    void add_member(sesstype::Role *role);
+    void add_member(Role *role)
+    {
+        members_.insert({ role->name(), role });
+    }
 
     /// \brief Check if this Role contains another Role.
     /// \returns true if this Role contains another Role.
-    bool matches(sesstype::Role *other) const override;
+    bool matches(sesstype::Role *other) const override
+    {
+        return false; // TODO
+    }
 
     /// \brief Start iterator for member.
-    std::unordered_map<std::string, sesstype::Role *>::const_iterator member_begin() const;
+    RoleContainer::const_iterator member_begin() const
+    {
+        return members_.begin();
+    }
 
     /// \brief End iterator for member.
-    std::unordered_map<std::string, sesstype::Role *>::const_iterator member_end() const;
+    RoleContainer::const_iterator member_end() const
+    {
+        return members_.end();
+    }
 
-    using sesstype::Role::accept;
-
-    void accept(sesstype::parameterised::util::RoleVisitor &v);
-
-  private:
-    std::unordered_map<std::string, sesstype::Role *> members_;
+    virtual void accept(util::RoleVisitor &v) override;
 };
 #endif
 

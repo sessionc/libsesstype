@@ -11,6 +11,8 @@
 
 #include "sesstype/role.h"
 #include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/expr/rng.h"
+#include "sesstype/parameterised/expr/val.h"
 #include "sesstype/parameterised/role.h"
 #include "sesstype/parameterised/role_grp.h"
 
@@ -48,34 +50,34 @@ TEST_F(RoleTest, BasicRole)
  */
 TEST_F(RoleTest, BasicRolrGrp)
 {
-    auto *A = new sesstype::Role("A");
-    auto *B = new sesstype::Role("B");
-    auto *C = new sesstype::Role("C");
-    auto *D = new sesstype::Role("D");
+    auto *A = new sesstype::parameterised::Role("A");
+    auto *B = new sesstype::parameterised::Role("B");
+    auto *C = new sesstype::parameterised::Role("C");
+    auto *D = new sesstype::parameterised::Role("D");
 
     auto *grp = new sesstype::parameterised::RoleGrp();
     EXPECT_EQ(grp->name(), "default_grp");
-    EXPECT_EQ(grp->num_member(), 0);
+    EXPECT_EQ(grp->num_members(), 0);
     grp->set_name("g");
     EXPECT_EQ(grp->name(), "g");
     grp->add_member(A);
-    EXPECT_EQ(grp->num_member(), 1);
+    EXPECT_EQ(grp->num_members(), 1);
     EXPECT_EQ(grp->member("A"), A);
 
     grp->add_member(B);
-    EXPECT_EQ(grp->num_member(), 2);
+    EXPECT_EQ(grp->num_members(), 2);
     EXPECT_EQ(grp->member("B"), B);
 
     delete grp;
 
     auto *grp_withname = new sesstype::parameterised::RoleGrp("GRP");
     EXPECT_EQ(grp_withname->name(), "GRP");
-    EXPECT_EQ(grp_withname->num_member(), 0);
+    EXPECT_EQ(grp_withname->num_members(), 0);
     grp_withname->add_member(C);
-    EXPECT_EQ(grp_withname->num_member(), 1);
+    EXPECT_EQ(grp_withname->num_members(), 1);
     EXPECT_EQ(grp_withname->member("C"), C);
     grp_withname->add_member(D);
-    EXPECT_EQ(grp_withname->num_member(), 2);
+    EXPECT_EQ(grp_withname->num_members(), 2);
     EXPECT_EQ(grp_withname->member("D"), D);
 
     for (auto it=grp_withname->member_begin();

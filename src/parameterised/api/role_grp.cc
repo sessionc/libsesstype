@@ -27,7 +27,7 @@ void st_role_grp_add_member(st_role_grp *const role_grp, st_role *role)
 
 unsigned int st_role_grp_num_member(const st_role_grp *const role_grp)
 {
-    return role_grp->num_member();
+    return role_grp->num_members();
 }
 
 void st_role_grp_free(st_role_grp *role_grp)

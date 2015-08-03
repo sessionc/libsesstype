@@ -1,19 +1,8 @@
 set(libsesstype_SOURCE
     ${libsesstype_SOURCE}
-    ${CMAKE_CURRENT_SOURCE_DIR}/msg.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/role.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/module.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/session.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/import.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/block_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/interaction_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/choice_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/recur_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/continue_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/par_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/interruptible_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/nested_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/msg.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/import.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/module.cc
@@ -27,21 +16,8 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/api/par_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/session.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/role.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/util/role_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/util/node_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/util/print.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/util/projection.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/util/role_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/expr.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/interaction_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/allreduce_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/for_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/oneof_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/if_node.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/role_grp.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/msg.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/module.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/session.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/constant.cc
@@ -55,8 +31,5 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/util.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/expr_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/node_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/print.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/projection.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/role_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/simplify.cc
     PARENT_SCOPE)

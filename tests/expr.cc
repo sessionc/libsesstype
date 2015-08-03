@@ -9,6 +9,17 @@
 #include <string>
 
 #include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/expr/var.h"
+#include "sesstype/parameterised/expr/val.h"
+#include "sesstype/parameterised/expr/add.h"
+#include "sesstype/parameterised/expr/sub.h"
+#include "sesstype/parameterised/expr/mul.h"
+#include "sesstype/parameterised/expr/div.h"
+#include "sesstype/parameterised/expr/mod.h"
+#include "sesstype/parameterised/expr/shl.h"
+#include "sesstype/parameterised/expr/shr.h"
+#include "sesstype/parameterised/expr/seq.h"
+#include "sesstype/parameterised/expr/rng.h"
 
 namespace sesstype {
 namespace tests {
@@ -145,17 +156,17 @@ TEST_F(ExprTest, TestSeqExpr)
 {
     auto *expr = new sesstype::parameterised::SeqExpr();
     EXPECT_EQ(expr->type(), ST_EXPR_SEQ);
-    EXPECT_EQ(expr->num_value(), 0);
+    EXPECT_EQ(expr->num_values(), 0);
     expr->append_value(1);
-    EXPECT_EQ(expr->num_value(), 1);
+    EXPECT_EQ(expr->num_values(), 1);
     expr->append_value(2);
-    EXPECT_EQ(expr->num_value(), 2);
+    EXPECT_EQ(expr->num_values(), 2);
     expr->append_value(3);
-    EXPECT_EQ(expr->num_value(), 3);
+    EXPECT_EQ(expr->num_values(), 3);
     expr->append_value(4);
-    EXPECT_EQ(expr->num_value(), 4);
+    EXPECT_EQ(expr->num_values(), 4);
     expr->append_value(5);
-    EXPECT_EQ(expr->num_value(), 5);
+    EXPECT_EQ(expr->num_values(), 5);
 
     int i=1;
     for (auto it=expr->seq_begin(); it!=expr->seq_end(); it++, i++) {

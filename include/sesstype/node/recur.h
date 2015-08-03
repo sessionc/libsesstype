@@ -5,17 +5,12 @@
 #include <string>
 #endif
 
+#include "sesstype/msg.h"
+#include "sesstype/role.h"
 #include "sesstype/node.h"
-
-#ifdef __cplusplus
-namespace sesstype {
-namespace util {
-
-class NodeVisitor;
-
-} // namespace util
-} // namespace sesstype
-#endif
+#include "sesstype/node/block.h"
+#include "sesstype/util/clonable.h"
+#include "sesstype/util/visitor_tmpl.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -25,33 +20,45 @@ namespace sesstype {
 /**
  * \brief Recursion statements.
  */
-class RecurNode : public BlockNode {
+template <class BaseNode, class RoleType, class MessageType, class VisitorType>
+class RecurNodeTmpl : public BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType> {
+    std::string label_;
+
   public:
     /// \brief RecurNode constructor.
     /// \param[in] label of RecurNode.
-    RecurNode(std::string label);
+    RecurNodeTmpl(std::string label)
+        : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(ST_NODE_RECUR),
+          label_(label) { }
 
     /// \brief RecurNode copy constructor.
-    RecurNode(const RecurNode &node);
-
-    /// \brief RecurNode destructor.
-    ~RecurNode() override;
+    RecurNodeTmpl(const RecurNodeTmpl &node)
+        : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(node),
+          label_(node.label_) { }
 
     /// \brief clone a RecurNode.
-    RecurNode *clone() const override;
-
-    /// \returns label of RecursionNode.
-    std::string label() const;
+    RecurNodeTmpl *clone() const override
+    {
+        return new RecurNodeTmpl(*this);
+    }
 
     /// \brief Replace label of RecurNode.
     /// \param[in] label of RecurNode to replace with.
-    void set_label(std::string label);
+    void set_label(std::string label)
+    {
+        label_ = label;
+    }
 
-    void accept(util::NodeVisitor &v) override;
+    /// \returns label of RecursionNode.
+    std::string label() const
+    {
+        return label_;
+    }
 
-  private:
-    std::string label_;
+    void accept(VisitorType &v) override;
 };
+
+using RecurNode = RecurNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 #endif // __cplusplus
 
 #ifdef __cplusplus
@@ -61,6 +68,7 @@ extern "C" {
 st_node *st_mk_recur_node(char *label);
 
 st_node *st_recur_node_set_label(st_node *node, char *label);
+
 const char *st_recur_node_get_label(st_node *node);
 
 #ifdef __cplusplus

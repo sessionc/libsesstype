@@ -10,16 +10,8 @@
 #include "sesstype/msg.h"
 #include "sesstype/node.h"
 #include "sesstype/role.h"
-
-#ifdef __cplusplus
-namespace sesstype {
-namespace util {
-
-class NodeVisitor;
-
-} // namespace util
-} // namespace sesstype
-#endif
+#include "sesstype/util/clonable.h"
+#include "sesstype/util/visitor_tmpl.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -29,64 +21,133 @@ namespace sesstype {
 /**
  * \brief Nested session type.
  */
-class NestedNode : public virtual Node {
+template <class BaseNode, class RoleType, class MessageType, class VisitorType>
+class NestedNodeTmpl : public BaseNode {
+    std::string name_;
+    std::string scope_;
+    typename std::vector<MessageType *> args_;
+    typename std::vector<RoleType *> role_args_;
+
   public:
     /// \brief NestedNode constructor with no scope name by default.
-    NestedNode(std::string protocol_name);
+    NestedNodeTmpl(std::string protocol_name)
+        : BaseNode(ST_NODE_NESTED),
+        name_(protocol_name), scope_(), args_(), role_args_() { }
 
     /// \brief NestedNode constructor.
-    NestedNode(std::string protocol_name, std::string scope_name);
+    NestedNodeTmpl(std::string protocol_name, std::string scope)
+        : BaseNode(ST_NODE_NESTED),
+          name_(protocol_name), scope_(scope), args_(), role_args_() { }
 
     /// \brief NestedNode copy constructor.
-    NestedNode(const NestedNode &node);
+    NestedNodeTmpl(const NestedNodeTmpl &node)
+        : BaseNode(node),
+          name_(node.name_), scope_(node.scope_), args_(), role_args_()
+    {
+        for (auto arg : node.args_) {
+            add_arg(arg->clone());
+        }
+        for (auto role_arg : node.role_args_) {
+            add_arg(role_arg->clone());
+        }
+    }
 
     /// \brief NestedNode destructor.
-    ~NestedNode() override;
+    ~NestedNodeTmpl() override
+    {
+        for (auto arg : args_) {
+            delete arg;
+        }
+        for (auto role_arg : role_args_) {
+            delete role_arg;
+        }
+    }
 
     /// \brief clone a NestedNode.
-    NestedNode *clone() const override;
+    NestedNodeTmpl *clone() const override
+    {
+        return new NestedNodeTmpl(*this);
+    }
 
     /// \returns name of nested session to execute.
-    std::string name() const;
+    std::string name() const
+    {
+        return name_;
+    }
 
     /// \param[in] scope_name to use for this NestedNode
-    void set_scope(std::string scope_name);
+    void set_scope(std::string scope)
+    {
+        scope_ = scope;
+    }
 
     /// \returns scope name.
-    std::string scope() const;
+    std::string scope() const
+    {
+        return scope_;
+    }
 
     /// \brief add message instantiation arguments.
     /// \param[in] arg for instantiation of message parameter.
-    void add_arg(MsgSig *msg);
+    void add_arg(MessageType *msg)
+    {
+        args_.push_back(msg);
+    }
 
     /// \returns number of Message arguments.
-    unsigned int num_args() const;
+    unsigned int num_args() const
+    {
+        return args_.size();
+    }
 
-    MsgSig *arg(unsigned int index) const;
+    MessageType *arg(unsigned int idx) const
+    {
+        return args_.at(idx);
+    }
 
-    std::vector<MsgSig *>::const_iterator arg_begin() const;
-    std::vector<MsgSig *>::const_iterator arg_end() const;
+    typename std::vector<MessageType *>::const_iterator arg_begin() const
+    {
+        return args_.begin();
+    }
+
+    typename std::vector<MessageType *>::const_iterator arg_end() const
+    {
+        return args_.end();
+    }
 
     /// \brief add role instantiation arguments.
     /// \param[in] role for instantiation of protocol.
-    void add_arg(Role *role);
+    void add_arg(RoleType *role)
+    {
+        role_args_.push_back(role);
+    }
 
     /// \returns number of Role arguments.
-    unsigned int num_roleargs() const;
+    unsigned int num_roleargs() const
+    {
+        return role_args_.size();
+    }
 
-    Role *rolearg(unsigned int index) const;
 
-    std::vector<Role *>::const_iterator rolearg_begin() const;
-    std::vector<Role *>::const_iterator rolearg_end() const;
+    RoleType *rolearg(unsigned int idx) const
+    {
+        return role_args_.at(idx);
+    }
 
-    void accept(util::NodeVisitor &v) override;
+    typename std::vector<RoleType *>::const_iterator rolearg_begin() const
+    {
+        return role_args_.begin();
+    }
 
-  private:
-    std::string name_;
-    std::string scope_name_;
-    std::vector<MsgSig *> args_;
-    std::vector<Role *> role_args_;
+    typename std::vector<RoleType *>::const_iterator rolearg_end() const
+    {
+        return role_args_.end();
+    }
+
+    void accept(VisitorType &v) override;
 };
+
+using NestedNode = NestedNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 #endif // __cplusplus
 
 #ifdef __cplusplus

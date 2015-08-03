@@ -1,7 +1,8 @@
 #include <iostream>
 
-#include <sesstype/node.h>
 #include <sesstype/role.h>
+#include <sesstype/node.h>
+#include <sesstype/node/block.h>
 
 namespace sesstype {
 

@@ -16,7 +16,7 @@ Projection::Projection(Role *role)
 {
 }
 
-Node *Projection::get_root()
+sesstype::Node *Projection::get_root()
 {
     return stack_.top();
 }
@@ -55,7 +55,7 @@ void Projection::visit(ContinueNode *node)
 
 void Projection::visit(ChoiceNode *node)
 {
-    ChoiceNode *new_node = new ChoiceNode(node->at());
+    ChoiceNode *new_node = node->clone();
     stack_.push(new_node);
     if (project_role_->matches(node->at())) {
         // Choice sender

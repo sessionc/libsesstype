@@ -1,7 +1,3 @@
-/**
- * \file sesstype/parameterised/util/role_visitor.h
- * \brief Utities for Roles.
- */
 #ifndef SESSTYPE__PARAMETERISED__UTIL__ROLE_VISITOR_H__
 #define SESSTYPE__PARAMETERISED__UTIL__ROLE_VISITOR_H__
 
@@ -13,29 +9,14 @@
 #ifdef __cplusplus
 namespace sesstype {
 namespace parameterised {
-
-class Role;
-class RoleGrp;
-
-} // namespace parameterised
-} // namespace sesstype
-#endif
-
-#ifdef __cplusplus
-namespace sesstype {
-namespace parameterised {
 namespace util {
-#endif
+#endif // __cplusplus
 
 #ifdef __cplusplus
-/**
- * \brief Abstract class for building Role visitors.
- */
-class RoleVisitor : public sesstype::util::RoleVisitor {
+class RoleVisitor {
   public:
-    using sesstype::util::RoleVisitor::visit;
-    virtual void visit(sesstype::parameterised::Role *role) = 0;
-    virtual void visit(sesstype::parameterised::RoleGrp *role) = 0;
+    virtual void visit(Role *role) = 0;
+    virtual void visit(RoleGrp *role) = 0;
 };
 #endif // __cplusplus
 
@@ -45,4 +26,4 @@ class RoleVisitor : public sesstype::util::RoleVisitor {
 } // namespace sesstype
 #endif
 
-#endif//SESSTYPE__PARAMETERISED__UTILS__ROLE_VISITOR_H__
+#endif//SESSTYPE__PARAMETERISED__UTIL__ROLE_VISITOR_H__

@@ -37,15 +37,15 @@ TEST_F(ProjectionTest, BasicProjection)
     auto *CAROL = new sesstype::Role("Carol");
 
     auto *interact_node = new sesstype::InteractionNode(new MsgSig("First"));
-    interact_node->set_from(ALICE);
-    interact_node->add_to(BOB);
-    interact_node->add_to(CAROL);
+    interact_node->set_sndr(ALICE);
+    interact_node->add_rcvr(BOB);
+    interact_node->add_rcvr(CAROL);
     root->append_child(interact_node);
 
     // Interaction 2.
     auto *interact2_node = new sesstype::InteractionNode(new MsgSig("Second"));
-    interact2_node->set_from(ALICE);
-    interact2_node->add_to(CAROL);
+    interact2_node->set_sndr(ALICE);
+    interact2_node->add_rcvr(CAROL);
     root->append_child(interact2_node);
 
     // Recur 1.
@@ -60,9 +60,9 @@ TEST_F(ProjectionTest, BasicProjection)
     auto *MALLORY = new sesstype::Role("Mallory");
     auto *msgsig1 = new sesstype::MsgSig("Label");
     auto *interact3_node = new sesstype::InteractionNode();
-    interact3_node->set_from(ALICE);
-    interact3_node->add_to(MALLORY);
-    interact3_node->set_msgsig(msgsig1);
+    interact3_node->set_sndr(ALICE);
+    interact3_node->add_rcvr(MALLORY);
+    interact3_node->set_msg(msgsig1);
     recur2_node->append_child(interact3_node);
 
     // Continue 1.
@@ -71,11 +71,14 @@ TEST_F(ProjectionTest, BasicProjection)
 
     // Interaction 4.
     auto *interact4_node = new sesstype::InteractionNode(new MsgSig("Third"));
-    interact4_node->set_from(BOB);
-    interact4_node->add_to(MALLORY);
-    interact4_node->add_to(ALICE);
+    interact4_node->set_sndr(BOB);
+    interact4_node->add_rcvr(MALLORY);
+    interact4_node->add_rcvr(ALICE);
 
     root->append_child(interact4_node);
+
+    util::Print print_visitor;
+    root->accept(print_visitor);
 
     // Project endpoint.
     sesstype::util::Projection projection_bob(BOB);
@@ -88,8 +91,8 @@ TEST_F(ProjectionTest, BasicProjection)
 
     EXPECT_EQ(ep_bob_root->child(0)->type(), ST_NODE_SENDRECV);
     InteractionNode *ep_bob_interact0 = dynamic_cast<InteractionNode *>(ep_bob_root->child(0));
-    EXPECT_EQ(ep_bob_interact0->msgsig()->label(), "First");
-    EXPECT_EQ(ep_bob_interact0->from()->name(), "Alice");
+    EXPECT_EQ(ep_bob_interact0->msg()->label(), "First");
+    EXPECT_EQ(ep_bob_interact0->rcvr()->name(), "Alice");
 
     EXPECT_EQ(ep_bob_root->child(1)->type(), ST_NODE_RECUR);
     RecurNode *ep_bob_recur0 = dynamic_cast<RecurNode *>(ep_bob_root->child(1));
@@ -107,8 +110,8 @@ TEST_F(ProjectionTest, BasicProjection)
 
     EXPECT_EQ(ep_bob_root->child(2)->type(), ST_NODE_SENDRECV);
     InteractionNode *ep_bob_interact2 = dynamic_cast<InteractionNode *>(ep_bob_root->child(2));
-    EXPECT_EQ(ep_bob_interact2->msgsig()->label(), "Third");
-    EXPECT_EQ(ep_bob_interact2->to()->name(), "Mallory");
+    EXPECT_EQ(ep_bob_interact2->msg()->label(), "Third");
+    EXPECT_EQ(ep_bob_interact2->rcvr()->name(), "Mallory");
 }
 
 } // namespace tests

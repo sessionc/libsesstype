@@ -7,6 +7,9 @@
 
 #include "sesstype/msg.h"
 #include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/expr/add.h"
+#include "sesstype/parameterised/expr/var.h"
+#include "sesstype/parameterised/expr/val.h"
 #include "sesstype/parameterised/msg.h"
 
 namespace sesstype {
@@ -46,7 +49,7 @@ TEST_F(MsgTest, EmptyParameterisedPayload)
   auto *payload = new sesstype::parameterised::MsgPayload("T");
   EXPECT_EQ(payload->name(), "");
   EXPECT_EQ(payload->type(), "T");
-  EXPECT_EQ(payload->num_dimen(), 0);
+  EXPECT_EQ(payload->num_dimens(), 0);
 }
 
 /**
@@ -67,28 +70,28 @@ TEST_F(MsgTest, BasicMessages)
   sig->add_payload(pl_typeonly);
   EXPECT_EQ(sig->num_payloads(), 1);
 
-  auto *pl_nametype = new sesstype::parameterised::MsgPayload("count", "int");
+  auto *pl_nametype = new sesstype::parameterised::MsgPayload("int", "count");
 
   EXPECT_EQ(pl_nametype->name(), "count");
   EXPECT_EQ(pl_nametype->type(), "int");
-  EXPECT_EQ(pl_nametype->num_dimen(), 0);
+  EXPECT_EQ(pl_nametype->num_dimens(), 0);
 
   sig->add_payload(pl_nametype);
   EXPECT_EQ(sig->num_payloads(), 2);
 
-  auto *pl_nametypeparam = new sesstype::parameterised::MsgPayload("size", "long");
+  auto *pl_nametypeparam = new sesstype::parameterised::MsgPayload("long", "size");
 
   EXPECT_EQ(pl_nametypeparam->name(), "size");
   EXPECT_EQ(pl_nametypeparam->type(), "long");
-  EXPECT_EQ(pl_nametypeparam->num_dimen(), 0);
+  EXPECT_EQ(pl_nametypeparam->num_dimens(), 0);
 
   pl_nametypeparam->add_param(new sesstype::parameterised::ValExpr(2));
-  EXPECT_EQ(pl_nametypeparam->num_dimen(), 1);
+  EXPECT_EQ(pl_nametypeparam->num_dimens(), 1);
 
   pl_nametypeparam->add_param(new sesstype::parameterised::AddExpr(
         new sesstype::parameterised::ValExpr(1),
         new sesstype::parameterised::VarExpr("N")));
-  EXPECT_EQ(pl_nametypeparam->num_dimen(), 2);
+  EXPECT_EQ(pl_nametypeparam->num_dimens(), 2);
 
   EXPECT_EQ(sig->num_payloads(), 2);
   sig->add_payload(pl_nametypeparam);

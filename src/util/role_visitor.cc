@@ -5,7 +5,7 @@ namespace sesstype {
 
 void Role::accept(util::RoleVisitor &v)
 {
-  v.visit(this);
+    v.visit(this);
 }
 
 } // namespace sesstype

@@ -5,6 +5,8 @@
 #ifndef SESSTYPE__UTIL__NODE_VISITOR_H__
 #define SESSTYPE__UTIL__NODE_VISITOR_H__
 
+#include "sesstype/msg.h"
+#include "sesstype/role.h"
 #include "sesstype/node.h"
 #include "sesstype/node/interaction.h"
 #include "sesstype/node/choice.h"
@@ -15,17 +17,21 @@
 #include "sesstype/node/interruptible.h"
 
 #ifdef __cplusplus
+/// Forward declaration of Node and friends.
 namespace sesstype {
 
-class Node;
-class BlockNode;
-class InteractionNode;
-class ChoiceNode;
-class RecurNode;
-class ContinueNode;
-class ParNode;
-class NestedNode;
-class InterruptibleNode;
+namespace util {
+class NodeVisitor;
+} // namespace util
+
+template class BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
+template class InteractionNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
+template class ChoiceNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
+template class RecurNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
+template class ContinueNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
+template class ParNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
+template class NestedNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
+template class InterruptibleNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 
 } // namespace sesstype
 #endif
@@ -42,14 +48,14 @@ namespace util {
 class NodeVisitor {
   public:
     virtual void visit(Node *node) = 0;
-    virtual void visit(BlockNode *node) = 0;
-    virtual void visit(InteractionNode *node) = 0;
-    virtual void visit(ChoiceNode *node) = 0;
-    virtual void visit(RecurNode *node) = 0;
-    virtual void visit(ContinueNode *node) = 0;
-    virtual void visit(ParNode *node) = 0;
-    virtual void visit(NestedNode *node) = 0;
-    virtual void visit(InterruptibleNode *node) = 0;
+    virtual void visit(BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
+    virtual void visit(InteractionNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
+    virtual void visit(ChoiceNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
+    virtual void visit(RecurNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
+    virtual void visit(ContinueNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
+    virtual void visit(ParNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
+    virtual void visit(NestedNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
+    virtual void visit(InterruptibleNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
 };
 #endif // __cplusplus
 

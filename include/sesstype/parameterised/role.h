@@ -8,15 +8,20 @@
 #include "sesstype/role.h"
 
 #include "sesstype/parameterised/expr.h"
-#include "sesstype/parameterised/util/role_visitor.h"
 
 #ifdef __cplusplus
 namespace sesstype {
 namespace parameterised {
-
 namespace util {
 class RoleVisitor;
 } // namespace util
+} // namespace sesstype
+} // namespace sesstype
+#endif
+
+#ifdef __cplusplus
+namespace sesstype {
+namespace parameterised {
 #endif
 
 #ifdef __cplusplus
@@ -24,46 +29,66 @@ class RoleVisitor;
  * \brief Parameterised Role (participant) of a protocol or session.
  */
 class Role : public sesstype::Role {
+    std::vector<Expr *> param_;
+
   public:
     /// \brief Role constructor with "default" as name.
-    Role();
+    Role() : sesstype::Role(), param_() { }
 
     /// \brief Role constructor.
-    Role(std::string name);
-
-    /// \brief Role constructor for upgrading from sesstype::Role..
-    Role(const sesstype::Role &role);
+    Role(std::string name) : sesstype::Role(name), param_() { }
 
     /// \brief Role copy constructor.
-    Role(const Role &role);
+    Role(const Role &role) : sesstype::Role(role), param_()
+    {
+        for (auto param : role.param_) {
+            param_.emplace_back(param);
+        }
+    }
 
     /// \brief Role destructor.
-    ~Role() override;
+    ~Role() override
+    {
+        for (auto param : param_) {
+            delete param;
+        }
+    }
 
     /// \brief clone a Role
-    Role *clone() const override;
+    Role *clone() const override
+    {
+        return new Role(*this);
+    }
 
     /// \returns Number of dimensions in the parameterised Role.
-    unsigned int num_dimen();
+    unsigned int num_dimen()
+    {
+        return param_.size();
+    }
 
     /// \param[in] param Adds parameter as a new dimension to the Role.
-    void add_param(Expr *param);
+    void add_param(Expr *param)
+    {
+        param_.push_back(param);
+    }
 
     /// \param[in] idx Dimension index of parameterised Role.
     /// \returns expression at dimension idx.
     /// \exception std::out_of_range if dimension idx does not exist.
-    Expr *operator[](std::size_t idx) const;
+    Expr *operator[](std::size_t idx) const
+    {
+        return param_.at(idx);
+    }
 
     /// \brief Check if this Role contains another Role.
     /// \returns true if this Role contains another Role.
-    bool matches(sesstype::Role *other) const override;
+    virtual bool matches(sesstype::Role *other) const
+    {
+        // TODO
+        return false;
+    }
 
-    using sesstype::Role::accept;
-
-    void accept(sesstype::parameterised::util::RoleVisitor &v);
-
-  private:
-    std::vector<Expr *> param_;
+    virtual void accept(util::RoleVisitor &v); // Warn: we intend to hide accept of parent
 };
 #endif // __cplusplus
 

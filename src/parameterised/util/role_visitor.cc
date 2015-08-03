@@ -6,16 +6,15 @@
 namespace sesstype {
 namespace parameterised {
 
-void Role::accept(sesstype::parameterised::util::RoleVisitor &v)
+void Role::accept(util::RoleVisitor &v)
 {
   v.visit(this);
 }
 
-void RoleGrp::accept(sesstype::parameterised::util::RoleVisitor &v)
+void RoleGrp::accept(util::RoleVisitor &v)
 {
   v.visit(this);
 }
 
 } // namespace parameterised
-
 } // namespace sesstype

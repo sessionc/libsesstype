@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include <sesstype/node.h>
 #include <sesstype/role.h>
+#include <sesstype/node.h>
 #include <sesstype/node/choice.h>
 
 namespace sesstype {

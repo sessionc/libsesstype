@@ -1,10 +1,14 @@
 #ifndef SESSTYPE__PARAMETERISED__NODE__IF_H__
 #define SESSTYPE__PARAMETERISED__NODE__IF_H__
 
-#include "sesstype/util/node_visitor.h"
+#include "sesstype/node/block.h"
+#include "sesstype/util/visitor_tmpl.h"
 
+#include "sesstype/parameterised/msg.h"
 #include "sesstype/parameterised/cond.h"
+#include "sesstype/parameterised/role.h"
 #include "sesstype/parameterised/node.h"
+
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -15,43 +19,66 @@ namespace parameterised {
 /**
  * \brief If-block.
  */
-class IfNode : public BlockNode {
+template <class BaseNode, class RoleType, class MessageType, class VisitorType>
+class IfNodeTmpl : public BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType> {
+    MsgCond *cond_;
+
   public:
     /// \brief IfNode constructor.
     /// \param[in] cond for the if-block.
-    IfNode(MsgCond *cond);
+    IfNodeTmpl(MsgCond *cond)
+        : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(ST_NODE_IF),
+          cond_(cond) { }
 
     /// \brief IfNode copy constructor.
-    IfNode(const IfNode &node);
+    IfNodeTmpl(const IfNodeTmpl &node)
+        : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(node),
+          cond_(node.cond_) { }
 
     /// \brief IfNode destructor.
-    ~IfNode() override;
+    ~IfNodeTmpl() override
+    {
+        delete cond_;
+    }
 
     /// \brief clone a IfNode.
-    IfNode *clone() const override;
+    IfNodeTmpl *clone() const override
+    {
+        return new IfNodeTmpl(*this);
+    }
 
     /// \brief Get body Node at position <tt>idx</tt>.
     /// \param[in] idx of Node in IfNode.
     /// \returns body Node at position <tt>idx</tt>
-    /// \exception std::out_of_range if <tt>idx</tt> is out of bounds.
-    Node *body(unsigned int idx) const;
+    BaseNode *body() const
+    {
+        return BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>::child(0);
+    }
 
     /// \brief Add body Node to current if-block
     /// \param[in] body Node.
-    void append_body(Node *body);
+    void set_body(BaseNode *body)
+    {
+        this->set_child(0, body);
+    }
 
     /// \returns if-block condition.
-    MsgCond *cond() const;
+    MsgCond *cond() const
+    {
+        return cond_;
+    }
 
     /// \brief Set if-block condition.
     /// \param[in] cond for the if-block.
-    void set_cond(MsgCond *cond);
+    void set_cond(MsgCond *cond)
+    {
+        cond_ = cond;
+    }
 
-    void accept(sesstype::util::NodeVisitor &v) override;
-
-  private:
-    MsgCond *cond_;
+    void virtual accept(VisitorType &v) override;
 };
+
+using IfNode = IfNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 #endif // __cplusplus
 
 #ifdef __cplusplus

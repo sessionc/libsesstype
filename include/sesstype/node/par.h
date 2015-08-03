@@ -1,17 +1,10 @@
 #ifndef SESSTYPE__NODE_PAR_H__
 #define SESSTYPE__NODE_PAR_H__
 
+#include "sesstype/msg.h"
+#include "sesstype/role.h"
 #include "sesstype/node.h"
-
-#ifdef __cplusplus
-namespace sesstype {
-namespace util {
-
-class NodeVisitor;
-
-} // namespace util
-} // namespace sesstype
-#endif
+#include "sesstype/node/block.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -21,25 +14,33 @@ namespace sesstype {
 /**
  * \brief Parallel blocks.
  */
-class ParNode : public virtual BlockNode {
+template <class BaseNode, class RoleType, class MessageType, class VisitorType>
+class ParNodeTmpl : public BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType> {
   public:
     /// \brief ParNode constructor.
-    ParNode();
+    ParNodeTmpl()
+        : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(ST_NODE_PARALLEL) { }
 
     /// \brief ParNode copy constructor.
-    ParNode(const ParNode &node);
-
-    /// \brief ParNode destructor.
-    ~ParNode() override;
+    ParNodeTmpl(const ParNodeTmpl &node)
+        : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(node) { }
 
     /// \brief clone a ParNode.
-    ParNode *clone() const override;
+    ParNodeTmpl *clone() const override
+    {
+        return new ParNodeTmpl(*this);
+    }
 
     /// \param[in] parallel Node to add as new 'thread'.
-    void add_parallel(Node *parallel);
+    void add_parallel(BaseNode *par)
+    {
+        this->append_child(par);
+    }
 
-    void accept(util::NodeVisitor &v) override;
+    void accept(VisitorType &v) override;
 };
+
+using ParNode = ParNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 #endif // __cplusplus
 
 #ifdef __cplusplus

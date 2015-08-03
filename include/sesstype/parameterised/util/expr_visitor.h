@@ -6,26 +6,17 @@
 #define SESSTYPE__PARAMETERISED__UTIL__EXPR_VISITOR_H__
 
 #include "sesstype/parameterised/expr.h"
-
-#ifdef __cplusplus
-namespace sesstype {
-namespace parameterised {
-
-class VarExpr;
-class ValExpr;
-class AddExpr;
-class SubExpr;
-class MulExpr;
-class DivExpr;
-class ModExpr;
-class ShlExpr;
-class ShrExpr;
-class SeqExpr;
-class RngExpr;
-
-} // namespace parameterised
-} // namespace sesstype
-#endif
+#include "sesstype/parameterised/expr/var.h"
+#include "sesstype/parameterised/expr/val.h"
+#include "sesstype/parameterised/expr/add.h"
+#include "sesstype/parameterised/expr/sub.h"
+#include "sesstype/parameterised/expr/mul.h"
+#include "sesstype/parameterised/expr/div.h"
+#include "sesstype/parameterised/expr/mod.h"
+#include "sesstype/parameterised/expr/shl.h"
+#include "sesstype/parameterised/expr/shr.h"
+#include "sesstype/parameterised/expr/seq.h"
+#include "sesstype/parameterised/expr/rng.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -39,17 +30,18 @@ namespace util {
  */
 class ExprVisitor {
   public:
-    virtual void visit(sesstype::parameterised::VarExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::ValExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::AddExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::SubExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::MulExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::DivExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::ModExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::ShlExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::ShrExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::SeqExpr *expr) = 0;
-    virtual void visit(sesstype::parameterised::RngExpr *expr) = 0;
+    virtual void visit(Expr *expr) = 0;
+    virtual void visit(VarExpr *expr) = 0;
+    virtual void visit(ValExpr *expr) = 0;
+    virtual void visit(AddExpr *expr) = 0;
+    virtual void visit(SubExpr *expr) = 0;
+    virtual void visit(MulExpr *expr) = 0;
+    virtual void visit(DivExpr *expr) = 0;
+    virtual void visit(ModExpr *expr) = 0;
+    virtual void visit(ShlExpr *expr) = 0;
+    virtual void visit(ShrExpr *expr) = 0;
+    virtual void visit(SeqExpr *expr) = 0;
+    virtual void visit(RngExpr *expr) = 0;
 };
 #endif // __cplusplus
 

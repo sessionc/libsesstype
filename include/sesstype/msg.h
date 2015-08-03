@@ -6,6 +6,8 @@
 #define SESSTYPE__MSG_H__
 
 #ifdef __cplusplus
+#include <algorithm>
+#include <stdexcept>
 #include <string>
 #include <vector>
 #endif
@@ -24,30 +26,38 @@ namespace sesstype {
  * for representing multi-dimensional arrays.
  */
 class MsgPayload {
+    std::string name_;
+    std::string type_;
+
   public:
     /// \brief MsgPayload constructor with "" (empty string) as MsgPayload name.
-    MsgPayload(std::string type);
+    MsgPayload(std::string type) : name_(), type_(type) { }
 
     /// \brief MsgPayload constructor.
     /// \param[in] type of MsgPayload (datatype).
     /// \param[in] name of MsgPayload (identifier).
-    MsgPayload(std::string type, std::string name);
+    MsgPayload(std::string type, std::string name)
+        : name_(name), type_(type) { }
 
     /// \brief MsgPayload copy constructor.
-    MsgPayload(const MsgPayload &payload);
+    MsgPayload(const MsgPayload &payload)
+        : name_(payload.name_), type_(payload.type_) { }
 
     /// \brief MsgPayload destructor.
-    ~MsgPayload();
+    ~MsgPayload() { }
 
     /// \returns name of MsgPayload.
-    std::string name() const;
+    std::string name() const
+    {
+        return name_;
+    }
 
     /// \returns datatype of MsgPayload.
-    std::string type() const;
+    std::string type() const
+    {
+        return type_;
+    }
 
-  private:
-    std::string name_;
-    std::string type_;
 };
 
 /**
@@ -58,42 +68,81 @@ class MsgPayload {
  * identifying messages) and optionally payload types (see MsgPayload).
  */
 class MsgSig {
+    std::string label_;
+    std::vector<MsgPayload *> payloads_;
+
   public:
     /// \brief MsgSig constructor.
     /// \param[in] label of the MsgSig.
-    MsgSig(std::string label);
+    MsgSig(std::string label) : label_(label), payloads_() { }
 
     /// \brief MsgSig copy constructor.
-    MsgSig(const MsgSig &msgsig);
+    MsgSig(const MsgSig &msgsig) : label_(msgsig.label_), payloads_()
+    {
+        for (auto payload : msgsig.payloads_) {
+            payloads_.emplace_back(payload);
+        }
+    }
 
     /// \brief MsgSig destructor.
-    virtual ~MsgSig();
+    virtual ~MsgSig()
+    {
+        for (auto payload : payloads_) {
+            delete payload;
+        }
+    }
 
     /// \brief Make a MsgSig* clone.
-    virtual MsgSig *clone() const;
+    virtual MsgSig *clone() const
+    {
+        return new MsgSig(*this);
+    }
 
     /// \returns label of the MsgSig.
-    std::string label() const;
+    std::string label() const
+    {
+        return label_;
+    }
 
     /// \returns number of payload paramaters.
-    unsigned int num_payloads() const;
+    unsigned int num_payloads() const
+    {
+        return payloads_.size();
+    }
 
     /// \returns payload by name.
-    MsgPayload *payload(std::string name) const;
+    MsgPayload *payload(std::string name) const
+    {
+        auto it = std::find_if(payloads_.begin(), payloads_.end(),
+            [name](const MsgPayload *const payload)
+                -> bool { return payload->name() == name; });
+        if (it == payloads_.end()) {
+            throw std::out_of_range("Payload "+name+" not found");
+        }
+        return *it;
+    }
 
     /// \returns payload by positional index.
-    MsgPayload *payload(unsigned int idx) const;
+    MsgPayload *payload(unsigned int idx) const
+    {
+        return payloads_.at(idx);
+    }
 
     /// \brief Add a payload parameter to current MsgSig.
     /// \param[in] payload to add.
-    void add_payload(MsgPayload *payload);
+    void add_payload(MsgPayload *payload)
+    {
+        payloads_.emplace_back(payload);
+    }
 
     /// \returns true if payload with name exists.
-    bool has_payload(std::string name) const;
+    bool has_payload(std::string name) const
+    {
 
-  private:
-    std::string label_;
-    std::vector<MsgPayload *> payloads_;
+    return (std::find_if(payloads_.begin(), payloads_.end(),
+                [name](const MsgPayload *const payload)
+                -> bool { return payload->name() == name; }) != payloads_.end());
+    }
 };
 #endif // __cplusplus
 
