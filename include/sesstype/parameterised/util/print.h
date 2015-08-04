@@ -1,6 +1,11 @@
 #ifndef SESSTYPE__PARAMETERISED__UTIL__PRINT_H__
 #define SESSTYPE__PARAMETERISED__UTIL__PRINT_H__
 
+#ifdef __cplusplus
+#include <iostream>
+#include <string>
+#endif
+
 #include "sesstype/parameterised/expr.h"
 
 #include "sesstype/parameterised/role.h"
@@ -53,7 +58,10 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     /// \brief Output prefix based on current line#, indent level and character.
     void prefix()
     {
-        os_ << line_count_++ << ": ";
+        if (line_count_ == 1) {
+            os_ << "Line\t |\tTree\n====================\n";
+        }
+        os_ << line_count_++ << "\t ";
         if (indent_lvl_ > 1) {
             os_ << '|';
             for (unsigned int i=1; i<indent_lvl_; i++) {
@@ -68,24 +76,24 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         line_count_ = 1;
     }
 
-    virtual void visit(Node *node) override
+    virtual void visit(Node *node)
     {
         prefix();
         os_ << "generic {} @ " << node << "\n";
     }
 
-    virtual void visit(InteractionNode *node) override
+    virtual void visit(InteractionNode *node)
     {
         prefix();
         os_ << "interaction { from: ";
         if (node->sndr()) {
-            node->sndr()->name();
+            node->sndr()->accept(*this);
         } else {
             os_ << "(empty)";
         }
         os_ << ", to(" << node->num_rcvrs() << "): [";
         if (node->num_rcvrs() > 0) {
-            node->rcvr()->name();
+            node->rcvr()->accept(*this);
         } else {
             os_ << "(empty)";
         }
@@ -94,7 +102,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
             << "(" << node->msg()->num_payloads() << ") } @" << node << "\n";
     }
 
-    virtual void visit(BlockNode *node) override
+    virtual void visit(BlockNode *node)
     {
         indent_lvl_++;
         for (auto it=node->child_begin(); it!=node->child_end(); it++) {
@@ -103,7 +111,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         indent_lvl_--;
     }
 
-    virtual void visit(RecurNode *node) override
+    virtual void visit(RecurNode *node)
     {
         prefix();
         os_ << "recur " << "{ label: " << node->label() << " }";
@@ -112,22 +120,23 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
 
-    virtual void visit(ContinueNode *node) override
+    virtual void visit(ContinueNode *node)
     {
         prefix();
         os_ << "cont { label: " << node->label() << " } @" << node << "\n";
     }
 
-    virtual void visit(ChoiceNode *node) override
+    virtual void visit(ChoiceNode *node)
     {
         prefix();
-        os_ << "choice { at: " << node->at()->name() << " }";
-        os_ << " children: " << node->num_children() << " @" << node << "\n";
+        os_ << "choice { at: ";
+        node->accept(*this);
+        os_ << ", children: " << node->num_children() << " @" << node << "\n";
 
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
 
-    virtual void visit(ParNode *node) override
+    virtual void visit(ParNode *node)
     {
         prefix();
         os_ << "par {}";
@@ -136,7 +145,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
 
-    virtual void visit(NestedNode *node) override
+    virtual void visit(NestedNode *node)
     {
         prefix();
         os_ << "nested { name: " << node->name();
@@ -154,7 +163,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         os_ << "]} @ " << node << "\n";
     }
 
-    virtual void visit(InterruptibleNode *node) override
+    virtual void visit(InterruptibleNode *node)
     {
         prefix();
         os_ << "interruptible { scope: " << node->scope();
@@ -173,30 +182,151 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         os_ <<"} @ " << node << "\n";
     }
 
-    virtual void visit(ForNode *node) override { }
-    virtual void visit(OneofNode *node) override { }
-    virtual void visit(IfNode *node) override { }
-    virtual void visit(AllReduceNode *node) override { }
-
-    virtual void visit(Role *role) override
+    virtual void visit(ForNode *node)
     {
-        os_ << role->name();
+        prefix();
+        os_ << "for { expr: ";
+        node->bindexpr()->accept(*this);
+        os_ << " } @" << node << "\n";
+
+        node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
+    }
+    virtual void visit(OneofNode *node)
+    {
+        prefix();
+        os_ << "oneof { range: ";
+        node->range()->accept(*this);
+        os_ << " , repeat? " << node->is_repeat();
+        os_ << " , unordered? " << node->is_unordered();
+        os_ << " } @" << node << "\n";
+
+        node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
+    }
+    virtual void visit(IfNode *node)
+    {
+        prefix();
+        os_ << "if { cond: ";
+        node->cond()->accept(*this);
+        os_ << " } @" << node << "\n";
+
+        node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
 
-    virtual void visit(RoleGrp *role) override { }
+    virtual void visit(AllReduceNode *node)
+    {
+        prefix();
+        os_ << "allreduce { msg: " << node->msg()->label()
+            << "(" << node->msg()->num_payloads() << ") } @" << node << "\n";
+    }
 
-    virtual void visit(Expr *expr) override { }
-    virtual void visit(VarExpr *expr) override { }
-    virtual void visit(ValExpr *expr) override { }
-    virtual void visit(AddExpr *expr) override { }
-    virtual void visit(SubExpr *expr) override { }
-    virtual void visit(MulExpr *expr) override { }
-    virtual void visit(DivExpr *expr) override { }
-    virtual void visit(ModExpr *expr) override { }
-    virtual void visit(ShlExpr *expr) override { }
-    virtual void visit(ShrExpr *expr) override { }
-    virtual void visit(SeqExpr *expr) override { }
-    virtual void visit(RngExpr *expr) override { }
+    virtual void visit(Role *role)
+    {
+        os_ << role->name();
+        if (role->num_dimen() > 0) {
+            os_ << "[";
+            for (int i=1; i<role->num_dimen(); i++) {
+                os_ << "][";
+            }
+            os_ << "]";
+        }
+        os_ << "@" << role;
+    }
+
+    virtual void visit(RoleGrp *role)
+    {
+        os_ << role->name();
+        os_ << "{ members#: " << role->num_members() << ", membs: ";
+        for (auto it=role->member_begin(); it!=role->member_end(); it++) {
+            (*it).second->accept(*this);
+            os_ << " ";
+        }
+        os_ << " } @" << role;
+    }
+
+    virtual void visit(Expr *expr)
+    {
+        // Empty.
+    }
+
+    virtual void visit(VarExpr *expr)
+    {
+        os_ << expr->name();
+    }
+    virtual void visit(ValExpr *expr)
+    {
+        os_ << expr->num();
+    }
+    virtual void visit(AddExpr *expr)
+    {
+        os_ << "(";
+        expr->lhs()->accept(*this);
+        os_ << "+";
+        expr->rhs()->accept(*this);
+        os_ << ")";
+    }
+    virtual void visit(SubExpr *expr)
+    {
+        os_ << "(";
+        expr->lhs()->accept(*this);
+        os_ << "-";
+        expr->rhs()->accept(*this);
+        os_ << ")";
+    }
+
+    virtual void visit(MulExpr *expr)
+    {
+        expr->lhs()->accept(*this);
+        os_ << "*";
+        expr->rhs()->accept(*this);
+    }
+
+    virtual void visit(DivExpr *expr)
+    {
+        expr->lhs()->accept(*this);
+        os_ << "/";
+        expr->rhs()->accept(*this);
+    }
+
+    virtual void visit(ModExpr *expr)
+    {
+        expr->lhs()->accept(*this);
+        os_ << "%";
+        expr->rhs()->accept(*this);
+    }
+
+    virtual void visit(ShlExpr *expr)
+    {
+        os_ << "(";
+        expr->lhs()->accept(*this);
+        os_ << "<<";
+        expr->rhs()->accept(*this);
+        os_ << ")";
+    }
+
+    virtual void visit(ShrExpr *expr)
+    {
+        os_ << "(";
+        expr->lhs()->accept(*this);
+        os_ << ">>";
+        expr->rhs()->accept(*this);
+        os_ << ")";
+
+    }
+
+    virtual void visit(SeqExpr *expr)
+    {
+        for (unsigned int i=0; i<expr->num_values(); i++) {
+            os_ << expr->value(i) << ",";
+        }
+    }
+
+    virtual void visit(RngExpr *expr)
+    {
+        os_ << expr->bindvar() << ":";
+        expr->from()->accept(*this);
+        os_ << "..";
+        expr->to()->accept(*this);
+    }
 };
 #endif // __cplusplus
 

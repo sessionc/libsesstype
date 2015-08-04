@@ -75,7 +75,7 @@ class Print : public NodeVisitor, public RoleVisitor {
     {
         prefix();
         os_ << "interaction { from: ";
-        if (node->sndr() != nullptr) {
+        if (node->sndr()) {
             node->sndr()->accept(*this);
         } else {
             os_ << "(empty)";
@@ -157,15 +157,18 @@ class Print : public NodeVisitor, public RoleVisitor {
         os_ << "interruptible { scope: " << node->scope();
         os_ << " interrupts(" << node->num_interrupts() << "): ";
         for (auto it=node->interrupt_begin(); it!=node->interrupt_end(); it++) {
-            os_ << (*it).first->name() << "/" << (*it).second->label() << ", ";
+            (*it).first->accept(*this);
+            os_ << "/" << (*it).second->label() << ", ";
         }
         os_ << ", catches(" << node->num_catches() << "): ";
         for (auto it=node->catch_begin(); it!=node->catch_end(); it++) {
-            os_ << (*it).first->name() << "/" << (*it).second->label() << ", ";
+            (*it).first->accept(*this);
+            os_ << "/" << (*it).second->label() << ", ";
         }
         os_ << ", throws(" << node->num_throws() << "): ";
         for (auto it=node->throw_begin(); it!=node->throw_end(); it++) {
-            os_ << (*it).first->name() << "/" << (*it).second->label() << ", ";
+            (*it).first->accept(*this);
+            os_ << "/" << (*it).second->label() << ", ";
         }
         os_ <<"} @ " << node << "\n";
     }
@@ -173,6 +176,7 @@ class Print : public NodeVisitor, public RoleVisitor {
     void visit(Role *role)
     {
         os_ << role->name();
+        os_ << "@" << role;
     }
 };
 #endif // __cplusplus

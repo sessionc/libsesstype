@@ -22,10 +22,10 @@ namespace parameterised {
  * \brief Role Group (group of participants) of a protocol or session.
  */
 class RoleGrp : public Role {
-    std::unordered_map<std::string, sesstype::Role *> members_;
+    std::unordered_map<std::string, sesstype::parameterised::Role *> members_;
 
   public:
-    typedef std::unordered_map<std::string, sesstype::Role *> RoleContainer;
+    typedef std::unordered_map<std::string, sesstype::parameterised::Role *> RoleContainer;
 
     /// \brief RoleGrp constructor with "default_grp" as name.
     RoleGrp() : Role("default_grp"), members_() { }
