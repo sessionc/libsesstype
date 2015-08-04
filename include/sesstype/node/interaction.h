@@ -40,18 +40,18 @@ class InteractionNodeTmpl : public BaseNode {
     /// \brief InteractionNode constructor with empty MsgSig.
     InteractionNodeTmpl()
         : BaseNode(ST_NODE_SENDRECV),
-          msg_(new MessageType("")), sndr_(), rcvrs_() { }
+          msg_(new MessageType("")), sndr_(nullptr), rcvrs_() { }
 
     /// \brief InteractionNode constructor.
     /// \param[in] msgsig for the interaction.
     InteractionNodeTmpl(MessageType *msg)
         : BaseNode(ST_NODE_SENDRECV),
-          msg_(msg->clone()), sndr_(), rcvrs_() { }
+          msg_(msg->clone()), sndr_(nullptr), rcvrs_() { }
 
     /// \brief InteractionNode copy constructor.
     InteractionNodeTmpl(const InteractionNodeTmpl &node)
         : BaseNode(ST_NODE_SENDRECV),
-          msg_(node.msg_), sndr_(node.sndr_), rcvrs_()
+          msg_(node.msg_->clone()), sndr_(node.sndr_->clone()), rcvrs_()
     {
         for (auto rcvr : node.rcvrs_) {
             rcvrs_.push_back(rcvr->clone());
@@ -80,14 +80,11 @@ class InteractionNodeTmpl : public BaseNode {
     void set_msg(MessageType *msg)
     {
         delete msg_;
-        msg_ = msg;
+        msg_ = msg->clone();
     }
 
     /// \returns message signature of InteractionNode.
-    MessageType *msg() const
-    {
-        return msg_;
-    }
+    MessageType *msg() const { return msg_; }
 
     /// \param[in] from Role of InteractionNode.
     void set_sndr(RoleType *sndr)
@@ -100,13 +97,14 @@ class InteractionNodeTmpl : public BaseNode {
     RoleType *sndr() const { return sndr_; }
 
     /// \brief Remove from Role.
-    void remove_sndr() { delete sndr_; }
+    void remove_sndr()
+    {
+        delete sndr_;
+        sndr_ = nullptr;
+    }
 
     /// \param[in] to Role to add to this InteractionNode.
-    void add_rcvr(RoleType *rcvr)
-    {
-        rcvrs_.push_back(rcvr->clone());
-    }
+    void add_rcvr(RoleType *rcvr) { rcvrs_.push_back(rcvr->clone()); }
 
     /// \returns number of <tt>to</tt> Role.
     unsigned int num_rcvrs() const { return rcvrs_.size(); }

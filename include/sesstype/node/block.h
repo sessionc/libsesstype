@@ -30,8 +30,8 @@ class BlockNodeTmpl : public BaseNode {
     /// \brief BlockNode copy constructor.
     BlockNodeTmpl(const BlockNodeTmpl &node) : BaseNode(ST_NODE_ROOT), children_()
     {
-        for (auto child : node.children_) {
-            children_.emplace_back(child);
+        for (BaseNode *child : node.children_) {
+            children_.push_back(static_cast<BaseNode *>(child->clone()));
         }
     }
 

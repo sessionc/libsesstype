@@ -45,29 +45,17 @@ class Role : public util::Clonable {
     virtual ~Role() { }
 
     /// \brief clone a Role.
-    virtual Role *clone() const override
-    {
-        return new Role(*this);
-    }
+    virtual Role *clone() const override { return new Role(*this); }
 
     /// \returns name of Role.
-    std::string name() const
-    {
-        return name_;
-    }
+    std::string name() const { return name_; }
 
     /// \param[in] name Sets role name to name.
-    void set_name(std::string name)
-    {
-        name_ = name;
-    }
+    void set_name(std::string name) { name_ = name; }
 
     /// \brief Check if this Role matches another Role.
     /// \returns true if this Role is another Role.
-    virtual bool matches(Role *other) const
-    {
-        return (other->name() == name_);
-    }
+    virtual bool matches(Role *other) const { return (name_ == other->name_); }
 
     virtual void accept(util::RoleVisitor &v);
 };

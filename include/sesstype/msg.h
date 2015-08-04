@@ -12,6 +12,8 @@
 #include <vector>
 #endif
 
+#include "sesstype/util/clonable.h"
+
 #ifdef __cplusplus
 namespace sesstype {
 #endif
@@ -25,7 +27,7 @@ namespace sesstype {
  * non-empty datatype. The datatypes can have multi-dimensional Expr parameters
  * for representing multi-dimensional arrays.
  */
-class MsgPayload {
+class MsgPayload : public util::Clonable {
     std::string name_;
     std::string type_;
 
@@ -46,17 +48,13 @@ class MsgPayload {
     /// \brief MsgPayload destructor.
     ~MsgPayload() { }
 
+    MsgPayload *clone() const override { return new MsgPayload(*this); }
+
     /// \returns name of MsgPayload.
-    std::string name() const
-    {
-        return name_;
-    }
+    std::string name() const { return name_; }
 
     /// \returns datatype of MsgPayload.
-    std::string type() const
-    {
-        return type_;
-    }
+    std::string type() const { return type_; }
 
 };
 
@@ -67,7 +65,7 @@ class MsgPayload {
  * message-passing based interactions), which contains a message label (for
  * identifying messages) and optionally payload types (see MsgPayload).
  */
-class MsgSig {
+class MsgSig : public util::Clonable {
     std::string label_;
     std::vector<MsgPayload *> payloads_;
 
@@ -80,7 +78,7 @@ class MsgSig {
     MsgSig(const MsgSig &msgsig) : label_(msgsig.label_), payloads_()
     {
         for (auto payload : msgsig.payloads_) {
-            payloads_.emplace_back(payload);
+            payloads_.push_back(payload);
         }
     }
 
@@ -93,22 +91,13 @@ class MsgSig {
     }
 
     /// \brief Make a MsgSig* clone.
-    virtual MsgSig *clone() const
-    {
-        return new MsgSig(*this);
-    }
+    virtual MsgSig *clone() const override { return new MsgSig(*this); }
 
     /// \returns label of the MsgSig.
-    std::string label() const
-    {
-        return label_;
-    }
+    std::string label() const { return label_; }
 
     /// \returns number of payload paramaters.
-    unsigned int num_payloads() const
-    {
-        return payloads_.size();
-    }
+    unsigned int num_payloads() const { return payloads_.size(); }
 
     /// \returns payload by name.
     MsgPayload *payload(std::string name) const
@@ -123,25 +112,21 @@ class MsgSig {
     }
 
     /// \returns payload by positional index.
-    MsgPayload *payload(unsigned int idx) const
-    {
-        return payloads_.at(idx);
-    }
+    MsgPayload *payload(unsigned int idx) const { return payloads_.at(idx); }
 
     /// \brief Add a payload parameter to current MsgSig.
     /// \param[in] payload to add.
     void add_payload(MsgPayload *payload)
     {
-        payloads_.emplace_back(payload);
+        payloads_.push_back(payload->clone());
     }
 
     /// \returns true if payload with name exists.
     bool has_payload(std::string name) const
     {
-
-    return (std::find_if(payloads_.begin(), payloads_.end(),
-                [name](const MsgPayload *const payload)
-                -> bool { return payload->name() == name; }) != payloads_.end());
+        return (std::find_if(payloads_.begin(), payloads_.end(),
+                    [name](const MsgPayload *const payload)
+                    -> bool { return payload->name() == name; }) != payloads_.end());
     }
 };
 #endif // __cplusplus

@@ -47,7 +47,10 @@ class Print : public NodeVisitor, public RoleVisitor {
     /// \brief Output prefix based on current line#, indent level and character.
     void prefix()
     {
-        os_ << line_count_++ << ": ";
+        if (line_count_ == 1) {
+            os_ << "Line\t |\tTree\n====================\n";
+        }
+        os_ << line_count_++ << "\t ";
         if (indent_lvl_ > 1) {
             os_ << '|';
             for (unsigned int i=1; i<indent_lvl_; i++) {
@@ -72,7 +75,7 @@ class Print : public NodeVisitor, public RoleVisitor {
     {
         prefix();
         os_ << "interaction { from: ";
-        if (node->sndr()) {
+        if (node->sndr() != nullptr) {
             node->sndr()->accept(*this);
         } else {
             os_ << "(empty)";
@@ -90,7 +93,6 @@ class Print : public NodeVisitor, public RoleVisitor {
 
     void visit(BlockNode *node)
     {
-        std::cout << "Considering a BlockNode\n";
         indent_lvl_++;
         for (auto it=node->child_begin(); it!=node->child_end(); it++) {
             (*it)->accept(*this);
@@ -104,7 +106,7 @@ class Print : public NodeVisitor, public RoleVisitor {
         os_ << "recur " << "{ label: " << node->label() << " }";
         os_ << " children: " << node->num_children() << " @" << node << "\n";
 
-        dynamic_cast<BlockNode *>(node)->accept(*this);
+        node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
 
     void visit(ContinueNode *node)
@@ -119,7 +121,7 @@ class Print : public NodeVisitor, public RoleVisitor {
         os_ << "choice { at: " << node->at()->name() << " }";
         os_ << " children: " << node->num_children() << " @" << node << "\n";
 
-        dynamic_cast<BlockNode *>(node)->accept(*this);
+        node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
 
     void visit(ParNode *node)
@@ -128,7 +130,7 @@ class Print : public NodeVisitor, public RoleVisitor {
         os_ << "par {}";
         os_ << " parblocks:children: " << node->num_children() << " @" << node << "\n";
 
-        dynamic_cast<BlockNode *>(node)->accept(*this);
+        node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
 
     void visit(NestedNode *node)
