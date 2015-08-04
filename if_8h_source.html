@@ -85,59 +85,87 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SESSTYPE__PARAMETERISED__NODE__IF_H__</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SESSTYPE__PARAMETERISED__NODE__IF_H__</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="util_2node__visitor_8h.html" title="Utilities for Node.">sesstype/util/node_visitor.h</a>&quot;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;sesstype/parameterised/cond.h&quot;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised).">sesstype/parameterised/node.h</a>&quot;</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00011"></a>00011 <span class="keyword">namespace </span>parameterised {
-<a name="l00012"></a>00012 <span class="preprocessor">#endif</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a>00014 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span>
-<a name="l00018"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html">00018</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html" title="If-block.">IfNode</a> : <span class="keyword">public</span> <a class="code" href="classsesstype_1_1BlockNode.html" title="Block of statements (Node instances).">BlockNode</a> {
-<a name="l00019"></a>00019   <span class="keyword">public</span>:
-<a name="l00022"></a>00022     <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#a50f0f9a04e3380efb015b058c58a1f45" title="IfNode constructor.">IfNode</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#a54de55194ecc1b2f16960057bbf9fbc0">cond</a>);
-<a name="l00023"></a>00023 
-<a name="l00025"></a>00025     <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#a50f0f9a04e3380efb015b058c58a1f45" title="IfNode constructor.">IfNode</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html" title="If-block.">IfNode</a> &amp;node);
-<a name="l00026"></a>00026 
-<a name="l00028"></a>00028     <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#aa9afda8ee0c3b40f921d0069a9d7454d" title="IfNode destructor.">~IfNode</a>() <span class="keyword">override</span>;
-<a name="l00029"></a>00029 
-<a name="l00031"></a>00031     <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html" title="If-block.">IfNode</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#a6b46ce69cbea072147df39eb94656eb9" title="clone a IfNode.">clone</a>() <span class="keyword">const override</span>;
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;sesstype/node/block.h&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;sesstype/util/visitor_tmpl.h&quot;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2msg_8h.html" title="A message for passing between participants (parameterised).">sesstype/parameterised/msg.h</a>&quot;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;sesstype/parameterised/cond.h&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised).">sesstype/parameterised/node.h</a>&quot;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 
+<a name="l00013"></a>00013 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00015"></a>00015 <span class="keyword">namespace </span>parameterised {
+<a name="l00016"></a>00016 <span class="preprocessor">#endif</span>
+<a name="l00017"></a>00017 <span class="preprocessor"></span>
+<a name="l00018"></a>00018 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>
+<a name="l00022"></a>00022 <span class="keyword">template</span> &lt;<span class="keyword">class</span> BaseNode, <span class="keyword">class</span> RoleType, <span class="keyword">class</span> MessageType, <span class="keyword">class</span> VisitorType&gt;
+<a name="l00023"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html">00023</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html" title="If-block.">IfNodeTmpl</a> : <span class="keyword">public</span> BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt; {
+<a name="l00024"></a>00024     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *cond_;
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026   <span class="keyword">public</span>:
+<a name="l00029"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aa5c9b0ac2aaf6daaefe4993611001b5d">00029</a>     <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aa5c9b0ac2aaf6daaefe4993611001b5d" title="IfNode constructor.">IfNodeTmpl</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a837fb7b913a35495eea02c0b3ad362af">cond</a>)
+<a name="l00030"></a>00030         : BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(ST_NODE_IF),
+<a name="l00031"></a>00031           cond_(cond) { }
 <a name="l00032"></a>00032 
-<a name="l00037"></a>00037     <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">Node</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#a3ed073bd945efc0104a9b6582de0d5ef" title="Get body Node at position idx.">body</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> idx) <span class="keyword">const</span>;
-<a name="l00038"></a>00038 
-<a name="l00041"></a>00041     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#ab64bf60d8d4e418188e0e0fec9b3a7ac" title="Add body Node to current if-block.">append_body</a>(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">Node</a> *body);
-<a name="l00042"></a>00042 
-<a name="l00044"></a>00044     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#a54de55194ecc1b2f16960057bbf9fbc0">cond</a>() <span class="keyword">const</span>;
-<a name="l00045"></a>00045 
-<a name="l00048"></a>00048     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#af899b470538497917c4b8862bea81da1" title="Set if-block condition.">set_cond</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *cond);
+<a name="l00034"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a6901178cec3dea79cee48d8ee80aeca5">00034</a>     <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aa5c9b0ac2aaf6daaefe4993611001b5d" title="IfNode constructor.">IfNodeTmpl</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html" title="If-block.">IfNodeTmpl</a> &amp;node)
+<a name="l00035"></a>00035         : BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(node),
+<a name="l00036"></a>00036           cond_(node.cond_) { }
+<a name="l00037"></a>00037 
+<a name="l00039"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aca43dc91c83440d9202984e602af653f">00039</a>     <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aca43dc91c83440d9202984e602af653f" title="IfNode destructor.">~IfNodeTmpl</a>()<span class="keyword"> override</span>
+<a name="l00040"></a>00040 <span class="keyword">    </span>{
+<a name="l00041"></a>00041         <span class="keyword">delete</span> cond_;
+<a name="l00042"></a>00042     }
+<a name="l00043"></a>00043 
+<a name="l00045"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#ac49a2f06a230509e523c39e9c9f32610">00045</a>     <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html" title="If-block.">IfNodeTmpl</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#ac49a2f06a230509e523c39e9c9f32610" title="clone a IfNode.">clone</a>()<span class="keyword"> const override</span>
+<a name="l00046"></a>00046 <span class="keyword">    </span>{
+<a name="l00047"></a>00047         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aa5c9b0ac2aaf6daaefe4993611001b5d" title="IfNode constructor.">IfNodeTmpl</a>(*<span class="keyword">this</span>);
+<a name="l00048"></a>00048     }
 <a name="l00049"></a>00049 
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html#aa5ab0448947c98221506c79a719739aa" title="accept method for util::NodeVisitor.">accept</a>(<a class="code" href="classsesstype_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">sesstype::util::NodeVisitor</a> &amp;v) <span class="keyword">override</span>;
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052   <span class="keyword">private</span>:
-<a name="l00053"></a>00053     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *cond_;
-<a name="l00054"></a>00054 };
-<a name="l00055"></a>00055 <span class="preprocessor">#endif // __cplusplus</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>
-<a name="l00057"></a>00057 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00059"></a>00059 <span class="preprocessor">#endif</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span>
-<a name="l00061"></a>00061 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_if_node(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">st_cond</a> *cond);
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00065"></a>00065 <span class="preprocessor">#endif</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span>
-<a name="l00067"></a>00067 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00068"></a>00068 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
-<a name="l00069"></a>00069 } <span class="comment">// namespace sesstype</span>
-<a name="l00070"></a>00070 <span class="preprocessor">#endif</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span>
-<a name="l00072"></a>00072 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__NODE__IF_H__</span>
+<a name="l00053"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a04e46c5c7e9eeda24b17b5162e8d0468">00053</a>     BaseNode *<a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a04e46c5c7e9eeda24b17b5162e8d0468" title="Get body Node at position idx.">body</a>()<span class="keyword"> const</span>
+<a name="l00054"></a>00054 <span class="keyword">    </span>{
+<a name="l00055"></a>00055         <span class="keywordflow">return</span> BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt;::child(0);
+<a name="l00056"></a>00056     }
+<a name="l00057"></a>00057 
+<a name="l00060"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a2a522899e9224d5a336aba07dbe29885">00060</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a2a522899e9224d5a336aba07dbe29885" title="Add body Node to current if-block.">set_body</a>(BaseNode *<a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a04e46c5c7e9eeda24b17b5162e8d0468" title="Get body Node at position idx.">body</a>)
+<a name="l00061"></a>00061     {
+<a name="l00062"></a>00062         this-&gt;set_child(0, body);
+<a name="l00063"></a>00063     }
+<a name="l00064"></a>00064 
+<a name="l00066"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a837fb7b913a35495eea02c0b3ad362af">00066</a>     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a837fb7b913a35495eea02c0b3ad362af">cond</a>()<span class="keyword"> const</span>
+<a name="l00067"></a>00067 <span class="keyword">    </span>{
+<a name="l00068"></a>00068         <span class="keywordflow">return</span> cond_;
+<a name="l00069"></a>00069     }
+<a name="l00070"></a>00070 
+<a name="l00073"></a><a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a85174d2816f78380141e0e48dda43913">00073</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a85174d2816f78380141e0e48dda43913" title="Set if-block condition.">set_cond</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a837fb7b913a35495eea02c0b3ad362af">cond</a>)
+<a name="l00074"></a>00074     {
+<a name="l00075"></a>00075         cond_ = <a class="code" href="classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a837fb7b913a35495eea02c0b3ad362af">cond</a>;
+<a name="l00076"></a>00076     }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     <span class="keywordtype">void</span> <span class="keyword">virtual</span> accept(VisitorType &amp;v) <span class="keyword">override</span>;
+<a name="l00079"></a>00079 };
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081 <span class="keyword">using</span> IfNode = IfNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;;
+<a name="l00082"></a>00082 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00083"></a>00083 <span class="preprocessor"></span>
+<a name="l00084"></a>00084 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00085"></a>00085 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00086"></a>00086 <span class="preprocessor">#endif</span>
+<a name="l00087"></a>00087 <span class="preprocessor"></span>
+<a name="l00088"></a>00088 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_if_node(st_cond *cond);
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00091"></a>00091 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00092"></a>00092 <span class="preprocessor">#endif</span>
+<a name="l00093"></a>00093 <span class="preprocessor"></span>
+<a name="l00094"></a>00094 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00095"></a>00095 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
+<a name="l00096"></a>00096 } <span class="comment">// namespace sesstype</span>
+<a name="l00097"></a>00097 <span class="preprocessor">#endif</span>
+<a name="l00098"></a>00098 <span class="preprocessor"></span>
+<a name="l00099"></a>00099 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__NODE__IF_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

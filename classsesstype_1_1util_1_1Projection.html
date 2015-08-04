@@ -112,7 +112,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Endpoint projection.  
  <a href="classsesstype_1_1util_1_1Projection.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="util_8h_source.html">util.h</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="util_2projection_8h_source.html">projection.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for sesstype::util::Projection:</div>
 <div class="dyncontent">
@@ -132,33 +132,53 @@ Collaboration diagram for sesstype::util::Projection:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8d351ef4b91191b8069f0ccb4ebc89c3"></a><!-- doxytag: member="sesstype::util::Projection::Projection" ref="a8d351ef4b91191b8069f0ccb4ebc89c3" args="(Role *role)" -->
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab98944f2386ad53037b4237b361c4a63"></a><!-- doxytag: member="sesstype::util::Projection::Projection" ref="ab98944f2386ad53037b4237b361c4a63" args="(Role *role)" -->
 &#160;</td><td class="memItemRight" valign="bottom"><b>Projection</b> (<a class="el" href="classsesstype_1_1Role.html">Role</a> *role)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaf662e3491632d79edf11aaabe3352ee"></a><!-- doxytag: member="sesstype::util::Projection::get_root" ref="aaf662e3491632d79edf11aaabe3352ee" args="()" -->
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6ee03bf59cb0ed4724303658c6e116f8"></a><!-- doxytag: member="sesstype::util::Projection::get_root" ref="a6ee03bf59cb0ed4724303658c6e116f8" args="()" -->
 <a class="el" href="classsesstype_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_root</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74a042698302e06aff43033e1cba238b"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a74a042698302e06aff43033e1cba238b" args="(Node *node) override" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1Node.html">Node</a> *node) override</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b80b8d153e7a66686fbead195b525de"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a5b80b8d153e7a66686fbead195b525de" args="(BlockNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1BlockNode.html">BlockNode</a> *node) override</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1util_1_1Projection.html#a5b80b8d153e7a66686fbead195b525de">visit</a> (BlockNode *node) override</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab381f5e06db37273fb84f38e96086a95"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="ab381f5e06db37273fb84f38e96086a95" args="(InteractionNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1InteractionNode.html">InteractionNode</a> *node) override</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (InteractionNode *node) override</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73febe436fe90602f4bf61994b9465e2"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a73febe436fe90602f4bf61994b9465e2" args="(ChoiceNode *node)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (ChoiceNode *node)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a345eaaef5c9b16e9c0a0dcf56c82fb7d"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a345eaaef5c9b16e9c0a0dcf56c82fb7d" args="(RecurNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1RecurNode.html">RecurNode</a> *node) override</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (RecurNode *node) override</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1ecc569b4c78cb2590a4efdb99b7dd0b"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a1ecc569b4c78cb2590a4efdb99b7dd0b" args="(ContinueNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1ContinueNode.html">ContinueNode</a> *node) override</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60334b5d02e2b5726cfb141ab01e3636"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a60334b5d02e2b5726cfb141ab01e3636" args="(ChoiceNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1ChoiceNode.html">ChoiceNode</a> *node) override</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3c00353b53bf2a1ec28d1fdf96eab91"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="ad3c00353b53bf2a1ec28d1fdf96eab91" args="(ParNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1ParNode.html">ParNode</a> *node) override</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a564614b2cba52a3bac5fd7c9da5157c9"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a564614b2cba52a3bac5fd7c9da5157c9" args="(NestedNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1NestedNode.html">NestedNode</a> *node) override</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6806c1a00aa4050e5d7a34bda4c728b4"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a6806c1a00aa4050e5d7a34bda4c728b4" args="(InterruptibleNode *node) override" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1InterruptibleNode.html">InterruptibleNode</a> *node) override</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (ContinueNode *node) override</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a88675f960bc41385c68f4653e662886a"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a88675f960bc41385c68f4653e662886a" args="(ParNode *node)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (ParNode *node)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad2532a99f0b3da4f0c983f9a441f3b7c"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="ad2532a99f0b3da4f0c983f9a441f3b7c" args="(NestedNode *node)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (NestedNode *node)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="addf485615273e744fdc03b9863590707"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="addf485615273e744fdc03b9863590707" args="(InterruptibleNode *node)" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (InterruptibleNode *node)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Endpoint projection. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="util_8h_source.html">util.h</a></li>
+</div><hr/><h2>Member Function Documentation</h2>
+<a class="anchor" id="a5b80b8d153e7a66686fbead195b525de"></a><!-- doxytag: member="sesstype::util::Projection::visit" ref="a5b80b8d153e7a66686fbead195b525de" args="(BlockNode *node) override" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sesstype::util::Projection::visit </td>
+          <td>(</td>
+          <td class="paramtype">BlockNode *&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td><code> [inline, override]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Note that we are not adding a new root node here, because the parent is addeded by one of below:</p>
+<p>1. Subclass of BlockNode 2. Constructor if this is the root <a class="el" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">Node</a> (the only place when BlockNode exists as BlockNode) </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="util_2projection_8h_source.html">util/projection.h</a></li>
+<li><a class="el" href="src_2parameterised_2util_2projection_8cc.html">src/parameterised/util/projection.cc</a></li>
 <li>src/util/projection.cc</li>
 </ul>
 </div><!-- contents -->

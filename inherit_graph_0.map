@@ -1,3 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsesstype_1_1Import.html" title="Import statement." alt="" coords="5,5,125,35"/>
+<area shape="rect" id="node1" href="$classsesstype_1_1BlockNodeTmpl.html" title="Block of statements (Node instances)." alt="" coords="7,85,495,115"/>
+<area shape="rect" id="node3" href="$classsesstype_1_1ChoiceNodeTmpl.html" title="Choice blocks." alt="" coords="559,5,1055,35"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1InterruptibleNodeTmpl.html" title="Interruptible blocks." alt="" coords="545,59,1068,88"/>
+<area shape="rect" id="node7" href="$classsesstype_1_1ParNodeTmpl.html" title="Parallel blocks." alt="" coords="569,112,1044,141"/>
+<area shape="rect" id="node9" href="$classsesstype_1_1RecurNodeTmpl.html" title="Recursion statements." alt="" coords="561,165,1052,195"/>
 </map>

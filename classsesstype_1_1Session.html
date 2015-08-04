@@ -134,6 +134,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#a236de05fdd7e8ca5d74d60e1bf2f9cab">name</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#a38ac9253061f7e239cd018cb6b1ebe5c">set_root</a> (<a class="el" href="classsesstype_1_1Node.html">Node</a> *<a class="el" href="classsesstype_1_1Session.html#ae867c4f33c52616c48d53c6781869ecf">root</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1Node.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#ae867c4f33c52616c48d53c6781869ecf">root</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1Role.html">Role</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#af5449544d56838c49762b71633301f6e">endpoint</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#a7ff8df30549d9668b002ec2605e235b8">set_endpoint</a> (<a class="el" href="classsesstype_1_1Role.html">Role</a> *<a class="el" href="classsesstype_1_1Session.html#af5449544d56838c49762b71633301f6e">endpoint</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#a9ee4acb269e5d5da303c046dd2fdd196">project</a> (<a class="el" href="classsesstype_1_1Role.html">Role</a> *<a class="el" href="classsesstype_1_1Session.html#a83337aa32c3f913c99c7012fd5a19567">role</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#afa486bb0445cf66910860426320543bc">type</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Session.html#a3ac3cb0478bf001bbfc69a90cad8ff7d">add_role</a> (<a class="el" href="classsesstype_1_1Role.html">Role</a> *<a class="el" href="classsesstype_1_1Session.html#a83337aa32c3f913c99c7012fd5a19567">role</a>)</td></tr>
@@ -196,6 +198,23 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="af5449544d56838c49762b71633301f6e"></a><!-- doxytag: member="sesstype::Session::endpoint" ref="af5449544d56838c49762b71633301f6e" args="() const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsesstype_1_1Role.html">Role</a> * <a class="el" href="classsesstype_1_1Session.html#af5449544d56838c49762b71633301f6e">sesstype::Session::endpoint</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>endpoint of current <a class="el" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">Session</a>. </dd></dl>
 
 </div>
 </div>
@@ -310,6 +329,29 @@ Public Member Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 <dl class="return"><dt><b>Returns:</b></dt><dd>root <a class="el" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">Node</a> of <a class="el" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">Session</a> body. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a7ff8df30549d9668b002ec2605e235b8"></a><!-- doxytag: member="sesstype::Session::set_endpoint" ref="a7ff8df30549d9668b002ec2605e235b8" args="(Role *endpoint)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsesstype_1_1Session.html#a7ff8df30549d9668b002ec2605e235b8">sesstype::Session::set_endpoint</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsesstype_1_1Role.html">Role</a> *&#160;</td>
+          <td class="paramname"><em>endpoint</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">role</td><td>Sets endpoint role to endpoint. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

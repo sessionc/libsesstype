@@ -1,7 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST&#45;based visitors." alt="" coords="229,32,496,61"/>
-<area shape="rect" id="node9" href="$classsesstype_1_1util_1_1Printer.html" title="Protocol and Expression printer." alt="" coords="289,85,436,115"/>
-<area shape="rect" id="node11" href="$classsesstype_1_1util_1_1Projection.html" title="Endpoint projection." alt="" coords="280,139,445,168"/>
-<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1util_1_1Printer.html" title="sesstype::parameterised::util::Printer" alt="" coords="555,5,789,35"/>
-<area shape="rect" id="node7" href="$classsesstype_1_1parameterised_1_1util_1_1Projection.html" title="sesstype::parameterised::util::Projection" alt="" coords="544,59,800,88"/>
+<area shape="rect" id="node3" href="$classsesstype_1_1util_1_1Print.html" title="Protocol and Expression printer." alt="" coords="5,83,139,112"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1util_1_1Projection.html" title="Endpoint projection." alt="" coords="163,83,328,112"/>
 </map>

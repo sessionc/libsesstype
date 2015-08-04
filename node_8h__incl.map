@@ -1,3 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node7" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="63,83,177,112"/>
+<area shape="rect" id="node3" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="177,83,292,112"/>
+<area shape="rect" id="node13" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="365,160,523,189"/>
+<area shape="rect" id="node15" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="316,83,425,112"/>
+<area shape="rect" id="node20" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="605,237,784,267"/>
+<area shape="rect" id="node22" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="547,160,720,189"/>
 </map>

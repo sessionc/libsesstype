@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['recurnode',['RecurNode',['../classsesstype_1_1RecurNode.html',1,'sesstype']]],
+  ['recurnodetmpl',['RecurNodeTmpl',['../classsesstype_1_1RecurNodeTmpl.html',1,'sesstype']]],
   ['rngexpr',['RngExpr',['../classsesstype_1_1parameterised_1_1RngExpr.html',1,'sesstype::parameterised']]],
   ['role',['Role',['../classsesstype_1_1Role.html',1,'sesstype']]],
   ['role',['Role',['../classsesstype_1_1parameterised_1_1Role.html',1,'sesstype::parameterised']]],

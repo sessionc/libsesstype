@@ -1,5 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$parameterised_2util_8h_source.html" title="util.h" alt="" coords="64,83,115,112"/>
-<area shape="rect" id="node5" href="$parameterised_2util_2print_8cc.html" title="Printer." alt="" coords="5,160,69,189"/>
-<area shape="rect" id="node7" href="$src_2parameterised_2util_2projection_8cc.html" title="Endpoint projection." alt="" coords="93,160,189,189"/>
+<area shape="rect" id="node3" href="$parameterised_2util_2print_8h_source.html" title="print.h" alt="" coords="12,83,71,112"/>
+<area shape="rect" id="node11" href="$parameterised_2util_2projection_8h_source.html" title="projection.h" alt="" coords="95,83,183,112"/>
+<area shape="rect" id="node5" href="$parameterised_2util_8h_source.html" title="util.h" alt="" coords="64,160,115,189"/>
+<area shape="rect" id="node7" href="$print_8cc.html" title="Printer." alt="" coords="5,237,69,267"/>
+<area shape="rect" id="node9" href="$src_2parameterised_2util_2projection_8cc.html" title="Endpoint projection." alt="" coords="93,237,189,267"/>
 </map>

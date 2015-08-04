@@ -91,13 +91,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#endif</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span>
-<a name="l00013"></a>00013 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00015"></a>00015 <span class="keyword">namespace </span>util {
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;sesstype/util/clonable.h&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;sesstype/util/visitor_tmpl.h&quot;</span>
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="util_2role__visitor_8h.html" title="Utities for Roles.">sesstype/util/role_visitor.h</a>&quot;</span>
 <a name="l00016"></a>00016 
-<a name="l00017"></a>00017 <span class="keyword">class </span>RoleVisitor;
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 } <span class="comment">// namespace util</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00018"></a>00018 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00019"></a>00019 <span class="keyword">class </span>Role;
 <a name="l00020"></a>00020 } <span class="comment">// namespace sesstype</span>
 <a name="l00021"></a>00021 <span class="preprocessor">#endif</span>
 <a name="l00022"></a>00022 <span class="preprocessor"></span>
@@ -107,60 +107,59 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00026"></a>00026 <span class="preprocessor"></span>
 <a name="l00027"></a>00027 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00028"></a>00028 <span class="preprocessor"></span>
-<a name="l00031"></a><a class="code" href="classsesstype_1_1Role.html">00031</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> {
-<a name="l00032"></a>00032   <span class="keyword">public</span>:
-<a name="l00034"></a>00034     <a class="code" href="classsesstype_1_1Role.html#a791a40d9bc802957e3fe13772017c8a5" title="Role constructor with &quot;default&quot; as name.">Role</a>();
-<a name="l00035"></a>00035 
-<a name="l00037"></a>00037     <a class="code" href="classsesstype_1_1Role.html#a791a40d9bc802957e3fe13772017c8a5" title="Role constructor with &quot;default&quot; as name.">Role</a>(std::string <a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>);
-<a name="l00038"></a>00038 
-<a name="l00040"></a>00040     <a class="code" href="classsesstype_1_1Role.html#a791a40d9bc802957e3fe13772017c8a5" title="Role constructor with &quot;default&quot; as name.">Role</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> &amp;role);
-<a name="l00041"></a>00041 
-<a name="l00043"></a>00043     <span class="keyword">virtual</span> <a class="code" href="classsesstype_1_1Role.html#a21686983fc550bd1f8ffb8564c9504f3" title="Role destructor.">~Role</a>();
-<a name="l00044"></a>00044 
-<a name="l00046"></a>00046     <span class="keyword">virtual</span> <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> *<a class="code" href="classsesstype_1_1Role.html#abedfb04319587936eadbbeef6b18533c" title="clone a Role.">clone</a>() <span class="keyword">const</span>;
-<a name="l00047"></a>00047 
-<a name="l00049"></a>00049     std::string <a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>() <span class="keyword">const</span>;
-<a name="l00050"></a>00050 
-<a name="l00052"></a>00052     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1Role.html#a016f2035aafde5d365ce457af7a134a9">set_name</a>(std::string name);
-<a name="l00053"></a>00053 
-<a name="l00056"></a>00056     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1Role.html#a3c8296f881de7e42b1ff8d40b5873487" title="Check if this Role matches another Role.">matches</a>(<a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> *other) <span class="keyword">const</span>;
-<a name="l00057"></a>00057 
-<a name="l00059"></a>00059     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1Role.html#ac41d01e2aedb618663b19c0e5c2b6aae" title="accept method for util::RoleVisitor.">accept</a>(<a class="code" href="classsesstype_1_1util_1_1RoleVisitor.html" title="Abstract class for building Role visitors.">sesstype::util::RoleVisitor</a> &amp;v);
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061   <span class="keyword">private</span>:
-<a name="l00062"></a>00062     std::string name_;
-<a name="l00063"></a>00063 };
-<a name="l00064"></a>00064 <span class="preprocessor">#endif // __cplusplus</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span>
-<a name="l00066"></a>00066 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00068"></a>00068 <span class="preprocessor">#endif</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span>
-<a name="l00070"></a>00070 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span><span class="keyword">typedef</span> <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">st_role</a>;
-<a name="l00072"></a>00072 <span class="preprocessor">#else</span>
-<a name="l00073"></a>00073 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> st_role;
-<a name="l00074"></a>00074 <span class="preprocessor">#endif</span>
-<a name="l00075"></a>00075 <span class="preprocessor"></span>
-<a name="l00079"></a>00079 st_role *<a class="code" href="namespacesesstype.html#a8008b522c66ab865ee65f6c978617d4a" title="Create a Role.">st_role_init</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
-<a name="l00080"></a>00080 
-<a name="l00084"></a>00084 st_role *<a class="code" href="namespacesesstype.html#a003a91ee46ea27c158a53bc91ec05090" title="Create a copy of a Role.">st_role_copy</a>(<span class="keyword">const</span> st_role *<span class="keyword">const</span> role);
-<a name="l00085"></a>00085 
-<a name="l00089"></a>00089 <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="namespacesesstype.html#afb636459a689ab0f80b028a0b47f5615" title="Get a name of the Role.">st_role_name</a>(st_role *<span class="keyword">const</span> role);
-<a name="l00090"></a>00090 
-<a name="l00095"></a>00095 st_role *<a class="code" href="namespacesesstype.html#a233b34a4c132f23d185e4df7a41e1865" title="Set the name of the Role.">st_role_set_name</a>(st_role *<span class="keyword">const</span> role, <span class="keyword">const</span> <span class="keywordtype">char</span> *name);
-<a name="l00096"></a>00096 
-<a name="l00099"></a>00099 <span class="keywordtype">void</span> <a class="code" href="namespacesesstype.html#af2ce8f88f5d6b97f4a2bc0e6b42a96be" title="Free a previously allocated Role.">st_role_free</a>(st_role *role);
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00102"></a>00102 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00103"></a>00103 <span class="preprocessor">#endif</span>
-<a name="l00104"></a>00104 <span class="preprocessor"></span>
-<a name="l00105"></a>00105 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00106"></a>00106 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
-<a name="l00107"></a>00107 <span class="preprocessor">#endif</span>
-<a name="l00108"></a>00108 <span class="preprocessor"></span>
-<a name="l00109"></a>00109 <span class="preprocessor">#endif//SESSTYPE__ROLE_H__</span>
+<a name="l00031"></a><a class="code" href="classsesstype_1_1Role.html">00031</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> : <span class="keyword">public</span> util::Clonable {
+<a name="l00032"></a>00032     std::string name_;
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034   <span class="keyword">public</span>:
+<a name="l00036"></a><a class="code" href="classsesstype_1_1Role.html#a791a40d9bc802957e3fe13772017c8a5">00036</a>     <a class="code" href="classsesstype_1_1Role.html#a791a40d9bc802957e3fe13772017c8a5" title="Role constructor with &quot;default&quot; as name.">Role</a>() : name_(<span class="stringliteral">&quot;default&quot;</span>) { }
+<a name="l00037"></a>00037 
+<a name="l00039"></a><a class="code" href="classsesstype_1_1Role.html#a65423c54d83217cee6ed9f4658513bcb">00039</a>     <a class="code" href="classsesstype_1_1Role.html#a65423c54d83217cee6ed9f4658513bcb" title="Role constructor.">Role</a>(std::string <a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>) : name_(name) { }
+<a name="l00040"></a>00040 
+<a name="l00042"></a><a class="code" href="classsesstype_1_1Role.html#a0788a2114e5848e65dedf42380dd3934">00042</a>     <a class="code" href="classsesstype_1_1Role.html#a0788a2114e5848e65dedf42380dd3934" title="Role copy constructor.">Role</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> &amp;role) : name_(role.name_) { }
+<a name="l00043"></a>00043 
+<a name="l00045"></a><a class="code" href="classsesstype_1_1Role.html#a32fbbade8ba5a40714672787992a2c80">00045</a>     <span class="keyword">virtual</span> <a class="code" href="classsesstype_1_1Role.html#a32fbbade8ba5a40714672787992a2c80" title="Role destructor.">~Role</a>() { }
+<a name="l00046"></a>00046 
+<a name="l00048"></a><a class="code" href="classsesstype_1_1Role.html#ab1c0d32b1d2eeb40c8a5c2f437aa54b7">00048</a>     <span class="keyword">virtual</span> <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> *<a class="code" href="classsesstype_1_1Role.html#ab1c0d32b1d2eeb40c8a5c2f437aa54b7" title="clone a Role.">clone</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classsesstype_1_1Role.html#a791a40d9bc802957e3fe13772017c8a5" title="Role constructor with &quot;default&quot; as name.">Role</a>(*<span class="keyword">this</span>); }
+<a name="l00049"></a>00049 
+<a name="l00051"></a><a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">00051</a>     std::string <a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> name_; }
+<a name="l00052"></a>00052 
+<a name="l00054"></a><a class="code" href="classsesstype_1_1Role.html#a016f2035aafde5d365ce457af7a134a9">00054</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1Role.html#a016f2035aafde5d365ce457af7a134a9">set_name</a>(std::string <a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>) { name_ = <a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>; }
+<a name="l00055"></a>00055 
+<a name="l00058"></a><a class="code" href="classsesstype_1_1Role.html#a10631bfd8bbae6628a8dfb26f4b683d3">00058</a>     <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1Role.html#a10631bfd8bbae6628a8dfb26f4b683d3" title="Check if this Role matches another Role.">matches</a>(<a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> *other)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> (name_ == other-&gt;name_); }
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060     <span class="keyword">virtual</span> <span class="keywordtype">void</span> accept(<a class="code" href="classsesstype_1_1util_1_1RoleVisitor.html" title="Abstract class for building Role visitors.">util::RoleVisitor</a> &amp;v);
+<a name="l00061"></a>00061 };
+<a name="l00062"></a>00062 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00063"></a>00063 <span class="preprocessor"></span>
+<a name="l00064"></a>00064 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00065"></a>00065 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00066"></a>00066 <span class="preprocessor">#endif</span>
+<a name="l00067"></a>00067 <span class="preprocessor"></span>
+<a name="l00068"></a>00068 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00069"></a>00069 <span class="preprocessor"></span><span class="keyword">typedef</span> Role st_role;
+<a name="l00070"></a>00070 <span class="preprocessor">#else</span>
+<a name="l00071"></a>00071 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>Role st_role;
+<a name="l00072"></a>00072 <span class="preprocessor">#endif</span>
+<a name="l00073"></a>00073 <span class="preprocessor"></span>
+<a name="l00077"></a>00077 st_role *<a class="code" href="namespacesesstype.html#a8008b522c66ab865ee65f6c978617d4a" title="Create a Role.">st_role_init</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
+<a name="l00078"></a>00078 
+<a name="l00082"></a>00082 st_role *<a class="code" href="namespacesesstype.html#a003a91ee46ea27c158a53bc91ec05090" title="Create a copy of a Role.">st_role_copy</a>(<span class="keyword">const</span> st_role *<span class="keyword">const</span> role);
+<a name="l00083"></a>00083 
+<a name="l00087"></a>00087 <span class="keyword">const</span> <span class="keywordtype">char</span> *<a class="code" href="namespacesesstype.html#afb636459a689ab0f80b028a0b47f5615" title="Get a name of the Role.">st_role_name</a>(st_role *<span class="keyword">const</span> role);
+<a name="l00088"></a>00088 
+<a name="l00093"></a>00093 st_role *<a class="code" href="namespacesesstype.html#a233b34a4c132f23d185e4df7a41e1865" title="Set the name of the Role.">st_role_set_name</a>(st_role *<span class="keyword">const</span> role, <span class="keyword">const</span> <span class="keywordtype">char</span> *name);
+<a name="l00094"></a>00094 
+<a name="l00097"></a>00097 <span class="keywordtype">void</span> <a class="code" href="namespacesesstype.html#af2ce8f88f5d6b97f4a2bc0e6b42a96be" title="Free a previously allocated Role.">st_role_free</a>(st_role *role);
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00101"></a>00101 <span class="preprocessor">#endif</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span>
+<a name="l00103"></a>00103 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00104"></a>00104 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
+<a name="l00105"></a>00105 <span class="preprocessor">#endif</span>
+<a name="l00106"></a>00106 <span class="preprocessor"></span>
+<a name="l00107"></a>00107 <span class="preprocessor">#endif//SESSTYPE__ROLE_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

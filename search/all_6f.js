@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['oneofnode',['OneofNode',['../classsesstype_1_1parameterised_1_1OneofNode.html',1,'sesstype::parameterised']]],
-  ['oneofnode',['OneofNode',['../classsesstype_1_1parameterised_1_1OneofNode.html#a32e45c2ee3691438c3bc61d22fae02b0',1,'sesstype::parameterised::OneofNode::OneofNode(parameterised::Role *selector, unsigned int dimen)'],['../classsesstype_1_1parameterised_1_1OneofNode.html#a706234b64a62170c748439ba02154ce8',1,'sesstype::parameterised::OneofNode::OneofNode(const OneofNode &amp;node)']]],
+  ['oneofnodetmpl',['OneofNodeTmpl',['../classsesstype_1_1parameterised_1_1OneofNodeTmpl.html',1,'sesstype::parameterised']]],
+  ['oneofnodetmpl',['OneofNodeTmpl',['../classsesstype_1_1parameterised_1_1OneofNodeTmpl.html#a83460c5d7db762357f3e40465e562173',1,'sesstype::parameterised::OneofNodeTmpl::OneofNodeTmpl(RoleType *selector, unsigned int dimen)'],['../classsesstype_1_1parameterised_1_1OneofNodeTmpl.html#a6277c65588033ce6c81f6c6441dda5a2',1,'sesstype::parameterised::OneofNodeTmpl::OneofNodeTmpl(const OneofNodeTmpl &amp;node)']]],
   ['op',['op',['../classsesstype_1_1parameterised_1_1BinExpr.html#aafb95ec5d111833c0028eb23ca49b5db',1,'sesstype::parameterised::BinExpr']]],
-  ['operator_5b_5d',['operator[]',['../classsesstype_1_1parameterised_1_1MsgPayload.html#a82d8ffdb5f03616ed1cd1587afef2b25',1,'sesstype::parameterised::MsgPayload::operator[]()'],['../classsesstype_1_1parameterised_1_1Role.html#abdfc3e699fe9f67d1c692293ed355e2e',1,'sesstype::parameterised::Role::operator[]()']]]
+  ['operator_5b_5d',['operator[]',['../classsesstype_1_1parameterised_1_1MsgPayload.html#a32ef9930a93a4a09ad463f60243653c4',1,'sesstype::parameterised::MsgPayload::operator[]()'],['../classsesstype_1_1parameterised_1_1Role.html#acfb846aa637c830ae0b9536a9f8c14cc',1,'sesstype::parameterised::Role::operator[]()']]]
 ];

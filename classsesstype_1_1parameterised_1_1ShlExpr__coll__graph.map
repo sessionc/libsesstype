@@ -1,4 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classsesstype_1_1parameterised_1_1BinExpr.html" title="Binary expression (Abstract)." alt="" coords="5,117,224,147"/>
-<area shape="rect" id="node4" href="$classsesstype_1_1parameterised_1_1Expr.html" title="Expression." alt="" coords="15,5,215,35"/>
+<area shape="rect" id="node2" href="$classsesstype_1_1parameterised_1_1BinExpr.html" title="Binary expression (Abstract)." alt="" coords="5,197,224,227"/>
+<area shape="rect" id="node4" href="$classsesstype_1_1parameterised_1_1Expr.html" title="Expression." alt="" coords="15,85,215,115"/>
+<area shape="rect" id="node6" href="$classsesstype_1_1util_1_1Clonable.html" title="Pure virtual class for clonable classes." alt="" coords="36,5,193,35"/>
 </map>

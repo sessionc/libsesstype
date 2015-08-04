@@ -1,4 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node5" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="246,83,361,112"/>
-<area shape="rect" id="node10" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="22,83,222,112"/>
+<area shape="rect" id="node5" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="123,83,237,112"/>
+<area shape="rect" id="node16" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="261,83,461,112"/>
+<area shape="rect" id="node14" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="283,160,440,189"/>
 </map>

@@ -1,7 +1,10 @@
 <map id="G" name="G">
-<area shape="rect" id="node7" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="24,160,150,189"/>
-<area shape="rect" id="node10" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="192,83,326,112"/>
-<area shape="rect" id="node15" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="224,160,342,189"/>
-<area shape="rect" id="node24" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="451,237,560,267"/>
-<area shape="rect" id="node20" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="262,237,376,267"/>
+<area shape="rect" id="node7" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="25,160,151,189"/>
+<area shape="rect" id="node10" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="193,83,327,112"/>
+<area shape="rect" id="node15" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="225,160,343,189"/>
+<area shape="rect" id="node28" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="415,237,524,267"/>
+<area shape="rect" id="node17" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="225,237,340,267"/>
+<area shape="rect" id="node26" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="319,315,476,344"/>
+<area shape="rect" id="node33" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="568,392,747,421"/>
+<area shape="rect" id="node35" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="633,315,807,344"/>
 </map>

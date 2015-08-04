@@ -1,3 +1,15 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="5,83,205,112"/>
+<area shape="rect" id="node3" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="1181,160,1381,189"/>
+<area shape="rect" id="node11" href="$var_8h_source.html" title="sesstype/parameterised/expr/var.h" alt="" coords="251,83,472,112"/>
+<area shape="rect" id="node15" href="$val_8h_source.html" title="sesstype/parameterised/expr/val.h" alt="" coords="547,83,768,112"/>
+<area shape="rect" id="node18" href="$add_8h_source.html" title="sesstype/parameterised/expr/add.h" alt="" coords="792,83,1019,112"/>
+<area shape="rect" id="node21" href="$sub_8h_source.html" title="sesstype/parameterised/expr/sub.h" alt="" coords="1043,83,1269,112"/>
+<area shape="rect" id="node24" href="$mul_8h_source.html" title="sesstype/parameterised/expr/mul.h" alt="" coords="1293,83,1520,112"/>
+<area shape="rect" id="node27" href="$div_8h_source.html" title="sesstype/parameterised/expr/div.h" alt="" coords="1544,83,1765,112"/>
+<area shape="rect" id="node30" href="$mod_8h_source.html" title="sesstype/parameterised/expr/mod.h" alt="" coords="1789,83,2019,112"/>
+<area shape="rect" id="node33" href="$shl_8h_source.html" title="sesstype/parameterised/expr/shl.h" alt="" coords="2043,83,2264,112"/>
+<area shape="rect" id="node36" href="$shr_8h_source.html" title="sesstype/parameterised/expr/shr.h" alt="" coords="2288,83,2509,112"/>
+<area shape="rect" id="node39" href="$seq_8h_source.html" title="sesstype/parameterised/expr/seq.h" alt="" coords="2533,83,2760,112"/>
+<area shape="rect" id="node45" href="$rng_8h_source.html" title="sesstype/parameterised/expr/rng.h" alt="" coords="5,83,227,112"/>
+<area shape="rect" id="node9" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="1203,237,1360,267"/>
 </map>

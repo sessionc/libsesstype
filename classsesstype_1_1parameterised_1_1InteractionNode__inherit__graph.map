@@ -1,4 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classsesstype_1_1InteractionNode.html" title="Interaction (message&#45;passing) statements." alt="" coords="51,83,224,112"/>
-<area shape="rect" id="node4" href="$classsesstype_1_1Node.html" title="Session Type statements (st_node)." alt="" coords="80,5,195,35"/>
+<area shape="rect" id="node2" href="$classsesstype_1_1InteractionNodeTmpl.html" title="sesstype::InteractionNodeTmpl\&lt; Node, Role, MsgSig, util::NodeVisitor \&gt;" alt="" coords="5,160,451,189"/>
+<area shape="rect" id="node4" href="$classsesstype_1_1Node.html" title="Session Type statements (st_node)." alt="" coords="171,83,285,112"/>
+<area shape="rect" id="node6" href="$classsesstype_1_1util_1_1Clonable.html" title="Pure virtual class for clonable classes." alt="" coords="149,5,307,35"/>
 </map>

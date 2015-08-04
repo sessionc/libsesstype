@@ -86,63 +86,60 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SESSTYPE__PARAMETERISED__NODE__INTERACTION__H__</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
 <a name="l00004"></a>00004 <span class="preprocessor">#include &quot;sesstype/node/interaction.h&quot;</span>
-<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="util_2node__visitor_8h.html" title="Utilities for Node.">sesstype/util/node_visitor.h</a>&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;sesstype/util/visitor_tmpl.h&quot;</span>
 <a name="l00006"></a>00006 
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;sesstype/parameterised/cond.h&quot;</span>
-<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2msg_8h.html" title="A message for passing between participants (parameterised).">sesstype/parameterised/msg.h</a>&quot;</span>
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00011"></a>00011 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00012"></a>00012 <span class="keyword">namespace </span>parameterised {
-<a name="l00013"></a>00013 <span class="preprocessor">#endif</span>
-<a name="l00014"></a>00014 <span class="preprocessor"></span>
-<a name="l00015"></a>00015 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2msg_8h.html" title="A message for passing between participants (parameterised).">sesstype/parameterised/msg.h</a>&quot;</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;sesstype/parameterised/cond.h&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised).">sesstype/parameterised/node.h</a>&quot;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00014"></a>00014 <span class="keyword">namespace </span>parameterised {
+<a name="l00015"></a>00015 <span class="preprocessor">#endif</span>
 <a name="l00016"></a>00016 <span class="preprocessor"></span>
-<a name="l00019"></a><a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html">00019</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">InteractionNode</a> : <span class="keyword">public</span> sesstype::<a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">InteractionNode</a> {
-<a name="l00020"></a>00020   <span class="keyword">public</span>:
-<a name="l00022"></a>00022     <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#ad74b91357638daa721ccabed2cacf97e" title="InteractionNode constructor with empty MsgSig.">InteractionNode</a>();
+<a name="l00017"></a>00017 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00018"></a>00018 <span class="preprocessor"></span>
+<a name="l00021"></a><a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html">00021</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">InteractionNode</a> : <span class="keyword">public</span> sesstype::<a class="code" href="classsesstype_1_1InteractionNodeTmpl.html" title="Interaction (message-passing) statements.">InteractionNodeTmpl</a>&lt;Node, Role, MsgSig, util::NodeVisitor&gt; {
+<a name="l00022"></a>00022     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *cond_;
 <a name="l00023"></a>00023 
-<a name="l00025"></a>00025     <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#ad74b91357638daa721ccabed2cacf97e" title="InteractionNode constructor with empty MsgSig.">InteractionNode</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1InteractionNode.html" title="Interaction (message-passing) statements.">sesstype::InteractionNode</a> &amp;node);
-<a name="l00026"></a>00026 
-<a name="l00028"></a>00028     <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#ad74b91357638daa721ccabed2cacf97e" title="InteractionNode constructor with empty MsgSig.">InteractionNode</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">InteractionNode</a> &amp;node);
-<a name="l00029"></a>00029 
-<a name="l00032"></a>00032     <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#ad74b91357638daa721ccabed2cacf97e" title="InteractionNode constructor with empty MsgSig.">InteractionNode</a>(<a class="code" href="classsesstype_1_1MsgSig.html" title="Message Signature.">MsgSig</a> *<a class="code" href="classsesstype_1_1InteractionNode.html#a5acd5972c75c0d9a545e3fb6047eaa89">msgsig</a>);
-<a name="l00033"></a>00033 
-<a name="l00035"></a>00035     <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a397a5d049877eef8c62fe9cf5fcca738" title="InteractionNode destructor.">~InteractionNode</a>() <span class="keyword">override</span>;
-<a name="l00036"></a>00036 
-<a name="l00037"></a>00037     <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">InteractionNode</a> *<a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#aed6d2782cc8fdc6d65e56fb0504d0cbf" title="clone a InteractionNode.">clone</a>() <span class="keyword">const override</span>;
-<a name="l00038"></a>00038 
-<a name="l00040"></a>00040     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a665220445b989eb3d7e01bead2fa833c">cond</a>() <span class="keyword">const</span>;
-<a name="l00041"></a>00041 
-<a name="l00044"></a>00044     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a1323a2dcd95aa7af5f06d3df1990d79f" title="Set message condition (only for send/receive).">set_cond</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *cond);
-<a name="l00045"></a>00045 
-<a name="l00046"></a>00046     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#afc8a9c4b4a18d7dc30c22badf09551ee" title="accept method for util::NodeVisitor.">accept</a>(<a class="code" href="classsesstype_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">sesstype::util::NodeVisitor</a> &amp;v) <span class="keyword">override</span>;
+<a name="l00024"></a>00024   <span class="keyword">public</span>:
+<a name="l00026"></a><a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a58752f695be2a6c5e1ce57cc7dd21319">00026</a>     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a58752f695be2a6c5e1ce57cc7dd21319">cond</a>()<span class="keyword"> const</span>
+<a name="l00027"></a>00027 <span class="keyword">    </span>{
+<a name="l00028"></a>00028         <span class="keywordflow">return</span> cond_;
+<a name="l00029"></a>00029     }
+<a name="l00030"></a>00030 
+<a name="l00033"></a><a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a1323a2dcd95aa7af5f06d3df1990d79f">00033</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a1323a2dcd95aa7af5f06d3df1990d79f" title="Set message condition (only for send/receive).">set_cond</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *<a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a58752f695be2a6c5e1ce57cc7dd21319">cond</a>)
+<a name="l00034"></a>00034     {
+<a name="l00035"></a>00035         cond_ = <a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a58752f695be2a6c5e1ce57cc7dd21319">cond</a>;
+<a name="l00036"></a>00036     }
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     <span class="keyword">virtual</span> <span class="keywordtype">void</span> accept(<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">util::NodeVisitor</a> &amp;v) <span class="keyword">override</span>;
+<a name="l00039"></a>00039 };
+<a name="l00040"></a>00040 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00041"></a>00041 <span class="preprocessor"></span>
+<a name="l00042"></a>00042 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00043"></a>00043 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00044"></a>00044 <span class="preprocessor">#endif</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span>
+<a name="l00046"></a>00046 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_param_interaction_node_init();
 <a name="l00047"></a>00047 
-<a name="l00048"></a>00048   <span class="keyword">private</span>:
-<a name="l00049"></a>00049     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">MsgCond</a> *msgcond_;
-<a name="l00050"></a>00050 };
-<a name="l00051"></a>00051 <span class="preprocessor">#endif // __cplusplus</span>
-<a name="l00052"></a>00052 <span class="preprocessor"></span>
-<a name="l00053"></a>00053 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00054"></a>00054 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00055"></a>00055 <span class="preprocessor">#endif</span>
-<a name="l00056"></a>00056 <span class="preprocessor"></span>
-<a name="l00057"></a>00057 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_param_interaction_node_init();
-<a name="l00058"></a>00058 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_param_interaction_node(<a class="code" href="classsesstype_1_1MsgSig.html" title="Message Signature.">st_msg</a> *msg);
-<a name="l00059"></a>00059 
-<a name="l00060"></a>00060 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_param_interaction_node_set_cond(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node, <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">st_cond</a> *cond);
-<a name="l00061"></a>00061 <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">st_cond</a> *st_param_interaction_node_get_cond(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node);
-<a name="l00062"></a>00062 
-<a name="l00063"></a>00063 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00064"></a>00064 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00065"></a>00065 <span class="preprocessor">#endif</span>
-<a name="l00066"></a>00066 <span class="preprocessor"></span>
-<a name="l00067"></a>00067 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00068"></a>00068 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
-<a name="l00069"></a>00069 } <span class="comment">// namespace sesstype</span>
-<a name="l00070"></a>00070 <span class="preprocessor">#endif</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span>
-<a name="l00072"></a>00072 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__NODE__INTERACTION__H__</span>
+<a name="l00048"></a>00048 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_param_interaction_node(<a class="code" href="classsesstype_1_1MsgSig.html" title="Message Signature.">st_msg</a> *msg);
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_param_interaction_node_set_cond(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node, st_cond *cond);
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052 st_cond *st_param_interaction_node_get_cond(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00055"></a>00055 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00056"></a>00056 <span class="preprocessor">#endif</span>
+<a name="l00057"></a>00057 <span class="preprocessor"></span>
+<a name="l00058"></a>00058 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00059"></a>00059 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
+<a name="l00060"></a>00060 } <span class="comment">// namespace sesstype</span>
+<a name="l00061"></a>00061 <span class="preprocessor">#endif</span>
+<a name="l00062"></a>00062 <span class="preprocessor"></span>
+<a name="l00063"></a>00063 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__NODE__INTERACTION__H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

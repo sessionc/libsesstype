@@ -85,114 +85,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SESSTYPE__PARAMETERISED__UTIL_H__</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SESSTYPE__PARAMETERISED__UTIL_H__</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#include &lt;stack&gt;</span>
-<a name="l00006"></a>00006 <span class="preprocessor">#include &lt;ostream&gt;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#endif</span>
-<a name="l00008"></a>00008 <span class="preprocessor"></span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="expr_8h.html" title="Expressions in a Role parameter or statement.">sesstype/parameterised/expr.h</a>&quot;</span>
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="expr__visitor_8h.html" title="Utilities for Expr.">sesstype/parameterised/util/expr_visitor.h</a>&quot;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2util_2node__visitor_8h.html" title="Utilities for Node.">sesstype/parameterised/util/node_visitor.h</a>&quot;</span>
-<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2util_2role__visitor_8h.html" title="Utities for Roles.">sesstype/parameterised/util/role_visitor.h</a>&quot;</span>
-<a name="l00014"></a>00014 
-<a name="l00015"></a>00015 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00016"></a>00016 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00017"></a>00017 <span class="keyword">namespace </span>parameterised {
-<a name="l00021"></a>00021 <span class="keyword">namespace </span>util {
-<a name="l00022"></a>00022 <span class="preprocessor">#endif</span>
-<a name="l00023"></a>00023 <span class="preprocessor"></span>
-<a name="l00024"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Printer.html">00024</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Printer.html">Printer</a> : <span class="keyword">public</span> sesstype::parameterised::util::<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">NodeVisitor</a>,
-<a name="l00025"></a>00025                 <span class="keyword">public</span> sesstype::parameterised::util::<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html" title="Abstract class for building Role visitors.">RoleVisitor</a>,
-<a name="l00026"></a>00026                 <span class="keyword">public</span> sesstype::parameterised::util::<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1ExprVisitor.html" title="Abstract class for building Expr visitors.">ExprVisitor</a> {
-<a name="l00027"></a>00027   <span class="keyword">public</span>:
-<a name="l00028"></a>00028     <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Printer.html">Printer</a>();
-<a name="l00029"></a>00029     <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Printer.html">Printer</a>(std::ostream &amp;os);
-<a name="l00030"></a>00030     <span class="keywordtype">void</span> prefix();
-<a name="l00031"></a>00031     <span class="keywordtype">void</span> reset_line_num();
-<a name="l00032"></a>00032 
-<a name="l00033"></a>00033     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">sesstype::parameterised::Node</a> *node) <span class="keyword">override</span>;
-<a name="l00034"></a>00034     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1BlockNode.html" title="Block of statements (Node instances).">sesstype::parameterised::BlockNode</a> *node) <span class="keyword">override</span>;
-<a name="l00035"></a>00035     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">sesstype::parameterised::InteractionNode</a> *node) <span class="keyword">override</span>;
-<a name="l00036"></a>00036     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1RecurNode.html" title="Recursion statements.">sesstype::parameterised::RecurNode</a> *node) <span class="keyword">override</span>;
-<a name="l00037"></a>00037     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1ContinueNode.html" title="Continue statements.">sesstype::parameterised::ContinueNode</a> *node) <span class="keyword">override</span>;
-<a name="l00038"></a>00038     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1ChoiceNode.html" title="Choice blocks.">sesstype::parameterised::ChoiceNode</a> *node) <span class="keyword">override</span>;
-<a name="l00039"></a>00039     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1ParNode.html" title="Parallel blocks.">sesstype::parameterised::ParNode</a> *node) <span class="keyword">override</span>;
-<a name="l00040"></a>00040     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1NestedNode.html" title="Nested session type.">sesstype::parameterised::NestedNode</a> *node) <span class="keyword">override</span>;
-<a name="l00041"></a>00041     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1InterruptibleNode.html" title="Interruptible blocks.">sesstype::parameterised::InterruptibleNode</a> *node) <span class="keyword">override</span>;
-<a name="l00042"></a>00042     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">sesstype::parameterised::ForNode</a> *node) <span class="keyword">override</span>;
-<a name="l00043"></a>00043     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1AllReduceNode.html" title="All-to-all reduction statement.">sesstype::parameterised::AllReduceNode</a> *node) <span class="keyword">override</span>;
-<a name="l00044"></a>00044     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct.">sesstype::parameterised::OneofNode</a> *node) <span class="keyword">override</span>;
-<a name="l00045"></a>00045     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html" title="If-block.">sesstype::parameterised::IfNode</a> *node) <span class="keyword">override</span>;
-<a name="l00046"></a>00046 
-<a name="l00047"></a>00047     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">sesstype::parameterised::Role</a> *role) <span class="keyword">override</span>;
-<a name="l00048"></a>00048     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">sesstype::parameterised::RoleGrp</a> *role) <span class="keyword">override</span>;
-<a name="l00049"></a>00049 
-<a name="l00050"></a>00050     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1VarExpr.html" title="Variable expression.">sesstype::parameterised::VarExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ValExpr.html" title="Value expression.">sesstype::parameterised::ValExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00052"></a>00052     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1AddExpr.html" title="Addition expression.">sesstype::parameterised::AddExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00053"></a>00053     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1SubExpr.html" title="Subtraction expression.">sesstype::parameterised::SubExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00054"></a>00054     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1MulExpr.html" title="Multiplication expression.">sesstype::parameterised::MulExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00055"></a>00055     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1DivExpr.html" title="Division expression.">sesstype::parameterised::DivExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00056"></a>00056     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ModExpr.html" title="Modulo expression.">sesstype::parameterised::ModExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00057"></a>00057     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ShlExpr.html" title="Shift left expression.">sesstype::parameterised::ShlExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00058"></a>00058     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ShrExpr.html" title="Shift right expression.">sesstype::parameterised::ShrExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00059"></a>00059     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1SeqExpr.html" title="Value sequence expression.">sesstype::parameterised::SeqExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00060"></a>00060     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">sesstype::parameterised::RngExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062   <span class="keyword">private</span>:
-<a name="l00063"></a>00063     std::ostream &amp;os_;
-<a name="l00064"></a>00064     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> indent_lvl_;
-<a name="l00065"></a>00065     std::string indent_str_;
-<a name="l00066"></a>00066     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> line_count_;
-<a name="l00067"></a>00067 };
-<a name="l00068"></a>00068 
-<a name="l00069"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Projection.html">00069</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Projection.html">Projection</a> : <span class="keyword">public</span> sesstype::parameterised::util::<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">NodeVisitor</a> {
-<a name="l00070"></a>00070   <span class="keyword">public</span>:
-<a name="l00071"></a>00071     <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Projection.html">Projection</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> *role);
-<a name="l00072"></a>00072     <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">Node</a> *get_root();
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">sesstype::parameterised::Node</a> *node) <span class="keyword">override</span>;
-<a name="l00075"></a>00075     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1BlockNode.html" title="Block of statements (Node instances).">sesstype::parameterised::BlockNode</a> *node) <span class="keyword">override</span>;
-<a name="l00076"></a>00076     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">sesstype::parameterised::InteractionNode</a> *node) <span class="keyword">override</span>;
-<a name="l00077"></a>00077     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1RecurNode.html" title="Recursion statements.">sesstype::parameterised::RecurNode</a> *node) <span class="keyword">override</span>;
-<a name="l00078"></a>00078     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1ContinueNode.html" title="Continue statements.">sesstype::parameterised::ContinueNode</a> *node) <span class="keyword">override</span>;
-<a name="l00079"></a>00079     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1ChoiceNode.html" title="Choice blocks.">sesstype::parameterised::ChoiceNode</a> *node) <span class="keyword">override</span>;
-<a name="l00080"></a>00080     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1ParNode.html" title="Parallel blocks.">sesstype::parameterised::ParNode</a> *node) <span class="keyword">override</span>;
-<a name="l00081"></a>00081     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1NestedNode.html" title="Nested session type.">sesstype::parameterised::NestedNode</a> *node) <span class="keyword">override</span>;
-<a name="l00082"></a>00082     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1InterruptibleNode.html" title="Interruptible blocks.">sesstype::parameterised::InterruptibleNode</a> *node) <span class="keyword">override</span>;
-<a name="l00083"></a>00083     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">sesstype::parameterised::ForNode</a> *node) <span class="keyword">override</span>;
-<a name="l00084"></a>00084     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1AllReduceNode.html" title="All-to-all reduction statement.">sesstype::parameterised::AllReduceNode</a> *node) <span class="keyword">override</span>;
-<a name="l00085"></a>00085     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1OneofNode.html" title="Existential construct.">sesstype::parameterised::OneofNode</a> *node) <span class="keyword">override</span>;
-<a name="l00086"></a>00086     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1IfNode.html" title="If-block.">sesstype::parameterised::IfNode</a> *node) <span class="keyword">override</span>;
-<a name="l00087"></a>00087 
-<a name="l00088"></a>00088   <span class="keyword">private</span>:
-<a name="l00089"></a>00089     <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> *project_role_;
-<a name="l00090"></a>00090     std::stack&lt;Node *&gt; stack_;
-<a name="l00091"></a>00091 };
-<a name="l00092"></a>00092 
-<a name="l00093"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Simplifier.html">00093</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Simplifier.html">Simplifier</a> : <span class="keyword">public</span> sesstype::parameterised::util::<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1ExprVisitor.html" title="Abstract class for building Expr visitors.">ExprVisitor</a> {
-<a name="l00094"></a>00094   <span class="keyword">public</span>:
-<a name="l00095"></a>00095     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1VarExpr.html" title="Variable expression.">sesstype::parameterised::VarExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00096"></a>00096     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ValExpr.html" title="Value expression.">sesstype::parameterised::ValExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00097"></a>00097     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1AddExpr.html" title="Addition expression.">sesstype::parameterised::AddExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00098"></a>00098     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1SubExpr.html" title="Subtraction expression.">sesstype::parameterised::SubExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00099"></a>00099     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1MulExpr.html" title="Multiplication expression.">sesstype::parameterised::MulExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00100"></a>00100     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1DivExpr.html" title="Division expression.">sesstype::parameterised::DivExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00101"></a>00101     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ModExpr.html" title="Modulo expression.">sesstype::parameterised::ModExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00102"></a>00102     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ShlExpr.html" title="Shift left expression.">sesstype::parameterised::ShlExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00103"></a>00103     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1ShrExpr.html" title="Shift right expression.">sesstype::parameterised::ShrExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00104"></a>00104     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1SeqExpr.html" title="Value sequence expression.">sesstype::parameterised::SeqExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00105"></a>00105     <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">sesstype::parameterised::RngExpr</a> *expr) <span class="keyword">override</span>;
-<a name="l00106"></a>00106 };
-<a name="l00107"></a>00107 
-<a name="l00108"></a>00108 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00109"></a>00109 <span class="preprocessor"></span>} <span class="comment">// namespace util</span>
-<a name="l00110"></a>00110 } <span class="comment">// namespace parameterised</span>
-<a name="l00111"></a>00111 } <span class="comment">// namespace sesstype</span>
-<a name="l00112"></a>00112 <span class="preprocessor">#endif</span>
-<a name="l00113"></a>00113 <span class="preprocessor"></span>
-<a name="l00114"></a>00114 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__UTIL_H__</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;sesstype/parameterised/util/print.h&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;sesstype/parameterised/util/projection.h&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;sesstype/parameterised/util/simplify_expr.h&quot;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00010"></a>00010 <span class="keyword">namespace </span>parameterised {
+<a name="l00014"></a>00014 <span class="keyword">namespace </span>util {
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 } <span class="comment">// namespace util</span>
+<a name="l00017"></a>00017 } <span class="comment">// namespace parameterised</span>
+<a name="l00018"></a>00018 } <span class="comment">// namespace sesstype</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#endif</span>
+<a name="l00020"></a>00020 <span class="preprocessor"></span>
+<a name="l00021"></a>00021 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__UTIL_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

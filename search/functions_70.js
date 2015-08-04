@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['parnode',['ParNode',['../classsesstype_1_1ParNode.html#a8b6f18e9ef3d44455fefd86efa7f9b84',1,'sesstype::ParNode::ParNode()'],['../classsesstype_1_1ParNode.html#aaf219c08a8feb0746f44ff74292ceec4',1,'sesstype::ParNode::ParNode(const ParNode &amp;node)']]],
-  ['payload',['payload',['../classsesstype_1_1MsgSig.html#a3eaac5ae71522116319cc03ef90cfcdf',1,'sesstype::MsgSig::payload(std::string name) const '],['../classsesstype_1_1MsgSig.html#ad41b26edd7c20f5810ef6e900294650e',1,'sesstype::MsgSig::payload(unsigned int idx) const ']]],
-  ['prefix',['prefix',['../classsesstype_1_1util_1_1Printer.html#a7d4ef0758a10850d9960f60f52956753',1,'sesstype::util::Printer']]],
-  ['printer',['Printer',['../classsesstype_1_1util_1_1Printer.html#abcce9f9d0275df67b71001390ee39032',1,'sesstype::util::Printer::Printer()'],['../classsesstype_1_1util_1_1Printer.html#aa8cb55dfdf1e3200262ae8bfcb1fa183',1,'sesstype::util::Printer::Printer(std::ostream &amp;os)']]],
+  ['parnodetmpl',['ParNodeTmpl',['../classsesstype_1_1ParNodeTmpl.html#a23f09e9fde25cf80349913321701f23c',1,'sesstype::ParNodeTmpl::ParNodeTmpl()'],['../classsesstype_1_1ParNodeTmpl.html#aef3d65023baa6f8b78924f87163cb889',1,'sesstype::ParNodeTmpl::ParNodeTmpl(const ParNodeTmpl &amp;node)']]],
+  ['payload',['payload',['../classsesstype_1_1MsgSig.html#adad849db1677360023458132ede929c1',1,'sesstype::MsgSig::payload(std::string name) const '],['../classsesstype_1_1MsgSig.html#aa9d9382dd8252a51800e52527620c3af',1,'sesstype::MsgSig::payload(unsigned int idx) const ']]],
+  ['prefix',['prefix',['../classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810',1,'sesstype::parameterised::util::Print::prefix()'],['../classsesstype_1_1util_1_1Print.html#a1709af2f17f0ec581c180e5412208262',1,'sesstype::util::Print::prefix()']]],
+  ['print',['Print',['../classsesstype_1_1parameterised_1_1util_1_1Print.html#ac01551c5b858e76970fc157dcb2a0af6',1,'sesstype::parameterised::util::Print::Print()'],['../classsesstype_1_1parameterised_1_1util_1_1Print.html#a2d03d1eaf04c072c0024bb917012b218',1,'sesstype::parameterised::util::Print::Print(std::ostream &amp;os)'],['../classsesstype_1_1util_1_1Print.html#a4c9b0268729ec48a918d5d53615b08f0',1,'sesstype::util::Print::Print()'],['../classsesstype_1_1util_1_1Print.html#a000493d8e9104e303bcf1a9aa28b2206',1,'sesstype::util::Print::Print(std::ostream &amp;os)']]],
   ['project',['project',['../classsesstype_1_1Session.html#a9ee4acb269e5d5da303c046dd2fdd196',1,'sesstype::Session']]]
 ];

@@ -1,12 +1,13 @@
 <map id="G" name="G">
-<area shape="rect" id="node7" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="646,160,780,189"/>
-<area shape="rect" id="node27" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="112,83,309,112"/>
-<area shape="rect" id="node40" href="$role__grp_8h.html" title="A group of participants of a protocol or session." alt="" coords="278,237,500,267"/>
-<area shape="rect" id="node11" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="868,237,993,267"/>
-<area shape="rect" id="node14" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="676,237,793,267"/>
-<area shape="rect" id="node23" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="260,315,369,344"/>
-<area shape="rect" id="node19" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="628,315,742,344"/>
-<area shape="rect" id="node30" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="36,315,236,344"/>
-<area shape="rect" id="node34" href="$parameterised_2util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="81,160,340,189"/>
-<area shape="rect" id="node36" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="81,237,254,267"/>
+<area shape="rect" id="node7" href="$session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="584,83,717,112"/>
+<area shape="rect" id="node39" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="381,160,579,189"/>
+<area shape="rect" id="node47" href="$role__grp_8h.html" title="A group of participants of a protocol or session." alt="" coords="741,83,963,112"/>
+<area shape="rect" id="node11" href="$import_8h.html" title="Protocol or Module imports." alt="" coords="704,237,829,267"/>
+<area shape="rect" id="node14" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="199,160,316,189"/>
+<area shape="rect" id="node27" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="520,237,629,267"/>
+<area shape="rect" id="node16" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="157,237,272,267"/>
+<area shape="rect" id="node25" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="205,315,363,344"/>
+<area shape="rect" id="node32" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="528,392,707,421"/>
+<area shape="rect" id="node34" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="469,315,643,344"/>
+<area shape="rect" id="node42" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="296,237,496,267"/>
 </map>

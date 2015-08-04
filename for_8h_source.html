@@ -85,59 +85,89 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SESSTYPE__PARAMETERIED__NODE__FOR__H__</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SESSTYPE__PARAMETERIED__NODE__FOR__H__</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="util_2node__visitor_8h.html" title="Utilities for Node.">sesstype/util/node_visitor.h</a>&quot;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="expr_8h.html" title="Expressions in a Role parameter or statement.">sesstype/parameterised/expr.h</a>&quot;</span>
-<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised).">sesstype/parameterised/node.h</a>&quot;</span>
-<a name="l00008"></a>00008 
-<a name="l00009"></a>00009 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00011"></a>00011 <span class="keyword">namespace </span>parameterised {
-<a name="l00012"></a>00012 <span class="preprocessor">#endif</span>
-<a name="l00013"></a>00013 <span class="preprocessor"></span>
-<a name="l00014"></a>00014 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span>
-<a name="l00018"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html">00018</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">ForNode</a> : <span class="keyword">public</span> <a class="code" href="classsesstype_1_1BlockNode.html" title="Block of statements (Node instances).">BlockNode</a> {
-<a name="l00019"></a>00019   <span class="keyword">public</span>:
-<a name="l00022"></a>00022     <a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a8a24b261d7506d783b7ce327a264bf49" title="ForNode constructor.">ForNode</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a65c1bc279734eae45a0a51b8bd6052b8">bindexpr</a>);
-<a name="l00023"></a>00023 
-<a name="l00025"></a>00025     <a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a8a24b261d7506d783b7ce327a264bf49" title="ForNode constructor.">ForNode</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">ForNode</a> &amp;node);
-<a name="l00026"></a>00026 
-<a name="l00028"></a>00028     <a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a0a5b9b757d3aac541dbd62c4e6a79e1d" title="ForNode destructor.">~ForNode</a>() <span class="keyword">override</span>;
+<a name="l00004"></a>00004 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00005"></a>00005 <span class="preprocessor"></span><span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#endif</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;sesstype/node/block.h&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;sesstype/util/visitor_tmpl.h&quot;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2msg_8h.html" title="A message for passing between participants (parameterised).">sesstype/parameterised/msg.h</a>&quot;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised).">sesstype/parameterised/node.h</a>&quot;</span>
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;sesstype/parameterised/expr/rng.h&quot;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00017"></a>00017 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00018"></a>00018 <span class="keyword">namespace </span>parameterised {
+<a name="l00019"></a>00019 <span class="preprocessor">#endif</span>
+<a name="l00020"></a>00020 <span class="preprocessor"></span>
+<a name="l00021"></a>00021 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00022"></a>00022 <span class="preprocessor"></span>
+<a name="l00025"></a>00025 <span class="keyword">template</span> &lt;<span class="keyword">class</span> BaseNode, <span class="keyword">class</span> RoleType, <span class="keyword">class</span> MessageType, <span class="keyword">class</span> VisitorType&gt;
+<a name="l00026"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html">00026</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html" title="Counting for-loop statement.">ForNodeTmpl</a> : <span class="keyword">public</span> BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt; {
+<a name="l00027"></a>00027     <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *bindexpr_;
+<a name="l00028"></a>00028     std::string except_idx_;
 <a name="l00029"></a>00029 
-<a name="l00031"></a>00031     <a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html" title="Counting for-loop statement.">ForNode</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a56bb467f1ce78c85f79ac0cb61190f6e" title="clone a ForNode.">clone</a>() <span class="keyword">const override</span>;
-<a name="l00032"></a>00032 
-<a name="l00034"></a>00034     <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a65c1bc279734eae45a0a51b8bd6052b8">bindexpr</a>() <span class="keyword">const</span>;
-<a name="l00035"></a>00035 
-<a name="l00038"></a>00038     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a8e8c977897c37d61b989fd67fa368b89" title="Replace binding expression of for loop.">set_bindexpr</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *bindexpr);
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNode.html#a9c1d0a792fcb6a8104302931c9fb7840" title="accept method for util::NodeVisitor.">accept</a>(<a class="code" href="classsesstype_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">sesstype::util::NodeVisitor</a> &amp;v) <span class="keyword">override</span>;
+<a name="l00030"></a>00030   <span class="keyword">public</span>:
+<a name="l00033"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f">00033</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f" title="ForNode constructor.">ForNodeTmpl</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>)
+<a name="l00034"></a>00034         : BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(ST_NODE_FOR),
+<a name="l00035"></a>00035           bindexpr_(bindexpr) { }
+<a name="l00036"></a>00036 
+<a name="l00038"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a98ae057cb805ef1aa3bb9eca6abd8ea6">00038</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f" title="ForNode constructor.">ForNodeTmpl</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html" title="Counting for-loop statement.">ForNodeTmpl</a> &amp;node)
+<a name="l00039"></a>00039         : BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(ST_NODE_FOR),
+<a name="l00040"></a>00040           bindexpr_(node.bindexpr_) { }
 <a name="l00041"></a>00041 
-<a name="l00042"></a>00042   <span class="keyword">private</span>:
-<a name="l00043"></a>00043     <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *bindexpr_;
-<a name="l00044"></a>00044     std::string except_idx_;
-<a name="l00045"></a>00045 };
-<a name="l00046"></a>00046 <span class="preprocessor">#endif</span>
-<a name="l00047"></a>00047 <span class="preprocessor"></span>
-<a name="l00048"></a>00048 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00049"></a>00049 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00050"></a>00050 <span class="preprocessor">#endif</span>
-<a name="l00051"></a>00051 <span class="preprocessor"></span>
-<a name="l00052"></a>00052 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_for_node(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">st_rng_expr</a> *bindexpr);
+<a name="l00043"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a83ccc240d1d7b52581f90d249fdabe01">00043</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a83ccc240d1d7b52581f90d249fdabe01" title="ForNode destructor.">~ForNodeTmpl</a>()<span class="keyword"> override</span>
+<a name="l00044"></a>00044 <span class="keyword">    </span>{
+<a name="l00045"></a>00045         <span class="keyword">delete</span> bindexpr_;
+<a name="l00046"></a>00046     }
+<a name="l00047"></a>00047 
+<a name="l00049"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#ada2e18059be137286b2914fd813aacf4">00049</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html" title="Counting for-loop statement.">ForNodeTmpl</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#ada2e18059be137286b2914fd813aacf4" title="clone a ForNode.">clone</a>()<span class="keyword"> const override</span>
+<a name="l00050"></a>00050 <span class="keyword">    </span>{
+<a name="l00051"></a>00051         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f" title="ForNode constructor.">ForNodeTmpl</a>(*<span class="keyword">this</span>);
+<a name="l00052"></a>00052     }
 <a name="l00053"></a>00053 
-<a name="l00054"></a>00054 <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">st_rng_expr</a> *st_for_node_get_bindexpr(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node);
-<a name="l00055"></a>00055 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_for_node_set_bindexpr(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node, <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">st_rng_expr</a> *bindexpr);
-<a name="l00056"></a>00056 
-<a name="l00057"></a>00057 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00058"></a>00058 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00059"></a>00059 <span class="preprocessor">#endif</span>
-<a name="l00060"></a>00060 <span class="preprocessor"></span>
-<a name="l00061"></a>00061 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00062"></a>00062 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
-<a name="l00063"></a>00063 } <span class="comment">// namespace sesstype</span>
-<a name="l00064"></a>00064 <span class="preprocessor">#endif</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span>
-<a name="l00066"></a>00066 <span class="preprocessor">#endif//SESSTYPE__PARAMETERIED__NODE__FOR__H__</span>
+<a name="l00056"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a786262f967729668583ebcb2d6263b90">00056</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a786262f967729668583ebcb2d6263b90" title="Replace binding expression of for loop.">set_bindexpr</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>)
+<a name="l00057"></a>00057     {
+<a name="l00058"></a>00058         <span class="keyword">delete</span> bindexpr_;
+<a name="l00059"></a>00059         bindexpr_ = <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>;
+<a name="l00060"></a>00060     }
+<a name="l00061"></a>00061 
+<a name="l00063"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">00063</a>     <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>()<span class="keyword"> const</span>
+<a name="l00064"></a>00064 <span class="keyword">    </span>{
+<a name="l00065"></a>00065         <span class="keywordflow">if</span> (bindexpr_ == NULL) {
+<a name="l00066"></a>00066             std::cerr &lt;&lt; <span class="stringliteral">&quot;Warning: bind_expr is NULL.\n&quot;</span>;
+<a name="l00067"></a>00067         }
+<a name="l00068"></a>00068         <span class="keywordflow">return</span> bindexpr_;
+<a name="l00069"></a>00069     }
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071     <span class="keyword">virtual</span> <span class="keywordtype">void</span> accept(VisitorType &amp;v) <span class="keyword">override</span>;
+<a name="l00072"></a>00072 };
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074 <span class="keyword">using</span> ForNode = ForNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;;
+<a name="l00075"></a>00075 <span class="preprocessor">#endif</span>
+<a name="l00076"></a>00076 <span class="preprocessor"></span>
+<a name="l00077"></a>00077 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00078"></a>00078 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00079"></a>00079 <span class="preprocessor">#endif</span>
+<a name="l00080"></a>00080 <span class="preprocessor"></span>
+<a name="l00081"></a>00081 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_for_node(<a class="code" href="namespacesesstype_1_1parameterised.html#ac96ca42d8b1c23ce7bc6a9d11c0ab62c">st_rng_expr</a> *bindexpr);
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083 <a class="code" href="namespacesesstype_1_1parameterised.html#ac96ca42d8b1c23ce7bc6a9d11c0ab62c">st_rng_expr</a> *st_for_node_get_bindexpr(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_for_node_set_bindexpr(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node, <a class="code" href="namespacesesstype_1_1parameterised.html#ac96ca42d8b1c23ce7bc6a9d11c0ab62c">st_rng_expr</a> *bindexpr);
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00088"></a>00088 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00089"></a>00089 <span class="preprocessor">#endif</span>
+<a name="l00090"></a>00090 <span class="preprocessor"></span>
+<a name="l00091"></a>00091 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00092"></a>00092 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
+<a name="l00093"></a>00093 } <span class="comment">// namespace sesstype</span>
+<a name="l00094"></a>00094 <span class="preprocessor">#endif</span>
+<a name="l00095"></a>00095 <span class="preprocessor"></span>
+<a name="l00096"></a>00096 <span class="preprocessor">#endif//SESSTYPE__PARAMETERIED__NODE__FOR__H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"

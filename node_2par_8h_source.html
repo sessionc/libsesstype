@@ -85,56 +85,58 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef SESSTYPE__NODE_PAR_H__</span>
 <a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define SESSTYPE__NODE_PAR_H__</span>
 <a name="l00003"></a>00003 <span class="preprocessor"></span>
-<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="node_8h.html" title="Statements in a protocol or session.">sesstype/node.h</a>&quot;</span>
-<a name="l00005"></a>00005 
-<a name="l00006"></a>00006 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00007"></a>00007 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00008"></a>00008 <span class="keyword">namespace </span>util {
-<a name="l00009"></a>00009 
-<a name="l00010"></a>00010 <span class="keyword">class </span>NodeVisitor;
-<a name="l00011"></a>00011 
-<a name="l00012"></a>00012 } <span class="comment">// namespace util</span>
-<a name="l00013"></a>00013 } <span class="comment">// namespace sesstype</span>
-<a name="l00014"></a>00014 <span class="preprocessor">#endif</span>
-<a name="l00015"></a>00015 <span class="preprocessor"></span>
-<a name="l00016"></a>00016 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00017"></a>00017 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00018"></a>00018 <span class="preprocessor">#endif</span>
-<a name="l00019"></a>00019 <span class="preprocessor"></span>
-<a name="l00020"></a>00020 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00021"></a>00021 <span class="preprocessor"></span>
-<a name="l00024"></a><a class="code" href="classsesstype_1_1ParNode.html">00024</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1ParNode.html" title="Parallel blocks.">ParNode</a> : <span class="keyword">public</span> <span class="keyword">virtual</span> <a class="code" href="classsesstype_1_1BlockNode.html" title="Block of statements (Node instances).">BlockNode</a> {
-<a name="l00025"></a>00025   <span class="keyword">public</span>:
-<a name="l00027"></a>00027     <a class="code" href="classsesstype_1_1ParNode.html#a8b6f18e9ef3d44455fefd86efa7f9b84" title="ParNode constructor.">ParNode</a>();
-<a name="l00028"></a>00028 
-<a name="l00030"></a>00030     <a class="code" href="classsesstype_1_1ParNode.html#a8b6f18e9ef3d44455fefd86efa7f9b84" title="ParNode constructor.">ParNode</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1ParNode.html" title="Parallel blocks.">ParNode</a> &amp;node);
-<a name="l00031"></a>00031 
-<a name="l00033"></a>00033     <a class="code" href="classsesstype_1_1ParNode.html#ae49f4e518f2a98abef64284ac9f36213" title="ParNode destructor.">~ParNode</a>() <span class="keyword">override</span>;
-<a name="l00034"></a>00034 
-<a name="l00036"></a>00036     <a class="code" href="classsesstype_1_1ParNode.html" title="Parallel blocks.">ParNode</a> *<a class="code" href="classsesstype_1_1ParNode.html#a3235d70fed85fdac67541bb7405749c2" title="clone a ParNode.">clone</a>() <span class="keyword">const override</span>;
-<a name="l00037"></a>00037 
-<a name="l00039"></a>00039     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1ParNode.html#a8e0ccd4c2052115d0788310f937c90e6">add_parallel</a>(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">Node</a> *parallel);
-<a name="l00040"></a>00040 
-<a name="l00041"></a>00041     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1ParNode.html#aa306780a564322bc773673cdfde670d5" title="accept method for util::NodeVisitor.">accept</a>(<a class="code" href="classsesstype_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">util::NodeVisitor</a> &amp;v) <span class="keyword">override</span>;
-<a name="l00042"></a>00042 };
-<a name="l00043"></a>00043 <span class="preprocessor">#endif // __cplusplus</span>
-<a name="l00044"></a>00044 <span class="preprocessor"></span>
-<a name="l00045"></a>00045 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00046"></a>00046 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00047"></a>00047 <span class="preprocessor">#endif</span>
-<a name="l00048"></a>00048 <span class="preprocessor"></span>
-<a name="l00049"></a>00049 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_par_node_init();
-<a name="l00050"></a>00050 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_par_node_add_parallel(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node, <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *par_blk);
-<a name="l00051"></a>00051 
-<a name="l00052"></a>00052 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00053"></a>00053 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00054"></a>00054 <span class="preprocessor">#endif</span>
-<a name="l00055"></a>00055 <span class="preprocessor"></span>
-<a name="l00056"></a>00056 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00057"></a>00057 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
-<a name="l00058"></a>00058 <span class="preprocessor">#endif</span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span>
-<a name="l00060"></a>00060 <span class="preprocessor">#endif//SESSTYPE__NODE_PAR_H__</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="msg_8h.html" title="A message for passing between participants.">sesstype/msg.h</a>&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;<a class="code" href="role_8h.html" title="A participant of a protocol or session.">sesstype/role.h</a>&quot;</span>
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="node_8h.html" title="Statements in a protocol or session.">sesstype/node.h</a>&quot;</span>
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;sesstype/node/block.h&quot;</span>
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00010"></a>00010 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00011"></a>00011 <span class="preprocessor">#endif</span>
+<a name="l00012"></a>00012 <span class="preprocessor"></span>
+<a name="l00013"></a>00013 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00014"></a>00014 <span class="preprocessor"></span>
+<a name="l00017"></a>00017 <span class="keyword">template</span> &lt;<span class="keyword">class</span> BaseNode, <span class="keyword">class</span> RoleType, <span class="keyword">class</span> MessageType, <span class="keyword">class</span> VisitorType&gt;
+<a name="l00018"></a><a class="code" href="classsesstype_1_1ParNodeTmpl.html">00018</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1ParNodeTmpl.html" title="Parallel blocks.">ParNodeTmpl</a> : <span class="keyword">public</span> <a class="code" href="classsesstype_1_1BlockNodeTmpl.html" title="Block of statements (Node instances).">BlockNodeTmpl</a>&lt;BaseNode, RoleType, MessageType, VisitorType&gt; {
+<a name="l00019"></a>00019   <span class="keyword">public</span>:
+<a name="l00021"></a><a class="code" href="classsesstype_1_1ParNodeTmpl.html#a23f09e9fde25cf80349913321701f23c">00021</a>     <a class="code" href="classsesstype_1_1ParNodeTmpl.html#a23f09e9fde25cf80349913321701f23c" title="ParNode constructor.">ParNodeTmpl</a>()
+<a name="l00022"></a>00022         : <a class="code" href="classsesstype_1_1BlockNodeTmpl.html" title="Block of statements (Node instances).">BlockNodeTmpl</a>&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(ST_NODE_PARALLEL) { }
+<a name="l00023"></a>00023 
+<a name="l00025"></a><a class="code" href="classsesstype_1_1ParNodeTmpl.html#aef3d65023baa6f8b78924f87163cb889">00025</a>     <a class="code" href="classsesstype_1_1ParNodeTmpl.html#a23f09e9fde25cf80349913321701f23c" title="ParNode constructor.">ParNodeTmpl</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1ParNodeTmpl.html" title="Parallel blocks.">ParNodeTmpl</a> &amp;node)
+<a name="l00026"></a>00026         : <a class="code" href="classsesstype_1_1BlockNodeTmpl.html" title="Block of statements (Node instances).">BlockNodeTmpl</a>&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(node) { }
+<a name="l00027"></a>00027 
+<a name="l00029"></a><a class="code" href="classsesstype_1_1ParNodeTmpl.html#aca125527175133906b4ce14a71a439ec">00029</a>     <a class="code" href="classsesstype_1_1ParNodeTmpl.html" title="Parallel blocks.">ParNodeTmpl</a> *<a class="code" href="classsesstype_1_1ParNodeTmpl.html#aca125527175133906b4ce14a71a439ec" title="clone a ParNode.">clone</a>()<span class="keyword"> const override</span>
+<a name="l00030"></a>00030 <span class="keyword">    </span>{
+<a name="l00031"></a>00031         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classsesstype_1_1ParNodeTmpl.html#a23f09e9fde25cf80349913321701f23c" title="ParNode constructor.">ParNodeTmpl</a>(*<span class="keyword">this</span>);
+<a name="l00032"></a>00032     }
+<a name="l00033"></a>00033 
+<a name="l00035"></a><a class="code" href="classsesstype_1_1ParNodeTmpl.html#a63f98d636960bbaabb73d56546afc5df">00035</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1ParNodeTmpl.html#a63f98d636960bbaabb73d56546afc5df">add_parallel</a>(BaseNode *par)
+<a name="l00036"></a>00036     {
+<a name="l00037"></a>00037         this-&gt;<a class="code" href="classsesstype_1_1BlockNodeTmpl.html#ab1ae1875226a8776353414d945086001" title="Add child Node to current Block.">append_child</a>(par);
+<a name="l00038"></a>00038     }
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040     <span class="keywordtype">void</span> accept(VisitorType &amp;v) <span class="keyword">override</span>;
+<a name="l00041"></a>00041 };
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043 <span class="keyword">using</span> ParNode = ParNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;;
+<a name="l00044"></a>00044 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00045"></a>00045 <span class="preprocessor"></span>
+<a name="l00046"></a>00046 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00047"></a>00047 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00048"></a>00048 <span class="preprocessor">#endif</span>
+<a name="l00049"></a>00049 <span class="preprocessor"></span>
+<a name="l00050"></a>00050 st_node *st_mk_par_node_init();
+<a name="l00051"></a>00051 st_node *st_par_node_add_parallel(st_node *node, st_node *par_blk);
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00054"></a>00054 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00055"></a>00055 <span class="preprocessor">#endif</span>
+<a name="l00056"></a>00056 <span class="preprocessor"></span>
+<a name="l00057"></a>00057 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00058"></a>00058 <span class="preprocessor"></span>} <span class="comment">// namespace sesstype</span>
+<a name="l00059"></a>00059 <span class="preprocessor">#endif</span>
+<a name="l00060"></a>00060 <span class="preprocessor"></span>
+<a name="l00061"></a>00061 <span class="preprocessor">#endif//SESSTYPE__NODE_PAR_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
