@@ -23,6 +23,11 @@ st_tree *st_tree_set_root(st_tree *tree, st_node *root)
     return tree;
 }
 
+st_node *st_tree_get_root(st_tree *tree)
+{
+    return tree->root();
+}
+
 void st_tree_free(st_tree *tree)
 {
     delete tree;

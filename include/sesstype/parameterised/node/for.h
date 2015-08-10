@@ -25,24 +25,25 @@ namespace parameterised {
 template <class BaseNode, class RoleType, class MessageType, class VisitorType>
 class ForNodeTmpl : public BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType> {
     RngExpr *bindexpr_;
-    std::string except_idx_;
+    Expr *except_;
 
   public:
     /// \brief ForNode constructor.
     /// \param[in] bind_expr to add as index binding expression.
     ForNodeTmpl(RngExpr *bindexpr)
         : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(ST_NODE_FOR),
-          bindexpr_(bindexpr) { }
+          bindexpr_(bindexpr), except_(0) { }
 
     /// \brief ForNode copy constructor.
     ForNodeTmpl(const ForNodeTmpl &node)
         : BlockNodeTmpl<BaseNode, RoleType, MessageType, VisitorType>(ST_NODE_FOR),
-          bindexpr_(node.bindexpr_) { }
+          bindexpr_(node.bindexpr_), except_(node.except_) { }
 
     /// \brief ForNode destructor.
     ~ForNodeTmpl() override
     {
         delete bindexpr_;
+        delete except_;
     }
 
     /// \brief clone a ForNode.
@@ -62,10 +63,21 @@ class ForNodeTmpl : public BlockNodeTmpl<BaseNode, RoleType, MessageType, Visito
     /// \returns binding expression of the for-loop.
     RngExpr *bindexpr() const
     {
-        if (bindexpr_ == NULL) {
+        if (bindexpr_ == nullptr) {
             std::cerr << "Warning: bind_expr is NULL.\n";
         }
         return bindexpr_;
+    }
+
+    void set_except(Expr *except)
+    {
+        delete except_;
+        except_ = except;
+    }
+
+    Expr *except() const
+    {
+        return except_;
     }
 
     virtual void accept(VisitorType &v) override;
@@ -80,9 +92,9 @@ extern "C" {
 
 st_node *st_mk_for_node(st_rng_expr *bindexpr);
 
-st_rng_expr *st_for_node_get_bindexpr(st_node *node);
+st_rng_expr *st_for_node_get_bindexpr(st_node *const node);
 
-st_node *st_for_node_set_bindexpr(st_node *node, st_rng_expr *bindexpr);
+st_node *st_for_node_set_bindexpr(st_node *const node, st_rng_expr *bindexpr);
 
 #ifdef __cplusplus
 } // extern "C"

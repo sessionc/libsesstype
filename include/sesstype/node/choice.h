@@ -80,9 +80,9 @@ st_node *st_mk_choice_node_init();
 
 st_node *st_mk_choice_node(st_role *at);
 
-st_role *st_choice_node_get_at(st_node *node);
+st_role *st_choice_node_get_at(st_node *const node);
 
-st_node *st_choice_node_set_at(st_node *node, st_role *at);
+st_node *st_choice_node_set_at(st_node *const node, st_role *at);
 
 #ifdef __cplusplus
 } // extern "C"

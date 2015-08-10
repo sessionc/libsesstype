@@ -183,6 +183,19 @@ class Print : public NodeVisitor, public RoleVisitor {
 
 #ifdef __cplusplus
 } // namespace util
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void st_node_print(st_node *node);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+#ifdef __cplusplus
 } // namespace sesstype
 #endif
 

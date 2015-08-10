@@ -48,13 +48,22 @@ class MsgPayload : public util::Clonable {
     /// \brief MsgPayload destructor.
     ~MsgPayload() { }
 
-    MsgPayload *clone() const override { return new MsgPayload(*this); }
+    MsgPayload *clone() const override
+    {
+        return new MsgPayload(*this);
+    }
 
     /// \returns name of MsgPayload.
-    std::string name() const { return name_; }
+    std::string name() const
+    {
+        return name_;
+    }
 
     /// \returns datatype of MsgPayload.
-    std::string type() const { return type_; }
+    std::string type() const
+    {
+        return type_;
+    }
 
 };
 
@@ -91,13 +100,22 @@ class MsgSig : public util::Clonable {
     }
 
     /// \brief Make a MsgSig* clone.
-    virtual MsgSig *clone() const override { return new MsgSig(*this); }
+    virtual MsgSig *clone() const override
+    {
+        return new MsgSig(*this);
+    }
 
     /// \returns label of the MsgSig.
-    std::string label() const { return label_; }
+    std::string label() const
+    {
+        return label_;
+    }
 
     /// \returns number of payload paramaters.
-    unsigned int num_payloads() const { return payloads_.size(); }
+    unsigned int num_payloads() const
+    {
+        return payloads_.size();
+    }
 
     /// \returns payload by name.
     MsgPayload *payload(std::string name) const
@@ -112,7 +130,10 @@ class MsgSig : public util::Clonable {
     }
 
     /// \returns payload by positional index.
-    MsgPayload *payload(unsigned int idx) const { return payloads_.at(idx); }
+    MsgPayload *payload(unsigned int idx) const
+    {
+        return payloads_.at(idx);
+    }
 
     /// \brief Add a payload parameter to current MsgSig.
     /// \param[in] payload to add.

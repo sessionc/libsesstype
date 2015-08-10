@@ -9,6 +9,8 @@
 #include "sesstype/util/visitor_tmpl.h"
 
 #include "sesstype/parameterised/msg.h"
+#include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/expr/rng.h"
 #include "sesstype/parameterised/role.h"
 #include "sesstype/parameterised/node.h"
 

@@ -20,6 +20,11 @@ st_module *st_module_add_tree(st_module *const module, st_tree *tree)
     return module;
 }
 
+st_tree *st_module_get_tree(st_module *const module, const char *name)
+{
+    return module->session(name);
+}
+
 st_module *st_module_import(st_module *const module, st_import *import)
 {
     module->add_import(import);

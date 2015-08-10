@@ -37,9 +37,23 @@ class Node : public sesstype::Node {
     explicit Node(unsigned int type) : sesstype::Node(type) { }
 
   private:
-    virtual void accept(sesstype::util::NodeVisitor &v) override { /* hidden */ }
+    virtual void accept(sesstype::util::NodeVisitor &v) override { };
 };
 #endif // __cplusplus
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __cplusplus
+typedef Node st_param_node;
+#else
+typedef struct Node st_param_node;
+#endif
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 #ifdef __cplusplus
 } // namespace parameterised

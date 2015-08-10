@@ -151,21 +151,21 @@ st_node *st_mk_interaction_node_init();
 
 st_node *st_mk_interaction_node(st_msg *msg);
 
-st_node *st_interaction_node_set_msg(st_node *node, st_msg *msg);
+st_node *st_interaction_node_set_msg(st_node *const node, st_msg *msg);
 
-st_msg *st_interaction_node_get_msg(st_node *node);
+st_msg *st_interaction_node_get_msg(st_node *const node);
 
-st_node *st_interaction_node_set_from(st_node *node, st_role *from);
+st_node *st_interaction_node_set_from(st_node *const node, st_role *from);
 
-st_role *st_interaction_node_get_from(st_node *node);
+st_role *st_interaction_node_get_from(st_node *const node);
 
-st_node *st_interaction_node_add_to(st_node *node, st_role *to);
+st_node *st_interaction_node_add_to(st_node *const node, st_role *to);
 
-unsigned int st_interaction_node_num_tos(st_node *node);
+unsigned int st_interaction_node_num_tos(st_node *const node);
 
-st_role **st_interaction_node_get_tos(st_node *node);
+st_role **st_interaction_node_get_tos(st_node *const node);
 
-st_role *st_interaction_node_get_to(st_node *node, unsigned int index);
+st_role *st_interaction_node_get_to(st_node *const node, unsigned int index);
 
 #ifdef __cplusplus
 } // extern "C"

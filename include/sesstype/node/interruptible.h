@@ -265,19 +265,26 @@ extern "C" {
 #endif
 
 st_node *st_mk_interruptible_node_init();
-st_node *st_mk_interruptible_node_scoped(char *scope_name);
 
-st_node *st_interruptible_node_add_interrupt(st_node *node, st_role *role, st_msg *msg);
-unsigned int st_interruptible_node_num_interrupts(st_node *node, st_role *role);
-st_msg *st_interruptible_node_interrupt(st_node *node, st_role *role, unsigned int index);
+st_node *st_mk_interruptible_node_scoped(char *scope);
 
-st_node *st_interruptible_node_add_throw(st_node *node, st_role *role, st_msg *msg);
-unsigned int st_interruptible_node_num_throws(st_node *node, st_role *role);
-st_msg *st_interruptible_node_throw(st_node *node, st_role *role, unsigned int index);
+st_node *st_interruptible_node_add_interrupt(st_node *const node, st_role *role, st_msg *msg);
 
-st_node *st_interruptible_node_add_catch(st_node *node, st_role *role, st_msg *msg);
-unsigned int st_interruptible_node_num_catches(st_node *node, st_role *role);
-st_msg *st_interruptible_node_catch(st_node *node, st_role *role, unsigned int index);
+unsigned int st_interruptible_node_num_interrupts(st_node *const node, st_role *role);
+
+st_msg *st_interruptible_node_interrupt(st_node *const node, st_role *role, unsigned int index);
+
+st_node *st_interruptible_node_add_throw(st_node *const node, st_role *role, st_msg *msg);
+
+unsigned int st_interruptible_node_num_throws(st_node *const node, st_role *role);
+
+st_msg *st_interruptible_node_throw(st_node *const node, st_role *role, unsigned int index);
+
+st_node *st_interruptible_node_add_catch(st_node *const node, st_role *role, st_msg *msg);
+
+unsigned int st_interruptible_node_num_catches(st_node *const node, st_role *role);
+
+st_msg *st_interruptible_node_catch(st_node *const node, st_role *role, unsigned int index);
 
 #ifdef __cplusplus
 } // extern "C""

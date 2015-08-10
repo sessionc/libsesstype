@@ -67,9 +67,9 @@ st_node *st_mk_allreduce_node_init();
 
 st_node *st_mk_allreduce_node(st_msg *msg);
 
-st_node *st_allreduce_node_set_msgsig(st_node *node, st_msg *msg);
+st_node *st_allreduce_node_set_msgsig(st_node *const node, st_msg *msg);
 
-st_msg *st_allreduce_node_get_msgsig(st_node *node);
+st_msg *st_allreduce_node_get_msgsig(st_node *const node);
 
 #ifdef __cplusplus
 } // extern "C"

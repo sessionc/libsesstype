@@ -5,9 +5,6 @@
 #ifndef SESSTYPE__PARAMETERISED__MODULE_H__
 #define SESSTYPE__PARAMETERISED__MODULE_H__
 
-#ifdef __cplusplus
-#endif
-
 #include "sesstype/module.h"
 #include "sesstype/parameterised/const.h"
 
@@ -22,32 +19,53 @@ namespace parameterised {
  * (contains parameterised elements).
  */
 class Module : public sesstype::Module {
+    std::unordered_map<std::string, Constant *> consts_;
+
   public:
     /// \brief Module constructor with "default" as Module name.
-    Module();
+    Module() : sesstype::Module(), consts_() { }
 
     /// \brief Module constructor.
-    Module(std::string name);
+    Module(std::string name) : sesstype::Module(), consts_() { }
 
     /// \brief Module destructor.
-    ~Module();
+    virtual ~Module()
+    {
+        for (auto constant_pair : consts_) {
+            delete constant_pair.second;
+        }
+    }
+
+    virtual Session *session(std::string name) const override
+    {
+        return dynamic_cast<Session *>(sesstype::Module::session(name));
+    }
 
     /// \returns Constant named <tt>name</tt>.
     /// \exception std::out_of_range if not found.
-    Constant *constant(std::string name) const;
+    Constant *constant(std::string name) const
+    {
+        return consts_.at(name);
+    }
 
     /// \returns number of Constant in Module.
-    unsigned int num_constant() const;
+    unsigned int num_constants() const
+    {
+        return consts_.size();
+    }
 
     /// \brief Test if Constant is in Module.
     /// \returns true if <tt>name</tt> is a Constant in Module.
-    bool has_constant(std::string name) const;
+    bool has_constant(std::string name) const
+    {
+        return (consts_.find(name) != consts_.end());
+    }
 
     /// \param[in] constant to add to Module.
-    void add_constant(Constant *constant);
-
-  private:
-    std::unordered_map<std::string, Constant *> consts_;
+    void add_constant(Constant *con)
+    {
+        consts_.insert({ con->name(), con });
+    }
 };
 #endif // __cplusplus
 

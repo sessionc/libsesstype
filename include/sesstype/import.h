@@ -18,28 +18,37 @@ namespace sesstype {
  * \brief Import statement.
  */
 class Import {
+    std::string name_;
+    std::string from_;
+    std::string as_;
+
   public:
     /// \brief Import constructor without "from" or alias.
-    Import(std::string name);
+    Import(std::string name) : name_(name), from_(), as_() { }
 
     /// \brief Import constructor
     /// \param[in] from Module name.
     /// \param[in] as Import alias name.
-    Import(std::string name, std::string from, std::string as);
+    Import(std::string name, std::string from, std::string as)
+        : name_(name), from_(from), as_(as) { }
 
     /// \returns name of Imported Protocol or Module.
-    std::string name() const;
+    std::string name() const
+    {
+        return name_;
+    }
 
     /// \returns name of Protocol or Module imported from.
-    std::string from() const;
+    std::string from() const
+    {
+        return from_;
+    }
 
     /// \returns alias of Protocol or Module imported as.
-    std::string as() const;
-
-  private:
-    std::string name_;
-    std::string from_;
-    std::string as_;
+    std::string as() const
+    {
+        return as_;
+    }
 };
 #endif // __cplusplus
 

@@ -6,6 +6,7 @@
 #define SESSTYPE__MODULE_H__
 
 #ifdef __cplusplus
+#include <iostream>
 #include <string>
 #include <unordered_map>
 #endif
@@ -25,56 +26,97 @@ namespace sesstype {
  * \brief Module is a container class for multiple logically related Sessions.
  */
 class Module {
-  public:
-    /// \brief Module constructor with "default" as Module name.
-    Module();
-
-    /// \brief Module constructor.
-    Module(std::string name);
-
-    /// \brief Module destructor.
-    ~Module();
-
-    /// \returns name of Module.
-    std::string name() const;
-
-    /// \brief Replace Module name.
-    /// \param[in] name of Module to replace with.
-    void set_name(std::string name);
-
-    /// \returns Session named <tt>name</tt>.
-    /// \exception std::out_of_range if not found.
-    Session *session(std::string name) const;
-
-    /// \returns number of Session in Module.
-    unsigned int num_session() const;
-
-    /// \param[in] Session to add as component of Module.
-    void add_session(Session *session);
-
-    /// \brief Test if Session is in Module.
-    /// \returns true if <tt>name</tt> is a Session in Module.
-    bool has_session(std::string name) const;
-
-    /// \detail This returns the original Import if alias is matched.
-    /// \returns Import named (or with alias)<tt>name</tt>.
-    /// \exception std::out_of_range if not found.
-    Import *import(std::string name) const;
-
-    unsigned int num_import() const;
-
-    /// \brief Test if Import is in Module.
-    /// \returns true if <tt>name</tt> is an Import (or alias) in Module.
-    bool has_import(std::string name) const;
-
-    /// \param[in] import to add to Module.
-    void add_import(Import *import);
-
-  private:
     std::string name_;
     // Pair<Import * theimport, bool is_alias>
     std::unordered_map<std::string, std::pair<Import *, bool>> imports_;
     std::unordered_map<std::string, Session *> sessions_;
+
+  public:
+    /// \brief Module constructor with "default" as Module name.
+    Module() : name_("default"), imports_(), sessions_() { }
+
+    /// \brief Module constructor.
+    Module(std::string name) : name_(name), imports_(), sessions_() { }
+
+    /// \brief Module destructor.
+    virtual ~Module()
+    {
+        for (auto import_pair : imports_) {
+            if (!import_pair.second.second /*alias?*/) {
+                delete import_pair.second.first;
+            }
+        }
+    }
+
+    /// \returns name of Module.
+    std::string name() const
+    {
+        return name_;
+    }
+
+    /// \brief Replace Module name.
+    /// \param[in] name of Module to replace with.
+    void set_name(std::string name)
+    {
+        name_ = name;
+    }
+
+    /// \param[in] Session to add as component of Module.
+    void add_session(Session *session)
+    {
+        sessions_.insert(
+            std::pair<std::string, Session *>(session->name(), session)
+        );
+    }
+
+    /// \returns number of Session in Module.
+    unsigned int num_session() const
+    {
+        return sessions_.size();
+    }
+
+    /// \brief Test if Session is in Module.
+    /// \returns true if <tt>name</tt> is a Session in Module.
+    bool has_session(std::string name) const
+    {
+        return (sessions_.find(name) != sessions_.end());
+    }
+
+    /// \returns Session named <tt>name</tt>.
+    /// \exception std::out_of_range if not found.
+    virtual Session *session(std::string name) const
+    {
+        return sessions_.at(name);
+    }
+
+    /// \param[in] import to add to Module.
+    void add_import(Import *import)
+    {
+        imports_.insert({ import->name(), std::make_pair(import, false)});
+        if (import->as() != "") {
+            imports_.insert({ import->as(), std::make_pair(import, true/*alias*/)});
+        }
+    }
+
+    unsigned int num_import() const
+    {
+        return imports_.size();
+    }
+
+    /// \brief Test if Import is in Module.
+    /// \returns true if <tt>name</tt> is an Import (or alias) in Module.
+    bool has_import(std::string name) const
+    {
+        return (imports_.find(name) != imports_.end());
+    }
+
+    /// \detail This returns the original Import if alias is matched.
+    /// \returns Import named (or with alias)<tt>name</tt>.
+    /// \exception std::out_of_range if not found.
+    virtual Import *import(std::string name) const
+    {
+        return imports_.at(name).first;
+    }
 };
 #endif // __cplusplus
 
@@ -99,6 +141,8 @@ const char *st_module_get_name(st_module *const module);
 /// \param[in] tree to add.
 /// \returns modified module.
 st_module *st_module_add_tree(st_module *const module, st_tree *tree);
+
+st_tree *st_module_get_tree(st_module *const module, const char *name);
 
 /// \param[in,out] module to contain import.
 /// \param[in] import to add.

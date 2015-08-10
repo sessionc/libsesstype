@@ -99,7 +99,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         }
         os_ << (node->num_rcvrs()>1 ? ".. ]" : "]")
             << ", msg: " << node->msg()->label()
-            << "(" << node->msg()->num_payloads() << ") } @" << node << "\n";
+            << "(" << node->msg()->num_payloads() << ") } @ " << node << "\n";
     }
 
     virtual void visit(BlockNode *node)
@@ -115,7 +115,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     {
         prefix();
         os_ << "recur " << "{ label: " << node->label() << " }";
-        os_ << " children: " << node->num_children() << " @" << node << "\n";
+        os_ << " children: " << node->num_children() << " @ " << node << "\n";
 
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
@@ -123,15 +123,15 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     virtual void visit(ContinueNode *node)
     {
         prefix();
-        os_ << "cont { label: " << node->label() << " } @" << node << "\n";
+        os_ << "cont { label: " << node->label() << " } @ " << node << "\n";
     }
 
     virtual void visit(ChoiceNode *node)
     {
         prefix();
         os_ << "choice { at: ";
-        node->accept(*this);
-        os_ << ", children: " << node->num_children() << " @" << node << "\n";
+        node->at()->accept(*this);
+        os_ << ", children: " << node->num_children() << " @ " << node << "\n";
 
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
@@ -140,7 +140,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     {
         prefix();
         os_ << "par {}";
-        os_ << " parblocks:children: " << node->num_children() << " @" << node << "\n";
+        os_ << " parblocks:children: " << node->num_children() << " @ " << node << "\n";
 
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
@@ -187,10 +187,11 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         prefix();
         os_ << "for { expr: ";
         node->bindexpr()->accept(*this);
-        os_ << " } @" << node << "\n";
+        os_ << " } @ " << node << "\n";
 
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
+
     virtual void visit(OneofNode *node)
     {
         prefix();
@@ -198,16 +199,17 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         node->range()->accept(*this);
         os_ << " , repeat? " << node->is_repeat();
         os_ << " , unordered? " << node->is_unordered();
-        os_ << " } @" << node << "\n";
+        os_ << " } @ " << node << "\n";
 
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
+
     virtual void visit(IfNode *node)
     {
         prefix();
         os_ << "if { cond: ";
         node->cond()->accept(*this);
-        os_ << " } @" << node << "\n";
+        os_ << " } @ " << node << "\n";
 
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
     }
@@ -216,7 +218,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     {
         prefix();
         os_ << "allreduce { msg: " << node->msg()->label()
-            << "(" << node->msg()->num_payloads() << ") } @" << node << "\n";
+            << "(" << node->msg()->num_payloads() << ") } @ " << node << "\n";
     }
 
     virtual void visit(Role *role)
@@ -229,7 +231,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
             }
             os_ << "]";
         }
-        os_ << "@" << role;
+        os_ << " @ " << role;
     }
 
     virtual void visit(RoleGrp *role)
@@ -240,7 +242,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
             (*it).second->accept(*this);
             os_ << " ";
         }
-        os_ << " } @" << role;
+        os_ << " } @ " << role;
     }
 
     virtual void visit(Expr *expr)
@@ -252,10 +254,12 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     {
         os_ << expr->name();
     }
+
     virtual void visit(ValExpr *expr)
     {
         os_ << expr->num();
     }
+
     virtual void visit(AddExpr *expr)
     {
         os_ << "(";
@@ -264,6 +268,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         expr->rhs()->accept(*this);
         os_ << ")";
     }
+
     virtual void visit(SubExpr *expr)
     {
         os_ << "(";
@@ -332,9 +337,21 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
 
 #ifdef __cplusplus
 } // namespace util
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void st_param_node_print(st_param_node *node);
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+#ifdef __cplusplus
 } // namespace parameterised
 } // namespace sesstype
 #endif
-
 
 #endif//SESSTYPE__PARAMETERISED__UTIL__PRINT_H__

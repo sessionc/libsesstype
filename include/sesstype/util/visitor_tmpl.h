@@ -4,6 +4,7 @@
 /// Visitor implemented with C++11 variadic templating black magic.
 ///
 
+#ifdef __cplusplus
 namespace sesstype {
 namespace util {
 
@@ -44,5 +45,6 @@ class VisitableImpl : public Visitable<Types...> {
 
 } // namespace util
 } // namespace sesstype
+#endif
 
 #endif//SESSTYPE__UTIL__VISITOR_TMPL_H__

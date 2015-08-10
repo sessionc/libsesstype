@@ -48,7 +48,8 @@ extern "C" {
 #endif
 
 st_node *st_mk_par_node_init();
-st_node *st_par_node_add_parallel(st_node *node, st_node *par_blk);
+
+st_node *st_par_node_add_parallel(st_node *const node, st_node *par_blk);
 
 #ifdef __cplusplus
 } // extern "C"

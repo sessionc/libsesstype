@@ -102,11 +102,11 @@ using BlockNode = BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 extern "C" {
 #endif
 
-void st_node_append_child(st_node *parent, st_node *child);
+st_node *st_node_append_child(st_node *const parent, st_node *child);
 
-unsigned int st_node_num_children(st_node *parent);
+unsigned int st_node_num_children(st_node *const parent);
 
-st_node *st_node_get_child(st_node *parent, unsigned int index);
+st_node *st_node_get_child(st_node *const parent, unsigned int index);
 
 #ifdef __cplusplus
 } // extern "C"

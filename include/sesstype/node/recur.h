@@ -67,9 +67,9 @@ extern "C" {
 
 st_node *st_mk_recur_node(char *label);
 
-st_node *st_recur_node_set_label(st_node *node, char *label);
+st_node *st_recur_node_set_label(st_node *const node, char *label);
 
-const char *st_recur_node_get_label(st_node *node);
+const char *st_recur_node_get_label(st_node *const node);
 
 #ifdef __cplusplus
 } // extern "C"

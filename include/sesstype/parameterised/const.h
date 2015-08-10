@@ -23,87 +23,104 @@ namespace parameterised {
  * \brief Named constants.
  */
 class Constant {
-  public:
-    /// \returns name of Constant.
-    std::string name() const;
-
-    /// \returns type of Constant.
-    int type() const;
-
-    /// \brief Constant destructor.
-    virtual ~Constant();
-
-  protected:
-    Constant(std::string name, int type);
-
-  private:
     std::string name_;
     int type_;
+
+  public:
+    /// \brief Constant destructor.
+    virtual ~Constant() { }
+
+    /// \returns name of Constant.
+    std::string name() const
+    {
+        return name_;
+    }
+
+    /// \returns type of Constant.
+    int type() const
+    {
+        return type_;
+    }
+
+  protected:
+    Constant(std::string name, int type) : name_(name), type_(type) { }
 };
 
 /**
  * \brief Constant value.
  */
 class ValueConstant : public Constant {
+    unsigned int value_;
+
   public:
     /// \brief ValueConstant constructor.
     /// \param[in] name of ValueConstant.
     /// \param[in] value of ValueConstant.
-    ValueConstant(std::string name, unsigned int value);
+    ValueConstant(std::string name, unsigned int value)
+        : Constant(name, ST_CONST_VALUE), value_(value) { }
 
     /// \brief ValueConstant destructor.
-    ~ValueConstant() override;
+    ~ValueConstant() override { }
 
     /// \returns value of ValueConstant.
-    unsigned int value() const;
-
-  private:
-    unsigned int value_;
+    unsigned int value() const
+    {
+        return value_;
+    }
 };
 
 /**
  * \brief Constant with bounds (range).
  */
 class BoundedConstant : public Constant {
+    unsigned int lbound_;
+    unsigned int ubound_;
+
   public:
     /// \brief BoundedConstant constructor.
     /// \param[in] name of BoundedConstant.
     /// \param[in] lbound lower bound of range.
     /// \param[in] ubound upper bound of range.
-    BoundedConstant(std::string name, unsigned int lbound, unsigned int ubound);
+    BoundedConstant(std::string name, unsigned int lbound, unsigned int ubound)
+        : Constant(name, ST_CONST_RANGE), lbound_(lbound), ubound_(ubound) { }
 
     /// \brief BoundedConstant destructor.
-    ~BoundedConstant() override;
+    ~BoundedConstant() override { }
 
     /// \returns lower bound of range.
-    unsigned int lbound() const;
+    unsigned int lbound() const
+    {
+        return lbound_;
+    }
 
     /// \returns upper bound of range.
-    unsigned int ubound() const;
-
-  protected:
-    unsigned int lbound_;
-    unsigned int ubound_;
+    unsigned int ubound() const
+    {
+        return ubound_;
+    }
 };
 
 /**
  * \brief Constant with no upper bound (scalable).
  */
 class ScalableConstant : public Constant {
+    unsigned int lbound_;
+
   public:
     /// \brief ScalableConstant constructor.
     /// \param[in] name of Constant.
     /// \param[in] lbound lower bound of range.
-    ScalableConstant(std::string name, unsigned int lbound);
+    ScalableConstant(std::string name, unsigned int lbound)
+        : Constant(name, ST_CONST_SCALABLE), lbound_(lbound) { }
 
     /// \brief ScalableConstant destructor.
-    ~ScalableConstant() override;
+    ~ScalableConstant() override { }
 
     /// \returns lower bound of range.
-    unsigned int lbound() const;
-
-  private:
-    unsigned int lbound_;
+    unsigned int lbound() const
+    {
+        return lbound_;
+    }
 };
 #endif
 

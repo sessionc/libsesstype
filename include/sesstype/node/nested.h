@@ -155,15 +155,20 @@ extern "C" {
 #endif
 
 st_node *st_mk_nested_node(char *protocol_name);
+
 st_node *st_mk_nested_node_scoped(char *protocol_name, char *scope_name);
 
-st_node *st_nested_node_add_arg(st_node *node, st_msg *arg);
-unsigned int st_nested_node_num_args(st_node *node);
-st_msg *st_nested_node_get_arg(st_node *node, unsigned int index);
+st_node *st_nested_node_add_arg(st_node *const node, st_msg *arg);
 
-st_node *st_nested_node_add_rolearg(st_node *node, st_role *rolearg);
-unsigned int st_nested_node_num_roleargs(st_node *node);
-st_role *st_nested_node_get_rolearg(st_node *node, unsigned int index);
+unsigned int st_nested_node_num_args(st_node *const node);
+
+st_msg *st_nested_node_get_arg(st_node *const node, unsigned int index);
+
+st_node *st_nested_node_add_rolearg(st_node *const node, st_role *rolearg);
+
+unsigned int st_nested_node_num_roleargs(st_node *const node);
+
+st_role *st_nested_node_get_rolearg(st_node *const node, unsigned int index);
 
 #ifdef __cplusplus
 } // extern "C"

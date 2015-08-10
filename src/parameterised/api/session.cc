@@ -7,9 +7,26 @@ namespace sesstype {
 namespace parameterised {
 #endif
 
-void st_tree_add_const(st_tree *tree, st_const *con);
-void st_tree_add_role_group(st_tree *tree, const st_role_grp *grp);
-bool st_tree_has_constant(st_tree *tree, const char *name);
+st_tree *st_tree_add_role_grp(st_tree *tree, st_role_grp *grp)
+{
+    if (Session *ptree = dynamic_cast<Session *>(tree)) {
+        ptree->add_group(grp);
+    }
+    return tree;
+}
+
+bool st_tree_has_role_grp(st_tree *const tree, const char *grp_name)
+{
+    if (Session *ptree = dynamic_cast<Session *>(tree)) {
+        return ptree->has_role_grp(grp_name);
+    }
+    return false;
+}
+
+st_role_grp *st_tree_get_role_grp(st_tree *const tree, const char *grp_name)
+{
+    return dynamic_cast<Session *>(tree)->group(grp_name);
+}
 
 #ifdef __cplusplus
 } // namespace parameterised

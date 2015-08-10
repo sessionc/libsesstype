@@ -11,6 +11,7 @@
 #include "sesstype/module.h"
 #include "sesstype/session.h"
 #include "sesstype/parameterised/module.h"
+#include "sesstype/parameterised/session.h"
 
 namespace sesstype {
 namespace tests {
@@ -53,6 +54,24 @@ TEST_F(ModuleTest, Module_AddSession)
   delete p;
 }
 
+TEST_F(ModuleTest, PModule_AddSession)
+{
+  sesstype::parameterised::Module pmodule("Parameterised_Module");
+  auto *p = new sesstype::parameterised::Session("P");
+  EXPECT_EQ(pmodule.num_session(), 0);
+  pmodule.add_session(p); // Do this, then hand over pointer to module.
+  EXPECT_EQ(pmodule.num_session(), 1);
+
+  sesstype::parameterised::Session pp("PP");
+  pmodule.add_session(&pp); // pp will be gone at the end of this function.
+  EXPECT_EQ(pmodule.num_session(), 2);
+
+  EXPECT_EQ(pmodule.session("P"), p);
+  EXPECT_EQ(pmodule.session("PP"), &pp);
+
+  delete p;
+}
+
 /**
  * \test Test adding Import to Module.
  */
@@ -86,12 +105,12 @@ TEST_F(ModuleTest, Module_AddConstant)
   sesstype::parameterised::Module empty;
   auto *constant = new sesstype::parameterised::ValueConstant("N", 1);
   auto *constant2 = new sesstype::parameterised::BoundedConstant("M", 1, 10);
-  EXPECT_EQ(empty.num_constant(), 0);
+  EXPECT_EQ(empty.num_constants(), 0);
   empty.add_constant(constant);
-  EXPECT_EQ(empty.num_constant(), 1);
+  EXPECT_EQ(empty.num_constants(), 1);
   EXPECT_EQ(empty.constant("N"), constant);
   empty.add_constant(constant2);
-  EXPECT_EQ(empty.num_constant(), 2);
+  EXPECT_EQ(empty.num_constants(), 2);
   EXPECT_EQ(empty.constant("M"), constant2);
 }
 
