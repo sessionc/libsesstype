@@ -8,6 +8,7 @@
 
 #ifdef __cplusplus
 #include <string>
+#include <iterator>
 #include <unordered_map>
 #endif
 
@@ -38,6 +39,8 @@ class Session {
     std::unordered_map<std::string, Role *> roles_;
 
   public:
+    typedef std::unordered_map<std::string, Role *> RoleContainer;
+
     /// Session constructor with "default" as Session name.
     Session()
         : name_("default"), type_(ST_TYPE_GLOBAL), me_(), root_(0), roles_() { }
@@ -46,7 +49,6 @@ class Session {
     /// \param[in] name Session name.
     Session(std::string name)
         : name_(name), type_(ST_TYPE_GLOBAL), me_(), root_(0), roles_() { }
-
 
     /// Session destructor.
     virtual ~Session()
@@ -138,6 +140,21 @@ class Session {
     Role *role(std::string name) const
     {
         return roles_.at(name);
+    }
+
+    unsigned int num_roles() const
+    {
+        return roles_.size();
+    }
+
+    RoleContainer::const_iterator role_begin() const
+    {
+        return roles_.begin();
+    }
+
+    RoleContainer::const_iterator role_end() const
+    {
+        return roles_.end();
     }
 };
 #endif
