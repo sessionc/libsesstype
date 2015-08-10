@@ -32,6 +32,9 @@ class Module {
     std::unordered_map<std::string, Session *> sessions_;
 
   public:
+    typedef std::unordered_map<std::string, Session *> SessionContainer;
+    typedef std::unordered_map<std::string, std::pair<Import *, bool>> ImportContainer;
+
     /// \brief Module constructor with "default" as Module name.
     Module() : name_("default"), imports_(), sessions_() { }
 
@@ -64,13 +67,11 @@ class Module {
     /// \param[in] Session to add as component of Module.
     void add_session(Session *session)
     {
-        sessions_.insert(
-            std::pair<std::string, Session *>(session->name(), session)
-        );
+        sessions_.insert({ session->name(), session });
     }
 
     /// \returns number of Session in Module.
-    unsigned int num_session() const
+    unsigned int num_sessions() const
     {
         return sessions_.size();
     }
@@ -89,6 +90,16 @@ class Module {
         return sessions_.at(name);
     }
 
+    SessionContainer::const_iterator session_begin() const
+    {
+        return sessions_.begin();
+    }
+
+    SessionContainer::const_iterator session_end() const
+    {
+        return sessions_.end();
+    }
+
     /// \param[in] import to add to Module.
     void add_import(Import *import)
     {
@@ -98,7 +109,7 @@ class Module {
         }
     }
 
-    unsigned int num_import() const
+    unsigned int num_imports() const
     {
         return imports_.size();
     }
@@ -143,6 +154,8 @@ const char *st_module_get_name(st_module *const module);
 st_module *st_module_add_tree(st_module *const module, st_tree *tree);
 
 st_tree *st_module_get_tree(st_module *const module, const char *name);
+
+st_tree *st_module_get_tree_at_idx(st_module *const module, unsigned int index);
 
 /// \param[in,out] module to contain import.
 /// \param[in] import to add.

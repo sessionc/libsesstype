@@ -40,13 +40,13 @@ TEST_F(ModuleTest, Module_AddSession)
 {
   sesstype::Module module("M");
   auto *p = new sesstype::Session("P");
-  EXPECT_EQ(module.num_session(), 0);
+  EXPECT_EQ(module.num_sessions(), 0);
   module.add_session(p); // Do this, then hand over pointer to module.
-  EXPECT_EQ(module.num_session(), 1);
+  EXPECT_EQ(module.num_sessions(), 1);
 
   sesstype::Session pp("PP");
   module.add_session(&pp); // pp will be gone at the end of this function.
-  EXPECT_EQ(module.num_session(), 2);
+  EXPECT_EQ(module.num_sessions(), 2);
 
   EXPECT_EQ(module.session("P"), p);
   EXPECT_EQ(module.session("PP"), &pp);
@@ -58,13 +58,13 @@ TEST_F(ModuleTest, PModule_AddSession)
 {
   sesstype::parameterised::Module pmodule("Parameterised_Module");
   auto *p = new sesstype::parameterised::Session("P");
-  EXPECT_EQ(pmodule.num_session(), 0);
+  EXPECT_EQ(pmodule.num_sessions(), 0);
   pmodule.add_session(p); // Do this, then hand over pointer to module.
-  EXPECT_EQ(pmodule.num_session(), 1);
+  EXPECT_EQ(pmodule.num_sessions(), 1);
 
   sesstype::parameterised::Session pp("PP");
   pmodule.add_session(&pp); // pp will be gone at the end of this function.
-  EXPECT_EQ(pmodule.num_session(), 2);
+  EXPECT_EQ(pmodule.num_sessions(), 2);
 
   EXPECT_EQ(pmodule.session("P"), p);
   EXPECT_EQ(pmodule.session("PP"), &pp);
@@ -82,15 +82,15 @@ TEST_F(ModuleTest, Module_AddImport)
   auto *java_string_import = new sesstype::Import("String", "java.lang", "");
 
   // Test adding import really works.
-  EXPECT_EQ(empty.num_import(), 0);
+  EXPECT_EQ(empty.num_imports(), 0);
   EXPECT_EQ(empty.has_import(std::string("int")), false);
   empty.add_import(int_import);
-  EXPECT_EQ(empty.num_import(), 1);
+  EXPECT_EQ(empty.num_imports(), 1);
   EXPECT_EQ(empty.has_import(std::string("int")), true);
   EXPECT_EQ(empty.import("int"), int_import);
 
   empty.add_import(java_string_import);
-  EXPECT_EQ(empty.num_import(), 2);
+  EXPECT_EQ(empty.num_imports(), 2);
   EXPECT_EQ(empty.has_import("String"), true);
   EXPECT_EQ(empty.import("String"), java_string_import);
 

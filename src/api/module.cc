@@ -25,6 +25,13 @@ st_tree *st_module_get_tree(st_module *const module, const char *name)
     return module->session(name);
 }
 
+st_tree *st_module_get_tree_at_idx(st_module *const module, unsigned int index)
+{
+    auto it = module->session_begin();
+    for (int i=0; i<index; i++, it++) { /* empty */ }
+    return (*it).second;
+}
+
 st_module *st_module_import(st_module *const module, st_import *import)
 {
     module->add_import(import);
