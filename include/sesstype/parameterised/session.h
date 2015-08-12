@@ -30,6 +30,7 @@ class Session : public sesstype::Session {
     std::unordered_map<std::string, RoleGrp *> groups_;
 
   public:
+    typedef std::unordered_map<std::string, RoleGrp *> RoleGrpContainer;
     /// Session constructor with "default" as Session name.
     Session() : sesstype::Session(), groups_() { }
 
@@ -75,6 +76,21 @@ class Session : public sesstype::Session {
     void add_group(RoleGrp *group)
     {
         groups_.insert(std::pair<std::string, RoleGrp *>(group->name(), group));
+    }
+
+    unsigned int num_groups() const
+    {
+        return groups_.size();
+    }
+
+    RoleGrpContainer::const_iterator rolegrp_begin() const
+    {
+        return groups_.begin();
+    }
+
+    RoleGrpContainer::const_iterator rolegrp_end() const
+    {
+        return groups_.end();
     }
 };
 #endif
