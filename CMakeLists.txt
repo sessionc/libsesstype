@@ -28,14 +28,24 @@ configure_file(
     ${PROJECT_BINARY_DIR}/include/sesstype/sesstype.h
 )
 
+#
+# Build type.
+#
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release CACHE STRING
+      "Choose the type of build, options are: None Debug Release."
+      FORCE)
+endif(NOT CMAKE_BUILD_TYPE)
+message(STATUS "Build mode: ${CMAKE_BUILD_TYPE}")
 
 #
 # Build configurations.
 #
-set(CMAKE_C_FLAGS   "-std=c99   -g -O0 -Wall")
-set(CMAKE_CXX_FLAGS "-std=c++11 -g -O0 -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11 -Wall -Werror")
+set(CMAKE_C_FLAGS_DEBUG   "${CMAKE_C_FLAGS_DEBUG} -D__DEBUG__")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Werror")
+set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -D__DEBUG__")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 
 #
 # Sources: libsesstype
@@ -105,7 +115,6 @@ set(PKG_CONFIG_CFLAGS "-I\${includedir}")
 configure_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/pkg-config.pc.cmake"
     "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc")
-
 
 #
 # Packaging.
