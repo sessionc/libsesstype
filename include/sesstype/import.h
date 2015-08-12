@@ -32,6 +32,8 @@ class Import {
     Import(std::string name, std::string from, std::string as)
         : name_(name), from_(from), as_(as) { }
 
+    ~Import() = default;
+
     /// \returns name of Imported Protocol or Module.
     std::string name() const
     {
