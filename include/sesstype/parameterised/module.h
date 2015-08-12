@@ -5,8 +5,14 @@
 #ifndef SESSTYPE__PARAMETERISED__MODULE_H__
 #define SESSTYPE__PARAMETERISED__MODULE_H__
 
+#ifdef __cplusplus
+#include <iterator>
+#include <unordered_map>
+#endif
+
 #include "sesstype/module.h"
 #include "sesstype/parameterised/const.h"
+#include "sesstype/parameterised/session.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -22,6 +28,8 @@ class Module : public sesstype::Module {
     std::unordered_map<std::string, Constant *> consts_;
 
   public:
+    typedef std::unordered_map<std::string, Constant *> ConstantContainer;
+
     /// \brief Module constructor with "default" as Module name.
     Module() : sesstype::Module(), consts_() { }
 
@@ -38,14 +46,13 @@ class Module : public sesstype::Module {
 
     virtual Session *session(std::string name) const override
     {
-        return dynamic_cast<Session *>(sesstype::Module::session(name));
+        return dynamic_cast<sesstype::parameterised::Session *>(sesstype::Module::session(name));
     }
 
-    /// \returns Constant named <tt>name</tt>.
-    /// \exception std::out_of_range if not found.
-    Constant *constant(std::string name) const
+    /// \param[in] constant to add to Module.
+    void add_constant(Constant *c)
     {
-        return consts_.at(name);
+        consts_.insert({ c->name(), c });
     }
 
     /// \returns number of Constant in Module.
@@ -61,10 +68,21 @@ class Module : public sesstype::Module {
         return (consts_.find(name) != consts_.end());
     }
 
-    /// \param[in] constant to add to Module.
-    void add_constant(Constant *con)
+    /// \returns Constant named <tt>name</tt>.
+    /// \exception std::out_of_range if not found.
+    Constant *constant(std::string name) const
     {
-        consts_.insert({ con->name(), con });
+        return consts_.at(name);
+    }
+
+    ConstantContainer::const_iterator const_begin() const
+    {
+        return consts_.begin();
+    }
+
+    ConstantContainer::const_iterator const_end() const
+    {
+        return consts_.end();
     }
 };
 #endif // __cplusplus

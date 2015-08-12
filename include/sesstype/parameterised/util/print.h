@@ -62,9 +62,9 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
             os_ << "Line\t |\tTree\n====================\n";
         }
         os_ << line_count_++ << "\t ";
-        if (indent_lvl_ > 1) {
+        if (indent_lvl_ > 0) {
             os_ << '|';
-            for (unsigned int i=1; i<indent_lvl_; i++) {
+            for (unsigned int i=0; i<indent_lvl_; i++) {
                 os_ << indent_str_;
             }
         }
@@ -104,11 +104,15 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
 
     virtual void visit(BlockNode *node)
     {
+        prefix();
+        os_ << "root @ " << node << " {\n";
         indent_lvl_++;
         for (auto it=node->child_begin(); it!=node->child_end(); it++) {
             (*it)->accept(*this);
         }
         indent_lvl_--;
+        prefix();
+        os_ << "}\n";
     }
 
     virtual void visit(RecurNode *node)
@@ -149,15 +153,15 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     {
         prefix();
         os_ << "nested { name: " << node->name();
-        os_ << ", scope_name: " << node->scope();
-        os_ << ", arg("<< node->num_roleargs() <<"): <";
+        os_ << ", scope: " << node->scope();
+        os_ << ", arg("<< node->num_args() <<"): <";
         for (auto it=node->arg_begin(); it!=node->arg_end(); it++) {
             os_ << (*it)->label() << "(" << (*it)->num_payloads() << ")" << ", ";
         }
         os_ << ">";
-        os_ << ", rolearg("<< node->num_args() <<"): [";
+        os_ << ", rolearg("<< node->num_roleargs() <<"): [";
         for (auto it=node->rolearg_begin(); it!=node->rolearg_end(); it++) {
-            (*it)->name();
+            (*it)->accept(*this);
             os_ << ", ";
         }
         os_ << "]} @ " << node << "\n";
@@ -226,8 +230,10 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         os_ << role->name();
         if (role->num_dimen() > 0) {
             os_ << "[";
+            (*role)[0]->accept(*this);
             for (int i=1; i<role->num_dimen(); i++) {
                 os_ << "][";
+                (*role)[i]->accept(*this);
             }
             os_ << "]";
         }
@@ -315,7 +321,6 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         os_ << ">>";
         expr->rhs()->accept(*this);
         os_ << ")";
-
     }
 
     virtual void visit(SeqExpr *expr)
@@ -328,9 +333,12 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     virtual void visit(RngExpr *expr)
     {
         os_ << expr->bindvar() << ":";
+        os_ << expr->from();
         expr->from()->accept(*this);
         os_ << "..";
+        os_ << expr->to();
         expr->to()->accept(*this);
+        os_.flush();
     }
 };
 #endif // __cplusplus

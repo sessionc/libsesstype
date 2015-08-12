@@ -6,7 +6,6 @@
 #define SESSTYPE__MODULE_H__
 
 #ifdef __cplusplus
-#include <iostream>
 #include <string>
 #include <unordered_map>
 #endif
@@ -32,8 +31,8 @@ class Module {
     std::unordered_map<std::string, Session *> sessions_;
 
   public:
-    typedef std::unordered_map<std::string, Session *> SessionContainer;
     typedef std::unordered_map<std::string, std::pair<Import *, bool>> ImportContainer;
+    typedef std::unordered_map<std::string, Session *> SessionContainer;
 
     /// \brief Module constructor with "default" as Module name.
     Module() : name_("default"), imports_(), sessions_() { }
@@ -127,6 +126,16 @@ class Module {
     virtual Import *import(std::string name) const
     {
         return imports_.at(name).first;
+    }
+
+    ImportContainer::const_iterator import_begin() const
+    {
+        return imports_.begin();
+    }
+
+    ImportContainer::const_iterator import_end() const
+    {
+        return imports_.end();
     }
 };
 #endif // __cplusplus
