@@ -79,6 +79,8 @@ class MsgSig : public util::Clonable {
     std::vector<MsgPayload *> payloads_;
 
   public:
+    typedef std::vector<MsgPayload *> PayloadContainer;
+
     /// \brief MsgSig constructor.
     /// \param[in] label of the MsgSig.
     MsgSig(std::string label) : label_(label), payloads_() { }
@@ -111,10 +113,31 @@ class MsgSig : public util::Clonable {
         return label_;
     }
 
+    /// \brief Add a payload parameter to current MsgSig.
+    /// \param[in] payload to add.
+    void add_payload(MsgPayload *payload)
+    {
+        payloads_.push_back(payload->clone());
+    }
+
     /// \returns number of payload paramaters.
     unsigned int num_payloads() const
     {
         return payloads_.size();
+    }
+
+    /// \returns true if payload with name exists.
+    bool has_payload(std::string name) const
+    {
+        return (std::find_if(payloads_.begin(), payloads_.end(),
+                    [name](const MsgPayload *const payload)
+                    -> bool { return payload->name() == name; }) != payloads_.end());
+    }
+
+    /// \returns payload by positional index.
+    MsgPayload *payload(unsigned int idx) const
+    {
+        return payloads_.at(idx);
     }
 
     /// \returns payload by name.
@@ -129,25 +152,14 @@ class MsgSig : public util::Clonable {
         return *it;
     }
 
-    /// \returns payload by positional index.
-    MsgPayload *payload(unsigned int idx) const
+    PayloadContainer::const_iterator payload_begin() const
     {
-        return payloads_.at(idx);
+        return payloads_.begin();
     }
 
-    /// \brief Add a payload parameter to current MsgSig.
-    /// \param[in] payload to add.
-    void add_payload(MsgPayload *payload)
+    PayloadContainer::const_iterator payload_end() const
     {
-        payloads_.push_back(payload->clone());
-    }
-
-    /// \returns true if payload with name exists.
-    bool has_payload(std::string name) const
-    {
-        return (std::find_if(payloads_.begin(), payloads_.end(),
-                    [name](const MsgPayload *const payload)
-                    -> bool { return payload->name() == name; }) != payloads_.end());
+        return payloads_.end();
     }
 };
 #endif // __cplusplus
