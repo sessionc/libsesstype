@@ -75,7 +75,7 @@ bool st_expr_is_identical(st_expr *e0, st_expr *e1)
 
 void st_expr_eval(st_expr *e)
 {
-    util::SimplifyExpr s;
+    util::ExprEval s;
     e->accept(s);
 }
 

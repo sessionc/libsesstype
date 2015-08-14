@@ -3,7 +3,8 @@
 
 #include "sesstype/parameterised/util/print.h"
 #include "sesstype/parameterised/util/projection.h"
-#include "sesstype/parameterised/util/simplify_expr.h"
+#include "sesstype/parameterised/util/expr_eval.h"
+#include "sesstype/parameterised/util/expr_invert.h"
 
 #ifdef __cplusplus
 namespace sesstype {
