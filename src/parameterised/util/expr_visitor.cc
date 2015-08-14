@@ -26,5 +26,7 @@ void SeqExpr::accept(util::ExprVisitor &v) { v.visit(this); }
 
 void RngExpr::accept(util::ExprVisitor &v) { v.visit(this); }
 
+void LogExpr::accept(util::ExprVisitor &v) { v.visit(this); }
+
 } // namespace parameterised
 } // namespace sesstype

@@ -17,6 +17,7 @@
 #include "sesstype/parameterised/expr/shr.h"
 #include "sesstype/parameterised/expr/seq.h"
 #include "sesstype/parameterised/expr/rng.h"
+#include "sesstype/parameterised/expr/log.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -30,7 +31,7 @@ namespace util {
  */
 class ExprVisitor {
   public:
-    virtual void visit(Expr *expr) = 0;
+    virtual void visit(Expr    *expr) = 0;
     virtual void visit(VarExpr *expr) = 0;
     virtual void visit(ValExpr *expr) = 0;
     virtual void visit(AddExpr *expr) = 0;
@@ -42,6 +43,7 @@ class ExprVisitor {
     virtual void visit(ShrExpr *expr) = 0;
     virtual void visit(SeqExpr *expr) = 0;
     virtual void visit(RngExpr *expr) = 0;
+    virtual void visit(LogExpr *expr) = 0;
 };
 #endif // __cplusplus
 

@@ -19,7 +19,9 @@
 namespace sesstype {
 namespace parameterised {
 namespace util {
+
 class ExprVisitor;
+
 } // namespace util
 } // namespace parameterised
 } // namespace sesstype
@@ -41,6 +43,7 @@ namespace parameterised {
 #define ST_EXPR_SHR   9 // >>
 #define ST_EXPR_SEQ   10 // , (Sequence)
 #define ST_EXPR_RNG   11 // .. (Range)
+#define ST_EXPR_LOG   12 // log(val, base)
 
 #ifdef __cplusplus
 /**

@@ -7,10 +7,8 @@
 #endif
 
 #include "sesstype/parameterised/expr.h"
-
 #include "sesstype/parameterised/role.h"
 #include "sesstype/parameterised/role_grp.h"
-
 #include "sesstype/parameterised/node.h"
 #include "sesstype/parameterised/node/block.h"
 #include "sesstype/parameterised/node/interaction.h"
@@ -41,19 +39,19 @@ namespace util {
  */
 class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     std::ostream &os_;
-    unsigned int indent_lvl_;
     std::string indent_str_;
+    unsigned int indent_lvl_;
     unsigned int line_count_;
 
   public:
     /// \brief Printer constructor with output to std::out as default.
     Print()
-        : os_(std::cout), indent_lvl_(0), indent_str_("  "), line_count_(1) { }
+        : os_(std::cout), indent_str_("  "), indent_lvl_(0), line_count_(1) { }
 
     /// \brief Printer constructor.
     /// \param[in] os output stream.
     Print(std::ostream &os)
-        : os_(os), indent_lvl_(0), indent_str_("  "), line_count_(1) { }
+        : os_(os), indent_str_("  "), indent_lvl_(0), line_count_(1) { }
 
     /// \brief Output prefix based on current line#, indent level and character.
     void prefix()
@@ -228,10 +226,10 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     virtual void visit(Role *role)
     {
         os_ << role->name();
-        if (role->num_dimen() > 0) {
+        if (role->num_dimens() > 0) {
             os_ << "[";
             (*role)[0]->accept(*this);
-            for (int i=1; i<role->num_dimen(); i++) {
+            for (int i=1; i<role->num_dimens(); i++) {
                 os_ << "][";
                 (*role)[i]->accept(*this);
             }
@@ -245,7 +243,7 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         os_ << role->name();
         os_ << "{ members#: " << role->num_members() << ", membs: ";
         for (auto it=role->member_begin(); it!=role->member_end(); it++) {
-            (*it).second->accept(*this);
+            (*it)->accept(*this);
             os_ << " ";
         }
         os_ << " } @ " << role;
@@ -338,7 +336,15 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
         os_ << "..";
         os_ << expr->to();
         expr->to()->accept(*this);
-        os_.flush();
+    }
+
+    virtual void visit(LogExpr *expr)
+    {
+        os_ << "log(";
+        expr->value()->accept(*this);
+        os_ << ", ";
+        expr->base()->accept(*this);
+        os_ << ")";
     }
 };
 #endif // __cplusplus

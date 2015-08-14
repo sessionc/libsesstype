@@ -5,6 +5,8 @@
 #ifndef SESSTYPE__PARAMETERISED__UTIL__NODE_VISITOR_H__
 #define SESSTYPE__PARAMETERISED__UTIL__NODE_VISITOR_H__
 
+#include "sesstype/parameterised/msg.h"
+#include "sesstype/parameterised/role.h"
 #include "sesstype/parameterised/node.h"
 #include "sesstype/parameterised/node/interaction.h"
 #include "sesstype/parameterised/node/choice.h"
