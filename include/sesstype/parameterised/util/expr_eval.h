@@ -187,8 +187,15 @@ class ExprEval : public ExprVisitor {
 
     virtual void visit(RngExpr *expr) override
     {
-        stack_.push(expr->clone());
-        invalid_ = true;
+        expr->from()->accept(*this);
+        Expr *from = stack_.top();
+        stack_.pop();
+
+        expr->to()->accept(*this);
+        Expr *to = stack_.top();
+        stack_.pop();
+
+        stack_.push(new RngExpr(std::string(expr->bindvar()), from, to));
     }
 
     virtual void visit(LogExpr *expr) override

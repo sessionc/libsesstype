@@ -21,6 +21,8 @@
 #include "sesstype/parameterised/expr/seq.h"
 #include "sesstype/parameterised/expr/rng.h"
 #include "sesstype/parameterised/expr/log.h"
+#include "sesstype/parameterised/util/expr_apply.h"
+#include "sesstype/parameterised/util/expr_eval.h"
 #include "sesstype/parameterised/util/expr_invert.h"
 #include "sesstype/parameterised/util/print.h"
 
@@ -268,6 +270,29 @@ TEST_F(ExprTest, InvertExpr)
 
     delete expr;
     delete inverted;
+}
+
+/**
+ * \test Expression apply.
+ */
+TEST_F(ExprTest, ApplyExpr)
+{
+    // Apply i:1..10 --> i+1
+
+    auto rng = new RngExpr("i", new ValExpr(1), new ValExpr(10));
+    util::ExprApply apply(rng);
+    auto expr = new AddExpr(new VarExpr("i"), new ValExpr(1));
+    expr->accept(apply);
+    auto applied = apply.apply();
+    util::Print p;
+    applied->accept(p);
+    util::ExprEval eval;
+    applied->accept(eval);
+    auto eval_applied = eval.eval();
+    std::cout << "eval applied: " << *eval_applied << "\n";
+
+    delete rng;
+    delete applied;
 }
 
 } // namespace tests

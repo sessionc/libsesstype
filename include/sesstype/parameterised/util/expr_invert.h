@@ -48,7 +48,10 @@ class ExprInvert : public ExprVisitor {
 
     Expr *invert()
     {
-        return reversed_;
+        if (is_valid()) {
+            return reversed_;
+        }
+        return nullptr;
     }
 
     bool is_valid()
