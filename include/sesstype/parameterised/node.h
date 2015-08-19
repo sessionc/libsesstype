@@ -33,6 +33,8 @@ class Node : public sesstype::Node {
     /// This subsumes accept in base class (but RoleVisitor is not a subclass)
     virtual void accept(util::NodeVisitor &v) = 0;
 
+    friend std::ostream &operator<<(std::ostream &os, Node &node);
+
   protected:
     explicit Node(unsigned int type) : sesstype::Node(type) { }
 

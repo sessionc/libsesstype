@@ -45,13 +45,17 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
 
   public:
     /// \brief Printer constructor with output to std::out as default.
-    Print()
-        : os_(std::cout), indent_str_("  "), indent_lvl_(0), line_count_(1) { }
+    Print() : os_(std::cout),
+              indent_str_("  "),
+              indent_lvl_(0),
+              line_count_(1) { }
 
     /// \brief Printer constructor.
     /// \param[in] os output stream.
-    Print(std::ostream &os)
-        : os_(os), indent_str_("  "), indent_lvl_(0), line_count_(1) { }
+    Print(std::ostream &os) : os_(os),
+                              indent_str_("  "),
+                              indent_lvl_(0),
+                              line_count_(1) { }
 
     /// \brief Output prefix based on current line#, indent level and character.
     void prefix()
@@ -331,10 +335,8 @@ class Print : public NodeVisitor, public RoleVisitor, public ExprVisitor {
     virtual void visit(RngExpr *expr)
     {
         os_ << expr->bindvar() << ":";
-        os_ << expr->from();
         expr->from()->accept(*this);
         os_ << "..";
-        os_ << expr->to();
         expr->to()->accept(*this);
     }
 

@@ -6,6 +6,7 @@
 #define SESSTYPE__PARAMETERISED__EXPR__H__
 
 #ifdef __cplusplus
+#include <ostream>
 #include <string>
 #include <vector>
 #else
@@ -64,6 +65,8 @@ class Expr : public sesstype::util::Clonable {
     {
         return type_;
     }
+
+    friend std::ostream &operator<<(std::ostream &os, Expr &expr);
 
     virtual void accept(util::ExprVisitor &v) = 0;
 

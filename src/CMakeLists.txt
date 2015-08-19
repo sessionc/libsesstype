@@ -16,6 +16,7 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/api/par_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/util/node_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/util/role_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/util/print.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/const.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/expr.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/module.cc
@@ -31,4 +32,5 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/expr_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/node_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/role_visitor.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/print.cc
     PARENT_SCOPE)

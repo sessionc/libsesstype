@@ -48,6 +48,8 @@ class Node : public util::Clonable {
 
     virtual void accept(util::NodeVisitor &v) { };
 
+    friend std::ostream &operator<<(std::ostream &os, Node &node);
+
   protected:
     explicit Node(unsigned int type) : type_(type) { }
 };
