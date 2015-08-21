@@ -25,6 +25,7 @@
 #include "sesstype/parameterised/util/expr_eval.h"
 #include "sesstype/parameterised/util/expr_invert.h"
 #include "sesstype/parameterised/util/print.h"
+#include "sesstype/parameterised/util/empty_visitor.hpp"
 
 namespace sesstype {
 namespace parameterised {
@@ -293,6 +294,30 @@ TEST_F(ExprTest, ApplyExpr)
 
     delete rng;
     delete applied;
+}
+
+TEST_F(ExprTest, CloneExpr)
+{
+    util::EmptyVisitor v;
+    auto rng = new RngExpr(
+            "__",
+            new ValExpr(1),
+            new AddExpr(
+                new SubExpr(
+                    new DivExpr(new ValExpr(1), new VarExpr("G")),
+                    new MulExpr(
+                        new ShlExpr(new ValExpr(1), new VarExpr("K")),
+                        new ShrExpr(new ValExpr(2), new ValExpr(3))
+                    )
+                ),
+                new ModExpr(new ValExpr(1), new ValExpr(42))
+            ));
+    rng->accept(v);
+    auto rng2 = rng->clone();
+    rng2->accept(v);
+    delete rng;
+    rng2->accept(v);
+    delete rng2;
 }
 
 } // namespace tests

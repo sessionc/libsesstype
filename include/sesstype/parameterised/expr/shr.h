@@ -21,7 +21,7 @@ class ShrExpr : public BinExpr {
 
     /// \brief ShrExpr copy constructor.
     ShrExpr(const ShrExpr &expr)
-        : BinExpr(ST_EXPR_SHR, expr.lhs_, expr.rhs_) { }
+        : BinExpr(ST_EXPR_SHR, expr.lhs_->clone(), expr.rhs_->clone()) { }
 
     /// \brief clone a ShrExpr.
     ShrExpr *clone() const override

@@ -18,6 +18,7 @@
 #include "sesstype/node/par.h"
 #include "sesstype/node/interruptible.h"
 #include "sesstype/node/nested.h"
+#include "sesstype/util/empty_visitor.hpp"
 
 #include "sesstype/parameterised/expr.h"
 #include "sesstype/parameterised/expr/var.h"
@@ -46,7 +47,7 @@ TEST_F(NodeTest, TestBlockNode)
     auto node = new InteractionNode();
     node->set_sndr(new Role("Alice"));
     node->add_rcvr(new Role("Bob"));
-/*
+
     auto node2 = new InteractionNode();
     node->set_sndr(new Role("Bob"));
     node->add_rcvr(new Role("Carol"));
@@ -71,7 +72,6 @@ TEST_F(NodeTest, TestBlockNode)
         EXPECT_EQ(blk->child(idx), *it);
     }
     delete blk;
-*/
 }
 
 /**
@@ -342,6 +342,29 @@ TEST_F(NodeTest, BasicUsage)
     recur_node->append_child(new sesstype::ContinueNode("rec"+0));
 
     delete block_node;
+}
+
+TEST_F(NodeTest, CloneTest)
+{
+    auto sndr = new sesstype::Role("Sender");
+    auto rcvr = new sesstype::Role("Receiver");
+    auto node = new sesstype::InteractionNode(new sesstype::MsgSig("Label"));
+    util::EmptyVisitor v;
+    node->set_sndr(sndr);
+    node->add_rcvr(rcvr);
+    node->accept(v);
+    auto node2 = node->clone();
+    node2->set_sndr(sndr);
+    node2->add_rcvr(rcvr);
+    EXPECT_EQ(node->num_rcvrs(), 1);
+    EXPECT_EQ(node2->num_rcvrs(), 2);
+    node2->remove_rcvrs(); // Remove
+    EXPECT_EQ(node->num_rcvrs(), 1);
+    EXPECT_EQ(node2->num_rcvrs(), 0);
+    node->accept(v);
+    delete node;
+    node2->accept(v);
+    delete node2;
 }
 
 } // namespace tests

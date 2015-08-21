@@ -21,7 +21,7 @@ class ModExpr : public BinExpr {
 
     /// \brief ModExpr copy constructor.
     ModExpr(const ModExpr &expr)
-        : BinExpr(ST_EXPR_MOD, expr.lhs_, expr.rhs_) { }
+        : BinExpr(ST_EXPR_MOD, expr.lhs_->clone(), expr.rhs_->clone()) { }
 
     /// \brief clone a ModExpr.
     ModExpr *clone() const override

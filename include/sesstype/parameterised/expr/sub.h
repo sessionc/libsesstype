@@ -21,7 +21,7 @@ class SubExpr : public BinExpr {
 
     /// \brief SubExpr copy constructor.
     SubExpr(const SubExpr &expr)
-        : BinExpr(ST_EXPR_SUB, expr.lhs_, expr.rhs_) { }
+        : BinExpr(ST_EXPR_SUB, expr.lhs_->clone(), expr.rhs_->clone()) { }
 
     /// \brief clone a SubExpr.
     SubExpr *clone() const override

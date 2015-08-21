@@ -41,7 +41,7 @@ class RngExpr : public Expr {
     /// \brief RngExpr copy constructor.
     RngExpr(const RngExpr &expr)
         : Expr(ST_EXPR_RNG),
-          bindvar_(expr.bindvar_), from_(expr.from_), to_(expr.to_) { }
+          bindvar_(expr.bindvar_), from_(expr.from_->clone()), to_(expr.to_->clone()) { }
 
     /// \brief RngExpr destructor.
     ~RngExpr() override

@@ -21,7 +21,7 @@ class DivExpr : public BinExpr {
 
     /// \brief DivExpr copy constructor.
     DivExpr(const DivExpr &expr)
-        : BinExpr(ST_EXPR_DIV, expr.lhs_, expr.rhs_) { }
+        : BinExpr(ST_EXPR_DIV, expr.lhs_->clone(), expr.rhs_->clone()) { }
 
     /// \brief clone a DivExpr.
     DivExpr *clone() const override

@@ -21,7 +21,7 @@ class MulExpr : public BinExpr {
 
     /// \brief MulExpr copy constructor.
     MulExpr(const MulExpr &expr)
-        : BinExpr(ST_EXPR_MUL, expr.lhs_, expr.rhs_) { }
+        : BinExpr(ST_EXPR_MUL, expr.lhs_->clone(), expr.rhs_->clone()) { }
 
     /// \brief clone a MulExpr.
     MulExpr *clone() const override

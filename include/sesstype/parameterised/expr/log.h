@@ -17,7 +17,7 @@ class LogExpr : public Expr {
     LogExpr(Expr *val, Expr *base) : Expr(ST_EXPR_LOG), value_(), base_() { }
 
     LogExpr(const LogExpr &expr)
-        : Expr(ST_EXPR_LOG), value_(expr.value_), base_(expr.base_) { }
+        : Expr(ST_EXPR_LOG), value_(expr.value_->clone()), base_(expr.base_->clone()) { }
 
     ~LogExpr() override
     {
