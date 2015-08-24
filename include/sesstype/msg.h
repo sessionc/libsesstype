@@ -38,12 +38,12 @@ class MsgPayload : public util::Clonable {
     /// \brief MsgPayload constructor.
     /// \param[in] type of MsgPayload (datatype).
     /// \param[in] name of MsgPayload (identifier).
-    MsgPayload(std::string type, std::string name)
-        : name_(name), type_(type) { }
+    MsgPayload(std::string type, std::string name) : name_(name),
+                                                     type_(type) { }
 
     /// \brief MsgPayload copy constructor.
-    MsgPayload(const MsgPayload &payload)
-        : name_(payload.name_), type_(payload.type_) { }
+    MsgPayload(const MsgPayload &payload) : name_(payload.name_),
+                                            type_(payload.type_) { }
 
     /// \brief MsgPayload destructor.
     ~MsgPayload() { }

@@ -1,12 +1,15 @@
-#ifndef SESSTYPE__UTIL__EMPTY_VISITOR_HPP__
-#define SESSTYPE__UTIL__EMPTY_VISITOR_HPP__
+#ifndef SESSTYPE__UTIL__EMPTY_VISITOR_H__
+#define SESSTYPE__UTIL__EMPTY_VISITOR_H__
 
 #include "sesstype/node.h"
 #include "sesstype/util/node_visitor.h"
 
+#ifdef __cplusplus
 namespace sesstype {
 namespace util {
+#endif
 
+#ifdef __cplusplus
 /**
  * \brief Empty visitor for mocking transversal of all Nodes.
  */
@@ -22,8 +25,11 @@ class EmptyVisitor : public NodeVisitor {
     virtual void visit(NestedNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) override { }
     virtual void visit(InterruptibleNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) override { }
 };
+#endif // __cplusplus
 
+#ifdef __cplusplus
 } // namespace util
 } // namespace sesstype
+#endif
 
-#endif//SESSTYPE__UTIL__EMPTY_VISITOR_HPP__
+#endif//SESSTYPE__UTIL__EMPTY_VISITOR_H__

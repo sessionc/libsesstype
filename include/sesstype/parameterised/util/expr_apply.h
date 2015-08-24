@@ -1,6 +1,10 @@
 #ifndef SESSTYPE__PARAMETERISED__UTIL__EXPR_APPLY_H__
 #define SESSTYPE__PARAMETERISED__UTIL__EXPR_APPLY_H__
 
+#ifdef __cplusplus
+#include <stack>
+#endif
+
 #include "sesstype/parameterised/expr/rng.h"
 #include "sesstype/parameterised/util/expr_visitor.h"
 
@@ -20,30 +24,27 @@ namespace util {
  *   i.e. Replace occurence of *bindvar* in e with *from* and *to*
  */
 class ExprApply : public ExprVisitor {
-    std::string var_;
-    Expr *from_;
-    Expr *to_;
-    Expr *result_from_;
-    Expr *result_to_;
+    std::string findvar_;
+    Expr *replacefrom_;
+    Expr *replaceto_;
+    std::stack<Expr *> from_;
+    std::stack<Expr *> to_;
     bool error_;
 
   public:
-    ExprApply(RngExpr *bindexpr) : var_(bindexpr->bindvar()),
-                                   from_(bindexpr->from()),
-                                   to_(bindexpr->to()),
+    ExprApply(RngExpr *bindexpr) : findvar_(bindexpr->bindvar()),
+                                   replacefrom_(bindexpr->from()),
+                                   replaceto_(bindexpr->to()),
+                                   from_(),
+                                   to_(),
                                    error_(false) { }
 
     Expr *apply()
     {
-        if (is_valid()) {
-            return new RngExpr(std::string(var_), result_from_, result_to_);
+        if (!error_) {
+            return new RngExpr(std::string(findvar_), from_.top(), to_.top());
         }
         return nullptr;
-    }
-
-    bool is_valid()
-    {
-        return !error_;
     }
 
     virtual void visit(Expr *expr)
@@ -51,120 +52,148 @@ class ExprApply : public ExprVisitor {
         // Nothing.
     }
 
-    virtual void visit(VarExpr *expr)
-    {
-        if (expr->name() == var_) {
-            // Replace var with from and to.
-            result_from_ = from_->clone();
-            result_to_ = to_->clone();
-        } else {
-            result_from_ = new VarExpr(expr->name());
-            result_to_ = new VarExpr(expr->name());
-        }
-    }
-
     virtual void visit(ValExpr *expr)
     {
-        result_from_ = new ValExpr(expr->num());
-        result_to_ = new ValExpr(expr->num());
+        from_.push(expr->clone());
+        to_.push(expr->clone());
+    }
+
+    virtual void visit(VarExpr *expr)
+    {
+        if (expr->name() == findvar_) { // Base case, start building
+            // Replace var with from and to.
+            from_.push(replacefrom_->clone());
+            to_.push(replaceto_->clone());
+        } else {
+            from_.push(expr->clone());
+            to_.push(expr->clone());
+        }
     }
 
     virtual void visit(AddExpr *expr)
     {
         expr->lhs()->accept(*this);
-        Expr *lhs_from_ = result_from_;
-        Expr *lhs_to_ = result_to_;
+        Expr *lhs_from = from_.top();
+        from_.pop();
+        Expr *lhs_to = to_.top();
+        to_.pop();
 
         expr->rhs()->accept(*this);
-        Expr *rhs_from_ = result_from_;
-        Expr *rhs_to_ = result_to_;
+        Expr *rhs_from = from_.top();
+        from_.pop();
+        Expr *rhs_to = to_.top();
+        to_.pop();
 
-        result_from_ = new AddExpr(lhs_from_, rhs_from_);
-        result_to_ = new AddExpr(lhs_to_, rhs_to_);
+        from_.push(new AddExpr(lhs_from, rhs_from));
+        to_.push(new AddExpr(lhs_to, rhs_to));
     }
 
     virtual void visit(SubExpr *expr)
     {
         expr->lhs()->accept(*this);
-        Expr *lhs_from_ = result_from_;
-        Expr *lhs_to_ = result_to_;
+        Expr *lhs_from = from_.top();
+        from_.pop();
+        Expr *lhs_to = to_.top();
+        to_.pop();
 
         expr->rhs()->accept(*this);
-        Expr *rhs_from_ = result_from_;
-        Expr *rhs_to_ = result_to_;
+        Expr *rhs_from = from_.top();
+        from_.pop();
+        Expr *rhs_to = to_.top();
+        to_.pop();
 
-        result_from_ = new AddExpr(lhs_from_, rhs_from_);
-        result_to_ = new AddExpr(lhs_to_, rhs_to_);
+        from_.push(new SubExpr(lhs_from, rhs_from));
+        to_.push(new SubExpr(lhs_to, rhs_to));
     }
 
     virtual void visit(MulExpr *expr)
     {
         expr->lhs()->accept(*this);
-        Expr *lhs_from_ = result_from_;
-        Expr *lhs_to_ = result_to_;
+        Expr *lhs_from = from_.top();
+        from_.pop();
+        Expr *lhs_to = to_.top();
+        to_.pop();
 
         expr->rhs()->accept(*this);
-        Expr *rhs_from_ = result_from_;
-        Expr *rhs_to_ = result_to_;
+        Expr *rhs_from = from_.top();
+        from_.pop();
+        Expr *rhs_to = to_.top();
+        to_.pop();
 
-        result_from_ = new AddExpr(lhs_from_, rhs_from_);
-        result_to_ = new AddExpr(lhs_to_, rhs_to_);
+        from_.push(new MulExpr(lhs_from, rhs_from));
+        to_.push(new MulExpr(lhs_to, rhs_to));
     }
 
     virtual void visit(DivExpr *expr)
     {
         expr->lhs()->accept(*this);
-        Expr *lhs_from_ = result_from_;
-        Expr *lhs_to_ = result_to_;
+        Expr *lhs_from = from_.top();
+        from_.pop();
+        Expr *lhs_to = to_.top();
+        to_.pop();
 
         expr->rhs()->accept(*this);
-        Expr *rhs_from_ = result_from_;
-        Expr *rhs_to_ = result_to_;
+        Expr *rhs_from = from_.top();
+        from_.pop();
+        Expr *rhs_to = to_.top();
+        to_.pop();
 
-        result_from_ = new AddExpr(lhs_from_, rhs_from_);
-        result_to_ = new AddExpr(lhs_to_, rhs_to_);
+        from_.push(new DivExpr(lhs_from, rhs_from));
+        to_.push(new DivExpr(lhs_to, rhs_to));
     }
 
     virtual void visit(ModExpr *expr)
     {
         expr->lhs()->accept(*this);
-        Expr *lhs_from_ = result_from_;
-        Expr *lhs_to_ = result_to_;
+        Expr *lhs_from = from_.top();
+        from_.pop();
+        Expr *lhs_to = to_.top();
+        to_.pop();
 
         expr->rhs()->accept(*this);
-        Expr *rhs_from_ = result_from_;
-        Expr *rhs_to_ = result_to_;
+        Expr *rhs_from = from_.top();
+        from_.pop();
+        Expr *rhs_to = to_.top();
+        to_.pop();
 
-        result_from_ = new AddExpr(lhs_from_, rhs_from_);
-        result_to_ = new AddExpr(lhs_to_, rhs_to_);
+        from_.push(new ModExpr(lhs_from, rhs_from));
+        to_.push(new ModExpr(lhs_to, rhs_to));
     }
 
     virtual void visit(ShlExpr *expr)
     {
         expr->lhs()->accept(*this);
-        Expr *lhs_from_ = result_from_;
-        Expr *lhs_to_ = result_to_;
+        Expr *lhs_from = from_.top();
+        from_.pop();
+        Expr *lhs_to = to_.top();
+        to_.pop();
 
         expr->rhs()->accept(*this);
-        Expr *rhs_from_ = result_from_;
-        Expr *rhs_to_ = result_to_;
+        Expr *rhs_from = from_.top();
+        from_.pop();
+        Expr *rhs_to = to_.top();
+        to_.pop();
 
-        result_from_ = new AddExpr(lhs_from_, rhs_from_);
-        result_to_ = new AddExpr(lhs_to_, rhs_to_);
+        from_.push(new ShlExpr(lhs_from, rhs_from));
+        to_.push(new ShlExpr(lhs_to, rhs_to));
     }
 
     virtual void visit(ShrExpr *expr)
     {
         expr->lhs()->accept(*this);
-        Expr *lhs_from_ = result_from_;
-        Expr *lhs_to_ = result_to_;
+        Expr *lhs_from = from_.top();
+        from_.pop();
+        Expr *lhs_to = to_.top();
+        to_.pop();
 
         expr->rhs()->accept(*this);
-        Expr *rhs_from_ = result_from_;
-        Expr *rhs_to_ = result_to_;
+        Expr *rhs_from = from_.top();
+        from_.pop();
+        Expr *rhs_to = to_.top();
+        to_.pop();
 
-        result_from_ = new AddExpr(lhs_from_, rhs_from_);
-        result_to_ = new AddExpr(lhs_to_, rhs_to_);
+        from_.push(new ShrExpr(lhs_from, rhs_from));
+        to_.push(new ShrExpr(lhs_to, rhs_to));
     }
 
     virtual void visit(SeqExpr *expr)

@@ -5,20 +5,14 @@
 namespace sesstype {
 namespace parameterised {
 
-unsigned int st_role_num_dimen(st_role *const role)
+unsigned int st_role_num_dimen(st_param_role *const role)
 {
-    if (parameterised::Role *paramrole = dynamic_cast<parameterised::Role *>(role)) {
-        return paramrole->num_dimen();
-    }
-    return 0;
+    return role->num_dimens();
 }
 
-st_role *st_role_add_param(st_role *role, st_expr *param)
+st_param_role *st_role_add_param(st_param_role *const role, st_expr *param)
 {
-    if (parameterised::Role *paramrole = dynamic_cast<parameterised::Role *>(role)) {
-        paramrole->add_param(param);
-        return paramrole;
-    }
+    role->add_param(param);
     return role;
 }
 

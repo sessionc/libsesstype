@@ -1,5 +1,5 @@
-#ifndef SESSTYPE__UTIL__PROJECTION_H__
-#define SESSTYPE__UTIL__PROJECTION_H__
+#ifndef SESSTYPE__UTIL__PROJECT_H__
+#define SESSTYPE__UTIL__PROJECT_H__
 
 #ifdef __cplusplus
 #include <stack>
@@ -7,6 +7,14 @@
 
 #include "sesstype/role.h"
 #include "sesstype/node.h"
+#include "sesstype/node/block.h"
+#include "sesstype/node/interaction.h"
+#include "sesstype/node/choice.h"
+#include "sesstype/node/recur.h"
+#include "sesstype/node/continue.h"
+#include "sesstype/node/par.h"
+#include "sesstype/node/nested.h"
+#include "sesstype/node/interruptible.h"
 #include "sesstype/util/node_visitor.h"
 
 #ifdef __cplusplus
@@ -18,12 +26,12 @@ namespace util {
 /**
  * \brief Endpoint projection.
  */
-class Projection : public NodeVisitor {
+class ProjectionVisitor : public NodeVisitor {
     Role *endpoint_;
     std::stack<Node *> stack_;
 
   public:
-    Projection(Role *role) : endpoint_(role), stack_()
+    ProjectionVisitor(Role *endpoint) : endpoint_(endpoint), stack_()
     {
         stack_.push(new BlockNode());
     }
@@ -65,7 +73,7 @@ class Projection : public NodeVisitor {
         for (auto it=node->rcvr_begin(); it!=node->rcvr_end(); it++) {
             if (*it && (*it)->matches(endpoint_)) {
                 projected_node = node->clone();
-                projected_node->clear_rcvrs();
+                projected_node->remove_rcvrs();
                 parent->append_child(projected_node);
                 return;
             }
@@ -118,6 +126,7 @@ class Projection : public NodeVisitor {
 
     void visit(NestedNode *node)
     {
+        // Only include nested node if role arg matches.
         for (auto it=node->rolearg_begin(); it!=node->rolearg_end(); it++) {
             if ((*it)->matches(endpoint_)) {
                 dynamic_cast<BlockNode *>(stack_.top())->append_child(node->clone());
@@ -129,6 +138,8 @@ class Projection : public NodeVisitor {
     void visit(InterruptibleNode *node)
     {
         auto *new_node = node->clone();
+
+        // TODO only retain interrupts relevant to endpoint role?
 
         stack_.push(new_node);
         node->BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>::accept(*this);
@@ -144,4 +155,4 @@ class Projection : public NodeVisitor {
 } // namespace sesstype
 #endif
 
-#endif//SESSTYPE__UTIL__PROJECTION_H__
+#endif//SESSTYPE__UTIL__PROJECT_H__

@@ -35,12 +35,12 @@ TEST_F(RoleTest, BasicRole)
 
     auto *role = new sesstype::parameterised::Role("R");
     EXPECT_EQ(role->name(), "R");
-    EXPECT_EQ(role->num_dimen(), 0);
+    EXPECT_EQ(role->num_dimens(), 0);
     auto *param0 = new sesstype::parameterised::RngExpr(
                 new sesstype::parameterised::ValExpr(1),
                 new sesstype::parameterised::ValExpr(100));
     role->add_param(param0);
-    EXPECT_EQ(role->num_dimen(), 1);
+    EXPECT_EQ(role->num_dimens(), 1);
     EXPECT_EQ((*role)[0], param0);
     delete role;
 }
@@ -62,11 +62,11 @@ TEST_F(RoleTest, BasicRolrGrp)
     EXPECT_EQ(grp->name(), "g");
     grp->add_member(A);
     EXPECT_EQ(grp->num_members(), 1);
-    EXPECT_EQ(grp->member("A"), A);
+    EXPECT_EQ(grp->member(0), A);
 
     grp->add_member(B);
     EXPECT_EQ(grp->num_members(), 2);
-    EXPECT_EQ(grp->member("B"), B);
+    EXPECT_EQ(grp->member(1), B);
 
     delete grp;
 
@@ -75,10 +75,10 @@ TEST_F(RoleTest, BasicRolrGrp)
     EXPECT_EQ(grp_withname->num_members(), 0);
     grp_withname->add_member(C);
     EXPECT_EQ(grp_withname->num_members(), 1);
-    EXPECT_EQ(grp_withname->member("C"), C);
+    EXPECT_EQ(grp_withname->member(0), C);
     grp_withname->add_member(D);
     EXPECT_EQ(grp_withname->num_members(), 2);
-    EXPECT_EQ(grp_withname->member("D"), D);
+    EXPECT_EQ(grp_withname->member(1), D);
 
     for (auto it=grp_withname->member_begin();
               it!=grp_withname->member_end(); it++) {

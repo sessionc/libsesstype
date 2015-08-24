@@ -6,12 +6,15 @@
 #define SESSTYPE__PARAMETERISED__NODE_H__
 
 #include "sesstype/node.h"
+#include "sesstype/parameterised/role.h"
 
 #ifdef __cplusplus
 namespace sesstype {
 namespace parameterised {
 namespace util {
+
 class NodeVisitor;
+
 } // namespace util
 } // namespace parameterised
 } // namespace sesstype
@@ -52,6 +55,14 @@ typedef Node st_param_node;
 #else
 typedef struct Node st_param_node;
 #endif
+
+/// \brief Debug print of parameterised Node.
+void st_param_node_print(st_param_node *const node);
+
+/// \brief Endpoint projection of parameterised Node.
+st_param_node *st_param_node_project(st_param_node *const node, st_param_role *const endpoint);
+
+void st_param_node_free(st_param_node *node);
 
 #ifdef __cplusplus
 } // extern "C"

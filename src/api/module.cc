@@ -1,8 +1,6 @@
 #include <sesstype/module.h>
 
-#ifdef __cplusplus
 namespace sesstype {
-#endif
 
 st_module *st_module_mk_init(const char *name)
 {
@@ -29,7 +27,7 @@ st_tree *st_module_get_tree_at_idx(st_module *const module, unsigned int index)
 {
     auto it = module->session_begin();
     for (int i=0; i<index; i++, it++) { /* empty */ }
-    return (*it).second;
+    return it->second;
 }
 
 st_module *st_module_import(st_module *const module, st_import *import)
@@ -43,6 +41,4 @@ void st_module_free(st_module *module)
     delete module;
 }
 
-#ifdef __cplusplus
 } // namespace sesstype
-#endif

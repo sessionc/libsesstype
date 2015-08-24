@@ -26,17 +26,18 @@ namespace parameterised {
 /**
  * \brief Session class encapsulates a single session (parameterised flavour).
  */
-class Session : public sesstype::Session {
+class Session : public sesstype::SessionTmpl<Node, Role> {
     std::unordered_map<std::string, RoleGrp *> groups_;
 
   public:
-    typedef std::unordered_map<std::string, RoleGrp *> RoleGrpContainer;
+    using RoleGrpContainer = std::unordered_map<std::string, RoleGrp *>;
     /// Session constructor with "default" as Session name.
-    Session() : sesstype::Session(), groups_() { }
+    Session() : sesstype::SessionTmpl<Node, Role>(), groups_() { }
 
     /// Session constructor.
     /// \param[in] name Session name.
-    Session(std::string name) : sesstype::Session(name), groups_() { }
+    Session(std::string name)
+        : sesstype::SessionTmpl<Node, Role>(name), groups_() { }
 
     /// Session destructor.
     virtual ~Session()
@@ -44,16 +45,6 @@ class Session : public sesstype::Session {
         for (auto grp_pair : groups_) {
             delete grp_pair.second;
         }
-    }
-
-    virtual Node *root() const override
-    {
-        return static_cast<Node *>(sesstype::Session::root());
-    }
-
-    virtual Role *endpoint() const override
-    {
-        return dynamic_cast<Role *>(sesstype::Session::endpoint());
     }
 
     /// \param[in] name of the RoleGrp.
@@ -83,12 +74,12 @@ class Session : public sesstype::Session {
         return groups_.size();
     }
 
-    RoleGrpContainer::const_iterator rolegrp_begin() const
+    typename RoleGrpContainer::const_iterator rolegrp_begin() const
     {
         return groups_.begin();
     }
 
-    RoleGrpContainer::const_iterator rolegrp_end() const
+    typename RoleGrpContainer::const_iterator rolegrp_end() const
     {
         return groups_.end();
     }

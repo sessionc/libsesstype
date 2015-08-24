@@ -7,7 +7,7 @@
 
 #ifdef __cplusplus
 #include <string>
-#include <unordered_map>
+#include <vector>
 #endif
 
 #include "sesstype/parameterised/role.h"
@@ -22,10 +22,10 @@ namespace parameterised {
  * \brief Role Group (group of participants) of a protocol or session.
  */
 class RoleGrp : public Role {
-    std::unordered_map<std::string, sesstype::parameterised::Role *> members_;
+    std::vector<sesstype::parameterised::Role *> members_;
 
   public:
-    typedef std::unordered_map<std::string, sesstype::parameterised::Role *> RoleContainer;
+    typedef std::vector<sesstype::parameterised::Role *> RoleContainer;
 
     /// \brief RoleGrp constructor with "default_grp" as name.
     RoleGrp() : Role("default_grp"), members_() { }
@@ -51,12 +51,12 @@ class RoleGrp : public Role {
         return new RoleGrp(*this);
     }
 
-    /// \param[in] name of the member Role.
+    /// \param[in] index of the member Role.
     /// \returns member Role.
     /// \exception std::out_of_range if Role is not in the RoleGrp.
-    sesstype::Role *member(std::string name) const
+    sesstype::Role *member(unsigned int index) const
     {
-        return members_.at(name);
+        return members_.at(index);
     }
 
     /// \returns number of members.
@@ -68,14 +68,20 @@ class RoleGrp : public Role {
     /// \param[in] role to add as member.
     void add_member(Role *role)
     {
-        members_.insert({ role->name(), role });
+        members_.push_back(role);
     }
 
     /// \brief Check if this Role contains another Role.
     /// \returns true if this Role contains another Role.
     bool matches(sesstype::Role *other) const override
     {
-        return false; // TODO
+        if (auto other_param = dynamic_cast<Role *>(other)) {
+            for (auto it=member_begin(); it!=member_end(); it++) {
+                if (!(*it)->matches(other_param)) return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     /// \brief Start iterator for member.
@@ -109,7 +115,7 @@ st_role_grp *st_role_grp_init(const char *name);
 const char *st_role_grp_name(const st_role_grp * const role_grp);
 st_role_grp *st_role_grp_set_name(st_role_grp * const role_grp, const char *name);
 
-void st_role_grp_add_member(st_role *role);
+void st_role_grp_add_member(st_param_role *role);
 unsigned int st_role_grp_num_member(const st_role_grp * const role_grp);
 void st_role_grp_free(st_role_grp *role_grp);
 

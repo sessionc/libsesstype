@@ -12,7 +12,9 @@
 #ifdef __cplusplus
 namespace sesstype {
 namespace util {
+
 class NodeVisitor;
+
 } // namesapce util
 } // namespace sesstype
 #endif
@@ -64,6 +66,10 @@ typedef Node st_node;
 #else
 typedef struct Node st_node;
 #endif // __cplusplus
+
+st_node *st_node_project(st_node *const node, st_role *const endpoint);
+
+void st_node_print(st_node *const node);
 
 void st_node_free(st_node *node);
 

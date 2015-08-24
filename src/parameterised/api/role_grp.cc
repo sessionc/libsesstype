@@ -20,7 +20,7 @@ st_role_grp *st_role_grp_set_name(st_role_grp *const role_grp, const char *name)
     return role_grp;
 }
 
-void st_role_grp_add_member(st_role_grp *const role_grp, st_role *role)
+void st_role_grp_add_member(st_role_grp *const role_grp, st_param_role *role)
 {
     role_grp->add_member(role);
 }

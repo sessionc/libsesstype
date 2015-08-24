@@ -1,5 +1,5 @@
-#ifndef SESSTYPE__PARAMETERISED__UTIL__EMPTY_VISITOR_HPP__
-#define SESSTYPE__PARAMETERISED__UTIL__EMPTY_VISITOR_HPP__
+#ifndef SESSTYPE__PARAMETERISED__UTIL__EMPTY_VISITOR_H__
+#define SESSTYPE__PARAMETERISED__UTIL__EMPTY_VISITOR_H__
 
 #include "sesstype/parameterised/util/expr_visitor.h"
 #include "sesstype/parameterised/util/node_visitor.h"
@@ -43,4 +43,4 @@ class EmptyVisitor : public NodeVisitor, public ExprVisitor {
 } // namespace sesstype
 
 
-#endif//SESSTYPE__PARAMETERISED__UTIL__EMPTY_VISITOR_HPP__
+#endif//SESSTYPE__PARAMETERISED__UTIL__EMPTY_VISITOR_H__

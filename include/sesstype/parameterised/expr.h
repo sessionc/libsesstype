@@ -115,8 +115,7 @@ class BinExpr : public Expr {
   protected:
     /// \brief BinExpr constructor.
     BinExpr(int op, Expr *lhs, Expr *rhs)
-        : Expr(op),
-          lhs_(lhs), rhs_(rhs) { }
+        : Expr(op), lhs_(lhs), rhs_(rhs) { }
 
     Expr *lhs_;
     Expr *rhs_;
@@ -129,10 +128,10 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-typedef Expr st_expr;        /**< Generic expression. */
+typedef Expr    st_expr;     /**< Generic expression. */
 typedef BinExpr st_bin_expr; /**< Binary expression. */
 #else
-typedef struct Expr st_expr;        /**< Generic expression. */
+typedef struct Expr    st_expr;     /**< Generic expression. */
 typedef struct BinExpr st_bin_expr; /**< Binary expression. */
 #endif // __cplusplus
 
@@ -169,16 +168,13 @@ bool st_expr_is_identical(st_expr *e0, st_expr *e1);
 ///
 /// Simplify mathematical expressions and return a canonical form if possible.
 /// \param[in,out] e Expression to evaluate.
-void st_expr_eval(st_expr *e);
-
-/// \brief Free an exprssion.
-/// \param[in] e Expression to free.
-void st_expr_free(st_expr *e);
+/// \returns pointer to dynamically allocated, simplified expression.
+st_expr *st_expr_eval(st_expr *const e);
 
 /// \brief Apply a relative expression on a binding range.
 /// \param[in] b Binding range.
 /// \param[in] e Relative expression.
-/// \returns pointer to dynamically allocated expression.
+/// \returns pointer to dynamically allocated expression, NULL if b is not binding expression.
 st_expr *st_expr_apply(const st_expr *b, const st_expr *e);
 
 /// \brief Invert an expression.
@@ -187,6 +183,10 @@ st_expr *st_expr_apply(const st_expr *b, const st_expr *e);
 /// \param[in] e Expression to invert.
 /// \returns an inverted expression or NULL if not possible.
 st_expr *st_expr_inv(const st_expr *e);
+
+/// \brief Free an exprssion.
+/// \param[in] e Expression to free.
+void st_expr_free(st_expr *e);
 
 #ifdef __cplusplus
 } // extern "C"

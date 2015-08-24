@@ -8,15 +8,6 @@
 #include "sesstype/msg.h"
 #include "sesstype/node.h"
 #include "sesstype/role.h"
-#include "sesstype/util/clonable.h"
-
-#ifdef __cplusplus
-namespace sesstype {
-namespace util {
-class NodeVisitor;
-} // namesapce util
-} // namespace sesstype
-#endif
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -38,20 +29,21 @@ class InteractionNodeTmpl : public BaseNode {
     typedef typename std::vector<RoleType *> RoleContainer;
 
     /// \brief InteractionNode constructor with empty MsgSig.
-    InteractionNodeTmpl()
-        : BaseNode(ST_NODE_SENDRECV),
-          msg_(new MessageType("")), sndr_(nullptr), rcvrs_() { }
+    InteractionNodeTmpl() : BaseNode(ST_NODE_SENDRECV),
+                            msg_(new MessageType("")),
+                            sndr_(nullptr), rcvrs_() { }
 
     /// \brief InteractionNode constructor.
     /// \param[in] msgsig for the interaction.
-    InteractionNodeTmpl(MessageType *msg)
-        : BaseNode(ST_NODE_SENDRECV),
-          msg_(msg->clone()), sndr_(nullptr), rcvrs_() { }
+    InteractionNodeTmpl(MessageType *msg) : BaseNode(ST_NODE_SENDRECV),
+                                            msg_(msg->clone()),
+                                            sndr_(nullptr), rcvrs_() { }
 
     /// \brief InteractionNode copy constructor.
     InteractionNodeTmpl(const InteractionNodeTmpl &node)
         : BaseNode(ST_NODE_SENDRECV),
-          msg_(node.msg_->clone()), sndr_(node.sndr_->clone()), rcvrs_()
+          msg_(node.msg_->clone()),
+          sndr_(node.sndr_ ? node.sndr_->clone() : nullptr), rcvrs_()
     {
         for (auto rcvr : node.rcvrs_) {
             rcvrs_.push_back(rcvr->clone());
@@ -62,11 +54,10 @@ class InteractionNodeTmpl : public BaseNode {
     ~InteractionNodeTmpl() override
     {
         delete msg_;
-        delete sndr_;
+        if (sndr_) delete sndr_;
         for (auto rcvr : rcvrs_) {
             delete rcvr;
         }
-        rcvrs_.clear();
     }
 
     /// \brief clone a InteractionNode.
@@ -79,22 +70,28 @@ class InteractionNodeTmpl : public BaseNode {
     /// \param[in] msgsig of InteractionNode to replace with.
     void set_msg(MessageType *msg)
     {
-        delete msg_;
+        if (msg_) delete msg_;
         msg_ = msg->clone();
     }
 
     /// \returns message signature of InteractionNode.
-    MessageType *msg() const { return msg_; }
+    MessageType *msg() const
+    {
+        return msg_;
+    }
 
     /// \param[in] from Role of InteractionNode.
     void set_sndr(RoleType *sndr)
     {
-        delete sndr_;
+        if (sndr_) delete sndr_;
         sndr_ = sndr->clone();
     }
 
     /// \returns <tt>from</tt> Role of InteractionNode.
-    RoleType *sndr() const { return sndr_; }
+    RoleType *sndr() const
+    {
+        return sndr_;
+    }
 
     /// \brief Remove from Role.
     void remove_sndr()
@@ -104,22 +101,34 @@ class InteractionNodeTmpl : public BaseNode {
     }
 
     /// \param[in] to Role to add to this InteractionNode.
-    void add_rcvr(RoleType *rcvr) { rcvrs_.push_back(rcvr->clone()); }
+    void add_rcvr(RoleType *rcvr)
+    {
+        rcvrs_.push_back(rcvr->clone());
+    }
 
     /// \returns number of <tt>to</tt> Role.
-    unsigned int num_rcvrs() const { return rcvrs_.size(); }
+    unsigned int num_rcvrs() const
+    {
+        return rcvrs_.size();
+    }
 
     /// \brief Convenient function to return the first <tt>to</tt> Role.
     /// \returns the first <tt>to</tt> Role of InteractionNode.
-    RoleType *rcvr() const { return rcvrs_.at(0); }
+    RoleType *rcvr() const
+    {
+        return rcvrs_.at(0);
+    }
 
     /// \returns <tt>index</tt>th <tt>to</tt> Role of InteractionNode.
-    RoleType *rcvr(unsigned int idx) const { return rcvrs_.at(idx); }
+    RoleType *rcvr(unsigned int idx) const
+    {
+        return rcvrs_.at(idx);
+    }
 
     /// \brief Remove to Role (all of them);
-    void clear_rcvrs()
+    void remove_rcvrs()
     {
-        for (auto *rcvr : rcvrs_) {
+        for (auto rcvr : rcvrs_) {
             delete rcvr;
         }
         rcvrs_.clear();

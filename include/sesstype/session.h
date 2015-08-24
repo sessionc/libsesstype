@@ -31,27 +31,28 @@ namespace sesstype {
  *  - root Node representing the body of Session
  *  - Metadata about the Session, including Roles in the Session
  */
-class Session {
+template <class BaseNode, class RoleType>
+class SessionTmpl {
     std::string name_;
     int type_;
-    Role *me_; // Localised role (only used in endpoint session)
-    Node *root_;
-    std::unordered_map<std::string, Role *> roles_;
+    RoleType *me_; // Localised role (only used in endpoint session)
+    BaseNode *root_;
+    std::unordered_map<std::string, RoleType *> roles_;
 
   public:
-    typedef std::unordered_map<std::string, Role *> RoleContainer;
+    using RoleContainer = std::unordered_map<std::string, RoleType *>;
 
     /// Session constructor with "default" as Session name.
-    Session()
+    SessionTmpl()
         : name_("default"), type_(ST_TYPE_GLOBAL), me_(), root_(0), roles_() { }
 
     /// Session constructor.
     /// \param[in] name Session name.
-    Session(std::string name)
+    SessionTmpl(std::string name)
         : name_(name), type_(ST_TYPE_GLOBAL), me_(), root_(0), roles_() { }
 
     /// Session destructor.
-    virtual ~Session()
+    virtual ~SessionTmpl()
     {
         {
             for (auto role_pair : roles_) {
@@ -70,7 +71,7 @@ class Session {
     }
 
     /// \param[in] root Node of Session body.
-    void set_root(Node *root)
+    void set_root(BaseNode *root)
     {
         if (root_ != NULL) {
             delete root_;
@@ -79,21 +80,22 @@ class Session {
     }
 
     /// \returns root Node of Session body.
-    virtual Node *root() const
+    BaseNode *root() const
     {
         return root_;
     }
 
     /// \returns endpoint of current Session.
-    virtual Role *endpoint() const
+    RoleType *endpoint() const
     {
         return me_;
     }
 
     /// \param[in] role Sets endpoint role to endpoint.
-    virtual void set_endpoint(Role *endpoint)
+    void set_endpoint(RoleType *endpoint)
     {
         me_ = endpoint;
+        type_ = ST_TYPE_LOCAL;
     }
 
     /// Perform endpoint projection of Session with respect to endpoint Role.
@@ -112,15 +114,15 @@ class Session {
 
     /// Add a Role as a participant of the Session.
     /// \param[in] role to add to this Session.
-    void add_role(Role *role)
+    void add_role(RoleType *role)
     {
-        roles_.insert(std::pair<std::string, Role *>(role->name(), role));
+        roles_.insert(std::pair<std::string, RoleType *>(role->name(), role));
     }
 
     /// Test if Role is a participant of Session.
     /// \param[in] role to look for.
     /// \returns true if role is a Role in the Session.
-    bool has_role(Role *role) const
+    bool has_role(RoleType *role) const
     {
         return (roles_.find(role->name()) != roles_.end());
     }
@@ -137,7 +139,7 @@ class Session {
     /// \param[in] name of the Role.
     /// \returns Role named name.
     /// \exception std::out_of_range if not found.
-    Role *role(std::string name) const
+    RoleType *role(std::string name) const
     {
         return roles_.at(name);
     }
@@ -147,16 +149,18 @@ class Session {
         return roles_.size();
     }
 
-    RoleContainer::const_iterator role_begin() const
+    typename RoleContainer::const_iterator role_begin() const
     {
         return roles_.begin();
     }
 
-    RoleContainer::const_iterator role_end() const
+    typename RoleContainer::const_iterator role_end() const
     {
         return roles_.end();
     }
 };
+
+using Session = SessionTmpl<Node, Role>;
 #endif
 
 #ifdef __cplusplus

@@ -2,7 +2,6 @@
 #define SESSTYPE__PARAMETERISED__UTIL__EXPR_INVERT_H__
 
 #ifdef __cplusplus
-#include <iostream>
 #include <stack>
 #endif
 
@@ -20,7 +19,6 @@
 #include "sesstype/parameterised/expr/rng.h"
 #include "sesstype/parameterised/expr/log.h"
 #include "sesstype/parameterised/util/expr_visitor.h"
-#include "sesstype/parameterised/util/print.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -39,12 +37,11 @@ class ExprInvert : public ExprVisitor {
     bool error_;
     Expr *reversed_;
     std::string var_;
-    util::Print p;
 
   public:
-    ExprInvert(std::string var) : error_(false), reversed_(new VarExpr(var)), var_(var), p()
-    {
-    }
+    ExprInvert(std::string var) : error_(false),
+                                  reversed_(new VarExpr(var)),
+                                  var_(var) { }
 
     Expr *invert()
     {

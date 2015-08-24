@@ -5,7 +5,7 @@
 namespace sesstype {
 namespace parameterised {
 
-st_node *st_mk_oneof_node(st_role *selector_role, unsigned int dimen)
+st_node *st_mk_oneof_node(st_param_role *selector_role, unsigned int dimen)
 {
     return new OneofNode(selector_role, dimen);
 }

@@ -11,6 +11,7 @@
 #endif
 
 #include "sesstype/module.h"
+#include "sesstype/import.h"
 #include "sesstype/parameterised/const.h"
 #include "sesstype/parameterised/session.h"
 
@@ -24,33 +25,31 @@ namespace parameterised {
  * \brief Module is a container class for multiple logically related Protocols
  * (contains parameterised elements).
  */
-class Module : public sesstype::Module {
-    std::unordered_map<std::string, Constant *> consts_;
+template <class ImportType, class SessionType, class ConstantType>
+class ModuleTmpl : public sesstype::ModuleTmpl<ImportType, SessionType> {
+    std::unordered_map<std::string, ConstantType *> consts_;
 
   public:
-    typedef std::unordered_map<std::string, Constant *> ConstantContainer;
+    using ConstantContainer = std::unordered_map<std::string, ConstantType *>;
 
     /// \brief Module constructor with "default" as Module name.
-    Module() : sesstype::Module(), consts_() { }
+    ModuleTmpl()
+        : sesstype::ModuleTmpl<ImportType, SessionType>(), consts_() { }
 
     /// \brief Module constructor.
-    Module(std::string name) : sesstype::Module(), consts_() { }
+    ModuleTmpl(std::string name)
+        : sesstype::ModuleTmpl<ImportType, SessionType>(name), consts_() { }
 
     /// \brief Module destructor.
-    virtual ~Module()
+    virtual ~ModuleTmpl()
     {
         for (auto constant_pair : consts_) {
             delete constant_pair.second;
         }
     }
 
-    virtual Session *session(std::string name) const override
-    {
-        return dynamic_cast<sesstype::parameterised::Session *>(sesstype::Module::session(name));
-    }
-
     /// \param[in] constant to add to Module.
-    void add_constant(Constant *c)
+    void add_constant(ConstantType *c)
     {
         consts_.insert({ c->name(), c });
     }
@@ -70,21 +69,23 @@ class Module : public sesstype::Module {
 
     /// \returns Constant named <tt>name</tt>.
     /// \exception std::out_of_range if not found.
-    Constant *constant(std::string name) const
+    ConstantType *constant(std::string name) const
     {
         return consts_.at(name);
     }
 
-    ConstantContainer::const_iterator const_begin() const
+    typename ConstantContainer::const_iterator const_begin() const
     {
         return consts_.begin();
     }
 
-    ConstantContainer::const_iterator const_end() const
+    typename ConstantContainer::const_iterator const_end() const
     {
         return consts_.end();
     }
 };
+
+using Module = ModuleTmpl<sesstype::Import, Session, Constant>;
 #endif // __cplusplus
 
 #ifdef __cplusplus

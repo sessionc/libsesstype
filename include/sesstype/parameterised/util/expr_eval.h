@@ -212,9 +212,11 @@ class ExprEval : public ExprVisitor {
     }
 };
 #endif // __cplusplus
-
 #ifdef __cplusplus
 } // namespace util
+#endif
+
+#ifdef __cplusplus
 } // namespace parameterised
 } // namespace sesstype
 #endif

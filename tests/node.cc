@@ -18,7 +18,7 @@
 #include "sesstype/node/par.h"
 #include "sesstype/node/interruptible.h"
 #include "sesstype/node/nested.h"
-#include "sesstype/util/empty_visitor.hpp"
+#include "sesstype/util/empty_visitor.h"
 
 #include "sesstype/parameterised/expr.h"
 #include "sesstype/parameterised/expr/var.h"

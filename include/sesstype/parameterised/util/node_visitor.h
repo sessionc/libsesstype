@@ -25,7 +25,7 @@
 namespace sesstype {
 
 template class BlockNodeTmpl<parameterised::Node, parameterised::Role, parameterised::MsgSig, parameterised::util::NodeVisitor>;
-template class InteractionNodeTmpl<parameterised::Node, parameterised::Role, parameterised::MsgSig, parameterised::util::NodeVisitor>;
+//template class InteractionNodeTmpl<parameterised::Node, parameterised::Role, parameterised::MsgSig, parameterised::util::NodeVisitor>;
 template class ChoiceNodeTmpl<parameterised::Node, parameterised::Role, parameterised::MsgSig, parameterised::util::NodeVisitor>;
 template class RecurNodeTmpl<parameterised::Node, parameterised::Role, parameterised::MsgSig, parameterised::util::NodeVisitor>;
 template class ContinueNodeTmpl<parameterised::Node, parameterised::Role, parameterised::MsgSig, parameterised::util::NodeVisitor>;
@@ -35,6 +35,7 @@ template class InterruptibleNodeTmpl<parameterised::Node, parameterised::Role, p
 
 namespace parameterised {
 
+class InteractionNode;
 template class ForNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 template class OneofNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
 template class IfNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>;
@@ -62,7 +63,7 @@ class NodeVisitor {
   public:
     virtual void visit(Node *node) = 0;
     virtual void visit(BlockNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
-    virtual void visit(InteractionNode *node) = 0;
+    virtual void visit(sesstype::parameterised::InteractionNode *node) = 0;
     virtual void visit(ChoiceNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
     virtual void visit(RecurNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;
     virtual void visit(ContinueNodeTmpl<Node, Role, MsgSig, util::NodeVisitor> *node) = 0;

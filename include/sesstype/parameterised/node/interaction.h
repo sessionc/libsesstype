@@ -31,6 +31,15 @@ class InteractionNode
         : InteractionNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>(msg),
           cond_(nullptr) { }
 
+    InteractionNode(const InteractionNode &node)
+        : sesstype::InteractionNodeTmpl<Node, Role, MsgSig, util::NodeVisitor>(node),
+          cond_(node.cond_ ? node.cond_->clone() : nullptr) { }
+
+    InteractionNode *clone() const override
+    {
+        return new InteractionNode(*this);
+    }
+
     /// \returns message condition.
     MsgCond *cond() const
     {

@@ -14,10 +14,10 @@ extern "C" {
 
 #ifdef __cplusplus
 typedef sesstype::parameterised::Role MsgCond;
-typedef sesstype::parameterised::st_role st_cond;
+typedef sesstype::parameterised::st_param_role st_cond;
 #else
 typedef struct Role MsgCond;
-typedef st_role st_cond;
+typedef st_param_role st_cond;
 #endif
 
 #ifdef __cplusplus

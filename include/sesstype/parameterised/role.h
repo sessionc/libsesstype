@@ -8,6 +8,7 @@
 #include "sesstype/role.h"
 
 #include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/expr/rng.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -42,7 +43,7 @@ class Role : public sesstype::Role {
     Role(const Role &role) : sesstype::Role(role), param_()
     {
         for (auto param : role.param_) {
-            param_.emplace_back(param);
+            param_.push_back(param->clone());
         }
     }
 
@@ -61,7 +62,7 @@ class Role : public sesstype::Role {
     }
 
     /// \returns Number of dimensions in the parameterised Role.
-    unsigned int num_dimen()
+    unsigned int num_dimens() const
     {
         return param_.size();
     }
@@ -80,16 +81,29 @@ class Role : public sesstype::Role {
         return param_.at(idx);
     }
 
-    /// \brief Check if this Role contains another Role.
-    /// \returns true if this Role contains another Role.
+    /// \brief Check if this Role is/is in another Role.
+    /// \returns true if this Role is/is in another Role.
     virtual bool matches(sesstype::Role *other) const
     {
-        // TODO
+        bool matching = true;
+        if (auto other_param = dynamic_cast<Role *>(other)) {
+            // 0. Check if current role is endpoint role (both dimen=0)
+            // 1. Check if current role is a member of endpoint role (both dimen>0)
+            //    current role is NOT multi and endpoint role is multi
+            // 2. Check if current role is subset of endpoint role (both dimen>0)
+            //    Note: endpoint role is always the full set (multi)
+            //    So if name matches this is always a subset (multi)
+            matching &= (name() == other_param->name()); // Name matches
+            matching &= (num_dimens() == other_param->num_dimens()); // Dimen
+            return matching;
+        }
         return false;
     }
 
     /// This subsumes accept in base class (but RoleVisitor is not a subclass)
     virtual void accept(util::RoleVisitor &v);
+
+    friend std::ostream &operator<<(std::ostream &os, Role &role);
 
   private:
     virtual void accept(sesstype::util::RoleVisitor &v) override { /* hidden */ }
@@ -101,24 +115,28 @@ extern "C" {
 #endif
 
 #ifdef __cplusplus
-typedef Role st_role;
+typedef Role st_param_role;
+#else
+typedef struct Role st_param_role;
 #endif
 
 /// \brief Get the total dimension of a Role.
 /// \param[in] role pointer.
 /// \returns the dimension of the Role.
-unsigned int st_role_num_dimen(st_role *const role);
+unsigned int st_role_num_dimen(st_param_role *const role);
 
 /// \brief Get the idx'th dimension parameter of a Role.
 /// \param[in] role pointer.
 /// \returns the idx'th dimension parameter of the Role.
-st_expr *st_role_get_param(st_role *const role, unsigned int idx);
+st_expr *st_role_get_param(st_param_role *const role, unsigned int idx);
 
 /// \brief Add a new parameter to the Role as a new dimension.
 /// \param[in] role pointer.
 /// \param[in] param Expr.
 /// \returns the modified Role.
-st_role *st_role_add_param(st_role *role, st_expr *param);
+st_param_role *st_role_add_param(st_param_role *const role, st_expr *param);
+
+void st_param_role_free(st_param_role *role);
 
 #ifdef __cplusplus
 } // extern "C"

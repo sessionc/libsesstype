@@ -7,6 +7,7 @@
 
 #ifdef __cplusplus
 #include <string>
+#include <iterator>
 #include <unordered_map>
 #endif
 
@@ -24,24 +25,25 @@ namespace sesstype {
 /**
  * \brief Module is a container class for multiple logically related Sessions.
  */
-class Module {
+template <class ImportType, class SessionType>
+class ModuleTmpl {
     std::string name_;
     // Pair<Import * theimport, bool is_alias>
-    std::unordered_map<std::string, std::pair<Import *, bool>> imports_;
-    std::unordered_map<std::string, Session *> sessions_;
+    std::unordered_map<std::string, std::pair<ImportType *, bool>> imports_;
+    std::unordered_map<std::string, SessionType *> sessions_;
 
   public:
-    typedef std::unordered_map<std::string, std::pair<Import *, bool>> ImportContainer;
-    typedef std::unordered_map<std::string, Session *> SessionContainer;
+    using ImportContainer  = std::unordered_map<std::string, std::pair<ImportType *, bool>>;
+    using SessionContainer = std::unordered_map<std::string, SessionType *>;
 
     /// \brief Module constructor with "default" as Module name.
-    Module() : name_("default"), imports_(), sessions_() { }
+    ModuleTmpl() : name_("default"), imports_(), sessions_() { }
 
     /// \brief Module constructor.
-    Module(std::string name) : name_(name), imports_(), sessions_() { }
+    ModuleTmpl(std::string name) : name_(name), imports_(), sessions_() { }
 
     /// \brief Module destructor.
-    virtual ~Module()
+    virtual ~ModuleTmpl()
     {
         for (auto import_pair : imports_) {
             if (!import_pair.second.second /*alias?*/) {
@@ -64,7 +66,7 @@ class Module {
     }
 
     /// \param[in] Session to add as component of Module.
-    void add_session(Session *session)
+    void add_session(SessionType *session)
     {
         sessions_.insert({ session->name(), session });
     }
@@ -84,23 +86,23 @@ class Module {
 
     /// \returns Session named <tt>name</tt>.
     /// \exception std::out_of_range if not found.
-    virtual Session *session(std::string name) const
+    SessionType *session(std::string name) const
     {
         return sessions_.at(name);
     }
 
-    SessionContainer::const_iterator session_begin() const
+    typename SessionContainer::const_iterator session_begin() const
     {
         return sessions_.begin();
     }
 
-    SessionContainer::const_iterator session_end() const
+    typename SessionContainer::const_iterator session_end() const
     {
         return sessions_.end();
     }
 
     /// \param[in] import to add to Module.
-    void add_import(Import *import)
+    void add_import(ImportType *import)
     {
         imports_.insert({ import->name(), std::make_pair(import, false)});
         if (import->as() != "") {
@@ -123,21 +125,23 @@ class Module {
     /// \detail This returns the original Import if alias is matched.
     /// \returns Import named (or with alias)<tt>name</tt>.
     /// \exception std::out_of_range if not found.
-    virtual Import *import(std::string name) const
+    ImportType *import(std::string name) const
     {
         return imports_.at(name).first;
     }
 
-    ImportContainer::const_iterator import_begin() const
+    typename ImportContainer::const_iterator import_begin() const
     {
         return imports_.begin();
     }
 
-    ImportContainer::const_iterator import_end() const
+    typename ImportContainer::const_iterator import_end() const
     {
         return imports_.end();
     }
 };
+
+using Module = ModuleTmpl<Import, Session>;
 #endif // __cplusplus
 
 #ifdef __cplusplus

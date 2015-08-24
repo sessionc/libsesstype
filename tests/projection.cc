@@ -80,7 +80,7 @@ TEST_F(ProjectionTest, BasicProjection)
 
     root->append_child(interact4_node);
 
-    util::Projection project_wrt_bob(BOB);
+    util::ProjectionVisitor project_wrt_bob(BOB);
     root->accept(project_wrt_bob);
 
     auto *endpoint_bob = project_wrt_bob.get_root();

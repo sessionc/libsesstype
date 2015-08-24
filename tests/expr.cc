@@ -25,7 +25,7 @@
 #include "sesstype/parameterised/util/expr_eval.h"
 #include "sesstype/parameterised/util/expr_invert.h"
 #include "sesstype/parameterised/util/print.h"
-#include "sesstype/parameterised/util/empty_visitor.hpp"
+#include "sesstype/parameterised/util/empty_visitor.h"
 
 namespace sesstype {
 namespace parameterised {
@@ -285,7 +285,7 @@ TEST_F(ExprTest, ApplyExpr)
     auto expr = new AddExpr(new VarExpr("i"), new ValExpr(1));
     expr->accept(apply);
     auto applied = apply.apply();
-    util::Print p;
+    util::PrintVisitor p;
     applied->accept(p);
     util::ExprEval eval;
     applied->accept(eval);
