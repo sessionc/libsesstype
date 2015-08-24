@@ -1,6 +1,6 @@
-#include <sesstype/role.h>
-#include <sesstype/parameterised/expr.h>
-#include <sesstype/parameterised/role.h>
+#include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/role.h"
+#include "sesstype/parameterised/util/print.h"
 
 namespace sesstype {
 namespace parameterised {
@@ -22,7 +22,14 @@ st_role *st_role_add_param(st_role *role, st_expr *param)
     return role;
 }
 
-void st_role_free(st_role *role)
+std::ostream &operator<<(std::ostream &os, Role &role)
+{
+    sesstype::parameterised::util::PrintVisitor printer(os);
+    role.accept(printer);
+    return os;
+}
+
+void st_param_role_free(st_param_role *role)
 {
   delete role;
 }

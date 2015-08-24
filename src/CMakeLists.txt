@@ -5,7 +5,6 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/api/module.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/session.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/role.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/api/print.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/choice_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/api/continue_node.cc
@@ -16,14 +15,13 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/api/par_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/util/node_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/util/role_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/util/print.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/const.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/expr.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/module.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/session.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/role.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/role_grp.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/print.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/interaction_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/for_node.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/api/allreduce_node.cc
@@ -32,5 +30,4 @@ set(libsesstype_SOURCE
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/expr_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/node_visitor.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/role_visitor.cc
-    ${CMAKE_CURRENT_SOURCE_DIR}/parameterised/util/print.cc
     PARENT_SCOPE)

@@ -3,9 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-#include <sesstype/parameterised/cond.h>
-#include <sesstype/parameterised/expr.h>
-#include <sesstype/parameterised/util.h>
+#include "sesstype/parameterised/cond.h"
+#include "sesstype/parameterised/expr.h"
+#include "sesstype/parameterised/util.h"
 
 namespace sesstype {
 namespace parameterised {
@@ -89,9 +89,11 @@ st_expr *st_expr_apply(const st_expr *b, const st_expr *e)
     assert(0 /* TODO */);
 }
 
-st_expr *st_expr_inv(const st_expr *e)
+std::ostream &operator<<(std::ostream &os, Expr &expr)
 {
-    assert(0 /* TODO */);
+    sesstype::parameterised::util::PrintVisitor printer(os);
+    expr.accept(printer);
+    return os;
 }
 
 } // namespace parameterised
