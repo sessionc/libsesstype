@@ -8,7 +8,7 @@ var searchData=
   ['var',['var',['../classsesstype_1_1parameterised_1_1OneofNodeTmpl.html#a719827cdd233131f8318d84e4e1aee74',1,'sesstype::parameterised::OneofNodeTmpl']]],
   ['varexpr',['VarExpr',['../classsesstype_1_1parameterised_1_1VarExpr.html#aeb3b981292e0725d7889977885f496a9',1,'sesstype::parameterised::VarExpr::VarExpr(std::string name)'],['../classsesstype_1_1parameterised_1_1VarExpr.html#a8ba8692ee098ca4ccedb41dba70a9fb5',1,'sesstype::parameterised::VarExpr::VarExpr(const VarExpr &amp;expr)']]],
   ['varexpr',['VarExpr',['../classsesstype_1_1parameterised_1_1VarExpr.html',1,'sesstype::parameterised']]],
-  ['visit',['visit',['../classsesstype_1_1util_1_1Projection.html#a5b80b8d153e7a66686fbead195b525de',1,'sesstype::util::Projection']]],
+  ['visit',['visit',['../classsesstype_1_1util_1_1ProjectionVisitor.html#a513af5ec349321f5e7d774cfc8556ff6',1,'sesstype::util::ProjectionVisitor']]],
   ['visitable',['Visitable',['../classsesstype_1_1util_1_1Visitable.html',1,'sesstype::util']]],
   ['visitable_3c_20types_2e_2e_2e_3e',['Visitable< Types...>',['../classsesstype_1_1util_1_1Visitable.html',1,'sesstype::util']]],
   ['visitableimpl',['VisitableImpl',['../classsesstype_1_1util_1_1VisitableImpl.html',1,'sesstype::util']]],

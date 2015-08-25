@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -96,8 +96,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespacesesstype.html">sesstype</a>      </li>
-      <li class="navelem"><a class="el" href="namespacesesstype_1_1parameterised.html">parameterised</a>      </li>
-      <li class="navelem"><a class="el" href="namespacesesstype_1_1parameterised_1_1util.html">util</a>      </li>
+      <li class="navelem"><b>parameterised</b>      </li>
+      <li class="navelem"><b>util</b>      </li>
       <li class="navelem"><a class="el" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html">NodeVisitor</a>      </li>
     </ul>
   </div>
@@ -119,7 +119,7 @@ Inheritance diagram for sesstype::parameterised::util::NodeVisitor:</div>
 <div class="dyncontent">
 <div class="center"><img src="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor__inherit__graph.png" border="0" usemap="#sesstype_1_1parameterised_1_1util_1_1NodeVisitor_inherit__map" alt="Inheritance graph"/></div>
 <map name="sesstype_1_1parameterised_1_1util_1_1NodeVisitor_inherit__map" id="sesstype_1_1parameterised_1_1util_1_1NodeVisitor_inherit__map">
-<area shape="rect" id="node3" href="classsesstype_1_1parameterised_1_1util_1_1Print.html" title="Protocol and Expression printer." alt="" coords="5,83,229,112"/><area shape="rect" id="node5" href="classsesstype_1_1parameterised_1_1util_1_1Projection.html" title="sesstype::parameterised::util::Projection" alt="" coords="253,83,509,112"/></map>
+<area shape="rect" id="node3" href="classsesstype_1_1parameterised_1_1util_1_1EmptyVisitor.html" title="sesstype::parameterised::util::EmptyVisitor" alt="" coords="331,5,603,35"/><area shape="rect" id="node5" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html" title="Protocol and Expression printer." alt="" coords="336,59,597,88"/><area shape="rect" id="node7" href="classsesstype_1_1parameterised_1_1util_1_1ProjectionVisitor.html" title="Endpoint projection for parameterised session types." alt="" coords="320,112,613,141"/></map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor-members.html">List of all members.</a></p>
@@ -130,8 +130,8 @@ Public Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1parameterised_1_1Node.html">Node</a> *node)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09a74751386407846277843d9ce44a27"></a><!-- doxytag: member="sesstype::parameterised::util::NodeVisitor::visit" ref="a09a74751386407846277843d9ce44a27" args="(BlockNodeTmpl&lt; Node, Role, MsgSig, util::NodeVisitor &gt; *node)=0" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (BlockNodeTmpl&lt; <a class="el" href="classsesstype_1_1parameterised_1_1Node.html">Node</a>, <a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a>, <a class="el" href="classsesstype_1_1MsgSig.html">MsgSig</a>, <a class="el" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html">util::NodeVisitor</a> &gt; *node)=0</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8817976e16420ec717f9fd7b622f5af"></a><!-- doxytag: member="sesstype::parameterised::util::NodeVisitor::visit" ref="aa8817976e16420ec717f9fd7b622f5af" args="(InteractionNode *node)=0" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html">InteractionNode</a> *node)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3f7a7b76f9bf260480367c8f2b6d8d75"></a><!-- doxytag: member="sesstype::parameterised::util::NodeVisitor::visit" ref="a3f7a7b76f9bf260480367c8f2b6d8d75" args="(sesstype::parameterised::InteractionNode *node)=0" -->
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html">sesstype::parameterised::InteractionNode</a> *node)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a072120499773da3c68ca17fae3071791"></a><!-- doxytag: member="sesstype::parameterised::util::NodeVisitor::visit" ref="a072120499773da3c68ca17fae3071791" args="(ChoiceNodeTmpl&lt; Node, Role, MsgSig, util::NodeVisitor &gt; *node)=0" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (ChoiceNodeTmpl&lt; <a class="el" href="classsesstype_1_1parameterised_1_1Node.html">Node</a>, <a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a>, <a class="el" href="classsesstype_1_1MsgSig.html">MsgSig</a>, <a class="el" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html">util::NodeVisitor</a> &gt; *node)=0</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada2353cfe6ce4c72916846587d186f36"></a><!-- doxytag: member="sesstype::parameterised::util::NodeVisitor::visit" ref="ada2353cfe6ce4c72916846587d186f36" args="(RecurNodeTmpl&lt; Node, Role, MsgSig, util::NodeVisitor &gt; *node)=0" -->
@@ -164,7 +164,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>visit</b> (<a
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

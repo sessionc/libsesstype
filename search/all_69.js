@@ -3,7 +3,7 @@ var searchData=
   ['ifnodetmpl',['IfNodeTmpl',['../classsesstype_1_1parameterised_1_1IfNodeTmpl.html',1,'sesstype::parameterised']]],
   ['ifnodetmpl',['IfNodeTmpl',['../classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aa5c9b0ac2aaf6daaefe4993611001b5d',1,'sesstype::parameterised::IfNodeTmpl::IfNodeTmpl(MsgCond *cond)'],['../classsesstype_1_1parameterised_1_1IfNodeTmpl.html#a6901178cec3dea79cee48d8ee80aeca5',1,'sesstype::parameterised::IfNodeTmpl::IfNodeTmpl(const IfNodeTmpl &amp;node)']]],
   ['import',['Import',['../classsesstype_1_1Import.html',1,'sesstype']]],
-  ['import',['import',['../classsesstype_1_1Module.html#a362d1db68e613f8ab0b4dcf25fa1bbe4',1,'sesstype::Module::import()'],['../classsesstype_1_1Import.html#a4913819760088b8ae322fe0db9795a13',1,'sesstype::Import::Import(std::string name)'],['../classsesstype_1_1Import.html#a830a4a0bd8ed55e6caa98f0656b418f3',1,'sesstype::Import::Import(std::string name, std::string from, std::string as)']]],
+  ['import',['import',['../classsesstype_1_1ModuleTmpl.html#a336d0929b8bb6fc80db3e225ddabfef4',1,'sesstype::ModuleTmpl::import()'],['../classsesstype_1_1Import.html#a4913819760088b8ae322fe0db9795a13',1,'sesstype::Import::Import(std::string name)'],['../classsesstype_1_1Import.html#a830a4a0bd8ed55e6caa98f0656b418f3',1,'sesstype::Import::Import(std::string name, std::string from, std::string as)']]],
   ['import_2eh',['import.h',['../import_8h.html',1,'']]],
   ['interactionnode',['InteractionNode',['../classsesstype_1_1parameterised_1_1InteractionNode.html',1,'sesstype::parameterised']]],
   ['interactionnodetmpl',['InteractionNodeTmpl',['../classsesstype_1_1InteractionNodeTmpl.html',1,'sesstype']]],

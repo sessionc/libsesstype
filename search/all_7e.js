@@ -4,13 +4,13 @@ var searchData=
   ['_7eblocknodetmpl',['~BlockNodeTmpl',['../classsesstype_1_1BlockNodeTmpl.html#aa1e4cba45f567b96b0fcde6a0d4a0418',1,'sesstype::BlockNodeTmpl']]],
   ['_7eboundedconstant',['~BoundedConstant',['../classsesstype_1_1parameterised_1_1BoundedConstant.html#a197bbbad6b81bdedf39cdc6e3f79966c',1,'sesstype::parameterised::BoundedConstant']]],
   ['_7echoicenodetmpl',['~ChoiceNodeTmpl',['../classsesstype_1_1ChoiceNodeTmpl.html#a3def501cc809048a5afa4871eee7fb9c',1,'sesstype::ChoiceNodeTmpl']]],
-  ['_7econstant',['~Constant',['../classsesstype_1_1parameterised_1_1Constant.html#a898323d233e674c7fa6a6b78e8e5938f',1,'sesstype::parameterised::Constant']]],
+  ['_7econstant',['~Constant',['../classsesstype_1_1parameterised_1_1Constant.html#af31450d75cfab312ea3d9fd7f2626ae6',1,'sesstype::parameterised::Constant']]],
   ['_7eexpr',['~Expr',['../classsesstype_1_1parameterised_1_1Expr.html#a84a7e0bc315a4b52ab963bf39c355c5e',1,'sesstype::parameterised::Expr']]],
   ['_7efornodetmpl',['~ForNodeTmpl',['../classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a83ccc240d1d7b52581f90d249fdabe01',1,'sesstype::parameterised::ForNodeTmpl']]],
   ['_7eifnodetmpl',['~IfNodeTmpl',['../classsesstype_1_1parameterised_1_1IfNodeTmpl.html#aca43dc91c83440d9202984e602af653f',1,'sesstype::parameterised::IfNodeTmpl']]],
   ['_7einteractionnodetmpl',['~InteractionNodeTmpl',['../classsesstype_1_1InteractionNodeTmpl.html#a84cf41e59db377c7b7efa53a75d12001',1,'sesstype::InteractionNodeTmpl']]],
   ['_7einterruptiblenodetmpl',['~InterruptibleNodeTmpl',['../classsesstype_1_1InterruptibleNodeTmpl.html#ab0fc970cd334006968d513fed913130d',1,'sesstype::InterruptibleNodeTmpl']]],
-  ['_7emodule',['~Module',['../classsesstype_1_1Module.html#a8563d229c00a1135da63665a431abf0d',1,'sesstype::Module::~Module()'],['../classsesstype_1_1parameterised_1_1Module.html#aa12b45014938bd57cca4ce8b1909372e',1,'sesstype::parameterised::Module::~Module()']]],
+  ['_7emoduletmpl',['~ModuleTmpl',['../classsesstype_1_1ModuleTmpl.html#a4c980038bd175deb102d9fea919f6b9d',1,'sesstype::ModuleTmpl::~ModuleTmpl()'],['../classsesstype_1_1parameterised_1_1ModuleTmpl.html#ac47016e0b627bd2c78f8b0d3695218b0',1,'sesstype::parameterised::ModuleTmpl::~ModuleTmpl()']]],
   ['_7emsgpayload',['~MsgPayload',['../classsesstype_1_1MsgPayload.html#af86bb6066ff92d326b72f4387d0fedde',1,'sesstype::MsgPayload::~MsgPayload()'],['../classsesstype_1_1parameterised_1_1MsgPayload.html#a2b671bbff1c0eb78ff057c11f8567a38',1,'sesstype::parameterised::MsgPayload::~MsgPayload()']]],
   ['_7emsgsig',['~MsgSig',['../classsesstype_1_1MsgSig.html#ad6da3d61aa900e9252e0ccefe6cf476e',1,'sesstype::MsgSig']]],
   ['_7enestednodetmpl',['~NestedNodeTmpl',['../classsesstype_1_1NestedNodeTmpl.html#ae6296f746aa6e90019e60a2d1d20143e',1,'sesstype::NestedNodeTmpl']]],
@@ -19,6 +19,6 @@ var searchData=
   ['_7erole',['~Role',['../classsesstype_1_1parameterised_1_1Role.html#a5fc502cd2ce1069d4be29eecd0ef9d3a',1,'sesstype::parameterised::Role::~Role()'],['../classsesstype_1_1Role.html#a32fbbade8ba5a40714672787992a2c80',1,'sesstype::Role::~Role()']]],
   ['_7erolegrp',['~RoleGrp',['../classsesstype_1_1parameterised_1_1RoleGrp.html#a6b5096e4d47065a474b3e429799b78bc',1,'sesstype::parameterised::RoleGrp']]],
   ['_7escalableconstant',['~ScalableConstant',['../classsesstype_1_1parameterised_1_1ScalableConstant.html#a7cb652c411ee5a51ed19d44469323ed5',1,'sesstype::parameterised::ScalableConstant']]],
-  ['_7esession',['~Session',['../classsesstype_1_1parameterised_1_1Session.html#a401df970b7bad79254e7986ed066d3e1',1,'sesstype::parameterised::Session::~Session()'],['../classsesstype_1_1Session.html#a9fabc37e73c687097b4281176e7afd83',1,'sesstype::Session::~Session()']]],
+  ['_7esessiontmpl',['~SessionTmpl',['../classsesstype_1_1parameterised_1_1SessionTmpl.html#ae5612166deedd3379eb88d468304a2bf',1,'sesstype::parameterised::SessionTmpl::~SessionTmpl()'],['../classsesstype_1_1SessionTmpl.html#ab03a7810bff4132928ebe646b708fb74',1,'sesstype::SessionTmpl::~SessionTmpl()']]],
   ['_7evalueconstant',['~ValueConstant',['../classsesstype_1_1parameterised_1_1ValueConstant.html#a18268d41cfa371d71e543b9fc405157d',1,'sesstype::parameterised::ValueConstant']]]
 ];

@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -96,14 +96,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespacesesstype.html">sesstype</a>      </li>
-      <li class="navelem"><a class="el" href="namespacesesstype_1_1parameterised.html">parameterised</a>      </li>
+      <li class="navelem"><b>parameterised</b>      </li>
       <li class="navelem"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a>      </li>
     </ul>
   </div>
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-methods">Public Member Functions</a>  </div>
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#friends">Friends</a>  </div>
   <div class="headertitle">
 <div class="title">sesstype::parameterised::Role Class Reference</div>  </div>
 </div><!--header-->
@@ -147,14 +148,18 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab25aed723b2d93283e3c80f41c0d4381"></a><!-- doxytag: member="sesstype::parameterised::Role::clone" ref="ab25aed723b2d93283e3c80f41c0d4381" args="() const override" -->
 <a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html#ab25aed723b2d93283e3c80f41c0d4381">clone</a> () const override</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">clone a <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html#aeeb4b1af7a84e0eb5653548b9e061bbf">num_dimen</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html#adcec12528ee429d9110d79d789cee51b">num_dimens</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html#a0bdc99a00eeef9590fb475456b2a2161">add_param</a> (<a class="el" href="classsesstype_1_1parameterised_1_1Expr.html">Expr</a> *param)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1parameterised_1_1Expr.html">Expr</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html#acfb846aa637c830ae0b9536a9f8c14cc">operator[]</a> (std::size_t idx) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html#a05300013fa84e7b22bf4577dc082ec1b">matches</a> (<a class="el" href="classsesstype_1_1Role.html">sesstype::Role</a> *other) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> contains another <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>.  <a href="#a05300013fa84e7b22bf4577dc082ec1b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> is/is in another <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>.  <a href="#a05300013fa84e7b22bf4577dc082ec1b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a11201439324646a7b3b783047c5a1636"></a><!-- doxytag: member="sesstype::parameterised::Role::accept" ref="a11201439324646a7b3b783047c5a1636" args="(util::RoleVisitor &amp;v)" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html#a11201439324646a7b3b783047c5a1636">accept</a> (<a class="el" href="classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html">util::RoleVisitor</a> &amp;v)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This subsumes accept in base class (but RoleVisitor is not a subclass) <br/></td></tr>
+<tr><td colspan="2"><h2><a name="friends"></a>
+Friends</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af6107921700dd02fb192b2617deb88f6"></a><!-- doxytag: member="sesstype::parameterised::Role::operator&lt;&lt;" ref="af6107921700dd02fb192b2617deb88f6" args="(std::ostream &amp;os, Role &amp;role)" -->
+std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::ostream &amp;os, <a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a> &amp;role)</td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Parameterised <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> (participant) of a protocol or session. </p>
@@ -197,8 +202,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 <div class="memdoc">
 
-<p>Check if this <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> contains another <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>true if this <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> contains another <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>. </dd></dl>
+<p>Check if this <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> is/is in another <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>true if this <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> is/is in another <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="classsesstype_1_1Role.html#a10631bfd8bbae6628a8dfb26f4b683d3">sesstype::Role</a>.</p>
 
@@ -206,15 +211,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
-<a class="anchor" id="aeeb4b1af7a84e0eb5653548b9e061bbf"></a><!-- doxytag: member="sesstype::parameterised::Role::num_dimen" ref="aeeb4b1af7a84e0eb5653548b9e061bbf" args="()" -->
+<a class="anchor" id="adcec12528ee429d9110d79d789cee51b"></a><!-- doxytag: member="sesstype::parameterised::Role::num_dimens" ref="adcec12528ee429d9110d79d789cee51b" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int <a class="el" href="classsesstype_1_1parameterised_1_1Role.html#aeeb4b1af7a84e0eb5653548b9e061bbf">sesstype::parameterised::Role::num_dimen</a> </td>
+          <td class="memname">unsigned int <a class="el" href="classsesstype_1_1parameterised_1_1Role.html#adcec12528ee429d9110d79d789cee51b">sesstype::parameterised::Role::num_dimens</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [inline]</code></td>
+          <td> const<code> [inline]</code></td>
         </tr>
       </table>
 </div>
@@ -263,7 +268,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

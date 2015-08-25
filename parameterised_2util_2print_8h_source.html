@@ -90,339 +90,421 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00006"></a>00006 <span class="preprocessor">#include &lt;string&gt;</span>
 <a name="l00007"></a>00007 <span class="preprocessor">#endif</span>
 <a name="l00008"></a>00008 <span class="preprocessor"></span>
-<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="expr_8h.html" title="Expressions in a Role parameter or statement.">sesstype/parameterised/expr.h</a>&quot;</span>
-<a name="l00010"></a>00010 
-<a name="l00011"></a>00011 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
-<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="role__grp_8h.html" title="A group of participants of a protocol or session.">sesstype/parameterised/role_grp.h</a>&quot;</span>
-<a name="l00013"></a>00013 
-<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised).">sesstype/parameterised/node.h</a>&quot;</span>
-<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;sesstype/parameterised/node/block.h&quot;</span>
-<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;sesstype/parameterised/node/interaction.h&quot;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;sesstype/parameterised/node/choice.h&quot;</span>
-<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;sesstype/parameterised/node/recur.h&quot;</span>
-<a name="l00019"></a>00019 <span class="preprocessor">#include &quot;sesstype/parameterised/node/continue.h&quot;</span>
-<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;sesstype/parameterised/node/par.h&quot;</span>
-<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;sesstype/parameterised/node/nested.h&quot;</span>
-<a name="l00022"></a>00022 <span class="preprocessor">#include &quot;sesstype/parameterised/node/interruptible.h&quot;</span>
-<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;sesstype/parameterised/node/for.h&quot;</span>
-<a name="l00024"></a>00024 <span class="preprocessor">#include &quot;sesstype/parameterised/node/oneof.h&quot;</span>
-<a name="l00025"></a>00025 <span class="preprocessor">#include &quot;sesstype/parameterised/node/if.h&quot;</span>
-<a name="l00026"></a>00026 <span class="preprocessor">#include &quot;sesstype/parameterised/node/allreduce.h&quot;</span>
-<a name="l00027"></a>00027 
-<a name="l00028"></a>00028 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2util_2node__visitor_8h.html" title="Utilities for Node.">sesstype/parameterised/util/node_visitor.h</a>&quot;</span>
-<a name="l00029"></a>00029 <span class="preprocessor">#include &quot;sesstype/parameterised/util/role_visitor.h&quot;</span>
-<a name="l00030"></a>00030 <span class="preprocessor">#include &quot;<a class="code" href="expr__visitor_8h.html" title="Utilities for Expr.">sesstype/parameterised/util/expr_visitor.h</a>&quot;</span>
-<a name="l00031"></a>00031 
-<a name="l00032"></a>00032 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00033"></a>00033 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00034"></a>00034 <span class="keyword">namespace </span>parameterised {
-<a name="l00035"></a>00035 <span class="keyword">namespace </span>util {
-<a name="l00036"></a>00036 <span class="preprocessor">#endif</span>
-<a name="l00037"></a>00037 <span class="preprocessor"></span>
-<a name="l00038"></a>00038 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00039"></a>00039 <span class="preprocessor"></span>
-<a name="l00042"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html">00042</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html" title="Protocol and Expression printer.">Print</a> : <span class="keyword">public</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">NodeVisitor</a>, <span class="keyword">public</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html">RoleVisitor</a>, <span class="keyword">public</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1ExprVisitor.html" title="Abstract class for building Expr visitors.">ExprVisitor</a> {
-<a name="l00043"></a>00043     std::ostream &amp;os_;
-<a name="l00044"></a>00044     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> indent_lvl_;
-<a name="l00045"></a>00045     std::string indent_str_;
-<a name="l00046"></a>00046     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> line_count_;
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048   <span class="keyword">public</span>:
-<a name="l00050"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#ac01551c5b858e76970fc157dcb2a0af6">00050</a>     <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#ac01551c5b858e76970fc157dcb2a0af6" title="Printer constructor with output to std::out as default.">Print</a>()
-<a name="l00051"></a>00051         : os_(std::cout), indent_lvl_(0), indent_str_(<span class="stringliteral">&quot;  &quot;</span>), line_count_(1) { }
-<a name="l00052"></a>00052 
-<a name="l00055"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a2d03d1eaf04c072c0024bb917012b218">00055</a>     <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#ac01551c5b858e76970fc157dcb2a0af6" title="Printer constructor with output to std::out as default.">Print</a>(std::ostream &amp;os)
-<a name="l00056"></a>00056         : os_(os), indent_lvl_(0), indent_str_(<span class="stringliteral">&quot;  &quot;</span>), line_count_(1) { }
-<a name="l00057"></a>00057 
-<a name="l00059"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810">00059</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>()
-<a name="l00060"></a>00060     {
-<a name="l00061"></a>00061         <span class="keywordflow">if</span> (line_count_ == 1) {
-<a name="l00062"></a>00062             os_ &lt;&lt; <span class="stringliteral">&quot;Line\t |\tTree\n====================\n&quot;</span>;
-<a name="l00063"></a>00063         }
-<a name="l00064"></a>00064         os_ &lt;&lt; line_count_++ &lt;&lt; <span class="stringliteral">&quot;\t &quot;</span>;
-<a name="l00065"></a>00065         <span class="keywordflow">if</span> (indent_lvl_ &gt; 1) {
-<a name="l00066"></a>00066             os_ &lt;&lt; <span class="charliteral">&#39;|&#39;</span>;
-<a name="l00067"></a>00067             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=1; i&lt;indent_lvl_; i++) {
-<a name="l00068"></a>00068                 os_ &lt;&lt; indent_str_;
-<a name="l00069"></a>00069             }
-<a name="l00070"></a>00070         }
-<a name="l00071"></a>00071     }
-<a name="l00072"></a>00072 
-<a name="l00073"></a>00073     <span class="keywordtype">void</span> reset_line_num()
-<a name="l00074"></a>00074     {
-<a name="l00075"></a>00075         indent_lvl_ = 0;
-<a name="l00076"></a>00076         line_count_ = 1;
-<a name="l00077"></a>00077     }
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(<a class="code" href="classsesstype_1_1parameterised_1_1Node.html">Node</a> *node)
-<a name="l00080"></a>00080     {
-<a name="l00081"></a>00081         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00082"></a>00082         os_ &lt;&lt; <span class="stringliteral">&quot;generic {} @ &quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00009"></a>00009 <span class="preprocessor">#include &quot;<a class="code" href="exprs_8h.html" title="Top-level header to pull in all defined Expr classes in sesstype::parameterised.">sesstype/parameterised/exprs.h</a>&quot;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &quot;<a class="code" href="nodes_8h.html" title="Top-level header to pull in all defined Node classes in sesstype::parameterised.">sesstype/parameterised/nodes.h</a>&quot;</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="role__grp_8h.html" title="A group of participants of a protocol or session.">sesstype/parameterised/role_grp.h</a>&quot;</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a>00015 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2util_2node__visitor_8h.html" title="Utilities for Node.">sesstype/parameterised/util/node_visitor.h</a>&quot;</span>
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;sesstype/parameterised/util/role_visitor.h&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="expr__visitor_8h.html" title="Utilities for Expr.">sesstype/parameterised/util/expr_visitor.h</a>&quot;</span>
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00020"></a>00020 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00021"></a>00021 <span class="keyword">namespace </span>parameterised {
+<a name="l00022"></a>00022 <span class="keyword">namespace </span>util {
+<a name="l00023"></a>00023 <span class="preprocessor">#endif</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span>
+<a name="l00025"></a>00025 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span>
+<a name="l00029"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html">00029</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html" title="Protocol and Expression printer.">PrintVisitor</a> : <span class="keyword">public</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST-based visitors.">NodeVisitor</a>, <span class="keyword">public</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html">RoleVisitor</a>, <span class="keyword">public</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1ExprVisitor.html" title="Abstract class for building Expr visitors.">ExprVisitor</a> {
+<a name="l00030"></a>00030     std::ostream &amp;os_;
+<a name="l00031"></a>00031     std::string indent_str_;
+<a name="l00032"></a>00032     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> indent_lvl_;
+<a name="l00033"></a>00033     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> line_count_;
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035   <span class="keyword">public</span>:
+<a name="l00037"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#a7faf0ce25f58b50e0bdae07e67d7ab1b">00037</a>     <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#a7faf0ce25f58b50e0bdae07e67d7ab1b" title="Printer constructor with output to std::out as default.">PrintVisitor</a>() : os_(std::cout),
+<a name="l00038"></a>00038               indent_str_(<span class="stringliteral">&quot;  &quot;</span>),
+<a name="l00039"></a>00039               indent_lvl_(0),
+<a name="l00040"></a>00040               line_count_(1) { }
+<a name="l00041"></a>00041 
+<a name="l00044"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#a3afe57efa593aaa6b25528e10721658c">00044</a>     <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#a7faf0ce25f58b50e0bdae07e67d7ab1b" title="Printer constructor with output to std::out as default.">PrintVisitor</a>(std::ostream &amp;os) : os_(os),
+<a name="l00045"></a>00045                               indent_str_(<span class="stringliteral">&quot;  &quot;</span>),
+<a name="l00046"></a>00046                               indent_lvl_(0),
+<a name="l00047"></a>00047                               line_count_(1) { }
+<a name="l00048"></a>00048 
+<a name="l00050"></a><a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600">00050</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>()
+<a name="l00051"></a>00051     {
+<a name="l00052"></a>00052         <span class="keywordflow">if</span> (line_count_ == 1) {
+<a name="l00053"></a>00053             os_ &lt;&lt; <span class="stringliteral">&quot;Line\t |\tTree\n====================\n&quot;</span>;
+<a name="l00054"></a>00054         }
+<a name="l00055"></a>00055         os_ &lt;&lt; line_count_++ &lt;&lt; <span class="stringliteral">&quot;\t &quot;</span>;
+<a name="l00056"></a>00056         <span class="keywordflow">if</span> (indent_lvl_ &gt; 0) {
+<a name="l00057"></a>00057             os_ &lt;&lt; <span class="charliteral">&#39;|&#39;</span>;
+<a name="l00058"></a>00058             <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0; i&lt;indent_lvl_; i++) {
+<a name="l00059"></a>00059                 os_ &lt;&lt; indent_str_;
+<a name="l00060"></a>00060             }
+<a name="l00061"></a>00061         }
+<a name="l00062"></a>00062     }
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064     <span class="keywordtype">void</span> reset_line_num()
+<a name="l00065"></a>00065     {
+<a name="l00066"></a>00066         indent_lvl_ = 0;
+<a name="l00067"></a>00067         line_count_ = 1;
+<a name="l00068"></a>00068     }
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     <span class="keywordtype">void</span> addr(<a class="code" href="classsesstype_1_1parameterised_1_1Node.html">Node</a> *node)
+<a name="l00071"></a>00071     {
+<a name="l00072"></a>00072         os_ &lt;&lt; <span class="stringliteral">&quot; \033[2;33m&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\033[0m&quot;</span>;
+<a name="l00073"></a>00073     }
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075     <span class="keywordtype">void</span> addr(<a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">Role</a> *role)
+<a name="l00076"></a>00076     {
+<a name="l00077"></a>00077         os_ &lt;&lt; <span class="stringliteral">&quot;@\033[2;36m&quot;</span> &lt;&lt; role &lt;&lt; <span class="stringliteral">&quot;\033[0m&quot;</span>;
+<a name="l00078"></a>00078     }
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080     <span class="keywordtype">void</span> addr(Expr *expr)
+<a name="l00081"></a>00081     {
+<a name="l00082"></a>00082         os_ &lt;&lt; <span class="stringliteral">&quot; @ \033[2;35m&quot;</span> &lt;&lt; expr &lt;&lt; <span class="stringliteral">&quot;\033[0m&quot;</span>;
 <a name="l00083"></a>00083     }
 <a name="l00084"></a>00084 
-<a name="l00085"></a>00085     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(InteractionNode *node)
+<a name="l00085"></a>00085     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(Node *node)
 <a name="l00086"></a>00086     {
-<a name="l00087"></a>00087         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00088"></a>00088         os_ &lt;&lt; <span class="stringliteral">&quot;interaction { from: &quot;</span>;
-<a name="l00089"></a>00089         <span class="keywordflow">if</span> (node-&gt;sndr()) {
-<a name="l00090"></a>00090             node-&gt;sndr()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00091"></a>00091         } <span class="keywordflow">else</span> {
-<a name="l00092"></a>00092             os_ &lt;&lt; <span class="stringliteral">&quot;(empty)&quot;</span>;
-<a name="l00093"></a>00093         }
-<a name="l00094"></a>00094         os_ &lt;&lt; <span class="stringliteral">&quot;, to(&quot;</span> &lt;&lt; node-&gt;num_rcvrs() &lt;&lt; <span class="stringliteral">&quot;): [&quot;</span>;
-<a name="l00095"></a>00095         <span class="keywordflow">if</span> (node-&gt;num_rcvrs() &gt; 0) {
-<a name="l00096"></a>00096             node-&gt;rcvr()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00097"></a>00097         } <span class="keywordflow">else</span> {
-<a name="l00098"></a>00098             os_ &lt;&lt; <span class="stringliteral">&quot;(empty)&quot;</span>;
-<a name="l00099"></a>00099         }
-<a name="l00100"></a>00100         os_ &lt;&lt; (node-&gt;num_rcvrs()&gt;1 ? <span class="stringliteral">&quot;.. ]&quot;</span> : <span class="stringliteral">&quot;]&quot;</span>)
-<a name="l00101"></a>00101             &lt;&lt; <span class="stringliteral">&quot;, msg: &quot;</span> &lt;&lt; node-&gt;msg()-&gt;label()
-<a name="l00102"></a>00102             &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; node-&gt;msg()-&gt;num_payloads() &lt;&lt; <span class="stringliteral">&quot;) } @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00103"></a>00103     }
-<a name="l00104"></a>00104 
-<a name="l00105"></a>00105     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(BlockNode *node)
-<a name="l00106"></a>00106     {
-<a name="l00107"></a>00107         indent_lvl_++;
-<a name="l00108"></a>00108         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;child_begin(); it!=node-&gt;child_end(); it++) {
-<a name="l00109"></a>00109             (*it)-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00110"></a>00110         }
-<a name="l00111"></a>00111         indent_lvl_--;
-<a name="l00112"></a>00112     }
-<a name="l00113"></a>00113 
-<a name="l00114"></a>00114     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(RecurNode *node)
-<a name="l00115"></a>00115     {
-<a name="l00116"></a>00116         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00117"></a>00117         os_ &lt;&lt; <span class="stringliteral">&quot;recur &quot;</span> &lt;&lt; <span class="stringliteral">&quot;{ label: &quot;</span> &lt;&lt; node-&gt;label() &lt;&lt; <span class="stringliteral">&quot; }&quot;</span>;
-<a name="l00118"></a>00118         os_ &lt;&lt; <span class="stringliteral">&quot; children: &quot;</span> &lt;&lt; node-&gt;num_children() &lt;&lt; <span class="stringliteral">&quot; @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00119"></a>00119 
-<a name="l00120"></a>00120         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
-<a name="l00121"></a>00121     }
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ContinueNode *node)
-<a name="l00124"></a>00124     {
-<a name="l00125"></a>00125         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00126"></a>00126         os_ &lt;&lt; <span class="stringliteral">&quot;cont { label: &quot;</span> &lt;&lt; node-&gt;label() &lt;&lt; <span class="stringliteral">&quot; } @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00127"></a>00127     }
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ChoiceNode *node)
-<a name="l00130"></a>00130     {
-<a name="l00131"></a>00131         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00132"></a>00132         os_ &lt;&lt; <span class="stringliteral">&quot;choice { at: &quot;</span>;
-<a name="l00133"></a>00133         node-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00134"></a>00134         os_ &lt;&lt; <span class="stringliteral">&quot;, children: &quot;</span> &lt;&lt; node-&gt;num_children() &lt;&lt; <span class="stringliteral">&quot; @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00135"></a>00135 
-<a name="l00136"></a>00136         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00087"></a>00087         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00088"></a>00088         os_ &lt;&lt; <span class="stringliteral">&quot;generic {}&quot;</span>;
+<a name="l00089"></a>00089         addr(node);
+<a name="l00090"></a>00090         os_ &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00091"></a>00091     }
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(InteractionNode *node)
+<a name="l00094"></a>00094     {
+<a name="l00095"></a>00095         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00096"></a>00096         os_ &lt;&lt; <span class="stringliteral">&quot;interaction&quot;</span>;
+<a name="l00097"></a>00097         addr(node);
+<a name="l00098"></a>00098         os_ &lt;&lt; <span class="stringliteral">&quot; { from: &quot;</span>;
+<a name="l00099"></a>00099         <span class="keywordflow">if</span> (node-&gt;sndr()) {
+<a name="l00100"></a>00100             node-&gt;sndr()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00101"></a>00101         } <span class="keywordflow">else</span> {
+<a name="l00102"></a>00102             os_ &lt;&lt; <span class="stringliteral">&quot;(empty)&quot;</span>;
+<a name="l00103"></a>00103         }
+<a name="l00104"></a>00104         os_ &lt;&lt; <span class="stringliteral">&quot;, to(&quot;</span> &lt;&lt; node-&gt;num_rcvrs() &lt;&lt; <span class="stringliteral">&quot;): [&quot;</span>;
+<a name="l00105"></a>00105         <span class="keywordflow">if</span> (node-&gt;num_rcvrs() &gt; 0) {
+<a name="l00106"></a>00106             node-&gt;rcvr()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00107"></a>00107         } <span class="keywordflow">else</span> {
+<a name="l00108"></a>00108             os_ &lt;&lt; <span class="stringliteral">&quot;(empty)&quot;</span>;
+<a name="l00109"></a>00109         }
+<a name="l00110"></a>00110         os_ &lt;&lt; (node-&gt;num_rcvrs()&gt;1 ? <span class="stringliteral">&quot;.. ]&quot;</span> : <span class="stringliteral">&quot;]&quot;</span>)
+<a name="l00111"></a>00111             &lt;&lt; <span class="stringliteral">&quot;, msg: &quot;</span> &lt;&lt; node-&gt;msg()-&gt;label()
+<a name="l00112"></a>00112             &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; node-&gt;msg()-&gt;num_payloads() &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>
+<a name="l00113"></a>00113             &lt;&lt; <span class="stringliteral">&quot;, cond: &quot;</span>;
+<a name="l00114"></a>00114         <span class="keywordflow">if</span> (node-&gt;cond()) {
+<a name="l00115"></a>00115             node-&gt;cond()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00116"></a>00116         } <span class="keywordflow">else</span> {
+<a name="l00117"></a>00117             os_ &lt;&lt; <span class="stringliteral">&quot;(none)&quot;</span>;
+<a name="l00118"></a>00118         }
+<a name="l00119"></a>00119         os_ &lt;&lt; <span class="stringliteral">&quot; }\n&quot;</span>;
+<a name="l00120"></a>00120     }
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(BlockNode *node)
+<a name="l00123"></a>00123     {
+<a name="l00124"></a>00124         <span class="keywordflow">if</span> (node-&gt;num_children() &gt; 0) {
+<a name="l00125"></a>00125             <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00126"></a>00126             os_ &lt;&lt; <span class="stringliteral">&quot;root&quot;</span>;
+<a name="l00127"></a>00127             addr(node);
+<a name="l00128"></a>00128             os_ &lt;&lt;<span class="stringliteral">&quot; {\n&quot;</span>;
+<a name="l00129"></a>00129             indent_lvl_++;
+<a name="l00130"></a>00130             <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;child_begin(); it!=node-&gt;child_end(); it++) {
+<a name="l00131"></a>00131                 (*it)-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00132"></a>00132             }
+<a name="l00133"></a>00133             indent_lvl_--;
+<a name="l00134"></a>00134             <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00135"></a>00135             os_ &lt;&lt; <span class="stringliteral">&quot;}\n&quot;</span>;
+<a name="l00136"></a>00136         }
 <a name="l00137"></a>00137     }
 <a name="l00138"></a>00138 
-<a name="l00139"></a>00139     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ParNode *node)
+<a name="l00139"></a>00139     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(RecurNode *node)
 <a name="l00140"></a>00140     {
-<a name="l00141"></a>00141         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00142"></a>00142         os_ &lt;&lt; <span class="stringliteral">&quot;par {}&quot;</span>;
-<a name="l00143"></a>00143         os_ &lt;&lt; <span class="stringliteral">&quot; parblocks:children: &quot;</span> &lt;&lt; node-&gt;num_children() &lt;&lt; <span class="stringliteral">&quot; @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00144"></a>00144 
-<a name="l00145"></a>00145         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
-<a name="l00146"></a>00146     }
-<a name="l00147"></a>00147 
-<a name="l00148"></a>00148     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(NestedNode *node)
-<a name="l00149"></a>00149     {
-<a name="l00150"></a>00150         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00151"></a>00151         os_ &lt;&lt; <span class="stringliteral">&quot;nested { name: &quot;</span> &lt;&lt; node-&gt;name();
-<a name="l00152"></a>00152         os_ &lt;&lt; <span class="stringliteral">&quot;, scope_name: &quot;</span> &lt;&lt; node-&gt;scope();
-<a name="l00153"></a>00153         os_ &lt;&lt; <span class="stringliteral">&quot;, arg(&quot;</span>&lt;&lt; node-&gt;num_roleargs() &lt;&lt;<span class="stringliteral">&quot;): &lt;&quot;</span>;
-<a name="l00154"></a>00154         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;arg_begin(); it!=node-&gt;arg_end(); it++) {
-<a name="l00155"></a>00155             os_ &lt;&lt; (*it)-&gt;label() &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; (*it)-&gt;num_payloads() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
-<a name="l00156"></a>00156         }
-<a name="l00157"></a>00157         os_ &lt;&lt; <span class="stringliteral">&quot;&gt;&quot;</span>;
-<a name="l00158"></a>00158         os_ &lt;&lt; <span class="stringliteral">&quot;, rolearg(&quot;</span>&lt;&lt; node-&gt;num_args() &lt;&lt;<span class="stringliteral">&quot;): [&quot;</span>;
-<a name="l00159"></a>00159         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;rolearg_begin(); it!=node-&gt;rolearg_end(); it++) {
-<a name="l00160"></a>00160             (*it)-&gt;name();
-<a name="l00161"></a>00161             os_ &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
-<a name="l00162"></a>00162         }
-<a name="l00163"></a>00163         os_ &lt;&lt; <span class="stringliteral">&quot;]} @ &quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00164"></a>00164     }
-<a name="l00165"></a>00165 
-<a name="l00166"></a>00166     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(InterruptibleNode *node)
-<a name="l00167"></a>00167     {
-<a name="l00168"></a>00168         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00169"></a>00169         os_ &lt;&lt; <span class="stringliteral">&quot;interruptible { scope: &quot;</span> &lt;&lt; node-&gt;scope();
-<a name="l00170"></a>00170         os_ &lt;&lt; <span class="stringliteral">&quot; interrupts(&quot;</span> &lt;&lt; node-&gt;num_interrupts() &lt;&lt; <span class="stringliteral">&quot;): &quot;</span>;
-<a name="l00171"></a>00171         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;interrupt_begin(); it!=node-&gt;interrupt_end(); it++) {
-<a name="l00172"></a>00172             os_ &lt;&lt; (*it).first-&gt;name() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (*it).second-&gt;label() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
-<a name="l00173"></a>00173         }
-<a name="l00174"></a>00174         os_ &lt;&lt; <span class="stringliteral">&quot;, catches(&quot;</span> &lt;&lt; node-&gt;num_catches() &lt;&lt; <span class="stringliteral">&quot;): &quot;</span>;
-<a name="l00175"></a>00175         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;catch_begin(); it!=node-&gt;catch_end(); it++) {
-<a name="l00176"></a>00176             os_ &lt;&lt; (*it).first-&gt;name() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (*it).second-&gt;label() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
-<a name="l00177"></a>00177         }
-<a name="l00178"></a>00178         os_ &lt;&lt; <span class="stringliteral">&quot;, throws(&quot;</span> &lt;&lt; node-&gt;num_throws() &lt;&lt; <span class="stringliteral">&quot;): &quot;</span>;
-<a name="l00179"></a>00179         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;throw_begin(); it!=node-&gt;throw_end(); it++) {
-<a name="l00180"></a>00180             os_ &lt;&lt; (*it).first-&gt;name() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (*it).second-&gt;label() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
-<a name="l00181"></a>00181         }
-<a name="l00182"></a>00182         os_ &lt;&lt;<span class="stringliteral">&quot;} @ &quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00183"></a>00183     }
-<a name="l00184"></a>00184 
-<a name="l00185"></a>00185     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ForNode *node)
-<a name="l00186"></a>00186     {
-<a name="l00187"></a>00187         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00188"></a>00188         os_ &lt;&lt; <span class="stringliteral">&quot;for { expr: &quot;</span>;
-<a name="l00189"></a>00189         node-&gt;bindexpr()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00190"></a>00190         os_ &lt;&lt; <span class="stringliteral">&quot; } @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00191"></a>00191 
-<a name="l00192"></a>00192         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
-<a name="l00193"></a>00193     }
-<a name="l00194"></a>00194     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(OneofNode *node)
-<a name="l00195"></a>00195     {
-<a name="l00196"></a>00196         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00197"></a>00197         os_ &lt;&lt; <span class="stringliteral">&quot;oneof { range: &quot;</span>;
-<a name="l00198"></a>00198         node-&gt;range()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00199"></a>00199         os_ &lt;&lt; <span class="stringliteral">&quot; , repeat? &quot;</span> &lt;&lt; node-&gt;is_repeat();
-<a name="l00200"></a>00200         os_ &lt;&lt; <span class="stringliteral">&quot; , unordered? &quot;</span> &lt;&lt; node-&gt;is_unordered();
-<a name="l00201"></a>00201         os_ &lt;&lt; <span class="stringliteral">&quot; } @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00141"></a>00141         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00142"></a>00142         os_ &lt;&lt; <span class="stringliteral">&quot;recur&quot;</span>;
+<a name="l00143"></a>00143         addr(node);
+<a name="l00144"></a>00144         os_ &lt;&lt;<span class="stringliteral">&quot; { label: &quot;</span> &lt;&lt; node-&gt;label() &lt;&lt; <span class="stringliteral">&quot; }&quot;</span>;
+<a name="l00145"></a>00145         os_ &lt;&lt; <span class="stringliteral">&quot; children: &quot;</span> &lt;&lt; node-&gt;num_children() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00148"></a>00148     }
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ContinueNode *node)
+<a name="l00151"></a>00151     {
+<a name="l00152"></a>00152         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00153"></a>00153         os_ &lt;&lt; <span class="stringliteral">&quot;cont&quot;</span>;
+<a name="l00154"></a>00154         addr(node);
+<a name="l00155"></a>00155         os_ &lt;&lt; <span class="stringliteral">&quot; { label: &quot;</span> &lt;&lt; node-&gt;label() &lt;&lt; <span class="stringliteral">&quot; }\n&quot;</span>;
+<a name="l00156"></a>00156     }
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ChoiceNode *node)
+<a name="l00159"></a>00159     {
+<a name="l00160"></a>00160         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00161"></a>00161         os_ &lt;&lt; <span class="stringliteral">&quot;choice&quot;</span>;
+<a name="l00162"></a>00162         addr(node);
+<a name="l00163"></a>00163         os_ &lt;&lt; <span class="stringliteral">&quot; { at: &quot;</span>;
+<a name="l00164"></a>00164         node-&gt;at()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00165"></a>00165         os_ &lt;&lt; <span class="stringliteral">&quot;, children: &quot;</span> &lt;&lt; node-&gt;num_children() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00166"></a>00166 
+<a name="l00167"></a>00167         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00168"></a>00168     }
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ParNode *node)
+<a name="l00171"></a>00171     {
+<a name="l00172"></a>00172         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00173"></a>00173         os_ &lt;&lt; <span class="stringliteral">&quot;par&quot;</span>;
+<a name="l00174"></a>00174         addr(node);
+<a name="l00175"></a>00175         os_ &lt;&lt; <span class="stringliteral">&quot; {}&quot;</span>;
+<a name="l00176"></a>00176         os_ &lt;&lt; <span class="stringliteral">&quot; parblocks:children: &quot;</span> &lt;&lt; node-&gt;num_children() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00179"></a>00179     }
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(NestedNode *node)
+<a name="l00182"></a>00182     {
+<a name="l00183"></a>00183         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00184"></a>00184         os_ &lt;&lt; <span class="stringliteral">&quot;nested&quot;</span>;
+<a name="l00185"></a>00185         addr(node);
+<a name="l00186"></a>00186         os_ &lt;&lt; <span class="stringliteral">&quot; { name: &quot;</span> &lt;&lt; node-&gt;name();
+<a name="l00187"></a>00187         os_ &lt;&lt; <span class="stringliteral">&quot;, scope: &quot;</span> &lt;&lt; node-&gt;scope();
+<a name="l00188"></a>00188         os_ &lt;&lt; <span class="stringliteral">&quot;, arg(&quot;</span>&lt;&lt; node-&gt;num_args() &lt;&lt;<span class="stringliteral">&quot;): &lt;&quot;</span>;
+<a name="l00189"></a>00189         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;arg_begin(); it!=node-&gt;arg_end(); it++) {
+<a name="l00190"></a>00190             <span class="keywordflow">if</span> (it!=node-&gt;arg_begin()) {
+<a name="l00191"></a>00191                 os_ &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
+<a name="l00192"></a>00192             }
+<a name="l00193"></a>00193             os_ &lt;&lt; (*it)-&gt;label() &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; (*it)-&gt;num_payloads() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00194"></a>00194         }
+<a name="l00195"></a>00195         os_ &lt;&lt; <span class="stringliteral">&quot;&gt;&quot;</span>;
+<a name="l00196"></a>00196         os_ &lt;&lt; <span class="stringliteral">&quot;, rolearg(&quot;</span>&lt;&lt; node-&gt;num_roleargs() &lt;&lt;<span class="stringliteral">&quot;): [&quot;</span>;
+<a name="l00197"></a>00197         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;rolearg_begin(); it!=node-&gt;rolearg_end(); it++) {
+<a name="l00198"></a>00198             <span class="keywordflow">if</span> (it != node-&gt;rolearg_begin()) {
+<a name="l00199"></a>00199                 os_ &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
+<a name="l00200"></a>00200             }
+<a name="l00201"></a>00201             (*it)-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00202"></a>00202         }
+<a name="l00203"></a>00203         os_ &lt;&lt; <span class="stringliteral">&quot;]}\n&quot;</span>;
 <a name="l00204"></a>00204     }
-<a name="l00205"></a>00205     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(IfNode *node)
-<a name="l00206"></a>00206     {
-<a name="l00207"></a>00207         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00208"></a>00208         os_ &lt;&lt; <span class="stringliteral">&quot;if { cond: &quot;</span>;
-<a name="l00209"></a>00209         node-&gt;cond()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00210"></a>00210         os_ &lt;&lt; <span class="stringliteral">&quot; } @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00211"></a>00211 
-<a name="l00212"></a>00212         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
-<a name="l00213"></a>00213     }
-<a name="l00214"></a>00214 
-<a name="l00215"></a>00215     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(AllReduceNode *node)
-<a name="l00216"></a>00216     {
-<a name="l00217"></a>00217         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1Print.html#a7c497772ba2c4acf5487c3138d823810" title="Output prefix based on current line#, indent level and character.">prefix</a>();
-<a name="l00218"></a>00218         os_ &lt;&lt; <span class="stringliteral">&quot;allreduce { msg: &quot;</span> &lt;&lt; node-&gt;msg()-&gt;label()
-<a name="l00219"></a>00219             &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; node-&gt;msg()-&gt;num_payloads() &lt;&lt; <span class="stringliteral">&quot;) } @&quot;</span> &lt;&lt; node &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;
-<a name="l00220"></a>00220     }
-<a name="l00221"></a>00221 
-<a name="l00222"></a>00222     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(Role *role)
-<a name="l00223"></a>00223     {
-<a name="l00224"></a>00224         os_ &lt;&lt; role-&gt;name();
-<a name="l00225"></a>00225         <span class="keywordflow">if</span> (role-&gt;num_dimen() &gt; 0) {
-<a name="l00226"></a>00226             os_ &lt;&lt; <span class="stringliteral">&quot;[&quot;</span>;
-<a name="l00227"></a>00227             <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=1; i&lt;role-&gt;num_dimen(); i++) {
-<a name="l00228"></a>00228                 os_ &lt;&lt; <span class="stringliteral">&quot;][&quot;</span>;
-<a name="l00229"></a>00229             }
-<a name="l00230"></a>00230             os_ &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;
-<a name="l00231"></a>00231         }
-<a name="l00232"></a>00232         os_ &lt;&lt; <span class="stringliteral">&quot;@&quot;</span> &lt;&lt; role;
-<a name="l00233"></a>00233     }
-<a name="l00234"></a>00234 
-<a name="l00235"></a>00235     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(RoleGrp *role)
-<a name="l00236"></a>00236     {
-<a name="l00237"></a>00237         os_ &lt;&lt; role-&gt;name();
-<a name="l00238"></a>00238         os_ &lt;&lt; <span class="stringliteral">&quot;{ members#: &quot;</span> &lt;&lt; role-&gt;num_members() &lt;&lt; <span class="stringliteral">&quot;, membs: &quot;</span>;
-<a name="l00239"></a>00239         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=role-&gt;member_begin(); it!=role-&gt;member_end(); it++) {
-<a name="l00240"></a>00240             (*it).second-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00241"></a>00241             os_ &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;
-<a name="l00242"></a>00242         }
-<a name="l00243"></a>00243         os_ &lt;&lt; <span class="stringliteral">&quot; } @&quot;</span> &lt;&lt; role;
-<a name="l00244"></a>00244     }
-<a name="l00245"></a>00245 
-<a name="l00246"></a>00246     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(Expr *expr)
-<a name="l00247"></a>00247     {
-<a name="l00248"></a>00248         <span class="comment">// Empty.</span>
-<a name="l00249"></a>00249     }
-<a name="l00250"></a>00250 
-<a name="l00251"></a>00251     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(VarExpr *expr)
-<a name="l00252"></a>00252     {
-<a name="l00253"></a>00253         os_ &lt;&lt; expr-&gt;name();
-<a name="l00254"></a>00254     }
-<a name="l00255"></a>00255     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ValExpr *expr)
-<a name="l00256"></a>00256     {
-<a name="l00257"></a>00257         os_ &lt;&lt; expr-&gt;num();
-<a name="l00258"></a>00258     }
-<a name="l00259"></a>00259     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(AddExpr *expr)
-<a name="l00260"></a>00260     {
-<a name="l00261"></a>00261         os_ &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;
-<a name="l00262"></a>00262         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00263"></a>00263         os_ &lt;&lt; <span class="stringliteral">&quot;+&quot;</span>;
-<a name="l00264"></a>00264         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00265"></a>00265         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
-<a name="l00266"></a>00266     }
-<a name="l00267"></a>00267     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(SubExpr *expr)
-<a name="l00268"></a>00268     {
-<a name="l00269"></a>00269         os_ &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;
-<a name="l00270"></a>00270         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00271"></a>00271         os_ &lt;&lt; <span class="stringliteral">&quot;-&quot;</span>;
-<a name="l00272"></a>00272         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00273"></a>00273         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
-<a name="l00274"></a>00274     }
-<a name="l00275"></a>00275 
-<a name="l00276"></a>00276     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(MulExpr *expr)
-<a name="l00277"></a>00277     {
-<a name="l00278"></a>00278         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00279"></a>00279         os_ &lt;&lt; <span class="stringliteral">&quot;*&quot;</span>;
-<a name="l00280"></a>00280         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00281"></a>00281     }
-<a name="l00282"></a>00282 
-<a name="l00283"></a>00283     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(DivExpr *expr)
-<a name="l00284"></a>00284     {
-<a name="l00285"></a>00285         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00286"></a>00286         os_ &lt;&lt; <span class="stringliteral">&quot;/&quot;</span>;
-<a name="l00287"></a>00287         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00288"></a>00288     }
-<a name="l00289"></a>00289 
-<a name="l00290"></a>00290     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ModExpr *expr)
-<a name="l00291"></a>00291     {
-<a name="l00292"></a>00292         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00293"></a>00293         os_ &lt;&lt; <span class="stringliteral">&quot;%&quot;</span>;
-<a name="l00294"></a>00294         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(InterruptibleNode *node)
+<a name="l00207"></a>00207     {
+<a name="l00208"></a>00208         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00209"></a>00209         os_ &lt;&lt; <span class="stringliteral">&quot;interruptible&quot;</span>;
+<a name="l00210"></a>00210         addr(node);
+<a name="l00211"></a>00211         os_ &lt;&lt; <span class="stringliteral">&quot; { scope: &quot;</span> &lt;&lt; node-&gt;scope();
+<a name="l00212"></a>00212         os_ &lt;&lt; <span class="stringliteral">&quot; interrupts(&quot;</span> &lt;&lt; node-&gt;num_interrupts() &lt;&lt; <span class="stringliteral">&quot;): &quot;</span>;
+<a name="l00213"></a>00213         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;interrupt_begin(); it!=node-&gt;interrupt_end(); it++) {
+<a name="l00214"></a>00214             os_ &lt;&lt; (*it).first-&gt;name() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (*it).second-&gt;label() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
+<a name="l00215"></a>00215         }
+<a name="l00216"></a>00216         os_ &lt;&lt; <span class="stringliteral">&quot;, catches(&quot;</span> &lt;&lt; node-&gt;num_catches() &lt;&lt; <span class="stringliteral">&quot;): &quot;</span>;
+<a name="l00217"></a>00217         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;catch_begin(); it!=node-&gt;catch_end(); it++) {
+<a name="l00218"></a>00218             os_ &lt;&lt; (*it).first-&gt;name() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (*it).second-&gt;label() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
+<a name="l00219"></a>00219         }
+<a name="l00220"></a>00220         os_ &lt;&lt; <span class="stringliteral">&quot;, throws(&quot;</span> &lt;&lt; node-&gt;num_throws() &lt;&lt; <span class="stringliteral">&quot;): &quot;</span>;
+<a name="l00221"></a>00221         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=node-&gt;throw_begin(); it!=node-&gt;throw_end(); it++) {
+<a name="l00222"></a>00222             os_ &lt;&lt; (*it).first-&gt;name() &lt;&lt; <span class="stringliteral">&quot;/&quot;</span> &lt;&lt; (*it).second-&gt;label() &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
+<a name="l00223"></a>00223         }
+<a name="l00224"></a>00224         os_ &lt;&lt;<span class="stringliteral">&quot;}\n&quot;</span>;
+<a name="l00225"></a>00225     }
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ForNode *node)
+<a name="l00228"></a>00228     {
+<a name="l00229"></a>00229         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00230"></a>00230         os_ &lt;&lt; <span class="stringliteral">&quot;for&quot;</span>;
+<a name="l00231"></a>00231         addr(node);
+<a name="l00232"></a>00232         os_ &lt;&lt; <span class="stringliteral">&quot; { expr: &quot;</span>;
+<a name="l00233"></a>00233         node-&gt;bindexpr()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00234"></a>00234         os_ &lt;&lt; <span class="stringliteral">&quot; }\n&quot;</span>;
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00237"></a>00237     }
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(OneofNode *node)
+<a name="l00240"></a>00240     {
+<a name="l00241"></a>00241         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00242"></a>00242         os_ &lt;&lt; <span class="stringliteral">&quot;oneof&quot;</span>;
+<a name="l00243"></a>00243         addr(node);
+<a name="l00244"></a>00244         os_ &lt;&lt; <span class="stringliteral">&quot; { range: &quot;</span>;
+<a name="l00245"></a>00245         node-&gt;range()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00246"></a>00246         os_ &lt;&lt; <span class="stringliteral">&quot; , repeat? &quot;</span> &lt;&lt; node-&gt;is_repeat();
+<a name="l00247"></a>00247         os_ &lt;&lt; <span class="stringliteral">&quot; , unordered? &quot;</span> &lt;&lt; node-&gt;is_unordered();
+<a name="l00248"></a>00248         os_ &lt;&lt; <span class="stringliteral">&quot; }\n&quot;</span>;
+<a name="l00249"></a>00249 
+<a name="l00250"></a>00250         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00251"></a>00251     }
+<a name="l00252"></a>00252 
+<a name="l00253"></a>00253     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(IfNode *node)
+<a name="l00254"></a>00254     {
+<a name="l00255"></a>00255         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00256"></a>00256         os_ &lt;&lt; <span class="stringliteral">&quot;if&quot;</span>;
+<a name="l00257"></a>00257         addr(node);
+<a name="l00258"></a>00258         os_ &lt;&lt; <span class="stringliteral">&quot; { cond: &quot;</span>;
+<a name="l00259"></a>00259         node-&gt;cond()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00260"></a>00260         os_ &lt;&lt; <span class="stringliteral">&quot; }\n&quot;</span>;
+<a name="l00261"></a>00261 
+<a name="l00262"></a>00262         node-&gt;BlockNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;::accept(*<span class="keyword">this</span>);
+<a name="l00263"></a>00263     }
+<a name="l00264"></a>00264 
+<a name="l00265"></a>00265     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(AllReduceNode *node)
+<a name="l00266"></a>00266     {
+<a name="l00267"></a>00267         <a class="code" href="classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html#ab39648afcaa30c705139625594222600" title="Output prefix based on current line#, indent level and character.">prefix</a>();
+<a name="l00268"></a>00268         os_ &lt;&lt; <span class="stringliteral">&quot;allreduce&quot;</span>;
+<a name="l00269"></a>00269         addr(node);
+<a name="l00270"></a>00270         os_ &lt;&lt; <span class="stringliteral">&quot; { msg: &quot;</span> &lt;&lt; node-&gt;msg()-&gt;label();
+<a name="l00271"></a>00271         os_  &lt;&lt; <span class="stringliteral">&quot;(&quot;</span> &lt;&lt; node-&gt;msg()-&gt;num_payloads() &lt;&lt; <span class="stringliteral">&quot;) }\n&quot;</span>;
+<a name="l00272"></a>00272     }
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(Role *role)
+<a name="l00275"></a>00275     {
+<a name="l00276"></a>00276         os_ &lt;&lt; role-&gt;name();
+<a name="l00277"></a>00277         <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;role-&gt;num_dimens(); i++) {
+<a name="l00278"></a>00278             os_ &lt;&lt; <span class="stringliteral">&quot;[&quot;</span>;
+<a name="l00279"></a>00279             (*role)[i]-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00280"></a>00280             os_ &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;
+<a name="l00281"></a>00281         }
+<a name="l00282"></a>00282         addr(role);
+<a name="l00283"></a>00283     }
+<a name="l00284"></a>00284 
+<a name="l00285"></a>00285     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(RoleGrp *role)
+<a name="l00286"></a>00286     {
+<a name="l00287"></a>00287         os_ &lt;&lt; role-&gt;name();
+<a name="l00288"></a>00288         os_ &lt;&lt; <span class="stringliteral">&quot;{ members#: &quot;</span> &lt;&lt; role-&gt;num_members() &lt;&lt; <span class="stringliteral">&quot;, membs: &quot;</span>;
+<a name="l00289"></a>00289         <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=role-&gt;member_begin(); it!=role-&gt;member_end(); it++) {
+<a name="l00290"></a>00290             (*it)-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00291"></a>00291             os_ &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;
+<a name="l00292"></a>00292         }
+<a name="l00293"></a>00293         os_ &lt;&lt; <span class="stringliteral">&quot; }&quot;</span>;
+<a name="l00294"></a>00294         addr(role);
 <a name="l00295"></a>00295     }
 <a name="l00296"></a>00296 
-<a name="l00297"></a>00297     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ShlExpr *expr)
+<a name="l00297"></a>00297     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(Expr *expr)
 <a name="l00298"></a>00298     {
-<a name="l00299"></a>00299         os_ &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;
-<a name="l00300"></a>00300         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00301"></a>00301         os_ &lt;&lt; <span class="stringliteral">&quot;&lt;&lt;&quot;</span>;
-<a name="l00302"></a>00302         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00303"></a>00303         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
-<a name="l00304"></a>00304     }
-<a name="l00305"></a>00305 
-<a name="l00306"></a>00306     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ShrExpr *expr)
-<a name="l00307"></a>00307     {
-<a name="l00308"></a>00308         os_ &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;
-<a name="l00309"></a>00309         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00310"></a>00310         os_ &lt;&lt; <span class="stringliteral">&quot;&gt;&gt;&quot;</span>;
-<a name="l00311"></a>00311         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00312"></a>00312         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00299"></a>00299         <span class="comment">// Empty.</span>
+<a name="l00300"></a>00300     }
+<a name="l00301"></a>00301 
+<a name="l00302"></a>00302     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(VarExpr *expr)
+<a name="l00303"></a>00303     {
+<a name="l00304"></a>00304         os_ &lt;&lt; <span class="stringliteral">&quot;var(&quot;</span> &lt;&lt; expr-&gt;name() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00305"></a>00305         addr(expr);
+<a name="l00306"></a>00306     }
+<a name="l00307"></a>00307 
+<a name="l00308"></a>00308     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ValExpr *expr)
+<a name="l00309"></a>00309     {
+<a name="l00310"></a>00310         os_ &lt;&lt; <span class="stringliteral">&quot;val(&quot;</span> &lt;&lt; expr-&gt;num() &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00311"></a>00311         addr(expr);
+<a name="l00312"></a>00312     }
 <a name="l00313"></a>00313 
-<a name="l00314"></a>00314     }
-<a name="l00315"></a>00315 
-<a name="l00316"></a>00316     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(SeqExpr *expr)
-<a name="l00317"></a>00317     {
-<a name="l00318"></a>00318         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0; i&lt;expr-&gt;num_values(); i++) {
-<a name="l00319"></a>00319             os_ &lt;&lt; expr-&gt;value(i) &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;
-<a name="l00320"></a>00320         }
-<a name="l00321"></a>00321     }
-<a name="l00322"></a>00322 
-<a name="l00323"></a>00323     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(RngExpr *expr)
-<a name="l00324"></a>00324     {
-<a name="l00325"></a>00325         os_ &lt;&lt; expr-&gt;bindvar() &lt;&lt; <span class="stringliteral">&quot;:&quot;</span>;
-<a name="l00326"></a>00326         expr-&gt;from()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00327"></a>00327         os_ &lt;&lt; <span class="stringliteral">&quot;..&quot;</span>;
-<a name="l00328"></a>00328         expr-&gt;to()-&gt;accept(*<span class="keyword">this</span>);
-<a name="l00329"></a>00329     }
-<a name="l00330"></a>00330 };
-<a name="l00331"></a>00331 <span class="preprocessor">#endif // __cplusplus</span>
-<a name="l00332"></a>00332 <span class="preprocessor"></span>
-<a name="l00333"></a>00333 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00334"></a>00334 <span class="preprocessor"></span>} <span class="comment">// namespace util</span>
-<a name="l00335"></a>00335 } <span class="comment">// namespace parameterised</span>
-<a name="l00336"></a>00336 } <span class="comment">// namespace sesstype</span>
-<a name="l00337"></a>00337 <span class="preprocessor">#endif</span>
-<a name="l00338"></a>00338 <span class="preprocessor"></span>
-<a name="l00339"></a>00339 
-<a name="l00340"></a>00340 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__UTIL__PRINT_H__</span>
+<a name="l00314"></a>00314     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(AddExpr *expr)
+<a name="l00315"></a>00315     {
+<a name="l00316"></a>00316         os_ &lt;&lt; <span class="stringliteral">&quot;+(&quot;</span>;
+<a name="l00317"></a>00317         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00318"></a>00318         os_ &lt;&lt; <span class="stringliteral">&quot; , &quot;</span>;
+<a name="l00319"></a>00319         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00320"></a>00320         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00321"></a>00321         addr(expr);
+<a name="l00322"></a>00322     }
+<a name="l00323"></a>00323 
+<a name="l00324"></a>00324     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(SubExpr *expr)
+<a name="l00325"></a>00325     {
+<a name="l00326"></a>00326         os_ &lt;&lt; <span class="stringliteral">&quot;-(&quot;</span>;
+<a name="l00327"></a>00327         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00328"></a>00328         os_ &lt;&lt; <span class="stringliteral">&quot; , &quot;</span>;
+<a name="l00329"></a>00329         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00330"></a>00330         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00331"></a>00331         addr(expr);
+<a name="l00332"></a>00332     }
+<a name="l00333"></a>00333 
+<a name="l00334"></a>00334     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(MulExpr *expr)
+<a name="l00335"></a>00335     {
+<a name="l00336"></a>00336         os_ &lt;&lt; <span class="stringliteral">&quot;*(&quot;</span>;
+<a name="l00337"></a>00337         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00338"></a>00338         os_ &lt;&lt; <span class="stringliteral">&quot; , &quot;</span>;
+<a name="l00339"></a>00339         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00340"></a>00340         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00341"></a>00341         addr(expr);
+<a name="l00342"></a>00342     }
+<a name="l00343"></a>00343 
+<a name="l00344"></a>00344     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(DivExpr *expr)
+<a name="l00345"></a>00345     {
+<a name="l00346"></a>00346         os_ &lt;&lt; <span class="stringliteral">&quot;/(&quot;</span>;
+<a name="l00347"></a>00347         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00348"></a>00348         os_ &lt;&lt; <span class="stringliteral">&quot; , &quot;</span>;
+<a name="l00349"></a>00349         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00350"></a>00350         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00351"></a>00351         addr(expr);
+<a name="l00352"></a>00352     }
+<a name="l00353"></a>00353 
+<a name="l00354"></a>00354     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ModExpr *expr)
+<a name="l00355"></a>00355     {
+<a name="l00356"></a>00356         os_ &lt;&lt; <span class="stringliteral">&quot;%(&quot;</span>;
+<a name="l00357"></a>00357         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00358"></a>00358         os_ &lt;&lt; <span class="stringliteral">&quot; , &quot;</span>;
+<a name="l00359"></a>00359         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00360"></a>00360         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00361"></a>00361         addr(expr);
+<a name="l00362"></a>00362     }
+<a name="l00363"></a>00363 
+<a name="l00364"></a>00364     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ShlExpr *expr)
+<a name="l00365"></a>00365     {
+<a name="l00366"></a>00366         os_ &lt;&lt; <span class="stringliteral">&quot;&lt;&lt;(&quot;</span>;
+<a name="l00367"></a>00367         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00368"></a>00368         os_ &lt;&lt; <span class="stringliteral">&quot; , &quot;</span>;
+<a name="l00369"></a>00369         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00370"></a>00370         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00371"></a>00371         addr(expr);
+<a name="l00372"></a>00372     }
+<a name="l00373"></a>00373 
+<a name="l00374"></a>00374     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(ShrExpr *expr)
+<a name="l00375"></a>00375     {
+<a name="l00376"></a>00376         os_ &lt;&lt; <span class="stringliteral">&quot;&gt;&gt;(&quot;</span>;
+<a name="l00377"></a>00377         expr-&gt;lhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00378"></a>00378         os_ &lt;&lt; <span class="stringliteral">&quot; , &quot;</span>;
+<a name="l00379"></a>00379         expr-&gt;rhs()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00380"></a>00380         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00381"></a>00381         addr(expr);
+<a name="l00382"></a>00382     }
+<a name="l00383"></a>00383 
+<a name="l00384"></a>00384     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(SeqExpr *expr)
+<a name="l00385"></a>00385     {
+<a name="l00386"></a>00386         os_ &lt;&lt; <span class="stringliteral">&quot;seq: &quot;</span>;
+<a name="l00387"></a>00387         <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i=0; i&lt;expr-&gt;num_values(); i++) {
+<a name="l00388"></a>00388             <span class="keywordflow">if</span> (i != 0) os_ &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;
+<a name="l00389"></a>00389             os_ &lt;&lt; expr-&gt;value(i);
+<a name="l00390"></a>00390         }
+<a name="l00391"></a>00391         addr(expr);
+<a name="l00392"></a>00392     }
+<a name="l00393"></a>00393 
+<a name="l00394"></a>00394     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(RngExpr *expr)
+<a name="l00395"></a>00395     {
+<a name="l00396"></a>00396         os_ &lt;&lt; <span class="stringliteral">&quot;rng(&quot;</span> &lt;&lt; expr-&gt;bindvar() &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;
+<a name="l00397"></a>00397         expr-&gt;from()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00398"></a>00398         os_ &lt;&lt; <span class="stringliteral">&quot;,&quot;</span>;
+<a name="l00399"></a>00399         expr-&gt;to()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00400"></a>00400         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00401"></a>00401         addr(expr);
+<a name="l00402"></a>00402     }
+<a name="l00403"></a>00403 
+<a name="l00404"></a>00404     <span class="keyword">virtual</span> <span class="keywordtype">void</span> visit(LogExpr *expr)
+<a name="l00405"></a>00405     {
+<a name="l00406"></a>00406         os_ &lt;&lt; <span class="stringliteral">&quot;log(&quot;</span>;
+<a name="l00407"></a>00407         expr-&gt;value()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00408"></a>00408         os_ &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;
+<a name="l00409"></a>00409         expr-&gt;base()-&gt;accept(*<span class="keyword">this</span>);
+<a name="l00410"></a>00410         os_ &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;
+<a name="l00411"></a>00411         addr(expr);
+<a name="l00412"></a>00412     }
+<a name="l00413"></a>00413 };
+<a name="l00414"></a>00414 <span class="preprocessor">#endif // __cplusplus</span>
+<a name="l00415"></a>00415 <span class="preprocessor"></span>
+<a name="l00416"></a>00416 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00417"></a>00417 <span class="preprocessor"></span>} <span class="comment">// namespace util</span>
+<a name="l00418"></a>00418 } <span class="comment">// namespace parameterised</span>
+<a name="l00419"></a>00419 } <span class="comment">// namespace sesstype</span>
+<a name="l00420"></a>00420 <span class="preprocessor">#endif</span>
+<a name="l00421"></a>00421 <span class="preprocessor"></span>
+<a name="l00422"></a>00422 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__UTIL__PRINT_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

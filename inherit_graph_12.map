@@ -1,4 +1,12 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session." alt="" coords="5,5,136,35"/>
-<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1Session.html" title="Session class encapsulates a single session (parameterised flavour)." alt="" coords="185,5,404,35"/>
+<area shape="rect" id="node1" href="$classsesstype_1_1parameterised_1_1util_1_1ExprVisitor.html" title="Abstract class for building Expr visitors." alt="" coords="8,192,269,221"/>
+<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1util_1_1EmptyVisitor.html" title="sesstype::parameterised::util::EmptyVisitor" alt="" coords="331,112,603,141"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1util_1_1ExprApply.html" title="ExprApply implements Pabble&#39;s apply(b, e)" alt="" coords="337,219,596,248"/>
+<area shape="rect" id="node7" href="$classsesstype_1_1parameterised_1_1util_1_1ExprEval.html" title="sesstype::parameterised::util::ExprEval" alt="" coords="341,272,592,301"/>
+<area shape="rect" id="node9" href="$classsesstype_1_1parameterised_1_1util_1_1ExprInvert.html" title="Given f(x) = y, calculate its mathematical reverse f^&#45;1(y) = x." alt="" coords="337,325,596,355"/>
+<area shape="rect" id="node11" href="$classsesstype_1_1parameterised_1_1util_1_1ExprPrintVisitor.html" title="Protocol and Expression printer." alt="" coords="323,165,611,195"/>
+<area shape="rect" id="node13" href="$classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html" title="Protocol and Expression printer." alt="" coords="336,59,597,88"/>
+<area shape="rect" id="node14" href="$classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST&#45;based visitors." alt="" coords="5,85,272,115"/>
+<area shape="rect" id="node18" href="$classsesstype_1_1parameterised_1_1util_1_1ProjectionVisitor.html" title="Endpoint projection for parameterised session types." alt="" coords="320,5,613,35"/>
+<area shape="rect" id="node19" href="$classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html" title="sesstype::parameterised::util::RoleVisitor" alt="" coords="8,32,269,61"/>
 </map>

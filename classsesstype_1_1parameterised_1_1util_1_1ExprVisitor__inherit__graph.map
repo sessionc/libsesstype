@@ -1,4 +1,8 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1util_1_1Print.html" title="Protocol and Expression printer." alt="" coords="5,83,229,112"/>
-<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1util_1_1SimplifyExpr.html" title="sesstype::parameterised::util::SimplifyExpr" alt="" coords="253,83,525,112"/>
+<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1util_1_1EmptyVisitor.html" title="sesstype::parameterised::util::EmptyVisitor" alt="" coords="327,5,599,35"/>
+<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1util_1_1ExprApply.html" title="ExprApply implements Pabble&#39;s apply(b, e)" alt="" coords="333,59,592,88"/>
+<area shape="rect" id="node7" href="$classsesstype_1_1parameterised_1_1util_1_1ExprEval.html" title="sesstype::parameterised::util::ExprEval" alt="" coords="337,112,588,141"/>
+<area shape="rect" id="node9" href="$classsesstype_1_1parameterised_1_1util_1_1ExprInvert.html" title="Given f(x) = y, calculate its mathematical reverse f^&#45;1(y) = x." alt="" coords="333,165,592,195"/>
+<area shape="rect" id="node11" href="$classsesstype_1_1parameterised_1_1util_1_1ExprPrintVisitor.html" title="Protocol and Expression printer." alt="" coords="319,219,607,248"/>
+<area shape="rect" id="node13" href="$classsesstype_1_1parameterised_1_1util_1_1PrintVisitor.html" title="Protocol and Expression printer." alt="" coords="332,272,593,301"/>
 </map>

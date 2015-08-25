@@ -1,8 +1,9 @@
 <map id="G" name="G">
-<area shape="rect" id="node7" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="32,83,229,112"/>
-<area shape="rect" id="node9" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="255,160,364,189"/>
-<area shape="rect" id="node21" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="31,160,231,189"/>
-<area shape="rect" id="node14" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="184,237,341,267"/>
-<area shape="rect" id="node16" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="424,315,603,344"/>
-<area shape="rect" id="node18" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="365,237,539,267"/>
+<area shape="rect" id="node7" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="276,83,473,112"/>
+<area shape="rect" id="node9" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="255,237,364,267"/>
+<area shape="rect" id="node20" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="388,237,588,267"/>
+<area shape="rect" id="node27" href="$rng_8h_source.html" title="sesstype/parameterised/expr/rng.h" alt="" coords="412,160,633,189"/>
+<area shape="rect" id="node13" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="336,315,493,344"/>
+<area shape="rect" id="node15" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="105,392,284,421"/>
+<area shape="rect" id="node17" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="5,315,179,344"/>
 </map>

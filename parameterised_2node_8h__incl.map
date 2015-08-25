@@ -1,8 +1,11 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="312,83,429,112"/>
-<area shape="rect" id="node5" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="177,160,292,189"/>
-<area shape="rect" id="node15" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="365,237,523,267"/>
-<area shape="rect" id="node17" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="316,160,425,189"/>
-<area shape="rect" id="node22" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="605,315,784,344"/>
-<area shape="rect" id="node24" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="547,237,720,267"/>
+<area shape="rect" id="node3" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="299,160,416,189"/>
+<area shape="rect" id="node28" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="403,83,600,112"/>
+<area shape="rect" id="node5" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="205,237,320,267"/>
+<area shape="rect" id="node15" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="205,315,363,344"/>
+<area shape="rect" id="node17" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="395,237,504,267"/>
+<area shape="rect" id="node22" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="455,392,633,421"/>
+<area shape="rect" id="node24" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="520,315,693,344"/>
+<area shape="rect" id="node31" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="528,237,728,267"/>
+<area shape="rect" id="node38" href="$rng_8h_source.html" title="sesstype/parameterised/expr/rng.h" alt="" coords="541,160,763,189"/>
 </map>

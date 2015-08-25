@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -102,6 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">sesstype::MsgSig Class Reference</div>  </div>
@@ -129,6 +130,10 @@ Collaboration diagram for sesstype::MsgSig:</div>
 
 <p><a href="classsesstype_1_1MsgSig-members.html">List of all members.</a></p>
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a831ffa2d105a714ffc061b8537cf9aac"></a><!-- doxytag: member="sesstype::MsgSig::PayloadContainer" ref="a831ffa2d105a714ffc061b8537cf9aac" args="" -->
+typedef std::vector&lt; <a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>PayloadContainer</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#a82ff979587709c71a6835db389084e51">MsgSig</a> (std::string <a class="el" href="classsesstype_1_1MsgSig.html#a388becb03a84076e692d33f27f82dcc9">label</a>)</td></tr>
@@ -143,12 +148,16 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 virtual <a class="el" href="classsesstype_1_1MsgSig.html">MsgSig</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#a71b9997d8d669f99c0244be05c470100">clone</a> () const override</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Make a MsgSig* clone. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#a388becb03a84076e692d33f27f82dcc9">label</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#a19107129eff00d91686b5b97bafd6f91">num_payloads</a> () const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#adad849db1677360023458132ede929c1">payload</a> (std::string name) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#aa9d9382dd8252a51800e52527620c3af">payload</a> (unsigned int idx) const </td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#a42dbd1abea30991c233b9274db9c9646">add_payload</a> (<a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a> *<a class="el" href="classsesstype_1_1MsgSig.html#adad849db1677360023458132ede929c1">payload</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#a42dbd1abea30991c233b9274db9c9646">add_payload</a> (<a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a> *<a class="el" href="classsesstype_1_1MsgSig.html#aa9d9382dd8252a51800e52527620c3af">payload</a>)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a payload parameter to current <a class="el" href="classsesstype_1_1MsgSig.html" title="Message Signature.">MsgSig</a>.  <a href="#a42dbd1abea30991c233b9274db9c9646"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#a19107129eff00d91686b5b97bafd6f91">num_payloads</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#aa892e29dde567d42d994bd2edc749ee5">has_payload</a> (std::string name) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#aa9d9382dd8252a51800e52527620c3af">payload</a> (unsigned int idx) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1MsgSig.html#adad849db1677360023458132ede929c1">payload</a> (std::string name) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2fa2d37197b1f9b247ac6066bc0463fd"></a><!-- doxytag: member="sesstype::MsgSig::payload_begin" ref="a2fa2d37197b1f9b247ac6066bc0463fd" args="() const " -->
+PayloadContainer::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>payload_begin</b> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa6af2175cb631e100f6e8b27327d3188"></a><!-- doxytag: member="sesstype::MsgSig::payload_end" ref="aa6af2175cb631e100f6e8b27327d3188" args="() const " -->
+PayloadContainer::const_iterator&#160;</td><td class="memItemRight" valign="bottom"><b>payload_end</b> () const </td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Message Signature. </p>
@@ -257,30 +266,12 @@ virtual <a class="el" href="classsesstype_1_1MsgSig.html">MsgSig</a> *&#160;</td
 
 </div>
 </div>
-<a class="anchor" id="adad849db1677360023458132ede929c1"></a><!-- doxytag: member="sesstype::MsgSig::payload" ref="adad849db1677360023458132ede929c1" args="(std::string name) const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a>* <a class="el" href="classsesstype_1_1MsgSig.html#adad849db1677360023458132ede929c1">sesstype::MsgSig::payload</a> </td>
-          <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
-          <td> const<code> [inline]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<dl class="return"><dt><b>Returns:</b></dt><dd>payload by name. </dd></dl>
-
-</div>
-</div>
 <a class="anchor" id="aa9d9382dd8252a51800e52527620c3af"></a><!-- doxytag: member="sesstype::MsgSig::payload" ref="aa9d9382dd8252a51800e52527620c3af" args="(unsigned int idx) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a>* <a class="el" href="classsesstype_1_1MsgSig.html#adad849db1677360023458132ede929c1">sesstype::MsgSig::payload</a> </td>
+          <td class="memname"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a>* <a class="el" href="classsesstype_1_1MsgSig.html#aa9d9382dd8252a51800e52527620c3af">sesstype::MsgSig::payload</a> </td>
           <td>(</td>
           <td class="paramtype">unsigned int&#160;</td>
           <td class="paramname"><em>idx</em></td><td>)</td>
@@ -293,6 +284,24 @@ virtual <a class="el" href="classsesstype_1_1MsgSig.html">MsgSig</a> *&#160;</td
 
 </div>
 </div>
+<a class="anchor" id="adad849db1677360023458132ede929c1"></a><!-- doxytag: member="sesstype::MsgSig::payload" ref="adad849db1677360023458132ede929c1" args="(std::string name) const " -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsesstype_1_1MsgPayload.html">MsgPayload</a>* <a class="el" href="classsesstype_1_1MsgSig.html#aa9d9382dd8252a51800e52527620c3af">sesstype::MsgSig::payload</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td> const<code> [inline]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="return"><dt><b>Returns:</b></dt><dd>payload by name. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="msg_8h_source.html">msg.h</a></li>
 </ul>
@@ -302,7 +311,7 @@ virtual <a class="el" href="classsesstype_1_1MsgSig.html">MsgSig</a> *&#160;</td
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

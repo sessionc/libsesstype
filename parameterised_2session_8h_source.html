@@ -93,60 +93,114 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00013"></a>00013 <span class="preprocessor"></span>
 <a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="session_8h.html" title="A session or a session of an interaction, also known in the literature as global type.">sesstype/session.h</a>&quot;</span>
 <a name="l00015"></a>00015 
-<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
-<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="role__grp_8h.html" title="A group of participants of a protocol or session.">sesstype/parameterised/role_grp.h</a>&quot;</span>
-<a name="l00018"></a>00018 
-<a name="l00019"></a>00019 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00020"></a>00020 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
-<a name="l00021"></a>00021 <span class="keyword">namespace </span>parameterised {
-<a name="l00022"></a>00022 <span class="preprocessor">#endif</span>
-<a name="l00023"></a>00023 <span class="preprocessor"></span>
-<a name="l00024"></a>00024 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00025"></a>00025 <span class="preprocessor"></span>
-<a name="l00028"></a><a class="code" href="classsesstype_1_1parameterised_1_1Session.html">00028</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1Session.html" title="Session class encapsulates a single session (parameterised flavour).">Session</a> : <span class="keyword">public</span> sesstype::<a class="code" href="classsesstype_1_1parameterised_1_1Session.html" title="Session class encapsulates a single session (parameterised flavour).">Session</a> {
-<a name="l00029"></a>00029   <span class="keyword">public</span>:
-<a name="l00031"></a>00031     <a class="code" href="classsesstype_1_1parameterised_1_1Session.html#aa7087a5a6b6c1a7d548a30d0fda2825c" title="Session constructor with &quot;default&quot; as Session name.">Session</a>();
+<a name="l00016"></a>00016 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised).">sesstype/parameterised/node.h</a>&quot;</span>
+<a name="l00017"></a>00017 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
+<a name="l00018"></a>00018 <span class="preprocessor">#include &quot;<a class="code" href="role__grp_8h.html" title="A group of participants of a protocol or session.">sesstype/parameterised/role_grp.h</a>&quot;</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00021"></a>00021 <span class="preprocessor"></span><span class="keyword">namespace </span>sesstype {
+<a name="l00022"></a>00022 <span class="keyword">namespace </span>parameterised {
+<a name="l00023"></a>00023 <span class="preprocessor">#endif</span>
+<a name="l00024"></a>00024 <span class="preprocessor"></span>
+<a name="l00025"></a>00025 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00026"></a>00026 <span class="preprocessor"></span>
+<a name="l00029"></a>00029 <span class="keyword">template</span> &lt;<span class="keyword">class</span> NodeType, <span class="keyword">class</span> RoleType, <span class="keyword">class</span> RoleGrpType&gt;
+<a name="l00030"></a><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html">00030</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html" title="Session class encapsulates a single session (parameterised flavour).">SessionTmpl</a> : <span class="keyword">public</span> sesstype::<a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html" title="Session class encapsulates a single session (parameterised flavour).">SessionTmpl</a>&lt;NodeType, RoleType&gt; {
+<a name="l00031"></a>00031     std::unordered_map&lt;std::string, RoleGrpType *&gt; groups_;
 <a name="l00032"></a>00032 
-<a name="l00035"></a>00035     <a class="code" href="classsesstype_1_1parameterised_1_1Session.html#aa7087a5a6b6c1a7d548a30d0fda2825c" title="Session constructor with &quot;default&quot; as Session name.">Session</a>(std::string <a class="code" href="classsesstype_1_1Session.html#a236de05fdd7e8ca5d74d60e1bf2f9cab">name</a>);
-<a name="l00036"></a>00036 
-<a name="l00038"></a>00038     <a class="code" href="classsesstype_1_1parameterised_1_1Session.html#a401df970b7bad79254e7986ed066d3e1" title="Session destructor.">~Session</a>();
-<a name="l00039"></a>00039 
-<a name="l00043"></a>00043     <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">RoleGrp</a> *<a class="code" href="classsesstype_1_1parameterised_1_1Session.html#ae106459c6769fc2ee593c767cf388bce">group</a>(std::string name) <span class="keyword">const</span>;
-<a name="l00044"></a>00044 
-<a name="l00047"></a>00047     <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1parameterised_1_1Session.html#a737f1676a3ffbf7e02414f3bbf8a254d">has_role_grp</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">RoleGrp</a> *group) <span class="keyword">const</span>;
-<a name="l00048"></a>00048 
-<a name="l00051"></a>00051     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1Session.html#a9af4739877335212862d922ebeed48c5">add_group</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">RoleGrp</a> *group);
-<a name="l00052"></a>00052 
-<a name="l00053"></a>00053   <span class="keyword">private</span>:
-<a name="l00054"></a>00054     std::unordered_map&lt;std::string, RoleGrp *&gt; groups_;
-<a name="l00055"></a>00055 };
-<a name="l00056"></a>00056 <span class="preprocessor">#endif</span>
-<a name="l00057"></a>00057 <span class="preprocessor"></span>
-<a name="l00058"></a>00058 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00059"></a>00059 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00060"></a>00060 <span class="preprocessor">#endif</span>
-<a name="l00061"></a>00061 <span class="preprocessor"></span>
-<a name="l00062"></a>00062 <span class="keywordtype">void</span> st_tree_add_role_grp(<a class="code" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">st_tree</a> *tree, <span class="keyword">const</span> <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">st_role_grp</a> *grp);
-<a name="l00063"></a>00063 <span class="keywordtype">bool</span> st_tree_has_role_grp(<a class="code" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">st_tree</a> *<span class="keyword">const</span> tree, <span class="keyword">const</span> <span class="keywordtype">char</span> *grp_name);
-<a name="l00064"></a>00064 <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">st_role_grp</a> *st_tree_get_role_grp(<a class="code" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">st_tree</a> *<span class="keyword">const</span> tree, <span class="keyword">const</span> <span class="keywordtype">char</span> *grp_name);
+<a name="l00033"></a>00033   <span class="keyword">public</span>:
+<a name="l00034"></a>00034     <span class="keyword">using</span> RoleGrpContainer = std::unordered_map&lt;std::string, RoleGrpType *&gt;;
+<a name="l00036"></a><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#ac6d833a7643a47498a50f804480f9ac6">00036</a>     <a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#ac6d833a7643a47498a50f804480f9ac6" title="Session constructor with &quot;default&quot; as Session name.">SessionTmpl</a>() : sesstype::<a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html" title="Session class encapsulates a single session (parameterised flavour).">SessionTmpl</a>&lt;NodeType, RoleType&gt;(), groups_() { }
+<a name="l00037"></a>00037 
+<a name="l00040"></a><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#a1751ea27ceebdc429564fe0dcbcb37ea">00040</a>     <a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#ac6d833a7643a47498a50f804480f9ac6" title="Session constructor with &quot;default&quot; as Session name.">SessionTmpl</a>(std::string <a class="code" href="classsesstype_1_1SessionTmpl.html#aaf3b8c91a7aff0a62816c31956922792">name</a>)
+<a name="l00041"></a>00041         : sesstype::<a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html" title="Session class encapsulates a single session (parameterised flavour).">SessionTmpl</a>&lt;NodeType, RoleType&gt;(name), groups_() { }
+<a name="l00042"></a>00042 
+<a name="l00044"></a><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#ae5612166deedd3379eb88d468304a2bf">00044</a>     <span class="keyword">virtual</span> <a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#ae5612166deedd3379eb88d468304a2bf" title="Session destructor.">~SessionTmpl</a>()
+<a name="l00045"></a>00045     {
+<a name="l00046"></a>00046         <span class="keywordflow">for</span> (<span class="keyword">auto</span> grp_pair : groups_) {
+<a name="l00047"></a>00047             <span class="keyword">delete</span> grp_pair.second;
+<a name="l00048"></a>00048         }
+<a name="l00049"></a>00049     }
+<a name="l00050"></a>00050 
+<a name="l00054"></a><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#a9750dd9b3aa19dd626987823fd12e4e5">00054</a>     RoleGrpType *<a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#a9750dd9b3aa19dd626987823fd12e4e5">group</a>(std::string <a class="code" href="classsesstype_1_1SessionTmpl.html#aaf3b8c91a7aff0a62816c31956922792">name</a>)<span class="keyword"> const</span>
+<a name="l00055"></a>00055 <span class="keyword">    </span>{
+<a name="l00056"></a>00056         <span class="keywordflow">return</span> groups_.at(name);
+<a name="l00057"></a>00057     }
+<a name="l00058"></a>00058 
+<a name="l00061"></a><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#a56914e7abf256de21070fb14e3f4f656">00061</a>     <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#a56914e7abf256de21070fb14e3f4f656">has_role_grp</a>(std::string <a class="code" href="classsesstype_1_1SessionTmpl.html#aaf3b8c91a7aff0a62816c31956922792">name</a>)<span class="keyword"> const</span>
+<a name="l00062"></a>00062 <span class="keyword">    </span>{
+<a name="l00063"></a>00063         <span class="keywordflow">return</span> (groups_.find(name) != groups_.end());
+<a name="l00064"></a>00064     }
 <a name="l00065"></a>00065 
-<a name="l00066"></a>00066 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00068"></a>00068 <span class="preprocessor">#endif</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span>
-<a name="l00070"></a>00070 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
-<a name="l00072"></a>00072 } <span class="comment">// namespace sesstype</span>
-<a name="l00073"></a>00073 <span class="preprocessor">#endif</span>
-<a name="l00074"></a>00074 <span class="preprocessor"></span>
-<a name="l00075"></a>00075 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__SESSION_H__</span>
+<a name="l00068"></a><a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#aa4e7b686309bba581374f30bda83e16a">00068</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#aa4e7b686309bba581374f30bda83e16a">add_group</a>(RoleGrpType *<a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#a9750dd9b3aa19dd626987823fd12e4e5">group</a>)
+<a name="l00069"></a>00069     {
+<a name="l00070"></a>00070         groups_.insert(std::pair&lt;std::string, RoleGrpType *&gt;(group-&gt;name(), <a class="code" href="classsesstype_1_1parameterised_1_1SessionTmpl.html#a9750dd9b3aa19dd626987823fd12e4e5">group</a>));
+<a name="l00071"></a>00071     }
+<a name="l00072"></a>00072 
+<a name="l00073"></a>00073     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> num_groups()<span class="keyword"> const</span>
+<a name="l00074"></a>00074 <span class="keyword">    </span>{
+<a name="l00075"></a>00075         <span class="keywordflow">return</span> groups_.size();
+<a name="l00076"></a>00076     }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     <span class="keyword">typename</span> RoleGrpContainer::const_iterator rolegrp_begin()<span class="keyword"> const</span>
+<a name="l00079"></a>00079 <span class="keyword">    </span>{
+<a name="l00080"></a>00080         <span class="keywordflow">return</span> groups_.begin();
+<a name="l00081"></a>00081     }
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083     <span class="keyword">typename</span> RoleGrpContainer::const_iterator rolegrp_end()<span class="keyword"> const</span>
+<a name="l00084"></a>00084 <span class="keyword">    </span>{
+<a name="l00085"></a>00085         <span class="keywordflow">return</span> groups_.end();
+<a name="l00086"></a>00086     }
+<a name="l00087"></a>00087 };
+<a name="l00088"></a>00088 
+<a name="l00089"></a>00089 <span class="keyword">using</span> Session = SessionTmpl&lt;Node, Role, RoleGrp&gt;;
+<a name="l00090"></a>00090 <span class="preprocessor">#endif</span>
+<a name="l00091"></a>00091 <span class="preprocessor"></span>
+<a name="l00092"></a>00092 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00093"></a>00093 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00094"></a>00094 <span class="preprocessor">#endif</span>
+<a name="l00095"></a>00095 <span class="preprocessor"></span>
+<a name="l00096"></a>00096 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00097"></a>00097 <span class="preprocessor"></span><span class="keyword">typedef</span> Session st_param_tree;
+<a name="l00098"></a>00098 <span class="preprocessor">#else</span>
+<a name="l00099"></a>00099 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>Session st_param_tree;
+<a name="l00100"></a>00100 <span class="preprocessor">#endif</span>
+<a name="l00101"></a>00101 <span class="preprocessor"></span>
+<a name="l00104"></a>00104 st_param_tree *st_param_tree_mk_init(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
+<a name="l00105"></a>00105 
+<a name="l00109"></a>00109 st_param_tree *st_param_tree_add_role(st_param_tree *<span class="keyword">const</span> tree, st_role *role);
+<a name="l00110"></a>00110 
+<a name="l00114"></a>00114 st_param_tree *st_param_tree_set_root(st_param_tree *<span class="keyword">const</span> tree, st_node *root);
+<a name="l00115"></a>00115 
+<a name="l00118"></a>00118 st_param_node *st_param_tree_get_root(st_param_tree *<span class="keyword">const</span> tree);
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120 st_param_tree *st_param_tree_add_role_grp(st_param_tree *tree, st_role_grp *grp);
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 <span class="keywordtype">bool</span> st_param_tree_has_role_grp(st_param_tree *<span class="keyword">const</span> tree, <span class="keyword">const</span> <span class="keywordtype">char</span> *grp_name);
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124 <span class="keywordtype">void</span> st_param_tree_print(st_param_tree *<span class="keyword">const</span> tree);
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126 st_role_grp *st_param_tree_get_role_grp(st_param_tree *<span class="keyword">const</span> tree, <span class="keyword">const</span> <span class="keywordtype">char</span> *grp_name);
+<a name="l00127"></a>00127 
+<a name="l00129"></a>00129 <span class="keywordtype">void</span> st_param_tree_free(st_param_tree *tree);
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00132"></a>00132 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00133"></a>00133 <span class="preprocessor">#endif</span>
+<a name="l00134"></a>00134 <span class="preprocessor"></span>
+<a name="l00135"></a>00135 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00136"></a>00136 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
+<a name="l00137"></a>00137 } <span class="comment">// namespace sesstype</span>
+<a name="l00138"></a>00138 <span class="preprocessor">#endif</span>
+<a name="l00139"></a>00139 <span class="preprocessor"></span>
+<a name="l00140"></a>00140 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__SESSION_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

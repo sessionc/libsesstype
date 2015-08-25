@@ -1,8 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsesstype_1_1parameterised_1_1util_1_1ExprVisitor.html" title="Abstract class for building Expr visitors." alt="" coords="8,5,269,35"/>
-<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1util_1_1Print.html" title="Protocol and Expression printer." alt="" coords="344,59,568,88"/>
-<area shape="rect" id="node5" href="$classsesstype_1_1parameterised_1_1util_1_1SimplifyExpr.html" title="sesstype::parameterised::util::SimplifyExpr" alt="" coords="320,5,592,35"/>
-<area shape="rect" id="node6" href="$classsesstype_1_1parameterised_1_1util_1_1NodeVisitor.html" title="Abstract class for building Node AST&#45;based visitors." alt="" coords="5,112,272,141"/>
-<area shape="rect" id="node9" href="$classsesstype_1_1parameterised_1_1util_1_1Projection.html" title="sesstype::parameterised::util::Projection" alt="" coords="328,112,584,141"/>
-<area shape="rect" id="node10" href="$classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html" title="sesstype::parameterised::util::RoleVisitor" alt="" coords="8,59,269,88"/>
+<area shape="rect" id="node1" href="$classsesstype_1_1parameterised_1_1tests_1_1ExprTest.html" title="sesstype::parameterised::tests::ExprTest" alt="" coords="7,5,268,35"/>
 </map>

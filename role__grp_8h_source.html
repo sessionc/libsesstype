@@ -88,7 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00007"></a>00007 <span class="preprocessor"></span>
 <a name="l00008"></a>00008 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#include &lt;string&gt;</span>
-<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;unordered_map&gt;</span>
+<a name="l00010"></a>00010 <span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00011"></a>00011 <span class="preprocessor">#endif</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span>
 <a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session.">sesstype/parameterised/role.h</a>&quot;</span>
@@ -101,10 +101,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00020"></a>00020 <span class="preprocessor">#ifdef __cplusplus</span>
 <a name="l00021"></a>00021 <span class="preprocessor"></span>
 <a name="l00024"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html">00024</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">RoleGrp</a> : <span class="keyword">public</span> <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> {
-<a name="l00025"></a>00025     std::unordered_map&lt;std::string, sesstype::parameterised::Role *&gt; members_;
+<a name="l00025"></a>00025     std::vector&lt;sesstype::parameterised::Role *&gt; members_;
 <a name="l00026"></a>00026 
 <a name="l00027"></a>00027   <span class="keyword">public</span>:
-<a name="l00028"></a>00028     <span class="keyword">typedef</span> std::unordered_map&lt;std::string, sesstype::parameterised::Role *&gt; RoleContainer;
+<a name="l00028"></a>00028     <span class="keyword">typedef</span> std::vector&lt;sesstype::parameterised::Role *&gt; RoleContainer;
 <a name="l00029"></a>00029 
 <a name="l00031"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a3b47d5ebe928d7fc27bd3e384eacdf74">00031</a>     <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a3b47d5ebe928d7fc27bd3e384eacdf74" title="RoleGrp constructor with &quot;default_grp&quot; as name.">RoleGrp</a>() : <a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>(<span class="stringliteral">&quot;default_grp&quot;</span>), members_() { }
 <a name="l00032"></a>00032 
@@ -123,9 +123,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00051"></a>00051         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a3b47d5ebe928d7fc27bd3e384eacdf74" title="RoleGrp constructor with &quot;default_grp&quot; as name.">RoleGrp</a>(*<span class="keyword">this</span>);
 <a name="l00052"></a>00052     }
 <a name="l00053"></a>00053 
-<a name="l00057"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#ab5786775ba2afe78b594d1e1f089cfa0">00057</a>     <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">sesstype::Role</a> *<a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#ab5786775ba2afe78b594d1e1f089cfa0">member</a>(std::string <a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>)<span class="keyword"> const</span>
+<a name="l00057"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a68e145db273f94237cf2fadd8407c34b">00057</a>     <a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">sesstype::Role</a> *<a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a68e145db273f94237cf2fadd8407c34b">member</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> index)<span class="keyword"> const</span>
 <a name="l00058"></a>00058 <span class="keyword">    </span>{
-<a name="l00059"></a>00059         <span class="keywordflow">return</span> members_.at(name);
+<a name="l00059"></a>00059         <span class="keywordflow">return</span> members_.at(index);
 <a name="l00060"></a>00060     }
 <a name="l00061"></a>00061 
 <a name="l00063"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a345837bba029b053a5120b223d5f0617">00063</a>     <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a345837bba029b053a5120b223d5f0617">num_members</a>()<span class="keyword"> const</span>
@@ -135,64 +135,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00067"></a>00067 
 <a name="l00069"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a71635596a7c51e900ad9c7ed029892a8">00069</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a71635596a7c51e900ad9c7ed029892a8">add_member</a>(<a class="code" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a> *role)
 <a name="l00070"></a>00070     {
-<a name="l00071"></a>00071         members_.insert({ role-&gt;<a class="code" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>(), role });
+<a name="l00071"></a>00071         members_.push_back(role);
 <a name="l00072"></a>00072     }
 <a name="l00073"></a>00073 
 <a name="l00076"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a25e2795ee67851344dbb16f765900681">00076</a>     <span class="keywordtype">bool</span> <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a25e2795ee67851344dbb16f765900681" title="Check if this Role contains another Role.">matches</a>(<a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">sesstype::Role</a> *other)<span class="keyword"> const override</span>
 <a name="l00077"></a>00077 <span class="keyword">    </span>{
-<a name="l00078"></a>00078         <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// TODO</span>
-<a name="l00079"></a>00079     }
-<a name="l00080"></a>00080 
-<a name="l00082"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a9d3cf14b3c3223aec09b9bf86c06efe2">00082</a>     RoleContainer::const_iterator <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a9d3cf14b3c3223aec09b9bf86c06efe2" title="Start iterator for member.">member_begin</a>()<span class="keyword"> const</span>
-<a name="l00083"></a>00083 <span class="keyword">    </span>{
-<a name="l00084"></a>00084         <span class="keywordflow">return</span> members_.begin();
+<a name="l00078"></a>00078         <span class="keywordflow">if</span> (<span class="keyword">auto</span> other_param = dynamic_cast&lt;Role *&gt;(other)) {
+<a name="l00079"></a>00079             <span class="keywordflow">for</span> (<span class="keyword">auto</span> it=<a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a9d3cf14b3c3223aec09b9bf86c06efe2" title="Start iterator for member.">member_begin</a>(); it!=<a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a90e09456299d5084de427ca8e75bbc73" title="End iterator for member.">member_end</a>(); it++) {
+<a name="l00080"></a>00080                 <span class="keywordflow">if</span> (!(*it)-&gt;matches(other_param)) <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00081"></a>00081             }
+<a name="l00082"></a>00082             <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00083"></a>00083         }
+<a name="l00084"></a>00084         <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00085"></a>00085     }
 <a name="l00086"></a>00086 
-<a name="l00088"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a90e09456299d5084de427ca8e75bbc73">00088</a>     RoleContainer::const_iterator <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a90e09456299d5084de427ca8e75bbc73" title="End iterator for member.">member_end</a>()<span class="keyword"> const</span>
+<a name="l00088"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a9d3cf14b3c3223aec09b9bf86c06efe2">00088</a>     RoleContainer::const_iterator <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a9d3cf14b3c3223aec09b9bf86c06efe2" title="Start iterator for member.">member_begin</a>()<span class="keyword"> const</span>
 <a name="l00089"></a>00089 <span class="keyword">    </span>{
-<a name="l00090"></a>00090         <span class="keywordflow">return</span> members_.end();
+<a name="l00090"></a>00090         <span class="keywordflow">return</span> members_.begin();
 <a name="l00091"></a>00091     }
 <a name="l00092"></a>00092 
-<a name="l00093"></a>00093     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a689a731e9489e80ff4d4e6b644924570" title="This subsumes accept in base class (but RoleVisitor is not a subclass)">accept</a>(<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html">util::RoleVisitor</a> &amp;v) <span class="keyword">override</span>;
-<a name="l00094"></a>00094 };
-<a name="l00095"></a>00095 <span class="preprocessor">#endif</span>
-<a name="l00096"></a>00096 <span class="preprocessor"></span>
-<a name="l00097"></a>00097 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00098"></a>00098 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00099"></a>00099 <span class="preprocessor">#endif</span>
-<a name="l00100"></a>00100 <span class="preprocessor"></span>
-<a name="l00101"></a>00101 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00102"></a>00102 <span class="preprocessor"></span><span class="keyword">typedef</span> RoleGrp st_role_grp;
-<a name="l00103"></a>00103 <span class="preprocessor">#else</span>
-<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>RoleGrp st_role_grp;
+<a name="l00094"></a><a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a90e09456299d5084de427ca8e75bbc73">00094</a>     RoleContainer::const_iterator <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a90e09456299d5084de427ca8e75bbc73" title="End iterator for member.">member_end</a>()<span class="keyword"> const</span>
+<a name="l00095"></a>00095 <span class="keyword">    </span>{
+<a name="l00096"></a>00096         <span class="keywordflow">return</span> members_.end();
+<a name="l00097"></a>00097     }
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099     <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a689a731e9489e80ff4d4e6b644924570" title="This subsumes accept in base class (but RoleVisitor is not a subclass)">accept</a>(<a class="code" href="classsesstype_1_1parameterised_1_1util_1_1RoleVisitor.html">util::RoleVisitor</a> &amp;v) <span class="keyword">override</span>;
+<a name="l00100"></a>00100 };
+<a name="l00101"></a>00101 <span class="preprocessor">#endif</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span>
+<a name="l00103"></a>00103 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00104"></a>00104 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
 <a name="l00105"></a>00105 <span class="preprocessor">#endif</span>
 <a name="l00106"></a>00106 <span class="preprocessor"></span>
-<a name="l00107"></a>00107 st_role_grp *st_role_grp_init(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
-<a name="l00108"></a>00108 
-<a name="l00109"></a>00109 <span class="keyword">const</span> <span class="keywordtype">char</span> *st_role_grp_name(<span class="keyword">const</span> st_role_grp * <span class="keyword">const</span> role_grp);
-<a name="l00110"></a>00110 st_role_grp *st_role_grp_set_name(st_role_grp * <span class="keyword">const</span> role_grp, <span class="keyword">const</span> <span class="keywordtype">char</span> *name);
-<a name="l00111"></a>00111 
-<a name="l00112"></a>00112 <span class="keywordtype">void</span> st_role_grp_add_member(<a class="code" href="classsesstype_1_1Role.html" title="Role (participant) of a protocol or session.">st_role</a> *role);
-<a name="l00113"></a>00113 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> st_role_grp_num_member(<span class="keyword">const</span> st_role_grp * <span class="keyword">const</span> role_grp);
-<a name="l00114"></a>00114 <span class="keywordtype">void</span> st_role_grp_free(st_role_grp *role_grp);
-<a name="l00115"></a>00115 
-<a name="l00116"></a>00116 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00117"></a>00117 <span class="preprocessor"></span>}; <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00118"></a>00118 <span class="preprocessor">#endif</span>
-<a name="l00119"></a>00119 <span class="preprocessor"></span>
-<a name="l00120"></a>00120 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00121"></a>00121 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
-<a name="l00122"></a>00122 } <span class="comment">// namespace sesstype</span>
-<a name="l00123"></a>00123 <span class="preprocessor">#endif</span>
-<a name="l00124"></a>00124 <span class="preprocessor"></span>
-<a name="l00125"></a>00125 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__ROLE_GRP_H__</span>
+<a name="l00107"></a>00107 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00108"></a>00108 <span class="preprocessor"></span><span class="keyword">typedef</span> RoleGrp st_role_grp;
+<a name="l00109"></a>00109 <span class="preprocessor">#else</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span><span class="keyword">typedef</span> <span class="keyword">struct </span>RoleGrp st_role_grp;
+<a name="l00111"></a>00111 <span class="preprocessor">#endif</span>
+<a name="l00112"></a>00112 <span class="preprocessor"></span>
+<a name="l00113"></a>00113 st_role_grp *st_role_grp_init(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 <span class="keyword">const</span> <span class="keywordtype">char</span> *st_role_grp_name(<span class="keyword">const</span> st_role_grp * <span class="keyword">const</span> role_grp);
+<a name="l00116"></a>00116 st_role_grp *st_role_grp_set_name(st_role_grp * <span class="keyword">const</span> role_grp, <span class="keyword">const</span> <span class="keywordtype">char</span> *name);
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118 <span class="keywordtype">void</span> st_role_grp_add_member(st_param_role *role);
+<a name="l00119"></a>00119 <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> st_role_grp_num_member(<span class="keyword">const</span> st_role_grp * <span class="keyword">const</span> role_grp);
+<a name="l00120"></a>00120 <span class="keywordtype">void</span> st_role_grp_free(st_role_grp *role_grp);
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00123"></a>00123 <span class="preprocessor"></span>}; <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00124"></a>00124 <span class="preprocessor">#endif</span>
+<a name="l00125"></a>00125 <span class="preprocessor"></span>
+<a name="l00126"></a>00126 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00127"></a>00127 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
+<a name="l00128"></a>00128 } <span class="comment">// namespace sesstype</span>
+<a name="l00129"></a>00129 <span class="preprocessor">#endif</span>
+<a name="l00130"></a>00130 <span class="preprocessor"></span>
+<a name="l00131"></a>00131 <span class="preprocessor">#endif//SESSTYPE__PARAMETERISED__ROLE_GRP_H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

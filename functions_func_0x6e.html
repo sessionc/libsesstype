@@ -116,9 +116,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_n"></a>- n -</h3><ul>
 <li>name()
 : <a class="el" href="classsesstype_1_1Import.html#a9da3e20a040151bedb5b1f725f448bb0">sesstype::Import</a>
-, <a class="el" href="classsesstype_1_1Module.html#a7475d94ec87425da735482bd5d0cca6b">sesstype::Module</a>
+, <a class="el" href="classsesstype_1_1ModuleTmpl.html#aec8de8633c2cb73a5f9c7067acc46415">sesstype::ModuleTmpl&lt; ImportType, SessionType &gt;</a>
 , <a class="el" href="classsesstype_1_1NestedNodeTmpl.html#aae53eb73faf02a07d2a6475cb651167a">sesstype::NestedNodeTmpl&lt; BaseNode, RoleType, MessageType, VisitorType &gt;</a>
-, <a class="el" href="classsesstype_1_1Session.html#a236de05fdd7e8ca5d74d60e1bf2f9cab">sesstype::Session</a>
+, <a class="el" href="classsesstype_1_1SessionTmpl.html#aaf3b8c91a7aff0a62816c31956922792">sesstype::SessionTmpl&lt; BaseNode, RoleType &gt;</a>
 , <a class="el" href="classsesstype_1_1parameterised_1_1Constant.html#af90a6cacfa1d394204eda912b7c5fd81">sesstype::parameterised::Constant</a>
 , <a class="el" href="classsesstype_1_1MsgPayload.html#ad79431671d7fc33edad3e871b6a21d8d">sesstype::MsgPayload</a>
 , <a class="el" href="classsesstype_1_1parameterised_1_1VarExpr.html#aa2ef0dee2b5fe5ae4a3fc50230fb734e">sesstype::parameterised::VarExpr</a>
@@ -139,14 +139,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>num_children()
 : <a class="el" href="classsesstype_1_1BlockNodeTmpl.html#a12f73f3a54d86a0fac7c650bc02243a1">sesstype::BlockNodeTmpl&lt; BaseNode, RoleType, MessageType, VisitorType &gt;</a>
 </li>
-<li>num_constant()
-: <a class="el" href="classsesstype_1_1parameterised_1_1Module.html#ae104dde11c233c314c4f6b11e1b62300">sesstype::parameterised::Module</a>
-</li>
-<li>num_dimen()
-: <a class="el" href="classsesstype_1_1parameterised_1_1Role.html#aeeb4b1af7a84e0eb5653548b9e061bbf">sesstype::parameterised::Role</a>
+<li>num_constants()
+: <a class="el" href="classsesstype_1_1parameterised_1_1ModuleTmpl.html#a6b60090f0714e6b7e8a230289baa5be9">sesstype::parameterised::ModuleTmpl&lt; ImportType, SessionType, ConstantType &gt;</a>
 </li>
 <li>num_dimens()
 : <a class="el" href="classsesstype_1_1parameterised_1_1MsgPayload.html#aefa2518314186377f8966f406b8fa273">sesstype::parameterised::MsgPayload</a>
+, <a class="el" href="classsesstype_1_1parameterised_1_1Role.html#adcec12528ee429d9110d79d789cee51b">sesstype::parameterised::Role</a>
 </li>
 <li>num_interrupts()
 : <a class="el" href="classsesstype_1_1InterruptibleNodeTmpl.html#a6d8a369e80f4ee03581bebf8a0f4f483">sesstype::InterruptibleNodeTmpl&lt; BaseNode, RoleType, MessageType, VisitorType &gt;</a>
@@ -163,8 +161,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>num_roleargs()
 : <a class="el" href="classsesstype_1_1NestedNodeTmpl.html#ad5700e3228cd7e5143f97edc9741487d">sesstype::NestedNodeTmpl&lt; BaseNode, RoleType, MessageType, VisitorType &gt;</a>
 </li>
-<li>num_session()
-: <a class="el" href="classsesstype_1_1Module.html#abf58e535dd58a391d3eb6a754fe5674a">sesstype::Module</a>
+<li>num_sessions()
+: <a class="el" href="classsesstype_1_1ModuleTmpl.html#adf007725fd7106e4735af3816e625760">sesstype::ModuleTmpl&lt; ImportType, SessionType &gt;</a>
 </li>
 <li>num_throws()
 : <a class="el" href="classsesstype_1_1InterruptibleNodeTmpl.html#a158a4e71d9b6dcd9e7a19b003e26aae6">sesstype::InterruptibleNodeTmpl&lt; BaseNode, RoleType, MessageType, VisitorType &gt;</a>
@@ -179,7 +177,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

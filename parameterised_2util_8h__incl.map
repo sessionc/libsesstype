@@ -1,0 +1,45 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$expr__apply_8h_source.html" title="sesstype/parameterised/util/expr_apply.h" alt="" coords="1027,315,1285,344"/>
+<area shape="rect" id="node61" href="$expr__eval_8h_source.html" title="sesstype/parameterised/util/expr_eval.h" alt="" coords="837,160,1091,189"/>
+<area shape="rect" id="node65" href="$expr__invert_8h_source.html" title="sesstype/parameterised/util/expr_invert.h" alt="" coords="640,315,901,344"/>
+<area shape="rect" id="node82" href="$parameterised_2util_2print_8h_source.html" title="sesstype/parameterised/util/print.h" alt="" coords="4811,83,5032,112"/>
+<area shape="rect" id="node217" href="$parameterised_2util_2project_8h_source.html" title="sesstype/parameterised/util/project.h" alt="" coords="1165,83,1400,112"/>
+<area shape="rect" id="node7" href="$rng_8h_source.html" title="sesstype/parameterised/expr/rng.h" alt="" coords="2859,469,3080,499"/>
+<area shape="rect" id="node20" href="$expr__visitor_8h.html" title="Utilities for Expr." alt="" coords="960,392,1224,421"/>
+<area shape="rect" id="node11" href="$expr_8h.html" title="Expressions in a Role parameter or statement." alt="" coords="2083,547,2283,576"/>
+<area shape="rect" id="node18" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="3695,624,3852,653"/>
+<area shape="rect" id="node23" href="$var_8h_source.html" title="sesstype/parameterised/expr/var.h" alt="" coords="2563,469,2784,499"/>
+<area shape="rect" id="node27" href="$val_8h_source.html" title="sesstype/parameterised/expr/val.h" alt="" coords="2317,469,2539,499"/>
+<area shape="rect" id="node30" href="$add_8h_source.html" title="sesstype/parameterised/expr/add.h" alt="" coords="525,469,752,499"/>
+<area shape="rect" id="node33" href="$sub_8h_source.html" title="sesstype/parameterised/expr/sub.h" alt="" coords="1325,469,1552,499"/>
+<area shape="rect" id="node36" href="$mul_8h_source.html" title="sesstype/parameterised/expr/mul.h" alt="" coords="1576,469,1803,499"/>
+<area shape="rect" id="node39" href="$div_8h_source.html" title="sesstype/parameterised/expr/div.h" alt="" coords="2072,469,2293,499"/>
+<area shape="rect" id="node42" href="$mod_8h_source.html" title="sesstype/parameterised/expr/mod.h" alt="" coords="776,469,1005,499"/>
+<area shape="rect" id="node45" href="$shl_8h_source.html" title="sesstype/parameterised/expr/shl.h" alt="" coords="1080,469,1301,499"/>
+<area shape="rect" id="node48" href="$shr_8h_source.html" title="sesstype/parameterised/expr/shr.h" alt="" coords="1827,469,2048,499"/>
+<area shape="rect" id="node51" href="$seq_8h_source.html" title="sesstype/parameterised/expr/seq.h" alt="" coords="29,469,256,499"/>
+<area shape="rect" id="node58" href="$log_8h_source.html" title="sesstype/parameterised/expr/log.h" alt="" coords="280,469,501,499"/>
+<area shape="rect" id="node87" href="$exprs_8h.html" title="Top&#45;level header to pull in all defined Expr classes in sesstype::parameterised." alt="" coords="1709,392,1917,421"/>
+<area shape="rect" id="node102" href="$nodes_8h.html" title="Top&#45;level header to pull in all defined Node classes in sesstype::parameterised." alt="" coords="3080,160,3291,189"/>
+<area shape="rect" id="node116" href="$parameterised_2role_8h.html" title="A (parameterised) participant of a protocol or session." alt="" coords="3205,392,3403,421"/>
+<area shape="rect" id="node190" href="$role__grp_8h.html" title="A group of participants of a protocol or session." alt="" coords="5021,315,5243,344"/>
+<area shape="rect" id="node195" href="$parameterised_2util_2node__visitor_8h.html" title="Utilities for Node." alt="" coords="2647,160,2913,189"/>
+<area shape="rect" id="node211" href="$parameterised_2util_2role__visitor_8h_source.html" title="sesstype/parameterised/util/role_visitor.h" alt="" coords="4984,237,5243,267"/>
+<area shape="rect" id="node104" href="$parameterised_2node_8h.html" title="Statements in a protocol or session (parameterised)." alt="" coords="3216,315,3419,344"/>
+<area shape="rect" id="node121" href="$parameterised_2node_2block_8h_source.html" title="sesstype/parameterised/node/block.h" alt="" coords="3960,237,4197,267"/>
+<area shape="rect" id="node129" href="$parameterised_2node_2interaction_8h_source.html" title="sesstype/parameterised/node/interaction.h" alt="" coords="2507,237,2773,267"/>
+<area shape="rect" id="node134" href="$parameterised_2node_2choice_8h_source.html" title="sesstype/parameterised/node/choice.h" alt="" coords="2797,237,3043,267"/>
+<area shape="rect" id="node139" href="$parameterised_2node_2recur_8h_source.html" title="sesstype/parameterised/node/recur.h" alt="" coords="3067,237,3304,267"/>
+<area shape="rect" id="node144" href="$parameterised_2node_2continue_8h_source.html" title="sesstype/parameterised/node/continue.h" alt="" coords="3379,237,3635,267"/>
+<area shape="rect" id="node149" href="$parameterised_2node_2par_8h_source.html" title="sesstype/parameterised/node/par.h" alt="" coords="3659,237,3885,267"/>
+<area shape="rect" id="node154" href="$parameterised_2node_2nested_8h_source.html" title="sesstype/parameterised/node/nested.h" alt="" coords="1419,237,1664,267"/>
+<area shape="rect" id="node159" href="$parameterised_2node_2interruptible_8h_source.html" title="sesstype/parameterised/node/interruptible.h" alt="" coords="1688,237,1963,267"/>
+<area shape="rect" id="node164" href="$for_8h_source.html" title="sesstype/parameterised/node/for.h" alt="" coords="4221,237,4443,267"/>
+<area shape="rect" id="node171" href="$oneof_8h_source.html" title="sesstype/parameterised/node/oneof.h" alt="" coords="4467,237,4707,267"/>
+<area shape="rect" id="node179" href="$if_8h_source.html" title="sesstype/parameterised/node/if.h" alt="" coords="1987,237,2200,267"/>
+<area shape="rect" id="node184" href="$allreduce_8h_source.html" title="sesstype/parameterised/node/allreduce.h" alt="" coords="2224,237,2483,267"/>
+<area shape="rect" id="node106" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="3828,469,3945,499"/>
+<area shape="rect" id="node108" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="3831,547,3940,576"/>
+<area shape="rect" id="node113" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="4521,624,4695,653"/>
+<area shape="rect" id="node123" href="$parameterised_2msg_8h.html" title="A message for passing between participants (parameterised)." alt="" coords="2891,315,3091,344"/>
+</map>

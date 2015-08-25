@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespacesesstype.html">sesstype</a>      </li>
-      <li class="navelem"><a class="el" href="namespacesesstype_1_1parameterised.html">parameterised</a>      </li>
+      <li class="navelem"><b>parameterised</b>      </li>
       <li class="navelem"><a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html">RoleGrp</a>      </li>
     </ul>
   </div>
@@ -133,10 +133,9 @@ Collaboration diagram for sesstype::parameterised::RoleGrp:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8dabdf5ec56456bfa5c799ef08991c26"></a><!-- doxytag: member="sesstype::parameterised::RoleGrp::RoleContainer" ref="a8dabdf5ec56456bfa5c799ef08991c26" args="" -->
-typedef std::unordered_map<br class="typebreak"/>
-&lt; std::string, <br class="typebreak"/>
-<a class="el" href="classsesstype_1_1parameterised_1_1Role.html">sesstype::parameterised::Role</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>RoleContainer</b></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0b16a533624235d229c3892511fd3aa7"></a><!-- doxytag: member="sesstype::parameterised::RoleGrp::RoleContainer" ref="a0b16a533624235d229c3892511fd3aa7" args="" -->
+typedef std::vector<br class="typebreak"/>
+&lt; <a class="el" href="classsesstype_1_1parameterised_1_1Role.html">sesstype::parameterised::Role</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>RoleContainer</b></td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b47d5ebe928d7fc27bd3e384eacdf74"></a><!-- doxytag: member="sesstype::parameterised::RoleGrp::RoleGrp" ref="a3b47d5ebe928d7fc27bd3e384eacdf74" args="()" -->
@@ -153,7 +152,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafb2a8b5c8bfd15b48db429d77ee1bfd"></a><!-- doxytag: member="sesstype::parameterised::RoleGrp::clone" ref="aafb2a8b5c8bfd15b48db429d77ee1bfd" args="() const override" -->
 <a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html">RoleGrp</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#aafb2a8b5c8bfd15b48db429d77ee1bfd">clone</a> () const override</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">clone a <a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html" title="Role Group (group of participants) of a protocol or session.">RoleGrp</a>. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1Role.html">sesstype::Role</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#ab5786775ba2afe78b594d1e1f089cfa0">member</a> (std::string <a class="el" href="classsesstype_1_1Role.html#aa0fadb4dd6ded3013b822ab76471da2f">name</a>) const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1Role.html">sesstype::Role</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a68e145db273f94237cf2fadd8407c34b">member</a> (unsigned int index) const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a345837bba029b053a5120b223d5f0617">num_members</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a71635596a7c51e900ad9c7ed029892a8">add_member</a> (<a class="el" href="classsesstype_1_1parameterised_1_1Role.html">Role</a> *role)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a25e2795ee67851344dbb16f765900681">matches</a> (<a class="el" href="classsesstype_1_1Role.html">sesstype::Role</a> *other) const override</td></tr>
@@ -236,15 +235,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 
 </div>
 </div>
-<a class="anchor" id="ab5786775ba2afe78b594d1e1f089cfa0"></a><!-- doxytag: member="sesstype::parameterised::RoleGrp::member" ref="ab5786775ba2afe78b594d1e1f089cfa0" args="(std::string name) const " -->
+<a class="anchor" id="a68e145db273f94237cf2fadd8407c34b"></a><!-- doxytag: member="sesstype::parameterised::RoleGrp::member" ref="a68e145db273f94237cf2fadd8407c34b" args="(unsigned int index) const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classsesstype_1_1Role.html">sesstype::Role</a>* <a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#ab5786775ba2afe78b594d1e1f089cfa0">sesstype::parameterised::RoleGrp::member</a> </td>
+          <td class="memname"><a class="el" href="classsesstype_1_1Role.html">sesstype::Role</a>* <a class="el" href="classsesstype_1_1parameterised_1_1RoleGrp.html#a68e145db273f94237cf2fadd8407c34b">sesstype::parameterised::RoleGrp::member</a> </td>
           <td>(</td>
-          <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>name</em></td><td>)</td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
           <td> const<code> [inline]</code></td>
         </tr>
       </table>
@@ -252,7 +251,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="memdoc">
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td>of the member <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>of the member <a class="el" href="classsesstype_1_1parameterised_1_1Role.html" title="Parameterised Role (participant) of a protocol or session.">Role</a>. </td></tr>
   </table>
   </dd>
 </dl>
@@ -293,7 +292,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

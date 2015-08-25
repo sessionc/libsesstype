@@ -1,3 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classsesstype_1_1tests_1_1ConstantTest.html" title="sesstype::tests::ConstantTest" alt="" coords="7,5,204,35"/>
+<area shape="rect" id="node1" href="$classsesstype_1_1SessionTmpl.html" title="sesstype::SessionTmpl\&lt; NodeType, RoleType \&gt;" alt="" coords="5,5,312,35"/>
+<area shape="rect" id="node3" href="$classsesstype_1_1parameterised_1_1SessionTmpl.html" title="Session class encapsulates a single session (parameterised flavour)." alt="" coords="360,5,843,35"/>
 </map>

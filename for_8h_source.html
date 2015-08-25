@@ -107,74 +107,86 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00025"></a>00025 <span class="keyword">template</span> &lt;<span class="keyword">class</span> BaseNode, <span class="keyword">class</span> RoleType, <span class="keyword">class</span> MessageType, <span class="keyword">class</span> VisitorType&gt;
 <a name="l00026"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html">00026</a> <span class="keyword">class </span><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html" title="Counting for-loop statement.">ForNodeTmpl</a> : <span class="keyword">public</span> BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt; {
 <a name="l00027"></a>00027     <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *bindexpr_;
-<a name="l00028"></a>00028     std::string except_idx_;
+<a name="l00028"></a>00028     <a class="code" href="classsesstype_1_1parameterised_1_1Expr.html" title="Expression.">Expr</a> *except_;
 <a name="l00029"></a>00029 
 <a name="l00030"></a>00030   <span class="keyword">public</span>:
 <a name="l00033"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f">00033</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f" title="ForNode constructor.">ForNodeTmpl</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>)
 <a name="l00034"></a>00034         : BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(ST_NODE_FOR),
-<a name="l00035"></a>00035           bindexpr_(bindexpr) { }
+<a name="l00035"></a>00035           bindexpr_(bindexpr), except_(0) { }
 <a name="l00036"></a>00036 
 <a name="l00038"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a98ae057cb805ef1aa3bb9eca6abd8ea6">00038</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f" title="ForNode constructor.">ForNodeTmpl</a>(<span class="keyword">const</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html" title="Counting for-loop statement.">ForNodeTmpl</a> &amp;node)
 <a name="l00039"></a>00039         : BlockNodeTmpl&lt;BaseNode, RoleType, MessageType, VisitorType&gt;(ST_NODE_FOR),
-<a name="l00040"></a>00040           bindexpr_(node.bindexpr_) { }
+<a name="l00040"></a>00040           bindexpr_(node.bindexpr_), except_(node.except_) { }
 <a name="l00041"></a>00041 
 <a name="l00043"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a83ccc240d1d7b52581f90d249fdabe01">00043</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a83ccc240d1d7b52581f90d249fdabe01" title="ForNode destructor.">~ForNodeTmpl</a>()<span class="keyword"> override</span>
 <a name="l00044"></a>00044 <span class="keyword">    </span>{
 <a name="l00045"></a>00045         <span class="keyword">delete</span> bindexpr_;
-<a name="l00046"></a>00046     }
-<a name="l00047"></a>00047 
-<a name="l00049"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#ada2e18059be137286b2914fd813aacf4">00049</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html" title="Counting for-loop statement.">ForNodeTmpl</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#ada2e18059be137286b2914fd813aacf4" title="clone a ForNode.">clone</a>()<span class="keyword"> const override</span>
-<a name="l00050"></a>00050 <span class="keyword">    </span>{
-<a name="l00051"></a>00051         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f" title="ForNode constructor.">ForNodeTmpl</a>(*<span class="keyword">this</span>);
-<a name="l00052"></a>00052     }
-<a name="l00053"></a>00053 
-<a name="l00056"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a786262f967729668583ebcb2d6263b90">00056</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a786262f967729668583ebcb2d6263b90" title="Replace binding expression of for loop.">set_bindexpr</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>)
-<a name="l00057"></a>00057     {
-<a name="l00058"></a>00058         <span class="keyword">delete</span> bindexpr_;
-<a name="l00059"></a>00059         bindexpr_ = <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>;
-<a name="l00060"></a>00060     }
-<a name="l00061"></a>00061 
-<a name="l00063"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">00063</a>     <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>()<span class="keyword"> const</span>
-<a name="l00064"></a>00064 <span class="keyword">    </span>{
-<a name="l00065"></a>00065         <span class="keywordflow">if</span> (bindexpr_ == NULL) {
-<a name="l00066"></a>00066             std::cerr &lt;&lt; <span class="stringliteral">&quot;Warning: bind_expr is NULL.\n&quot;</span>;
-<a name="l00067"></a>00067         }
-<a name="l00068"></a>00068         <span class="keywordflow">return</span> bindexpr_;
-<a name="l00069"></a>00069     }
-<a name="l00070"></a>00070 
-<a name="l00071"></a>00071     <span class="keyword">virtual</span> <span class="keywordtype">void</span> accept(VisitorType &amp;v) <span class="keyword">override</span>;
-<a name="l00072"></a>00072 };
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074 <span class="keyword">using</span> ForNode = ForNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;;
-<a name="l00075"></a>00075 <span class="preprocessor">#endif</span>
-<a name="l00076"></a>00076 <span class="preprocessor"></span>
-<a name="l00077"></a>00077 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00078"></a>00078 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
-<a name="l00079"></a>00079 <span class="preprocessor">#endif</span>
-<a name="l00080"></a>00080 <span class="preprocessor"></span>
-<a name="l00081"></a>00081 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_mk_for_node(<a class="code" href="namespacesesstype_1_1parameterised.html#ac96ca42d8b1c23ce7bc6a9d11c0ab62c">st_rng_expr</a> *bindexpr);
+<a name="l00046"></a>00046         <span class="keyword">delete</span> except_;
+<a name="l00047"></a>00047     }
+<a name="l00048"></a>00048 
+<a name="l00050"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#ada2e18059be137286b2914fd813aacf4">00050</a>     <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html" title="Counting for-loop statement.">ForNodeTmpl</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#ada2e18059be137286b2914fd813aacf4" title="clone a ForNode.">clone</a>()<span class="keyword"> const override</span>
+<a name="l00051"></a>00051 <span class="keyword">    </span>{
+<a name="l00052"></a>00052         <span class="keywordflow">return</span> <span class="keyword">new</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a70806dcf17cfc6e9e69b51ae01e9db5f" title="ForNode constructor.">ForNodeTmpl</a>(*<span class="keyword">this</span>);
+<a name="l00053"></a>00053     }
+<a name="l00054"></a>00054 
+<a name="l00057"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a786262f967729668583ebcb2d6263b90">00057</a>     <span class="keywordtype">void</span> <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#a786262f967729668583ebcb2d6263b90" title="Replace binding expression of for loop.">set_bindexpr</a>(<a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>)
+<a name="l00058"></a>00058     {
+<a name="l00059"></a>00059         <span class="keyword">delete</span> bindexpr_;
+<a name="l00060"></a>00060         bindexpr_ = <a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>;
+<a name="l00061"></a>00061     }
+<a name="l00062"></a>00062 
+<a name="l00064"></a><a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">00064</a>     <a class="code" href="classsesstype_1_1parameterised_1_1RngExpr.html" title="Range expression with a binding variable.">RngExpr</a> *<a class="code" href="classsesstype_1_1parameterised_1_1ForNodeTmpl.html#adc0155f0c1a795133f50df1bcd35f0ce">bindexpr</a>()<span class="keyword"> const</span>
+<a name="l00065"></a>00065 <span class="keyword">    </span>{
+<a name="l00066"></a>00066         <span class="keywordflow">if</span> (bindexpr_ == <span class="keyword">nullptr</span>) {
+<a name="l00067"></a>00067             std::cerr &lt;&lt; <span class="stringliteral">&quot;Warning: bind_expr is NULL.\n&quot;</span>;
+<a name="l00068"></a>00068         }
+<a name="l00069"></a>00069         <span class="keywordflow">return</span> bindexpr_;
+<a name="l00070"></a>00070     }
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072     <span class="keywordtype">void</span> set_except(<a class="code" href="classsesstype_1_1parameterised_1_1Expr.html" title="Expression.">Expr</a> *except)
+<a name="l00073"></a>00073     {
+<a name="l00074"></a>00074         <span class="keyword">delete</span> except_;
+<a name="l00075"></a>00075         except_ = except;
+<a name="l00076"></a>00076     }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     Expr *except()<span class="keyword"> const</span>
+<a name="l00079"></a>00079 <span class="keyword">    </span>{
+<a name="l00080"></a>00080         <span class="keywordflow">return</span> except_;
+<a name="l00081"></a>00081     }
 <a name="l00082"></a>00082 
-<a name="l00083"></a>00083 <a class="code" href="namespacesesstype_1_1parameterised.html#ac96ca42d8b1c23ce7bc6a9d11c0ab62c">st_rng_expr</a> *st_for_node_get_bindexpr(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node);
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085 <a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *st_for_node_set_bindexpr(<a class="code" href="classsesstype_1_1Node.html" title="Session Type statements (st_node).">st_node</a> *node, <a class="code" href="namespacesesstype_1_1parameterised.html#ac96ca42d8b1c23ce7bc6a9d11c0ab62c">st_rng_expr</a> *bindexpr);
-<a name="l00086"></a>00086 
-<a name="l00087"></a>00087 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00088"></a>00088 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
-<a name="l00089"></a>00089 <span class="preprocessor">#endif</span>
-<a name="l00090"></a>00090 <span class="preprocessor"></span>
-<a name="l00091"></a>00091 <span class="preprocessor">#ifdef __cplusplus</span>
-<a name="l00092"></a>00092 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
-<a name="l00093"></a>00093 } <span class="comment">// namespace sesstype</span>
-<a name="l00094"></a>00094 <span class="preprocessor">#endif</span>
-<a name="l00095"></a>00095 <span class="preprocessor"></span>
-<a name="l00096"></a>00096 <span class="preprocessor">#endif//SESSTYPE__PARAMETERIED__NODE__FOR__H__</span>
+<a name="l00083"></a>00083     <span class="keyword">virtual</span> <span class="keywordtype">void</span> accept(VisitorType &amp;v) <span class="keyword">override</span>;
+<a name="l00084"></a>00084 };
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086 <span class="keyword">using</span> ForNode = ForNodeTmpl&lt;Node, Role, MsgSig, util::NodeVisitor&gt;;
+<a name="l00087"></a>00087 <span class="preprocessor">#endif</span>
+<a name="l00088"></a>00088 <span class="preprocessor"></span>
+<a name="l00089"></a>00089 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00090"></a>00090 <span class="preprocessor"></span><span class="keyword">extern</span> <span class="stringliteral">&quot;C&quot;</span> {
+<a name="l00091"></a>00091 <span class="preprocessor">#endif</span>
+<a name="l00092"></a>00092 <span class="preprocessor"></span>
+<a name="l00093"></a>00093 st_node *st_mk_for_node(st_rng_expr *bindexpr);
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095 st_rng_expr *st_for_node_get_bindexpr(st_node *<span class="keyword">const</span> node);
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097 st_node *st_for_node_set_bindexpr(st_node *<span class="keyword">const</span> node, st_rng_expr *bindexpr);
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00100"></a>00100 <span class="preprocessor"></span>} <span class="comment">// extern &quot;C&quot;</span>
+<a name="l00101"></a>00101 <span class="preprocessor">#endif</span>
+<a name="l00102"></a>00102 <span class="preprocessor"></span>
+<a name="l00103"></a>00103 <span class="preprocessor">#ifdef __cplusplus</span>
+<a name="l00104"></a>00104 <span class="preprocessor"></span>} <span class="comment">// namespace parameterised</span>
+<a name="l00105"></a>00105 } <span class="comment">// namespace sesstype</span>
+<a name="l00106"></a>00106 <span class="preprocessor">#endif</span>
+<a name="l00107"></a>00107 <span class="preprocessor"></span>
+<a name="l00108"></a>00108 <span class="preprocessor">#endif//SESSTYPE__PARAMETERIED__NODE__FOR__H__</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

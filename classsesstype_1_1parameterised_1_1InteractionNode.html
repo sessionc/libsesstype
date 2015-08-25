@@ -84,7 +84,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespacesesstype.html">sesstype</a>      </li>
-      <li class="navelem"><a class="el" href="namespacesesstype_1_1parameterised.html">parameterised</a>      </li>
+      <li class="navelem"><b>parameterised</b>      </li>
       <li class="navelem"><a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html">InteractionNode</a>      </li>
     </ul>
   </div>
@@ -132,6 +132,13 @@ Collaboration diagram for sesstype::parameterised::InteractionNode:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82bbe5b1666cd6859725343cefb69b44"></a><!-- doxytag: member="sesstype::parameterised::InteractionNode::InteractionNode" ref="a82bbe5b1666cd6859725343cefb69b44" args="(MsgSig *msg)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>InteractionNode</b> (<a class="el" href="classsesstype_1_1MsgSig.html">MsgSig</a> *<a class="el" href="classsesstype_1_1InteractionNodeTmpl.html#aee3490ccd73c3376e88cfa40f1e68a38">msg</a>)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0e73b36f7df6a73b2f5a32b034c8ec1f"></a><!-- doxytag: member="sesstype::parameterised::InteractionNode::InteractionNode" ref="a0e73b36f7df6a73b2f5a32b034c8ec1f" args="(const InteractionNode &amp;node)" -->
+&#160;</td><td class="memItemRight" valign="bottom"><b>InteractionNode</b> (const <a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html">InteractionNode</a> &amp;node)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8742363c5b07a510a8b336265f8a5e2b"></a><!-- doxytag: member="sesstype::parameterised::InteractionNode::clone" ref="a8742363c5b07a510a8b336265f8a5e2b" args="() const override" -->
+<a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html">InteractionNode</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a8742363c5b07a510a8b336265f8a5e2b">clone</a> () const override</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">clone a <a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html" title="InteractionNode (message-passing) statements (parameterised).">InteractionNode</a>. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classsesstype_1_1parameterised_1_1Role.html">MsgCond</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a58752f695be2a6c5e1ce57cc7dd21319">cond</a> () const </td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a1323a2dcd95aa7af5f06d3df1990d79f">set_cond</a> (<a class="el" href="classsesstype_1_1parameterised_1_1Role.html">MsgCond</a> *<a class="el" href="classsesstype_1_1parameterised_1_1InteractionNode.html#a58752f695be2a6c5e1ce57cc7dd21319">cond</a>)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set message condition (only for send/receive).  <a href="#a1323a2dcd95aa7af5f06d3df1990d79f"></a><br/></td></tr>
@@ -193,7 +200,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">

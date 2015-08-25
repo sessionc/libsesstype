@@ -1,16 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="1009,315,1124,344"/>
-<area shape="rect" id="node15" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="759,315,868,344"/>
-<area shape="rect" id="node25" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="608,237,725,267"/>
-<area shape="rect" id="node30" href="$node_2interaction_8h_source.html" title="sesstype/node/interaction.h" alt="" coords="144,160,325,189"/>
-<area shape="rect" id="node37" href="$node_2choice_8h_source.html" title="sesstype/node/choice.h" alt="" coords="469,83,629,112"/>
-<area shape="rect" id="node48" href="$node_2recur_8h_source.html" title="sesstype/node/recur.h" alt="" coords="292,83,441,112"/>
-<area shape="rect" id="node57" href="$node_2continue_8h_source.html" title="sesstype/node/continue.h" alt="" coords="989,83,1160,112"/>
-<area shape="rect" id="node64" href="$node_2par_8h_source.html" title="sesstype/node/par.h" alt="" coords="827,83,965,112"/>
-<area shape="rect" id="node70" href="$node_2nested_8h_source.html" title="sesstype/node/nested.h" alt="" coords="1285,160,1445,189"/>
-<area shape="rect" id="node81" href="$node_2interruptible_8h_source.html" title="sesstype/node/interruptible.h" alt="" coords="1561,83,1751,112"/>
-<area shape="rect" id="node13" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="552,392,709,421"/>
-<area shape="rect" id="node20" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="719,469,897,499"/>
-<area shape="rect" id="node22" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="784,392,957,421"/>
-<area shape="rect" id="node42" href="$node_2block_8h_source.html" title="sesstype/node/block.h" alt="" coords="856,160,1008,189"/>
+<area shape="rect" id="node3" href="$msg_8h.html" title="A message for passing between participants." alt="" coords="1095,315,1209,344"/>
+<area shape="rect" id="node15" href="$role_8h.html" title="A participant of a protocol or session." alt="" coords="368,315,477,344"/>
+<area shape="rect" id="node25" href="$node_8h.html" title="Statements in a protocol or session." alt="" coords="947,237,1064,267"/>
+<area shape="rect" id="node30" href="$node_2interaction_8h_source.html" title="sesstype/node/interaction.h" alt="" coords="36,160,217,189"/>
+<area shape="rect" id="node36" href="$node_2choice_8h_source.html" title="sesstype/node/choice.h" alt="" coords="755,83,915,112"/>
+<area shape="rect" id="node47" href="$node_2recur_8h_source.html" title="sesstype/node/recur.h" alt="" coords="1185,83,1335,112"/>
+<area shape="rect" id="node56" href="$node_2continue_8h_source.html" title="sesstype/node/continue.h" alt="" coords="939,83,1109,112"/>
+<area shape="rect" id="node63" href="$node_2par_8h_source.html" title="sesstype/node/par.h" alt="" coords="592,83,731,112"/>
+<area shape="rect" id="node69" href="$node_2nested_8h_source.html" title="sesstype/node/nested.h" alt="" coords="475,160,635,189"/>
+<area shape="rect" id="node80" href="$node_2interruptible_8h_source.html" title="sesstype/node/interruptible.h" alt="" coords="1360,83,1549,112"/>
+<area shape="rect" id="node13" href="$clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="628,392,785,421"/>
+<area shape="rect" id="node20" href="$visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="271,469,449,499"/>
+<area shape="rect" id="node22" href="$util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="336,392,509,421"/>
+<area shape="rect" id="node41" href="$node_2block_8h_source.html" title="sesstype/node/block.h" alt="" coords="811,160,963,189"/>
 </map>

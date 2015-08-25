@@ -1,6 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$util_2print_8h_source.html" title="print.h" alt="" coords="5,83,64,112"/>
-<area shape="rect" id="node9" href="$util_2projection_8h_source.html" title="projection.h" alt="" coords="88,83,176,112"/>
-<area shape="rect" id="node5" href="$util_8h.html" title="Utility functions for working with Session Types." alt="" coords="57,160,108,189"/>
-<area shape="rect" id="node7" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="40,237,125,267"/>
+<area shape="rect" id="node3" href="$util_2empty__visitor_8h_source.html" title="empty_visitor.h" alt="" coords="5,83,115,112"/>
+<area shape="rect" id="node5" href="$util_2print_8h_source.html" title="print.h" alt="" coords="139,83,197,112"/>
+<area shape="rect" id="node11" href="$util_2project_8h_source.html" title="project.h" alt="" coords="221,83,293,112"/>
+<area shape="rect" id="node7" href="$util_8h.html" title="Utilities for working with Session Types." alt="" coords="187,160,237,189"/>
+<area shape="rect" id="node9" href="$sesstype_8h.html" title="Top&#45;level header file to access data structures and functions for representing a session type..." alt="" coords="169,237,255,267"/>
 </map>

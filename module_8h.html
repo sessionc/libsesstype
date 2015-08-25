@@ -91,6 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>Module containing sessions or sessions.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br/>
+<code>#include &lt;iterator&gt;</code><br/>
 <code>#include &lt;unordered_map&gt;</code><br/>
 <code>#include &quot;<a class="el" href="import_8h_source.html">sesstype/import.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="session_8h_source.html">sesstype/session.h</a>&quot;</code><br/>
@@ -99,7 +100,7 @@ Include dependency graph for module.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="module_8h__incl.png" border="0" usemap="#module_8h" alt=""/></div>
 <map name="module_8h" id="module_8h">
-<area shape="rect" id="node7" href="import_8h.html" title="Protocol or Module imports." alt="" coords="25,160,151,189"/><area shape="rect" id="node10" href="session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="193,83,327,112"/><area shape="rect" id="node15" href="node_8h.html" title="Statements in a protocol or session." alt="" coords="225,160,343,189"/><area shape="rect" id="node28" href="role_8h.html" title="A participant of a protocol or session." alt="" coords="415,237,524,267"/><area shape="rect" id="node17" href="msg_8h.html" title="A message for passing between participants." alt="" coords="225,237,340,267"/><area shape="rect" id="node26" href="clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="319,315,476,344"/><area shape="rect" id="node33" href="visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="568,392,747,421"/><area shape="rect" id="node35" href="util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="633,315,807,344"/></map>
+<area shape="rect" id="node9" href="import_8h.html" title="Protocol or Module imports." alt="" coords="28,160,153,189"/><area shape="rect" id="node12" href="session_8h.html" title="A session or a session of an interaction, also known in the literature as global type." alt="" coords="234,83,368,112"/><area shape="rect" id="node18" href="node_8h.html" title="Statements in a protocol or session." alt="" coords="228,160,345,189"/><area shape="rect" id="node31" href="role_8h.html" title="A participant of a protocol or session." alt="" coords="417,237,526,267"/><area shape="rect" id="node20" href="msg_8h.html" title="A message for passing between participants." alt="" coords="228,237,342,267"/><area shape="rect" id="node29" href="clonable_8h_source.html" title="sesstype/util/clonable.h" alt="" coords="408,315,565,344"/><area shape="rect" id="node36" href="visitor__tmpl_8h_source.html" title="sesstype/util/visitor_tmpl.h" alt="" coords="574,392,753,421"/><area shape="rect" id="node38" href="util_2role__visitor_8h.html" title="Utities for Roles." alt="" coords="640,315,813,344"/></map>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -113,12 +114,12 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1Module.html">sesstype::Module</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classsesstype_1_1Module.html" title="Module is a container class for multiple logically related Sessions.">Module</a> is a container class for multiple logically related Sessions.  <a href="classsesstype_1_1Module.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classsesstype_1_1ModuleTmpl.html">sesstype::ModuleTmpl&lt; ImportType, SessionType &gt;</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Module is a container class for multiple logically related Sessions.  <a href="classsesstype_1_1ModuleTmpl.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html">sesstype</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>namespace for <a class="el" href="classsesstype_1_1Session.html" title="Session (st_tree) class encapsulates a single session.">Session</a> Types. </p>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight"><p>namespace for Session Types. </p>
 <br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -129,6 +130,10 @@ Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">st_module *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a7a8d085a9e562102c125a716e7ae21d9">sesstype::st_module_mk_init</a> (const char *name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a953e5e3827966979c3576a950b05e0c4">sesstype::st_module_get_name</a> (st_module *const module)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">st_module *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a6483a2d843de49dfb62bba023e16870f">sesstype::st_module_add_tree</a> (st_module *const module, st_tree *tree)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a85fb8d51a2d82d60e2a505114fcb94f3"></a><!-- doxytag: member="module.h::st_module_get_tree" ref="a85fb8d51a2d82d60e2a505114fcb94f3" args="(st_module *const module, const char *name)" -->
+st_tree *&#160;</td><td class="memItemRight" valign="bottom"><b>sesstype::st_module_get_tree</b> (st_module *const module, const char *name)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e1637de5a73a5c8ae4f993fc0a969c8"></a><!-- doxytag: member="module.h::st_module_get_tree_at_idx" ref="a2e1637de5a73a5c8ae4f993fc0a969c8" args="(st_module *const module, unsigned int index)" -->
+st_tree *&#160;</td><td class="memItemRight" valign="bottom"><b>sesstype::st_module_get_tree_at_idx</b> (st_module *const module, unsigned int index)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">st_module *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a85bab2c40cc0546265476c48c2cecbb6">sesstype::st_module_import</a> (st_module *const module, st_import *import)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesesstype.html#a2e74bfa771fb7d0ef9c7d62a0befda47">sesstype::st_module_free</a> (st_module *module)</td></tr>
 </table>
@@ -140,7 +145,7 @@ Functions</h2></td></tr>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Typedefs</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
