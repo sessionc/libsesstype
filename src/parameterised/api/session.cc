@@ -1,6 +1,8 @@
-#include <sesstype/session.h>
-#include <sesstype/parameterised/const.h>
-#include <sesstype/parameterised/session.h>
+#include <iostream>
+#include "sesstype/session.h"
+#include "sesstype/parameterised/const.h"
+#include "sesstype/parameterised/session.h"
+#include "sesstype/parameterised/util/print.h"
 
 #ifdef __cplusplus
 namespace sesstype {
@@ -43,6 +45,32 @@ bool st_param_tree_has_role_grp(st_param_tree *const tree, const char *grp_name)
 st_role_grp *st_param_tree_get_role_grp(st_param_tree *const tree, const char *grp_name)
 {
     return tree->group(grp_name);
+}
+
+void st_param_tree_print(st_param_tree *const tree)
+{
+    if (tree == nullptr) return;
+
+    sesstype::parameterised::util::PrintVisitor prot_printer;
+    if (tree->type() == ST_TYPE_LOCAL) {
+        std::cout << " > Endpoint\t";
+        tree->endpoint()->accept(prot_printer);
+        std::cout << "\n";
+    }
+    std::cout << " > Roles(" << tree->num_roles() << ")\t";
+    for (auto it=tree->role_begin(); it!=tree->role_end(); it++) {
+        dynamic_cast<sesstype::parameterised::Role *>(it->second)->accept(prot_printer);
+        std::cout << " ";
+    }
+    std::cout << "\n";
+    std::cout << " > RoleGrps(" << tree->num_groups() << ")\t";
+    for (auto it=tree->rolegrp_begin(); it!=tree->rolegrp_end(); it++) {
+        dynamic_cast<sesstype::parameterised::RoleGrp *>(it->second)->accept(prot_printer);
+        std::cout << " ";
+    }
+    std::cout << "\n";
+
+    tree->root()->accept(prot_printer);
 }
 
 void st_param_tree_free(st_param_tree *const tree)

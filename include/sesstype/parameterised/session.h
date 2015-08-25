@@ -121,6 +121,8 @@ st_param_tree *st_param_tree_add_role_grp(st_param_tree *tree, st_role_grp *grp)
 
 bool st_param_tree_has_role_grp(st_param_tree *const tree, const char *grp_name);
 
+void st_param_tree_print(st_param_tree *const tree);
+
 st_role_grp *st_param_tree_get_role_grp(st_param_tree *const tree, const char *grp_name);
 
 /// \param[in,out] session object to destroy.
