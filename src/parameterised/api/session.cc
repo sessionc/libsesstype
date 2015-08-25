@@ -7,25 +7,47 @@ namespace sesstype {
 namespace parameterised {
 #endif
 
-st_tree *st_tree_add_role_grp(st_tree *tree, st_role_grp *grp)
+st_param_tree *st_param_tree_mk_init(const char *name)
 {
-    if (Session *ptree = dynamic_cast<Session *>(tree)) {
-        ptree->add_group(grp);
-    }
+    return new Session(name);
+}
+
+st_param_tree *st_param_tree_add_role(st_param_tree *const tree, st_param_role *role)
+{
+    tree->add_role(role);
     return tree;
 }
 
-bool st_tree_has_role_grp(st_tree *const tree, const char *grp_name)
+st_param_tree *st_param_tree_set_root(st_param_tree *const tree, st_param_node *root)
 {
-    if (Session *ptree = dynamic_cast<Session *>(tree)) {
-        return ptree->has_role_grp(grp_name);
-    }
-    return false;
+    tree->set_root(root);
+    return tree;
 }
 
-st_role_grp *st_tree_get_role_grp(st_tree *const tree, const char *grp_name)
+st_param_node *st_param_tree_get_root(st_param_tree *const tree)
 {
-    return dynamic_cast<Session *>(tree)->group(grp_name);
+    return tree->root();
+}
+
+st_param_tree *st_param_tree_add_role_grp(st_param_tree *const tree, st_role_grp *grp)
+{
+    tree->add_group(grp);
+    return tree;
+}
+
+bool st_param_tree_has_role_grp(st_param_tree *const tree, const char *grp_name)
+{
+    return tree->has_role_grp(grp_name);
+}
+
+st_role_grp *st_param_tree_get_role_grp(st_param_tree *const tree, const char *grp_name)
+{
+    return tree->group(grp_name);
+}
+
+void st_param_tree_free(st_param_tree *const tree)
+{
+    delete tree;
 }
 
 #ifdef __cplusplus

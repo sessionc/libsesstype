@@ -61,7 +61,7 @@ class ProjectionVisitor : public NodeVisitor {
             for (auto it=node->rcvr_begin(); it!=node->rcvr_end(); it++) {
                 if (*it && (*it)->matches(endpoint_)) { // Rule 1.
 #ifdef __DEBUG__
-                    std::cerr << "Rule 1\n";
+                    std::cerr << "Rule 1 Ordinary to\n";
 #endif
                     projected_node = node->clone();
                     projected_node->remove_rcvrs();
@@ -72,7 +72,7 @@ class ProjectionVisitor : public NodeVisitor {
 
             if (node->sndr()->matches(endpoint_)) { // Rule 2.
 #ifdef __DEBUG__
-                std::cerr << "Rule 2\n";
+                std::cerr << "Rule 2 Ordinary from\n";
 #endif
                 projected_node = node->clone();
                 projected_node->remove_sndr();
@@ -93,7 +93,7 @@ class ProjectionVisitor : public NodeVisitor {
                     for (auto it=node->rcvr_begin(); it!=node->rcvr_end(); it++) {
                         if (*it && (*it)->matches(endpoint_)) { // Rule 9.
 #ifdef __DEBUG__
-                            std::cerr << "Rule 9\n";
+                            std::cerr << "Rule 9 Relative from\n";
 #endif
                             projected_node = node->clone();
 
@@ -136,7 +136,7 @@ class ProjectionVisitor : public NodeVisitor {
 
                     if (node->sndr()->matches(endpoint_)) { // Rule 8.
 #ifdef __DEBUG__
-                        std::cerr << "Rule 8\n";
+                        std::cerr << "Rule 8 Relative to\n";
 #endif
                         projected_node = node->clone();
                         projected_node->set_cond(projected_node->sndr()->clone());
@@ -150,7 +150,7 @@ class ProjectionVisitor : public NodeVisitor {
                     for (auto it=node->rcvr_begin(); it!=node->rcvr_end(); it++) {
                         if (*it && (*it)->matches(endpoint_)) { // Rule 3.
 #ifdef __DEBUG__
-                            std::cerr << "Rule 3\n";
+                            std::cerr << "Rule 3 Parameterised to\n";
 #endif
                             projected_node = node->clone();
                             projected_node->remove_rcvrs();
@@ -162,7 +162,7 @@ class ProjectionVisitor : public NodeVisitor {
 
                     if (node->sndr()->matches(endpoint_)) { // Rule 4
 #ifdef __DEBUG__
-                        std::cerr << "Rule 4\n";
+                        std::cerr << "Rule 4 Parameterised from\n";
 #endif
                         projected_node = node->clone();
                         projected_node->set_cond(projected_node->sndr()->clone());
@@ -178,7 +178,7 @@ class ProjectionVisitor : public NodeVisitor {
                     if (*it && dynamic_cast<RoleGrp *>(*it)) { // Rule 6.
                         if (*it && (*it)->matches(endpoint_)) {
 #ifdef __DEBUG__
-                            std::cerr << "Rule 6\n";
+                            std::cerr << "Rule 6 Group from\n";
 #endif
                             projected_node = node->clone();
                             projected_node->remove_rcvrs();
@@ -192,7 +192,7 @@ class ProjectionVisitor : public NodeVisitor {
                 if (dynamic_cast<RoleGrp *>(node->sndr())) { // Rule 7.
                     if (node->sndr()->matches(endpoint_)) {
 #ifdef __DEBUG__
-                        std::cerr << "Rule 7\n";
+                        std::cerr << "Rule 7 Group to\n";
 #endif
                         projected_node = node->clone();
                         projected_node->remove_sndr();
@@ -218,7 +218,7 @@ class ProjectionVisitor : public NodeVisitor {
 
     virtual void visit(ChoiceNode *node) override
     {
-        auto *projected_node = new ChoiceNode(node->at());
+        auto *projected_node = new ChoiceNode(node->at()->clone());
 
         stack_.push(projected_node);
         if (endpoint_->matches(projected_node->at())) {
